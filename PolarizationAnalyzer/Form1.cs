@@ -7,7 +7,8 @@ namespace PolarizationAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string text_S0 = "VAL00 annnn.nnn;VAL01 annnn.nnn;VAL02 annnn.nnn;VAL03 annnn.nnn;VAL04 annnn.nnn;VAL05 annnn.nnn;VAL06 annnn.nnn;VAL07 annnn.nnn;VAL08 annnn.nnn;VAL09 annnn.nnn;VAL10 annnn.nnn;VAL11 annnn.nnn;VAL12 annnn.nnn;VAL13 annnn.nnn;VAL14 annnn.nnn;nnnn;Enn;";
+        private string text_S_1 = "VAL00 annnn.nnn;VAL01 annnn.nnn;VAL02 annnn.nnn;VAL03 annnn.nnn;VAL04 0.5;VAL05 annnn.nnn;VAL06 90.0;VAL07 annnn.nnn;VAL08 annnn.nnn;VAL09 annnn.nnn;VAL10 annnn.nnn;VAL11 annnn.nnn;VAL12 annnn.nnn;VAL13 annnn.nnn;VAL14 annnn.nnn;nnnn;Enn;";
+        private string text_S0 = "VAL00  77.204;VAL01  16.427;VAL02   0.295;VAL03  39.486;VAL04   0.371;VAL05   0.121;VAL06  56.222;VAL07   0.000;VAL08  10.609;VAL09  -0.758;VAL10   0.363;VAL11   0.543;VAL12 -75.284;VAL13 -71.248;VAL14 -73.429;1000;E08\n";
         private string[] lables_S0 =
         {
             "elevation angle θ",
@@ -31,9 +32,27 @@ namespace PolarizationAnalyzer
 
         private string[] S0(string data)
         {
+            int x = 0;
+            string[] values = new string[17];
+
+            for (int i = 0; i < 15; i++)
+            {
+                values[i] = data.Substring(x + 5, 8);
+                x = x + 14;
+            }
+
+            values[15] = data.Substring(x, 4);
+            values[16] = data.Substring(x + 5, 3);
+
+            return values;
+        }
+
+        private string[] S0_1(string data)
+        {
             string[] VAL = data.Split(';');
 
             string[] values = new string[17];
+
 
             for (int i = 0; i < 15; i++)
             {
@@ -102,9 +121,8 @@ namespace PolarizationAnalyzer
             g.Dispose();
         }
 
-        private void PolarizationEllipse(ref Point[] points, double Eyx, double delata_x)
+        private void PolarizationEllipse(ref Point[] points, double Eyx, double delta)//Eyx(0 _ 1) delta(-pi _ pi)
         {
-            delta = Math.PI * delata_x;//-PI and +PI
 
             t = 0;
 
@@ -115,7 +133,18 @@ namespace PolarizationAnalyzer
                 points[i].Y = (int)(Math.Round((Eyx * Math.Sin((Omega * t) + delta) + 1) * 100)) + 1;
             }
         }
+        private void PolarizationEllipse2(ref Point[] points, double Eyx, double delta)//Eyx(0 _ 1) delta(-180 _ 180)
+        {
+            delta = (delta * Math.PI) / 180;
+            t = 0;
 
+            for (int i = 0; i < noPoints; i++)
+            {
+                t = (double)i / (noPoints - 1);
+                points[i].X = (int)(Math.Round((Math.Sin(Omega * t) + 1) * 100)) + 1;
+                points[i].Y = (int)(Math.Round((Eyx * Math.Sin((Omega * t) + delta) + 1) * 100)) + 1;
+            }
+        }
         private void DrawCall(ref Bitmap frame, ref Point[] points)
         {
             frame = CreatBitMap(Color.White, pictureBox.Width, pictureBox.Height);
@@ -127,7 +156,7 @@ namespace PolarizationAnalyzer
 
         private double Omega;
         private double Eyx;
-        private double delata_x;
+        private double delta_x;
         private double delta;
 
         private double t;
@@ -140,13 +169,6 @@ namespace PolarizationAnalyzer
             InitializeComponent();
             SetupControlState(false);
             InitsecondaryAddressComboBox();
-
-            string[] data = S0(text_S0);
-            
-            for (int i = 0; i < 17; i++)
-            {
-                stringReadTextBox.Text += (lables_S0[i] + " - " + data[i] + Environment.NewLine);
-            }
 
             noPoints = 20;
             points = new Point[noPoints];
@@ -225,10 +247,10 @@ namespace PolarizationAnalyzer
             Eyx = (double)trackBar1.Value / 100;//0 - 1
             lblEyx.Text = Eyx.ToString();
 
-            delata_x = ((double)trackBar2.Value / 100) * 2 - 1;//-1 and 1
+            delta_x = ((double)trackBar2.Value / 100) * 2 - 1;//-1 and 1
+            delta = Math.PI * delta_x;//-PI and +PI
 
-
-            PolarizationEllipse(ref points, Eyx, delata_x);
+            PolarizationEllipse(ref points, Eyx, delta);
             DrawCall(ref frame, ref points);
             pictureBox.Image = frame;
         }
@@ -237,12 +259,52 @@ namespace PolarizationAnalyzer
         {
             Eyx = (double)trackBar1.Value / 100;//0 - 1
 
-            delata_x = ((double)trackBar2.Value / 100) * 2 - 1;//-1 and 1
-            lblDelta.Text = delata_x.ToString() + " Pi";
+            delta_x = ((double)trackBar2.Value / 100) * 2 - 1;//-1 and 1
+            lblDelta.Text = delta_x.ToString() + " Pi";
+            delta = Math.PI * delta_x;//-PI and +PI
 
-            PolarizationEllipse(ref points, Eyx, delata_x);
+            PolarizationEllipse(ref points, Eyx, delta);
             DrawCall(ref frame, ref points);
             pictureBox.Image = frame;
         }
+
+        private void BtnS0_Click(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                //stringReadTextBox.Text = InsertCommonEscapeSequences(device.ReadString());
+                //------------------------Test Code--------------------------------------//
+                stringReadTextBox.Enabled = true;
+                stringReadTextBox.Clear();
+                string[] data = S0(text_S0);
+                
+                //string[] data = S0(InsertCommonEscapeSequences(device.ReadString()));
+
+                for (int i = 0; i < 17; i++)
+                {
+                    stringReadTextBox.Text += (lables_S0[i] + " - " + data[i] + Environment.NewLine);
+                }
+
+                delta = Convert.ToDouble(data[6]);
+                Eyx = Convert.ToDouble(data[4]);
+
+                PolarizationEllipse2(ref points, Eyx, delta);
+                DrawCall(ref frame, ref points);
+                pictureBox.Image = frame;
+                //------------------------------End--------------------------------------//
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+            
+        }
     }
 }
+

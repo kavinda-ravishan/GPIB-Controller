@@ -57,6 +57,7 @@ namespace PolarizationAnalyzer
             this.stringToWriteTextBox = new System.Windows.Forms.TextBox();
             this.lblEyx = new System.Windows.Forms.Label();
             this.lblDelta = new System.Windows.Forms.Label();
+            this.btnS0 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -229,11 +230,21 @@ namespace PolarizationAnalyzer
             this.lblDelta.TabIndex = 24;
             this.lblDelta.Text = "--";
             // 
+            // btnS0
+            // 
+            this.btnS0.Location = new System.Drawing.Point(324, 232);
+            this.btnS0.Name = "btnS0";
+            this.btnS0.Size = new System.Drawing.Size(75, 23);
+            this.btnS0.TabIndex = 25;
+            this.btnS0.Text = "S0 Read";
+            this.btnS0.Click += new System.EventHandler(this.BtnS0_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(548, 501);
+            this.Controls.Add(this.btnS0);
             this.Controls.Add(this.lblDelta);
             this.Controls.Add(this.lblEyx);
             this.Controls.Add(this.stringToWriteTextBox);
@@ -286,6 +297,7 @@ namespace PolarizationAnalyzer
         private System.Windows.Forms.TextBox stringToWriteTextBox;
         private System.Windows.Forms.Label lblEyx;
         private System.Windows.Forms.Label lblDelta;
+        private System.Windows.Forms.Button btnS0;
     }
 }
 

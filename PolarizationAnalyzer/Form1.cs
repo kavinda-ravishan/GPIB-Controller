@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 using NationalInstruments.NI4882;
 
@@ -7,8 +6,27 @@ namespace PolarizationAnalyzer
 {
     public partial class MainForm : Form
     {
-        private string text_S_1 = "VAL00 annnn.nnn;VAL01 annnn.nnn;VAL02 annnn.nnn;VAL03 annnn.nnn;VAL04 0.5;VAL05 annnn.nnn;VAL06 90.0;VAL07 annnn.nnn;VAL08 annnn.nnn;VAL09 annnn.nnn;VAL10 annnn.nnn;VAL11 annnn.nnn;VAL12 annnn.nnn;VAL13 annnn.nnn;VAL14 annnn.nnn;nnnn;Enn;";
+        public MainForm()
+        {
+            InitializeComponent();
+            SetupControlState1(false);
+            SetupControlState2(false);
+            InitsecondaryAddressComboBox1();
+            InitsecondaryAddressComboBox2();
+        }
+        private string ReplaceCommonEscapeSequences(string s)
+        {
+            return s.Replace("\\n", "\n").Replace("\\r", "\r");
+        }
+        private string InsertCommonEscapeSequences(string s)
+        {
+            return s.Replace("\n", "\\n").Replace("\r", "\\r");
+        }
+
+        //----------------- device 1 -------------------------------------//
+
         private string text_S0 = "VAL00  77.204;VAL01  16.427;VAL02   0.295;VAL03  39.486;VAL04   0.371;VAL05   0.121;VAL06  56.222;VAL07   0.000;VAL08  10.609;VAL09  -0.758;VAL10   0.363;VAL11   0.543;VAL12 -75.284;VAL13 -71.248;VAL14 -73.429;1000;E08\n";
+
         private string[] lables_S0 =
         {
             "elevation angle θ",
@@ -30,6 +48,49 @@ namespace PolarizationAnalyzer
             "error code"
         };
 
+        private string[] Errors = 
+            {
+"E00 no error",
+"E01 incorrect command or wrong character",
+"E02 string of characters too long (> 250 characters without terminator)",
+"E03 command buffer overflow(>8 commands without trigger command X; or[GET])",
+"E04 incorrect parameter format",
+"E05 parameter outside the allowed range",
+"E06 parameter has too many digits after the decimal point",
+"E07 optical power too high",
+"E08 incorrect operating wavelength or incorrect optical head calibration (degree of polarization measured >100 %)",
+"E09 no PAN9300 module(in the activated slot)",
+"E10 no POL 9320-Modul(in the activated slot)",
+"E12 no PAN-IR module",
+"E13 no tunable laser",
+"E14 incorrect type of PAN set",
+"E15 type of PMD not set",
+"E16 no reference Jones matrix available",
+"E17 incorrect start wavelength",
+"E18 incorrect stop wavelength",
+"E19 incorrect wavelength step",
+"E20 incorrect wavelength speed",
+"E21 incorrect length of fiber",
+"E22 incorrect K-factor",
+"E23 incorrect value for delta_mm",
+"E24 no PMD data available",
+"E25 no PMD file available",
+"E26 no turbo mode available for PAN9300",
+"E29 no tunable laser for PMD measurements available",
+"E30 No or wrong authorization code",
+"E31 No turbo file existent",
+"E33 Power below limit setting",
+"E34 Insufficient measured points",
+"E35 Unable to calculate ER",
+"E36 Not sufficient fiber stress",
+"E37 No typical PMF behavior(Warning only)",
+"E38 Bad linear eigenmodes(Warning only)",
+"E39 Error loading calibration file*.set",
+"E46 No PAN-NIR",
+"E47 No PAN-FIR",
+"E99 1. Status request after switching the unit on or voltage failure of the unit"
+        };
+
         private string[] S0(string data)
         {
             int x = 0;
@@ -47,134 +108,27 @@ namespace PolarizationAnalyzer
             return values;
         }
 
-        private string[] S0_1(string data)
+        private void SetupControlState1(bool isSessionOpen)
         {
-            string[] VAL = data.Split(';');
-
-            string[] values = new string[17];
-
-
-            for (int i = 0; i < 15; i++)
-            {
-                values[i] = VAL[i].Split(' ')[1];
-            }
-
-            values[15] = VAL[VAL.Length - 3];
-            values[16] = VAL[VAL.Length - 2];
-
-            return values;
+            boardIdNumericUpDown1.Enabled = !isSessionOpen;
+            primaryAddressNumericUpDown1.Enabled = !isSessionOpen;
+            secondaryAddressComboBox1.Enabled = !isSessionOpen;
+            openButton1.Enabled = !isSessionOpen;
+            closeButton1.Enabled = isSessionOpen;
+            stringToWriteTextBox1.Enabled = isSessionOpen;
+            writeButton1.Enabled = isSessionOpen;
+            readButton1.Enabled = isSessionOpen;
+            stringReadTextBox1.Enabled = isSessionOpen;
         }
 
-        private void InitsecondaryAddressComboBox()
+        private void InitsecondaryAddressComboBox1()
         {
-            secondaryAddressComboBox.Items.Add("None");
+            secondaryAddressComboBox1.Items.Add("None");
             for (int i = 96; i <= 126; i++)
             {
-                secondaryAddressComboBox.Items.Add(i);
+                secondaryAddressComboBox1.Items.Add(i);
             }
-            secondaryAddressComboBox.SelectedIndex = 0;
-        }
-
-        private void SetupControlState(bool isSessionOpen)
-        {
-            boardIdNumericUpDown.Enabled = !isSessionOpen;
-            primaryAddressNumericUpDown.Enabled = !isSessionOpen;
-            secondaryAddressComboBox.Enabled = !isSessionOpen;
-            openButton.Enabled = !isSessionOpen;
-            closeButton.Enabled = isSessionOpen;
-            stringToWriteTextBox.Enabled = isSessionOpen;
-            writeButton.Enabled = isSessionOpen;
-            readButton.Enabled = isSessionOpen;
-            stringReadTextBox.Enabled = isSessionOpen;
-        }
-
-        private string ReplaceCommonEscapeSequences(string s)
-        {
-            return s.Replace("\\n", "\n").Replace("\\r", "\r");
-        }
-
-        private string InsertCommonEscapeSequences(string s)
-        {
-            return s.Replace("\n", "\\n").Replace("\r", "\\r");
-        }
-
-        Bitmap CreatBitMap(Color color, int rows, int cols)
-        {
-            Bitmap frame = new Bitmap(cols, rows);
-
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    frame.SetPixel(i, j, color);
-                }
-            }
-            return frame;
-        }
-
-        void DrowLinesOnBitmap(ref Bitmap frame, Point[] points, Color color)
-        {
-            Graphics g = Graphics.FromImage(frame);
-            Pen pen = new Pen(color);
-            g.DrawLines(pen, points);
-            pen.Dispose();
-            g.Dispose();
-        }
-
-        private void PolarizationEllipse(ref Point[] points, double Eyx, double delta)//Eyx(0 _ 1) delta(-pi _ pi)
-        {
-
-            t = 0;
-
-            for (int i = 0; i < noPoints; i++)
-            {
-                t = (double)i / (noPoints - 1);
-                points[i].X = (int)(Math.Round((Math.Sin(Omega * t) + 1) * 100)) + 1;
-                points[i].Y = (int)(Math.Round((Eyx * Math.Sin((Omega * t) + delta) + 1) * 100)) + 1;
-            }
-        }
-        private void PolarizationEllipse2(ref Point[] points, double Eyx, double delta)//Eyx(0 _ 1) delta(-180 _ 180)
-        {
-            delta = (delta * Math.PI) / 180;
-            t = 0;
-
-            for (int i = 0; i < noPoints; i++)
-            {
-                t = (double)i / (noPoints - 1);
-                points[i].X = (int)(Math.Round((Math.Sin(Omega * t) + 1) * 100)) + 1;
-                points[i].Y = (int)(Math.Round((Eyx * Math.Sin((Omega * t) + delta) + 1) * 100)) + 1;
-            }
-        }
-        private void DrawCall(ref Bitmap frame, ref Point[] points)
-        {
-            frame = CreatBitMap(Color.White, pictureBox.Width, pictureBox.Height);
-            DrowLinesOnBitmap(ref frame, points, Color.Black);
-            frame.RotateFlip(RotateFlipType.Rotate180FlipX);
-        }
-
-        private Bitmap frame;
-
-        private double Omega;
-        private double Eyx;
-        private double delta_x;
-        private double delta;
-
-        private double t;
-        private Point[] points;
-
-        private bool b_timer = false;
-
-        private int noPoints;
-
-        public MainForm()
-        {
-            InitializeComponent();
-            SetupControlState(false);
-            InitsecondaryAddressComboBox();
-
-            noPoints = 20;
-            points = new Point[noPoints];
-            Omega = 2 * Math.PI * 1;
+            secondaryAddressComboBox1.SelectedIndex = 0;
         }
 
         private void OpenButton_Click(object sender, System.EventArgs e)
@@ -184,13 +138,13 @@ namespace PolarizationAnalyzer
                 Cursor.Current = Cursors.WaitCursor;
                 // Convert the Secondary Address Combo Text into a number.
                 int currentSecondaryAddress = 0;
-                if (secondaryAddressComboBox.SelectedIndex != 0)
+                if (secondaryAddressComboBox1.SelectedIndex != 0)
                 {
-                    currentSecondaryAddress = (int)secondaryAddressComboBox.SelectedItem;
+                    currentSecondaryAddress = (int)secondaryAddressComboBox1.SelectedItem;
                 }
                 // Intialize the device
-                device = new Device((int)boardIdNumericUpDown.Value, (byte)primaryAddressNumericUpDown.Value, (byte)currentSecondaryAddress);
-                SetupControlState(true);
+                device1 = new Device((int)boardIdNumericUpDown1.Value, (byte)primaryAddressNumericUpDown1.Value, (byte)currentSecondaryAddress);
+                SetupControlState1(true);
             }
             catch (Exception ex)
             {
@@ -206,8 +160,8 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                device.Dispose();
-                SetupControlState(false);
+                device1.Dispose();
+                SetupControlState1(false);
             }
             catch (Exception ex)
             {
@@ -219,7 +173,7 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                device.Write(ReplaceCommonEscapeSequences(stringToWriteTextBox.Text));
+                device1.Write(ReplaceCommonEscapeSequences(stringToWriteTextBox1.Text));
             }
             catch (Exception ex)
             {
@@ -232,7 +186,7 @@ namespace PolarizationAnalyzer
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                stringReadTextBox.Text = InsertCommonEscapeSequences(device.ReadString());
+                stringReadTextBox1.Text = InsertCommonEscapeSequences(device1.ReadString());
             }
             catch (Exception ex)
             {
@@ -242,70 +196,25 @@ namespace PolarizationAnalyzer
             {
                 Cursor.Current = Cursors.Default;
             }
-        }
-
-        private void TrackBar1_Scroll(object sender, EventArgs e)
-        {
-            Eyx = (double)trackBar1.Value / 100;//0 - 1
-            lblEyx.Text = Eyx.ToString();
-
-            delta_x = ((double)trackBar2.Value / 100) * 2 - 1;//-1 and 1
-            delta = Math.PI * delta_x;//-PI and +PI
-
-            PolarizationEllipse(ref points, Eyx, delta);
-            DrawCall(ref frame, ref points);
-            pictureBox.Image = frame;
-        }
-
-        private void TrackBar2_Scroll(object sender, EventArgs e)
-        {
-            Eyx = (double)trackBar1.Value / 100;//0 - 1
-
-            delta_x = ((double)trackBar2.Value / 100) * 2 - 1;//-1 and 1
-            lblDelta.Text = delta_x.ToString() + " Pi";
-            delta = Math.PI * delta_x;//-PI and +PI
-
-            PolarizationEllipse(ref points, Eyx, delta);
-            DrawCall(ref frame, ref points);
-            pictureBox.Image = frame;
         }
 
         private void BtnS0_Click(object sender, EventArgs e)
-        {
-            if (b_timer)
-            {
-                timer.Enabled = true;
-                b_timer = !b_timer;
-            }
-            else
-            {
-                timer.Enabled = false;
-                b_timer = !b_timer;
-            }
-            /*
+        {       
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                //stringReadTextBox.Text = InsertCommonEscapeSequences(device.ReadString());
-                //------------------------Test Code--------------------------------------//
-                stringReadTextBox.Enabled = true;
-                stringReadTextBox.Clear();
-                //string[] data = S0(text_S0);
-                
-                string[] data = S0(InsertCommonEscapeSequences(device.ReadString()));
+                stringReadTextBox1.Enabled = true;
+                stringReadTextBox1.Clear();
+
+                //device1.Write(ReplaceCommonEscapeSequences("S0;"));
+                //string[] data = S0(InsertCommonEscapeSequences(device.ReadString()));
+                string[] data = S0(text_S0);
 
                 for (int i = 0; i < 17; i++)
                 {
-                    stringReadTextBox.Text += (lables_S0[i] + " - " + data[i] + Environment.NewLine);
+                    stringReadTextBox1.Text += (lables_S0[i] + " - " + data[i] + Environment.NewLine);
                 }
 
-                delta = Convert.ToDouble(data[6]);
-                Eyx = Convert.ToDouble(data[4]);
-
-                PolarizationEllipse2(ref points, Eyx, delta);
-                DrawCall(ref frame, ref points);
-                pictureBox.Image = frame;
-                //------------------------------End--------------------------------------//
             }
             catch (Exception ex)
             {
@@ -315,38 +224,94 @@ namespace PolarizationAnalyzer
             {
                 Cursor.Current = Cursors.Default;
             }
-            */
+
         }
 
-        private void Timer1_Tick(object sender, EventArgs e)
+        //----------------- device 2 -------------------------------------//
+
+        private void SetupControlState2(bool isSessionOpen)
+        {
+            boardIdNumericUpDown2.Enabled = !isSessionOpen;
+            primaryAddressNumericUpDown2.Enabled = !isSessionOpen;
+            secondaryAddressComboBox2.Enabled = !isSessionOpen;
+            openButton2.Enabled = !isSessionOpen;
+            closeButton2.Enabled = isSessionOpen;
+            stringToWriteTextBox2.Enabled = isSessionOpen;
+            writeButton2.Enabled = isSessionOpen;
+            readButton2.Enabled = isSessionOpen;
+            stringReadTextBox2.Enabled = isSessionOpen;
+        }
+
+        private void InitsecondaryAddressComboBox2()
+        {
+            secondaryAddressComboBox2.Items.Add("None");
+            for (int i = 96; i <= 126; i++)
+            {
+                secondaryAddressComboBox2.Items.Add(i);
+            }
+            secondaryAddressComboBox2.SelectedIndex = 0;
+        }
+
+        private void OpenButton2_Click(object sender, EventArgs e)
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                //stringReadTextBox.Text = InsertCommonEscapeSequences(device.ReadString());
-                //------------------------Test Code--------------------------------------//
-                stringReadTextBox.Enabled = true;
-                stringReadTextBox.Clear();
-                //string[] data = S0(text_S0);
-
-                string[] data = S0(InsertCommonEscapeSequences(device.ReadString()));
-
-                for (int i = 0; i < 17; i++)
+                // Convert the Secondary Address Combo Text into a number.
+                int currentSecondaryAddress = 0;
+                if (secondaryAddressComboBox2.SelectedIndex != 0)
                 {
-                    stringReadTextBox.Text += (lables_S0[i] + " - " + data[i] + Environment.NewLine);
+                    currentSecondaryAddress = (int)secondaryAddressComboBox2.SelectedItem;
                 }
-
-                delta = Convert.ToDouble(data[6]);
-                Eyx = Convert.ToDouble(data[4]);
-
-                PolarizationEllipse2(ref points, Eyx, delta);
-                DrawCall(ref frame, ref points);
-                pictureBox.Image = frame;
-                //------------------------------End--------------------------------------//
+                // Intialize the device
+                device2 = new Device((int)boardIdNumericUpDown2.Value, (byte)primaryAddressNumericUpDown2.Value, (byte)currentSecondaryAddress);
+                SetupControlState2(true);
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void CloseButton2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                device2.Dispose();
+                SetupControlState2(false);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void WriteButton2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                device2.Write(ReplaceCommonEscapeSequences(stringToWriteTextBox2.Text));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ReadButton2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                stringReadTextBox2.Text = InsertCommonEscapeSequences(device2.ReadString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             finally
             {

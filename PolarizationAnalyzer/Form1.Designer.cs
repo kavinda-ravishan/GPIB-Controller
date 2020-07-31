@@ -4,7 +4,8 @@ namespace PolarizationAnalyzer
 {
     partial class MainForm
     {
-        private Device device;
+        private Device device1;
+        private Device device2;
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -18,9 +19,13 @@ namespace PolarizationAnalyzer
         {
             if (disposing)
             {
-                if (device != null)
+                if (device1 != null)
                 {
-                    device.Dispose();
+                    device1.Dispose();
+                }
+                if (device2 != null)
+                {
+                    device2.Dispose();
                 }
                 if (components != null)
                 {
@@ -38,246 +43,332 @@ namespace PolarizationAnalyzer
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.boardIdLabel = new System.Windows.Forms.Label();
-            this.primaryAddressLabel = new System.Windows.Forms.Label();
-            this.secondaryAddressLabel = new System.Windows.Forms.Label();
-            this.secondaryAddressComboBox = new System.Windows.Forms.ComboBox();
-            this.primaryAddressNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.boardIdNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.closeButton = new System.Windows.Forms.Button();
-            this.openButton = new System.Windows.Forms.Button();
-            this.stringReadLabel = new System.Windows.Forms.Label();
-            this.readButton = new System.Windows.Forms.Button();
-            this.stringToWriteLabel = new System.Windows.Forms.Label();
-            this.writeButton = new System.Windows.Forms.Button();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.stringReadTextBox = new System.Windows.Forms.RichTextBox();
-            this.stringToWriteTextBox = new System.Windows.Forms.TextBox();
-            this.lblEyx = new System.Windows.Forms.Label();
-            this.lblDelta = new System.Windows.Forms.Label();
+            this.boardIdLabel1 = new System.Windows.Forms.Label();
+            this.primaryAddressLabel1 = new System.Windows.Forms.Label();
+            this.secondaryAddressLabel1 = new System.Windows.Forms.Label();
+            this.secondaryAddressComboBox1 = new System.Windows.Forms.ComboBox();
+            this.primaryAddressNumericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.boardIdNumericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.closeButton1 = new System.Windows.Forms.Button();
+            this.openButton1 = new System.Windows.Forms.Button();
+            this.stringReadLabel1 = new System.Windows.Forms.Label();
+            this.readButton1 = new System.Windows.Forms.Button();
+            this.stringToWriteLabel1 = new System.Windows.Forms.Label();
+            this.writeButton1 = new System.Windows.Forms.Button();
+            this.stringReadTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.stringToWriteTextBox1 = new System.Windows.Forms.TextBox();
             this.btnS0 = new System.Windows.Forms.Button();
-            this.timer = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            this.stringToWriteTextBox2 = new System.Windows.Forms.TextBox();
+            this.stringReadTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.stringReadLabel2 = new System.Windows.Forms.Label();
+            this.readButton2 = new System.Windows.Forms.Button();
+            this.stringToWriteLabel2 = new System.Windows.Forms.Label();
+            this.writeButton2 = new System.Windows.Forms.Button();
+            this.closeButton2 = new System.Windows.Forms.Button();
+            this.openButton2 = new System.Windows.Forms.Button();
+            this.secondaryAddressComboBox2 = new System.Windows.Forms.ComboBox();
+            this.primaryAddressNumericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.boardIdNumericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.secondaryAddressLabel2 = new System.Windows.Forms.Label();
+            this.primaryAddressLabel2 = new System.Windows.Forms.Label();
+            this.boardIdLabel2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
-            // boardIdLabel
+            // boardIdLabel1
             // 
-            this.boardIdLabel.AutoSize = true;
-            this.boardIdLabel.Location = new System.Drawing.Point(69, 15);
-            this.boardIdLabel.Name = "boardIdLabel";
-            this.boardIdLabel.Size = new System.Drawing.Size(52, 13);
-            this.boardIdLabel.TabIndex = 0;
-            this.boardIdLabel.Text = "Board ID:";
+            this.boardIdLabel1.AutoSize = true;
+            this.boardIdLabel1.Location = new System.Drawing.Point(91, 39);
+            this.boardIdLabel1.Name = "boardIdLabel1";
+            this.boardIdLabel1.Size = new System.Drawing.Size(52, 13);
+            this.boardIdLabel1.TabIndex = 0;
+            this.boardIdLabel1.Text = "Board ID:";
             // 
-            // primaryAddressLabel
+            // primaryAddressLabel1
             // 
-            this.primaryAddressLabel.AutoSize = true;
-            this.primaryAddressLabel.Location = new System.Drawing.Point(36, 41);
-            this.primaryAddressLabel.Name = "primaryAddressLabel";
-            this.primaryAddressLabel.Size = new System.Drawing.Size(85, 13);
-            this.primaryAddressLabel.TabIndex = 2;
-            this.primaryAddressLabel.Text = "Primary Address:";
+            this.primaryAddressLabel1.AutoSize = true;
+            this.primaryAddressLabel1.Location = new System.Drawing.Point(58, 65);
+            this.primaryAddressLabel1.Name = "primaryAddressLabel1";
+            this.primaryAddressLabel1.Size = new System.Drawing.Size(85, 13);
+            this.primaryAddressLabel1.TabIndex = 2;
+            this.primaryAddressLabel1.Text = "Primary Address:";
             // 
-            // secondaryAddressLabel
+            // secondaryAddressLabel1
             // 
-            this.secondaryAddressLabel.AutoSize = true;
-            this.secondaryAddressLabel.Location = new System.Drawing.Point(19, 68);
-            this.secondaryAddressLabel.Name = "secondaryAddressLabel";
-            this.secondaryAddressLabel.Size = new System.Drawing.Size(102, 13);
-            this.secondaryAddressLabel.TabIndex = 4;
-            this.secondaryAddressLabel.Text = "Secondary Address:";
+            this.secondaryAddressLabel1.AutoSize = true;
+            this.secondaryAddressLabel1.Location = new System.Drawing.Point(41, 92);
+            this.secondaryAddressLabel1.Name = "secondaryAddressLabel1";
+            this.secondaryAddressLabel1.Size = new System.Drawing.Size(102, 13);
+            this.secondaryAddressLabel1.TabIndex = 4;
+            this.secondaryAddressLabel1.Text = "Secondary Address:";
             // 
-            // secondaryAddressComboBox
+            // secondaryAddressComboBox1
             // 
-            this.secondaryAddressComboBox.Location = new System.Drawing.Point(127, 65);
-            this.secondaryAddressComboBox.Name = "secondaryAddressComboBox";
-            this.secondaryAddressComboBox.Size = new System.Drawing.Size(56, 21);
-            this.secondaryAddressComboBox.TabIndex = 5;
+            this.secondaryAddressComboBox1.Location = new System.Drawing.Point(149, 89);
+            this.secondaryAddressComboBox1.Name = "secondaryAddressComboBox1";
+            this.secondaryAddressComboBox1.Size = new System.Drawing.Size(56, 21);
+            this.secondaryAddressComboBox1.TabIndex = 5;
             // 
-            // primaryAddressNumericUpDown
+            // primaryAddressNumericUpDown1
             // 
-            this.primaryAddressNumericUpDown.Location = new System.Drawing.Point(127, 39);
-            this.primaryAddressNumericUpDown.Name = "primaryAddressNumericUpDown";
-            this.primaryAddressNumericUpDown.Size = new System.Drawing.Size(40, 20);
-            this.primaryAddressNumericUpDown.TabIndex = 3;
-            this.primaryAddressNumericUpDown.Value = new decimal(new int[] {
+            this.primaryAddressNumericUpDown1.Location = new System.Drawing.Point(149, 63);
+            this.primaryAddressNumericUpDown1.Name = "primaryAddressNumericUpDown1";
+            this.primaryAddressNumericUpDown1.Size = new System.Drawing.Size(40, 20);
+            this.primaryAddressNumericUpDown1.TabIndex = 3;
+            this.primaryAddressNumericUpDown1.Value = new decimal(new int[] {
             2,
             0,
             0,
             0});
             // 
-            // boardIdNumericUpDown
+            // boardIdNumericUpDown1
             // 
-            this.boardIdNumericUpDown.Location = new System.Drawing.Point(127, 13);
-            this.boardIdNumericUpDown.Name = "boardIdNumericUpDown";
-            this.boardIdNumericUpDown.Size = new System.Drawing.Size(40, 20);
-            this.boardIdNumericUpDown.TabIndex = 1;
+            this.boardIdNumericUpDown1.Location = new System.Drawing.Point(149, 37);
+            this.boardIdNumericUpDown1.Name = "boardIdNumericUpDown1";
+            this.boardIdNumericUpDown1.Size = new System.Drawing.Size(40, 20);
+            this.boardIdNumericUpDown1.TabIndex = 1;
             // 
-            // closeButton
+            // closeButton1
             // 
-            this.closeButton.Location = new System.Drawing.Point(102, 110);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 23);
-            this.closeButton.TabIndex = 7;
-            this.closeButton.Text = "&Close";
-            this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.closeButton1.Location = new System.Drawing.Point(124, 134);
+            this.closeButton1.Name = "closeButton1";
+            this.closeButton1.Size = new System.Drawing.Size(75, 23);
+            this.closeButton1.TabIndex = 7;
+            this.closeButton1.Text = "&Close";
+            this.closeButton1.Click += new System.EventHandler(this.CloseButton_Click);
             // 
-            // openButton
+            // openButton1
             // 
-            this.openButton.Location = new System.Drawing.Point(22, 110);
-            this.openButton.Name = "openButton";
-            this.openButton.Size = new System.Drawing.Size(75, 23);
-            this.openButton.TabIndex = 6;
-            this.openButton.Text = "&Open";
-            this.openButton.Click += new System.EventHandler(this.OpenButton_Click);
+            this.openButton1.Location = new System.Drawing.Point(44, 134);
+            this.openButton1.Name = "openButton1";
+            this.openButton1.Size = new System.Drawing.Size(75, 23);
+            this.openButton1.TabIndex = 6;
+            this.openButton1.Text = "&Open";
+            this.openButton1.Click += new System.EventHandler(this.OpenButton_Click);
             // 
-            // stringReadLabel
+            // stringReadLabel1
             // 
-            this.stringReadLabel.Location = new System.Drawing.Point(204, 5);
-            this.stringReadLabel.Name = "stringReadLabel";
-            this.stringReadLabel.Size = new System.Drawing.Size(75, 23);
-            this.stringReadLabel.TabIndex = 16;
-            this.stringReadLabel.Text = "String Read:";
+            this.stringReadLabel1.Location = new System.Drawing.Point(226, 29);
+            this.stringReadLabel1.Name = "stringReadLabel1";
+            this.stringReadLabel1.Size = new System.Drawing.Size(75, 23);
+            this.stringReadLabel1.TabIndex = 16;
+            this.stringReadLabel1.Text = "String Read:";
             // 
-            // readButton
+            // readButton1
             // 
-            this.readButton.Location = new System.Drawing.Point(127, 215);
-            this.readButton.Name = "readButton";
-            this.readButton.Size = new System.Drawing.Size(75, 23);
-            this.readButton.TabIndex = 15;
-            this.readButton.Text = "&Read";
-            this.readButton.Click += new System.EventHandler(this.ReadButton_Click);
+            this.readButton1.Location = new System.Drawing.Point(149, 239);
+            this.readButton1.Name = "readButton1";
+            this.readButton1.Size = new System.Drawing.Size(75, 23);
+            this.readButton1.TabIndex = 15;
+            this.readButton1.Text = "&Read";
+            this.readButton1.Click += new System.EventHandler(this.ReadButton_Click);
             // 
-            // stringToWriteLabel
+            // stringToWriteLabel1
             // 
-            this.stringToWriteLabel.Location = new System.Drawing.Point(22, 160);
-            this.stringToWriteLabel.Name = "stringToWriteLabel";
-            this.stringToWriteLabel.Size = new System.Drawing.Size(100, 23);
-            this.stringToWriteLabel.TabIndex = 14;
-            this.stringToWriteLabel.Text = "String to Write:";
+            this.stringToWriteLabel1.Location = new System.Drawing.Point(44, 184);
+            this.stringToWriteLabel1.Name = "stringToWriteLabel1";
+            this.stringToWriteLabel1.Size = new System.Drawing.Size(100, 23);
+            this.stringToWriteLabel1.TabIndex = 14;
+            this.stringToWriteLabel1.Text = "String to Write:";
             // 
-            // writeButton
+            // writeButton1
             // 
-            this.writeButton.Location = new System.Drawing.Point(27, 215);
-            this.writeButton.Name = "writeButton";
-            this.writeButton.Size = new System.Drawing.Size(75, 23);
-            this.writeButton.TabIndex = 13;
-            this.writeButton.Text = "&Write";
-            this.writeButton.Click += new System.EventHandler(this.WriteButton_Click);
+            this.writeButton1.Location = new System.Drawing.Point(49, 239);
+            this.writeButton1.Name = "writeButton1";
+            this.writeButton1.Size = new System.Drawing.Size(75, 23);
+            this.writeButton1.TabIndex = 13;
+            this.writeButton1.Text = "&Write";
+            this.writeButton1.Click += new System.EventHandler(this.WriteButton_Click);
             // 
-            // pictureBox
+            // stringReadTextBox1
             // 
-            this.pictureBox.Location = new System.Drawing.Point(27, 270);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(202, 202);
-            this.pictureBox.TabIndex = 17;
-            this.pictureBox.TabStop = false;
+            this.stringReadTextBox1.Location = new System.Drawing.Point(229, 55);
+            this.stringReadTextBox1.Name = "stringReadTextBox1";
+            this.stringReadTextBox1.ReadOnly = true;
+            this.stringReadTextBox1.Size = new System.Drawing.Size(329, 152);
+            this.stringReadTextBox1.TabIndex = 21;
+            this.stringReadTextBox1.Text = "";
             // 
-            // trackBar1
+            // stringToWriteTextBox1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(235, 298);
-            this.trackBar1.Maximum = 100;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(301, 45);
-            this.trackBar1.TabIndex = 19;
-            this.trackBar1.Scroll += new System.EventHandler(this.TrackBar1_Scroll);
-            // 
-            // trackBar2
-            // 
-            this.trackBar2.Location = new System.Drawing.Point(235, 404);
-            this.trackBar2.Maximum = 100;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(301, 45);
-            this.trackBar2.TabIndex = 20;
-            this.trackBar2.Scroll += new System.EventHandler(this.TrackBar2_Scroll);
-            // 
-            // stringReadTextBox
-            // 
-            this.stringReadTextBox.Location = new System.Drawing.Point(207, 31);
-            this.stringReadTextBox.Name = "stringReadTextBox";
-            this.stringReadTextBox.ReadOnly = true;
-            this.stringReadTextBox.Size = new System.Drawing.Size(329, 152);
-            this.stringReadTextBox.TabIndex = 21;
-            this.stringReadTextBox.Text = "";
-            // 
-            // stringToWriteTextBox
-            // 
-            this.stringToWriteTextBox.Location = new System.Drawing.Point(25, 189);
-            this.stringToWriteTextBox.Name = "stringToWriteTextBox";
-            this.stringToWriteTextBox.Size = new System.Drawing.Size(511, 20);
-            this.stringToWriteTextBox.TabIndex = 22;
-            // 
-            // lblEyx
-            // 
-            this.lblEyx.AutoSize = true;
-            this.lblEyx.Location = new System.Drawing.Point(247, 271);
-            this.lblEyx.Name = "lblEyx";
-            this.lblEyx.Size = new System.Drawing.Size(13, 13);
-            this.lblEyx.TabIndex = 23;
-            this.lblEyx.Text = "--";
-            // 
-            // lblDelta
-            // 
-            this.lblDelta.AutoSize = true;
-            this.lblDelta.Location = new System.Drawing.Point(247, 379);
-            this.lblDelta.Name = "lblDelta";
-            this.lblDelta.Size = new System.Drawing.Size(13, 13);
-            this.lblDelta.TabIndex = 24;
-            this.lblDelta.Text = "--";
+            this.stringToWriteTextBox1.Location = new System.Drawing.Point(47, 213);
+            this.stringToWriteTextBox1.Name = "stringToWriteTextBox1";
+            this.stringToWriteTextBox1.Size = new System.Drawing.Size(511, 20);
+            this.stringToWriteTextBox1.TabIndex = 22;
             // 
             // btnS0
             // 
-            this.btnS0.Location = new System.Drawing.Point(324, 232);
+            this.btnS0.Location = new System.Drawing.Point(483, 239);
             this.btnS0.Name = "btnS0";
             this.btnS0.Size = new System.Drawing.Size(75, 23);
             this.btnS0.TabIndex = 25;
             this.btnS0.Text = "S0 Read";
             this.btnS0.Click += new System.EventHandler(this.BtnS0_Click);
             // 
-            // timer
+            // stringToWriteTextBox2
             // 
-            this.timer.Interval = 1000;
-            this.timer.Tick += new System.EventHandler(this.Timer1_Tick);
+            this.stringToWriteTextBox2.Location = new System.Drawing.Point(668, 213);
+            this.stringToWriteTextBox2.Name = "stringToWriteTextBox2";
+            this.stringToWriteTextBox2.Size = new System.Drawing.Size(511, 20);
+            this.stringToWriteTextBox2.TabIndex = 39;
+            // 
+            // stringReadTextBox2
+            // 
+            this.stringReadTextBox2.Location = new System.Drawing.Point(850, 55);
+            this.stringReadTextBox2.Name = "stringReadTextBox2";
+            this.stringReadTextBox2.ReadOnly = true;
+            this.stringReadTextBox2.Size = new System.Drawing.Size(329, 152);
+            this.stringReadTextBox2.TabIndex = 38;
+            this.stringReadTextBox2.Text = "";
+            // 
+            // stringReadLabel2
+            // 
+            this.stringReadLabel2.Location = new System.Drawing.Point(847, 29);
+            this.stringReadLabel2.Name = "stringReadLabel2";
+            this.stringReadLabel2.Size = new System.Drawing.Size(75, 23);
+            this.stringReadLabel2.TabIndex = 37;
+            this.stringReadLabel2.Text = "String Read:";
+            // 
+            // readButton2
+            // 
+            this.readButton2.Location = new System.Drawing.Point(770, 239);
+            this.readButton2.Name = "readButton2";
+            this.readButton2.Size = new System.Drawing.Size(75, 23);
+            this.readButton2.TabIndex = 36;
+            this.readButton2.Text = "&Read";
+            this.readButton2.Click += new System.EventHandler(this.ReadButton2_Click);
+            // 
+            // stringToWriteLabel2
+            // 
+            this.stringToWriteLabel2.Location = new System.Drawing.Point(665, 184);
+            this.stringToWriteLabel2.Name = "stringToWriteLabel2";
+            this.stringToWriteLabel2.Size = new System.Drawing.Size(100, 23);
+            this.stringToWriteLabel2.TabIndex = 35;
+            this.stringToWriteLabel2.Text = "String to Write:";
+            // 
+            // writeButton2
+            // 
+            this.writeButton2.Location = new System.Drawing.Point(670, 239);
+            this.writeButton2.Name = "writeButton2";
+            this.writeButton2.Size = new System.Drawing.Size(75, 23);
+            this.writeButton2.TabIndex = 34;
+            this.writeButton2.Text = "&Write";
+            this.writeButton2.Click += new System.EventHandler(this.WriteButton2_Click);
+            // 
+            // closeButton2
+            // 
+            this.closeButton2.Location = new System.Drawing.Point(745, 134);
+            this.closeButton2.Name = "closeButton2";
+            this.closeButton2.Size = new System.Drawing.Size(75, 23);
+            this.closeButton2.TabIndex = 33;
+            this.closeButton2.Text = "&Close";
+            this.closeButton2.Click += new System.EventHandler(this.CloseButton2_Click);
+            // 
+            // openButton2
+            // 
+            this.openButton2.Location = new System.Drawing.Point(665, 134);
+            this.openButton2.Name = "openButton2";
+            this.openButton2.Size = new System.Drawing.Size(75, 23);
+            this.openButton2.TabIndex = 32;
+            this.openButton2.Text = "&Open";
+            this.openButton2.Click += new System.EventHandler(this.OpenButton2_Click);
+            // 
+            // secondaryAddressComboBox2
+            // 
+            this.secondaryAddressComboBox2.Location = new System.Drawing.Point(770, 89);
+            this.secondaryAddressComboBox2.Name = "secondaryAddressComboBox2";
+            this.secondaryAddressComboBox2.Size = new System.Drawing.Size(56, 21);
+            this.secondaryAddressComboBox2.TabIndex = 31;
+            // 
+            // primaryAddressNumericUpDown2
+            // 
+            this.primaryAddressNumericUpDown2.Location = new System.Drawing.Point(770, 63);
+            this.primaryAddressNumericUpDown2.Name = "primaryAddressNumericUpDown2";
+            this.primaryAddressNumericUpDown2.Size = new System.Drawing.Size(40, 20);
+            this.primaryAddressNumericUpDown2.TabIndex = 29;
+            this.primaryAddressNumericUpDown2.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // boardIdNumericUpDown2
+            // 
+            this.boardIdNumericUpDown2.Location = new System.Drawing.Point(770, 37);
+            this.boardIdNumericUpDown2.Name = "boardIdNumericUpDown2";
+            this.boardIdNumericUpDown2.Size = new System.Drawing.Size(40, 20);
+            this.boardIdNumericUpDown2.TabIndex = 27;
+            // 
+            // secondaryAddressLabel2
+            // 
+            this.secondaryAddressLabel2.AutoSize = true;
+            this.secondaryAddressLabel2.Location = new System.Drawing.Point(662, 92);
+            this.secondaryAddressLabel2.Name = "secondaryAddressLabel2";
+            this.secondaryAddressLabel2.Size = new System.Drawing.Size(102, 13);
+            this.secondaryAddressLabel2.TabIndex = 30;
+            this.secondaryAddressLabel2.Text = "Secondary Address:";
+            // 
+            // primaryAddressLabel2
+            // 
+            this.primaryAddressLabel2.AutoSize = true;
+            this.primaryAddressLabel2.Location = new System.Drawing.Point(679, 65);
+            this.primaryAddressLabel2.Name = "primaryAddressLabel2";
+            this.primaryAddressLabel2.Size = new System.Drawing.Size(85, 13);
+            this.primaryAddressLabel2.TabIndex = 28;
+            this.primaryAddressLabel2.Text = "Primary Address:";
+            // 
+            // boardIdLabel2
+            // 
+            this.boardIdLabel2.AutoSize = true;
+            this.boardIdLabel2.Location = new System.Drawing.Point(712, 39);
+            this.boardIdLabel2.Name = "boardIdLabel2";
+            this.boardIdLabel2.Size = new System.Drawing.Size(52, 13);
+            this.boardIdLabel2.TabIndex = 26;
+            this.boardIdLabel2.Text = "Board ID:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(548, 501);
+            this.ClientSize = new System.Drawing.Size(1234, 300);
+            this.Controls.Add(this.stringToWriteTextBox2);
+            this.Controls.Add(this.stringReadTextBox2);
+            this.Controls.Add(this.stringReadLabel2);
+            this.Controls.Add(this.readButton2);
+            this.Controls.Add(this.stringToWriteLabel2);
+            this.Controls.Add(this.writeButton2);
+            this.Controls.Add(this.closeButton2);
+            this.Controls.Add(this.openButton2);
+            this.Controls.Add(this.secondaryAddressComboBox2);
+            this.Controls.Add(this.primaryAddressNumericUpDown2);
+            this.Controls.Add(this.boardIdNumericUpDown2);
+            this.Controls.Add(this.secondaryAddressLabel2);
+            this.Controls.Add(this.primaryAddressLabel2);
+            this.Controls.Add(this.boardIdLabel2);
             this.Controls.Add(this.btnS0);
-            this.Controls.Add(this.lblDelta);
-            this.Controls.Add(this.lblEyx);
-            this.Controls.Add(this.stringToWriteTextBox);
-            this.Controls.Add(this.stringReadTextBox);
-            this.Controls.Add(this.trackBar2);
-            this.Controls.Add(this.trackBar1);
-            this.Controls.Add(this.pictureBox);
-            this.Controls.Add(this.stringReadLabel);
-            this.Controls.Add(this.readButton);
-            this.Controls.Add(this.stringToWriteLabel);
-            this.Controls.Add(this.writeButton);
-            this.Controls.Add(this.closeButton);
-            this.Controls.Add(this.openButton);
-            this.Controls.Add(this.secondaryAddressComboBox);
-            this.Controls.Add(this.primaryAddressNumericUpDown);
-            this.Controls.Add(this.boardIdNumericUpDown);
-            this.Controls.Add(this.secondaryAddressLabel);
-            this.Controls.Add(this.primaryAddressLabel);
-            this.Controls.Add(this.boardIdLabel);
+            this.Controls.Add(this.stringToWriteTextBox1);
+            this.Controls.Add(this.stringReadTextBox1);
+            this.Controls.Add(this.stringReadLabel1);
+            this.Controls.Add(this.readButton1);
+            this.Controls.Add(this.stringToWriteLabel1);
+            this.Controls.Add(this.writeButton1);
+            this.Controls.Add(this.closeButton1);
+            this.Controls.Add(this.openButton1);
+            this.Controls.Add(this.secondaryAddressComboBox1);
+            this.Controls.Add(this.primaryAddressNumericUpDown1);
+            this.Controls.Add(this.boardIdNumericUpDown1);
+            this.Controls.Add(this.secondaryAddressLabel1);
+            this.Controls.Add(this.primaryAddressLabel1);
+            this.Controls.Add(this.boardIdLabel1);
             this.Name = "MainForm";
             this.Text = "Main";
-            ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,27 +376,35 @@ namespace PolarizationAnalyzer
 
         #endregion
 
-        private System.Windows.Forms.Label boardIdLabel;
-        private System.Windows.Forms.Label primaryAddressLabel;
-        private System.Windows.Forms.Label secondaryAddressLabel;
-        private System.Windows.Forms.ComboBox secondaryAddressComboBox;
-        private System.Windows.Forms.NumericUpDown primaryAddressNumericUpDown;
-        private System.Windows.Forms.NumericUpDown boardIdNumericUpDown;
-        private System.Windows.Forms.Button closeButton;
-        private System.Windows.Forms.Button openButton;
-        private System.Windows.Forms.Label stringReadLabel;
-        private System.Windows.Forms.Button readButton;
-        private System.Windows.Forms.Label stringToWriteLabel;
-        private System.Windows.Forms.Button writeButton;
-        private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TrackBar trackBar2;
-        private System.Windows.Forms.RichTextBox stringReadTextBox;
-        private System.Windows.Forms.TextBox stringToWriteTextBox;
-        private System.Windows.Forms.Label lblEyx;
-        private System.Windows.Forms.Label lblDelta;
+        private System.Windows.Forms.Label boardIdLabel1;
+        private System.Windows.Forms.Label primaryAddressLabel1;
+        private System.Windows.Forms.Label secondaryAddressLabel1;
+        private System.Windows.Forms.ComboBox secondaryAddressComboBox1;
+        private System.Windows.Forms.NumericUpDown primaryAddressNumericUpDown1;
+        private System.Windows.Forms.NumericUpDown boardIdNumericUpDown1;
+        private System.Windows.Forms.Button closeButton1;
+        private System.Windows.Forms.Button openButton1;
+        private System.Windows.Forms.Label stringReadLabel1;
+        private System.Windows.Forms.Button readButton1;
+        private System.Windows.Forms.Label stringToWriteLabel1;
+        private System.Windows.Forms.Button writeButton1;
+        private System.Windows.Forms.RichTextBox stringReadTextBox1;
+        private System.Windows.Forms.TextBox stringToWriteTextBox1;
         private System.Windows.Forms.Button btnS0;
-        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.TextBox stringToWriteTextBox2;
+        private System.Windows.Forms.RichTextBox stringReadTextBox2;
+        private System.Windows.Forms.Label stringReadLabel2;
+        private System.Windows.Forms.Button readButton2;
+        private System.Windows.Forms.Label stringToWriteLabel2;
+        private System.Windows.Forms.Button writeButton2;
+        private System.Windows.Forms.Button closeButton2;
+        private System.Windows.Forms.Button openButton2;
+        private System.Windows.Forms.ComboBox secondaryAddressComboBox2;
+        private System.Windows.Forms.NumericUpDown primaryAddressNumericUpDown2;
+        private System.Windows.Forms.NumericUpDown boardIdNumericUpDown2;
+        private System.Windows.Forms.Label secondaryAddressLabel2;
+        private System.Windows.Forms.Label primaryAddressLabel2;
+        private System.Windows.Forms.Label boardIdLabel2;
     }
 }
 

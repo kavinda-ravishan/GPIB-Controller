@@ -220,9 +220,9 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                //device1.Write(ReplaceCommonEscapeSequences("S0;"));
-                //string[] data = S0(InsertCommonEscapeSequences(device.ReadString()));
-                string[] data = S0(text_S0);
+                device1.Write(ReplaceCommonEscapeSequences("S0;"));
+                string[] data = S0(InsertCommonEscapeSequences(device1.ReadString()));
+                //string[] data = S0(text_S0);
 
                 for (int i = 0; i < 17; i++)
                 {

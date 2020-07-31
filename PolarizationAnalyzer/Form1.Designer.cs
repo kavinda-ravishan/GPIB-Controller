@@ -333,7 +333,7 @@ namespace PolarizationAnalyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1234, 300);
+            this.ClientSize = new System.Drawing.Size(1234, 291);
             this.Controls.Add(this.stringToWriteTextBox2);
             this.Controls.Add(this.stringReadTextBox2);
             this.Controls.Add(this.stringReadLabel2);

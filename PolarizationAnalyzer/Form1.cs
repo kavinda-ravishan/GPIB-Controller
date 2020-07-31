@@ -48,7 +48,9 @@ namespace PolarizationAnalyzer
             "error code"
         };
 
-        private string[] Errors = 
+        private string ErrorCheck(string Error)
+        {
+            string[] ErrorList =
             {
 "E00 no error",
 "E01 incorrect command or wrong character",
@@ -88,8 +90,20 @@ namespace PolarizationAnalyzer
 "E39 Error loading calibration file*.set",
 "E46 No PAN-NIR",
 "E47 No PAN-FIR",
-"E99 1. Status request after switching the unit on or voltage failure of the unit"
+"E99 1. Status request after switching the unit on or voltage failure of the unit",
+"EEE"
         };
+            string ErrorNo;
+
+            int i;
+            for (i = 0; i < ErrorList.Length-1; i++)
+            {
+                ErrorNo = ErrorList[i].Substring(0, 3);
+
+                if(ErrorNo == Error) break;
+            }
+            return ErrorList[i];
+        }
 
         private string[] S0(string data)
         {
@@ -103,7 +117,7 @@ namespace PolarizationAnalyzer
             }
 
             values[15] = data.Substring(x, 4);
-            values[16] = data.Substring(x + 5, 3);
+            values[16] = ErrorCheck(data.Substring(x + 5, 3));
 
             return values;
         }

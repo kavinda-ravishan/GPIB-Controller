@@ -1,0 +1,16 @@
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Release\PolarizationAnalyzer.exe.config
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Release\PolarizationAnalyzer.exe
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Release\PolarizationAnalyzer.pdb
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Release\NationalInstruments.Common.dll
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Release\NationalInstruments.NI4882.dll
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Release\NationalInstruments.Common.xml
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Release\NationalInstruments.NI4882.xml
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Release\PolarizationAnalyzer.csprojAssemblyReference.cache
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Release\PolarizationAnalyzer.exe.config
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Release\PolarizationAnalyzer.MainForm.resources
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Release\PolarizationAnalyzer.Properties.Resources.resources
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Release\PolarizationAnalyzer.csproj.GenerateResource.cache
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Release\PolarizationAnalyzer.csproj.CoreCompileInputs.cache
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Release\PolarizationAnalyzer.csproj.CopyComplete
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Release\PolarizationAnalyzer.exe
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Release\PolarizationAnalyzer.pdb

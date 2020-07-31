@@ -1,0 +1,16 @@
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Debug\PolarizationAnalyzer.exe.config
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Debug\PolarizationAnalyzer.exe
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Debug\PolarizationAnalyzer.pdb
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.csprojAssemblyReference.cache
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.MainForm.resources
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.Properties.Resources.resources
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.csproj.GenerateResource.cache
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.csproj.CoreCompileInputs.cache
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.exe
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.pdb
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.exe.config
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Debug\NationalInstruments.Common.dll
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Debug\NationalInstruments.NI4882.dll
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Debug\NationalInstruments.Common.xml
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Debug\NationalInstruments.NI4882.xml
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.csproj.CopyComplete

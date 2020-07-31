@@ -162,6 +162,8 @@ namespace PolarizationAnalyzer
         private double t;
         private Point[] points;
 
+        private bool b_timer = false;
+
         private int noPoints;
 
         public MainForm()
@@ -270,7 +272,17 @@ namespace PolarizationAnalyzer
 
         private void BtnS0_Click(object sender, EventArgs e)
         {
-            
+            if (b_timer)
+            {
+                timer.Enabled = true;
+                b_timer = !b_timer;
+            }
+            else
+            {
+                timer.Enabled = false;
+                b_timer = !b_timer;
+            }
+            /*
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -278,9 +290,9 @@ namespace PolarizationAnalyzer
                 //------------------------Test Code--------------------------------------//
                 stringReadTextBox.Enabled = true;
                 stringReadTextBox.Clear();
-                string[] data = S0(text_S0);
+                //string[] data = S0(text_S0);
                 
-                //string[] data = S0(InsertCommonEscapeSequences(device.ReadString()));
+                string[] data = S0(InsertCommonEscapeSequences(device.ReadString()));
 
                 for (int i = 0; i < 17; i++)
                 {
@@ -303,7 +315,43 @@ namespace PolarizationAnalyzer
             {
                 Cursor.Current = Cursors.Default;
             }
-            
+            */
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                //stringReadTextBox.Text = InsertCommonEscapeSequences(device.ReadString());
+                //------------------------Test Code--------------------------------------//
+                stringReadTextBox.Enabled = true;
+                stringReadTextBox.Clear();
+                //string[] data = S0(text_S0);
+
+                string[] data = S0(InsertCommonEscapeSequences(device.ReadString()));
+
+                for (int i = 0; i < 17; i++)
+                {
+                    stringReadTextBox.Text += (lables_S0[i] + " - " + data[i] + Environment.NewLine);
+                }
+
+                delta = Convert.ToDouble(data[6]);
+                Eyx = Convert.ToDouble(data[4]);
+
+                PolarizationEllipse2(ref points, Eyx, delta);
+                DrawCall(ref frame, ref points);
+                pictureBox.Image = frame;
+                //------------------------------End--------------------------------------//
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
     }
 }

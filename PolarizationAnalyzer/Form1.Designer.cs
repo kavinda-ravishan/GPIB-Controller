@@ -38,6 +38,7 @@ namespace PolarizationAnalyzer
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.boardIdLabel = new System.Windows.Forms.Label();
             this.primaryAddressLabel = new System.Windows.Forms.Label();
             this.secondaryAddressLabel = new System.Windows.Forms.Label();
@@ -58,6 +59,7 @@ namespace PolarizationAnalyzer
             this.lblEyx = new System.Windows.Forms.Label();
             this.lblDelta = new System.Windows.Forms.Label();
             this.btnS0 = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -239,6 +241,11 @@ namespace PolarizationAnalyzer
             this.btnS0.Text = "S0 Read";
             this.btnS0.Click += new System.EventHandler(this.BtnS0_Click);
             // 
+            // timer
+            // 
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.Timer1_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,6 +305,7 @@ namespace PolarizationAnalyzer
         private System.Windows.Forms.Label lblEyx;
         private System.Windows.Forms.Label lblDelta;
         private System.Windows.Forms.Button btnS0;
+        private System.Windows.Forms.Timer timer;
     }
 }
 

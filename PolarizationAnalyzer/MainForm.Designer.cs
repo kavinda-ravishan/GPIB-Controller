@@ -442,7 +442,7 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Main";
+            this.Text = "GPIG Controller";
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown2)).EndInit();

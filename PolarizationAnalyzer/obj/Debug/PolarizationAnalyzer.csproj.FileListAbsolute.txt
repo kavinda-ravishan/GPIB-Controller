@@ -14,3 +14,4 @@ C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer
 C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Debug\NationalInstruments.Common.xml
 C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\bin\Debug\NationalInstruments.NI4882.xml
 C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.csproj.CopyComplete
+C:\Users\Kavinda Ravishan\source\repos\PolarizationAnalyzer\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.NewForm.resources

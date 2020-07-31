@@ -1,11 +1,8 @@
-﻿using NationalInstruments.NI4882;
-
-namespace PolarizationAnalyzer
+﻿namespace PolarizationAnalyzer
 {
     partial class MainForm
     {
-        private Device device1;
-        private Device device2;
+        
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -19,14 +16,15 @@ namespace PolarizationAnalyzer
         {
             if (disposing)
             {
-                if (device1 != null)
+                if (Devices.devicePolarizationAnalyzer != null)
                 {
-                    device1.Dispose();
+                    Devices.devicePolarizationAnalyzer.Dispose();
                 }
-                if (device2 != null)
+                if (Devices.deviceLaserSource != null)
                 {
-                    device2.Dispose();
+                    Devices.deviceLaserSource.Dispose();
                 }
+                
                 if (components != null)
                 {
                     components.Dispose();
@@ -72,16 +70,24 @@ namespace PolarizationAnalyzer
             this.secondaryAddressLabel2 = new System.Windows.Forms.Label();
             this.primaryAddressLabel2 = new System.Windows.Forms.Label();
             this.boardIdLabel2 = new System.Windows.Forms.Label();
+            this.btnForm = new System.Windows.Forms.Button();
+            this.lblPol = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnFindDevices = new System.Windows.Forms.Button();
+            this.richTextBoxDevices = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown2)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // boardIdLabel1
             // 
             this.boardIdLabel1.AutoSize = true;
-            this.boardIdLabel1.Location = new System.Drawing.Point(91, 39);
+            this.boardIdLabel1.Location = new System.Drawing.Point(71, 55);
             this.boardIdLabel1.Name = "boardIdLabel1";
             this.boardIdLabel1.Size = new System.Drawing.Size(52, 13);
             this.boardIdLabel1.TabIndex = 0;
@@ -90,7 +96,7 @@ namespace PolarizationAnalyzer
             // primaryAddressLabel1
             // 
             this.primaryAddressLabel1.AutoSize = true;
-            this.primaryAddressLabel1.Location = new System.Drawing.Point(58, 65);
+            this.primaryAddressLabel1.Location = new System.Drawing.Point(38, 81);
             this.primaryAddressLabel1.Name = "primaryAddressLabel1";
             this.primaryAddressLabel1.Size = new System.Drawing.Size(85, 13);
             this.primaryAddressLabel1.TabIndex = 2;
@@ -99,7 +105,7 @@ namespace PolarizationAnalyzer
             // secondaryAddressLabel1
             // 
             this.secondaryAddressLabel1.AutoSize = true;
-            this.secondaryAddressLabel1.Location = new System.Drawing.Point(41, 92);
+            this.secondaryAddressLabel1.Location = new System.Drawing.Point(21, 108);
             this.secondaryAddressLabel1.Name = "secondaryAddressLabel1";
             this.secondaryAddressLabel1.Size = new System.Drawing.Size(102, 13);
             this.secondaryAddressLabel1.TabIndex = 4;
@@ -107,14 +113,14 @@ namespace PolarizationAnalyzer
             // 
             // secondaryAddressComboBox1
             // 
-            this.secondaryAddressComboBox1.Location = new System.Drawing.Point(149, 89);
+            this.secondaryAddressComboBox1.Location = new System.Drawing.Point(129, 105);
             this.secondaryAddressComboBox1.Name = "secondaryAddressComboBox1";
             this.secondaryAddressComboBox1.Size = new System.Drawing.Size(56, 21);
             this.secondaryAddressComboBox1.TabIndex = 5;
             // 
             // primaryAddressNumericUpDown1
             // 
-            this.primaryAddressNumericUpDown1.Location = new System.Drawing.Point(149, 63);
+            this.primaryAddressNumericUpDown1.Location = new System.Drawing.Point(129, 79);
             this.primaryAddressNumericUpDown1.Name = "primaryAddressNumericUpDown1";
             this.primaryAddressNumericUpDown1.Size = new System.Drawing.Size(40, 20);
             this.primaryAddressNumericUpDown1.TabIndex = 3;
@@ -126,14 +132,14 @@ namespace PolarizationAnalyzer
             // 
             // boardIdNumericUpDown1
             // 
-            this.boardIdNumericUpDown1.Location = new System.Drawing.Point(149, 37);
+            this.boardIdNumericUpDown1.Location = new System.Drawing.Point(129, 53);
             this.boardIdNumericUpDown1.Name = "boardIdNumericUpDown1";
             this.boardIdNumericUpDown1.Size = new System.Drawing.Size(40, 20);
             this.boardIdNumericUpDown1.TabIndex = 1;
             // 
             // closeButton1
             // 
-            this.closeButton1.Location = new System.Drawing.Point(124, 134);
+            this.closeButton1.Location = new System.Drawing.Point(104, 150);
             this.closeButton1.Name = "closeButton1";
             this.closeButton1.Size = new System.Drawing.Size(75, 23);
             this.closeButton1.TabIndex = 7;
@@ -142,7 +148,7 @@ namespace PolarizationAnalyzer
             // 
             // openButton1
             // 
-            this.openButton1.Location = new System.Drawing.Point(44, 134);
+            this.openButton1.Location = new System.Drawing.Point(24, 150);
             this.openButton1.Name = "openButton1";
             this.openButton1.Size = new System.Drawing.Size(75, 23);
             this.openButton1.TabIndex = 6;
@@ -151,7 +157,7 @@ namespace PolarizationAnalyzer
             // 
             // stringReadLabel1
             // 
-            this.stringReadLabel1.Location = new System.Drawing.Point(226, 29);
+            this.stringReadLabel1.Location = new System.Drawing.Point(206, 45);
             this.stringReadLabel1.Name = "stringReadLabel1";
             this.stringReadLabel1.Size = new System.Drawing.Size(75, 23);
             this.stringReadLabel1.TabIndex = 16;
@@ -159,7 +165,7 @@ namespace PolarizationAnalyzer
             // 
             // readButton1
             // 
-            this.readButton1.Location = new System.Drawing.Point(149, 239);
+            this.readButton1.Location = new System.Drawing.Point(117, 383);
             this.readButton1.Name = "readButton1";
             this.readButton1.Size = new System.Drawing.Size(75, 23);
             this.readButton1.TabIndex = 15;
@@ -168,7 +174,7 @@ namespace PolarizationAnalyzer
             // 
             // stringToWriteLabel1
             // 
-            this.stringToWriteLabel1.Location = new System.Drawing.Point(44, 184);
+            this.stringToWriteLabel1.Location = new System.Drawing.Point(14, 331);
             this.stringToWriteLabel1.Name = "stringToWriteLabel1";
             this.stringToWriteLabel1.Size = new System.Drawing.Size(100, 23);
             this.stringToWriteLabel1.TabIndex = 14;
@@ -176,7 +182,7 @@ namespace PolarizationAnalyzer
             // 
             // writeButton1
             // 
-            this.writeButton1.Location = new System.Drawing.Point(49, 239);
+            this.writeButton1.Location = new System.Drawing.Point(17, 383);
             this.writeButton1.Name = "writeButton1";
             this.writeButton1.Size = new System.Drawing.Size(75, 23);
             this.writeButton1.TabIndex = 13;
@@ -185,23 +191,23 @@ namespace PolarizationAnalyzer
             // 
             // stringReadTextBox1
             // 
-            this.stringReadTextBox1.Location = new System.Drawing.Point(229, 55);
+            this.stringReadTextBox1.Location = new System.Drawing.Point(209, 71);
             this.stringReadTextBox1.Name = "stringReadTextBox1";
             this.stringReadTextBox1.ReadOnly = true;
-            this.stringReadTextBox1.Size = new System.Drawing.Size(329, 152);
+            this.stringReadTextBox1.Size = new System.Drawing.Size(329, 277);
             this.stringReadTextBox1.TabIndex = 21;
             this.stringReadTextBox1.Text = "";
             // 
             // stringToWriteTextBox1
             // 
-            this.stringToWriteTextBox1.Location = new System.Drawing.Point(47, 213);
+            this.stringToWriteTextBox1.Location = new System.Drawing.Point(15, 357);
             this.stringToWriteTextBox1.Name = "stringToWriteTextBox1";
             this.stringToWriteTextBox1.Size = new System.Drawing.Size(511, 20);
             this.stringToWriteTextBox1.TabIndex = 22;
             // 
             // btnS0
             // 
-            this.btnS0.Location = new System.Drawing.Point(483, 239);
+            this.btnS0.Location = new System.Drawing.Point(451, 383);
             this.btnS0.Name = "btnS0";
             this.btnS0.Size = new System.Drawing.Size(75, 23);
             this.btnS0.TabIndex = 25;
@@ -210,14 +216,14 @@ namespace PolarizationAnalyzer
             // 
             // stringToWriteTextBox2
             // 
-            this.stringToWriteTextBox2.Location = new System.Drawing.Point(668, 213);
+            this.stringToWriteTextBox2.Location = new System.Drawing.Point(577, 229);
             this.stringToWriteTextBox2.Name = "stringToWriteTextBox2";
             this.stringToWriteTextBox2.Size = new System.Drawing.Size(511, 20);
             this.stringToWriteTextBox2.TabIndex = 39;
             // 
             // stringReadTextBox2
             // 
-            this.stringReadTextBox2.Location = new System.Drawing.Point(850, 55);
+            this.stringReadTextBox2.Location = new System.Drawing.Point(759, 71);
             this.stringReadTextBox2.Name = "stringReadTextBox2";
             this.stringReadTextBox2.ReadOnly = true;
             this.stringReadTextBox2.Size = new System.Drawing.Size(329, 152);
@@ -226,7 +232,7 @@ namespace PolarizationAnalyzer
             // 
             // stringReadLabel2
             // 
-            this.stringReadLabel2.Location = new System.Drawing.Point(847, 29);
+            this.stringReadLabel2.Location = new System.Drawing.Point(756, 45);
             this.stringReadLabel2.Name = "stringReadLabel2";
             this.stringReadLabel2.Size = new System.Drawing.Size(75, 23);
             this.stringReadLabel2.TabIndex = 37;
@@ -234,7 +240,7 @@ namespace PolarizationAnalyzer
             // 
             // readButton2
             // 
-            this.readButton2.Location = new System.Drawing.Point(770, 239);
+            this.readButton2.Location = new System.Drawing.Point(679, 255);
             this.readButton2.Name = "readButton2";
             this.readButton2.Size = new System.Drawing.Size(75, 23);
             this.readButton2.TabIndex = 36;
@@ -243,7 +249,7 @@ namespace PolarizationAnalyzer
             // 
             // stringToWriteLabel2
             // 
-            this.stringToWriteLabel2.Location = new System.Drawing.Point(665, 184);
+            this.stringToWriteLabel2.Location = new System.Drawing.Point(574, 200);
             this.stringToWriteLabel2.Name = "stringToWriteLabel2";
             this.stringToWriteLabel2.Size = new System.Drawing.Size(100, 23);
             this.stringToWriteLabel2.TabIndex = 35;
@@ -251,7 +257,7 @@ namespace PolarizationAnalyzer
             // 
             // writeButton2
             // 
-            this.writeButton2.Location = new System.Drawing.Point(670, 239);
+            this.writeButton2.Location = new System.Drawing.Point(579, 255);
             this.writeButton2.Name = "writeButton2";
             this.writeButton2.Size = new System.Drawing.Size(75, 23);
             this.writeButton2.TabIndex = 34;
@@ -260,7 +266,7 @@ namespace PolarizationAnalyzer
             // 
             // closeButton2
             // 
-            this.closeButton2.Location = new System.Drawing.Point(745, 134);
+            this.closeButton2.Location = new System.Drawing.Point(654, 150);
             this.closeButton2.Name = "closeButton2";
             this.closeButton2.Size = new System.Drawing.Size(75, 23);
             this.closeButton2.TabIndex = 33;
@@ -269,7 +275,7 @@ namespace PolarizationAnalyzer
             // 
             // openButton2
             // 
-            this.openButton2.Location = new System.Drawing.Point(665, 134);
+            this.openButton2.Location = new System.Drawing.Point(574, 150);
             this.openButton2.Name = "openButton2";
             this.openButton2.Size = new System.Drawing.Size(75, 23);
             this.openButton2.TabIndex = 32;
@@ -278,14 +284,14 @@ namespace PolarizationAnalyzer
             // 
             // secondaryAddressComboBox2
             // 
-            this.secondaryAddressComboBox2.Location = new System.Drawing.Point(770, 89);
+            this.secondaryAddressComboBox2.Location = new System.Drawing.Point(679, 105);
             this.secondaryAddressComboBox2.Name = "secondaryAddressComboBox2";
             this.secondaryAddressComboBox2.Size = new System.Drawing.Size(56, 21);
             this.secondaryAddressComboBox2.TabIndex = 31;
             // 
             // primaryAddressNumericUpDown2
             // 
-            this.primaryAddressNumericUpDown2.Location = new System.Drawing.Point(770, 63);
+            this.primaryAddressNumericUpDown2.Location = new System.Drawing.Point(679, 79);
             this.primaryAddressNumericUpDown2.Name = "primaryAddressNumericUpDown2";
             this.primaryAddressNumericUpDown2.Size = new System.Drawing.Size(40, 20);
             this.primaryAddressNumericUpDown2.TabIndex = 29;
@@ -297,7 +303,7 @@ namespace PolarizationAnalyzer
             // 
             // boardIdNumericUpDown2
             // 
-            this.boardIdNumericUpDown2.Location = new System.Drawing.Point(770, 37);
+            this.boardIdNumericUpDown2.Location = new System.Drawing.Point(679, 53);
             this.boardIdNumericUpDown2.Name = "boardIdNumericUpDown2";
             this.boardIdNumericUpDown2.Size = new System.Drawing.Size(40, 20);
             this.boardIdNumericUpDown2.TabIndex = 27;
@@ -305,7 +311,7 @@ namespace PolarizationAnalyzer
             // secondaryAddressLabel2
             // 
             this.secondaryAddressLabel2.AutoSize = true;
-            this.secondaryAddressLabel2.Location = new System.Drawing.Point(662, 92);
+            this.secondaryAddressLabel2.Location = new System.Drawing.Point(571, 108);
             this.secondaryAddressLabel2.Name = "secondaryAddressLabel2";
             this.secondaryAddressLabel2.Size = new System.Drawing.Size(102, 13);
             this.secondaryAddressLabel2.TabIndex = 30;
@@ -314,7 +320,7 @@ namespace PolarizationAnalyzer
             // primaryAddressLabel2
             // 
             this.primaryAddressLabel2.AutoSize = true;
-            this.primaryAddressLabel2.Location = new System.Drawing.Point(679, 65);
+            this.primaryAddressLabel2.Location = new System.Drawing.Point(588, 81);
             this.primaryAddressLabel2.Name = "primaryAddressLabel2";
             this.primaryAddressLabel2.Size = new System.Drawing.Size(85, 13);
             this.primaryAddressLabel2.TabIndex = 28;
@@ -323,17 +329,90 @@ namespace PolarizationAnalyzer
             // boardIdLabel2
             // 
             this.boardIdLabel2.AutoSize = true;
-            this.boardIdLabel2.Location = new System.Drawing.Point(712, 39);
+            this.boardIdLabel2.Location = new System.Drawing.Point(621, 55);
             this.boardIdLabel2.Name = "boardIdLabel2";
             this.boardIdLabel2.Size = new System.Drawing.Size(52, 13);
             this.boardIdLabel2.TabIndex = 26;
             this.boardIdLabel2.Text = "Board ID:";
             // 
+            // btnForm
+            // 
+            this.btnForm.Location = new System.Drawing.Point(1042, 317);
+            this.btnForm.Name = "btnForm";
+            this.btnForm.Size = new System.Drawing.Size(75, 23);
+            this.btnForm.TabIndex = 40;
+            this.btnForm.Text = "New Form";
+            this.btnForm.UseVisualStyleBackColor = true;
+            this.btnForm.Click += new System.EventHandler(this.BtnForm_Click);
+            // 
+            // lblPol
+            // 
+            this.lblPol.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPol.Location = new System.Drawing.Point(272, 9);
+            this.lblPol.Name = "lblPol";
+            this.lblPol.Size = new System.Drawing.Size(178, 23);
+            this.lblPol.TabIndex = 41;
+            this.lblPol.Text = "Polarization Analyzer";
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(817, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(122, 23);
+            this.label1.TabIndex = 42;
+            this.label1.Text = "Laser Source";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnS0);
+            this.groupBox1.Controls.Add(this.writeButton1);
+            this.groupBox1.Controls.Add(this.readButton1);
+            this.groupBox1.Controls.Add(this.stringToWriteTextBox1);
+            this.groupBox1.Controls.Add(this.stringToWriteLabel1);
+            this.groupBox1.Location = new System.Drawing.Point(12, 9);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(540, 422);
+            this.groupBox1.TabIndex = 43;
+            this.groupBox1.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Location = new System.Drawing.Point(558, 9);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(559, 278);
+            this.groupBox2.TabIndex = 44;
+            this.groupBox2.TabStop = false;
+            // 
+            // btnFindDevices
+            // 
+            this.btnFindDevices.Location = new System.Drawing.Point(591, 351);
+            this.btnFindDevices.Name = "btnFindDevices";
+            this.btnFindDevices.Size = new System.Drawing.Size(117, 49);
+            this.btnFindDevices.TabIndex = 46;
+            this.btnFindDevices.Text = "Find Devices";
+            this.btnFindDevices.UseVisualStyleBackColor = true;
+            this.btnFindDevices.Click += new System.EventHandler(this.BtnFindDevices_Click);
+            // 
+            // richTextBoxDevices
+            // 
+            this.richTextBoxDevices.Location = new System.Drawing.Point(742, 303);
+            this.richTextBoxDevices.Name = "richTextBoxDevices";
+            this.richTextBoxDevices.ReadOnly = true;
+            this.richTextBoxDevices.Size = new System.Drawing.Size(258, 128);
+            this.richTextBoxDevices.TabIndex = 47;
+            this.richTextBoxDevices.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1234, 291);
+            this.ClientSize = new System.Drawing.Size(1129, 449);
+            this.Controls.Add(this.richTextBoxDevices);
+            this.Controls.Add(this.btnFindDevices);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblPol);
+            this.Controls.Add(this.btnForm);
             this.Controls.Add(this.stringToWriteTextBox2);
             this.Controls.Add(this.stringReadTextBox2);
             this.Controls.Add(this.stringReadLabel2);
@@ -348,13 +427,8 @@ namespace PolarizationAnalyzer
             this.Controls.Add(this.secondaryAddressLabel2);
             this.Controls.Add(this.primaryAddressLabel2);
             this.Controls.Add(this.boardIdLabel2);
-            this.Controls.Add(this.btnS0);
-            this.Controls.Add(this.stringToWriteTextBox1);
             this.Controls.Add(this.stringReadTextBox1);
             this.Controls.Add(this.stringReadLabel1);
-            this.Controls.Add(this.readButton1);
-            this.Controls.Add(this.stringToWriteLabel1);
-            this.Controls.Add(this.writeButton1);
             this.Controls.Add(this.closeButton1);
             this.Controls.Add(this.openButton1);
             this.Controls.Add(this.secondaryAddressComboBox1);
@@ -363,12 +437,18 @@ namespace PolarizationAnalyzer
             this.Controls.Add(this.secondaryAddressLabel1);
             this.Controls.Add(this.primaryAddressLabel1);
             this.Controls.Add(this.boardIdLabel1);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox2);
+            this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown2)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -405,6 +485,13 @@ namespace PolarizationAnalyzer
         private System.Windows.Forms.Label secondaryAddressLabel2;
         private System.Windows.Forms.Label primaryAddressLabel2;
         private System.Windows.Forms.Label boardIdLabel2;
+        private System.Windows.Forms.Button btnForm;
+        private System.Windows.Forms.Label lblPol;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnFindDevices;
+        private System.Windows.Forms.RichTextBox richTextBoxDevices;
     }
 }
 

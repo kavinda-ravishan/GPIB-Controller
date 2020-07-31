@@ -23,10 +23,12 @@ namespace PolarizationAnalyzer
             return s.Replace("\n", "\\n").Replace("\r", "\\r");
         }
 
-        //----------------- device 1 -------------------------------------//
+        #region Polarization Analyzer
 
+        //For testing purposes
         private string text_S0 = "VAL00  77.204;VAL01  16.427;VAL02   0.295;VAL03  39.486;VAL04   0.371;VAL05   0.121;VAL06  56.222;VAL07   0.000;VAL08  10.609;VAL09  -0.758;VAL10   0.363;VAL11   0.543;VAL12 -75.284;VAL13 -71.248;VAL14 -73.429;1000;E08\n";
 
+        //Labels for S0 receive data
         private string[] lables_S0 =
         {
             "elevation angle θ",
@@ -48,51 +50,54 @@ namespace PolarizationAnalyzer
             "error code"
         };
 
+        //Labels for error messages
+        private string[] ErrorList =
+            {
+                "E00 no error",
+                "E01 incorrect command or wrong character",
+                "E02 string of characters too long (> 250 characters without terminator)",
+                "E03 command buffer overflow(>8 commands without trigger command X; or[GET])",
+                "E04 incorrect parameter format",
+                "E05 parameter outside the allowed range",
+                "E06 parameter has too many digits after the decimal point",
+                "E07 optical power too high",
+                "E08 incorrect operating wavelength or incorrect optical head calibration (degree of polarization measured >100 %)",
+                "E09 no PAN9300 module(in the activated slot)",
+                "E10 no POL 9320-Modul(in the activated slot)",
+                "E12 no PAN-IR module",
+                "E13 no tunable laser",
+                "E14 incorrect type of PAN set",
+                "E15 type of PMD not set",
+                "E16 no reference Jones matrix available",
+                "E17 incorrect start wavelength",
+                "E18 incorrect stop wavelength",
+                "E19 incorrect wavelength step",
+                "E20 incorrect wavelength speed",
+                "E21 incorrect length of fiber",
+                "E22 incorrect K-factor",
+                "E23 incorrect value for delta_mm",
+                "E24 no PMD data available",
+                "E25 no PMD file available",
+                "E26 no turbo mode available for PAN9300",
+                "E29 no tunable laser for PMD measurements available",
+                "E30 No or wrong authorization code",
+                "E31 No turbo file existent",
+                "E33 Power below limit setting",
+                "E34 Insufficient measured points",
+                "E35 Unable to calculate ER",
+                "E36 Not sufficient fiber stress",
+                "E37 No typical PMF behavior(Warning only)",
+                "E38 Bad linear eigenmodes(Warning only)",
+                "E39 Error loading calibration file*.set",
+                "E46 No PAN-NIR",
+                "E47 No PAN-FIR",
+                "E99 1. Status request after switching the unit on or voltage failure of the unit",
+                "EEE"
+        };
+
+        //Convert error codes to corresponding error message
         private string ErrorCheck(string Error)
         {
-            string[] ErrorList =
-            {
-"E00 no error",
-"E01 incorrect command or wrong character",
-"E02 string of characters too long (> 250 characters without terminator)",
-"E03 command buffer overflow(>8 commands without trigger command X; or[GET])",
-"E04 incorrect parameter format",
-"E05 parameter outside the allowed range",
-"E06 parameter has too many digits after the decimal point",
-"E07 optical power too high",
-"E08 incorrect operating wavelength or incorrect optical head calibration (degree of polarization measured >100 %)",
-"E09 no PAN9300 module(in the activated slot)",
-"E10 no POL 9320-Modul(in the activated slot)",
-"E12 no PAN-IR module",
-"E13 no tunable laser",
-"E14 incorrect type of PAN set",
-"E15 type of PMD not set",
-"E16 no reference Jones matrix available",
-"E17 incorrect start wavelength",
-"E18 incorrect stop wavelength",
-"E19 incorrect wavelength step",
-"E20 incorrect wavelength speed",
-"E21 incorrect length of fiber",
-"E22 incorrect K-factor",
-"E23 incorrect value for delta_mm",
-"E24 no PMD data available",
-"E25 no PMD file available",
-"E26 no turbo mode available for PAN9300",
-"E29 no tunable laser for PMD measurements available",
-"E30 No or wrong authorization code",
-"E31 No turbo file existent",
-"E33 Power below limit setting",
-"E34 Insufficient measured points",
-"E35 Unable to calculate ER",
-"E36 Not sufficient fiber stress",
-"E37 No typical PMF behavior(Warning only)",
-"E38 Bad linear eigenmodes(Warning only)",
-"E39 Error loading calibration file*.set",
-"E46 No PAN-NIR",
-"E47 No PAN-FIR",
-"E99 1. Status request after switching the unit on or voltage failure of the unit",
-"EEE"
-        };
             string ErrorNo;
 
             int i;
@@ -105,6 +110,7 @@ namespace PolarizationAnalyzer
             return ErrorList[i];
         }
 
+        //Convert the S0 data string to values string array
         private string[] S0(string data)
         {
             int x = 0;
@@ -133,6 +139,7 @@ namespace PolarizationAnalyzer
             writeButton1.Enabled = isSessionOpen;
             readButton1.Enabled = isSessionOpen;
             stringReadTextBox1.Enabled = isSessionOpen;
+            btnS0.Enabled = isSessionOpen;
         }
 
         private void InitsecondaryAddressComboBox1()
@@ -157,7 +164,7 @@ namespace PolarizationAnalyzer
                     currentSecondaryAddress = (int)secondaryAddressComboBox1.SelectedItem;
                 }
                 // Intialize the device
-                device1 = new Device((int)boardIdNumericUpDown1.Value, (byte)primaryAddressNumericUpDown1.Value, (byte)currentSecondaryAddress);
+                Devices.devicePolarizationAnalyzer = new Device((int)boardIdNumericUpDown1.Value, (byte)primaryAddressNumericUpDown1.Value, (byte)currentSecondaryAddress);
                 SetupControlState1(true);
             }
             catch (Exception ex)
@@ -173,8 +180,9 @@ namespace PolarizationAnalyzer
         private void CloseButton_Click(object sender, EventArgs e)
         {
             try
-            {
-                device1.Dispose();
+            {    
+                Devices.devicePolarizationAnalyzer.Dispose();
+                Devices.devicePolarizationAnalyzer = null;
                 SetupControlState1(false);
             }
             catch (Exception ex)
@@ -187,7 +195,7 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                device1.Write(ReplaceCommonEscapeSequences(stringToWriteTextBox1.Text));
+                Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences(stringToWriteTextBox1.Text));
             }
             catch (Exception ex)
             {
@@ -200,7 +208,7 @@ namespace PolarizationAnalyzer
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                stringReadTextBox1.Text = InsertCommonEscapeSequences(device1.ReadString());
+                stringReadTextBox1.Text = InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString());
             }
             catch (Exception ex)
             {
@@ -220,8 +228,8 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                device1.Write(ReplaceCommonEscapeSequences("S0;"));
-                string[] data = S0(InsertCommonEscapeSequences(device1.ReadString()));
+                Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences("S0;"));
+                string[] data = S0(InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
                 //string[] data = S0(text_S0);
 
                 for (int i = 0; i < 17; i++)
@@ -241,7 +249,9 @@ namespace PolarizationAnalyzer
 
         }
 
-        //----------------- device 2 -------------------------------------//
+        #endregion
+
+        #region Laser Source
 
         private void SetupControlState2(bool isSessionOpen)
         {
@@ -278,7 +288,7 @@ namespace PolarizationAnalyzer
                     currentSecondaryAddress = (int)secondaryAddressComboBox2.SelectedItem;
                 }
                 // Intialize the device
-                device2 = new Device((int)boardIdNumericUpDown2.Value, (byte)primaryAddressNumericUpDown2.Value, (byte)currentSecondaryAddress);
+                Devices.deviceLaserSource = new Device((int)boardIdNumericUpDown2.Value, (byte)primaryAddressNumericUpDown2.Value, (byte)currentSecondaryAddress);
                 SetupControlState2(true);
             }
             catch (Exception ex)
@@ -295,7 +305,8 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                device2.Dispose();
+                Devices.deviceLaserSource.Dispose();
+                Devices.deviceLaserSource = null;
                 SetupControlState2(false);
             }
             catch (Exception ex)
@@ -308,7 +319,7 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                device2.Write(ReplaceCommonEscapeSequences(stringToWriteTextBox2.Text));
+                Devices.deviceLaserSource.Write(ReplaceCommonEscapeSequences(stringToWriteTextBox2.Text));
             }
             catch (Exception ex)
             {
@@ -321,7 +332,7 @@ namespace PolarizationAnalyzer
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                stringReadTextBox2.Text = InsertCommonEscapeSequences(device2.ReadString());
+                stringReadTextBox2.Text = InsertCommonEscapeSequences(Devices.deviceLaserSource.ReadString());
             }
             catch (Exception ex)
             {
@@ -330,6 +341,47 @@ namespace PolarizationAnalyzer
             finally
             {
                 Cursor.Current = Cursors.Default;
+            }
+        }
+
+        #endregion
+
+        private void BtnForm_Click(object sender, EventArgs e)
+        {
+            if ((Devices.devicePolarizationAnalyzer != null) & (Devices.deviceLaserSource != null))
+            {
+                this.Hide();
+                NewForm newForm = new NewForm();
+                newForm.RefToMainForm = this;
+                newForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Device not initialized");
+            }
+        }
+
+        private void BtnFindDevices_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Board board = new Board(0);
+                board.SendInterfaceClear();
+                AddressCollection addressCollection = board.FindListeners();
+
+                richTextBoxDevices.Clear();
+                for (int i = 0; i < addressCollection.Count; i++)
+                {
+                    richTextBoxDevices.Text += (
+                        "Primary Address : " + addressCollection[i].PrimaryAddress + " , " +
+                        "Secondary Address : " + addressCollection[i].SecondaryAddress +
+                        Environment.NewLine);
+                }
+                board.Dispose();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

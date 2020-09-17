@@ -13,7 +13,10 @@ namespace PolarizationAnalyzer
             SetupControlState2(false);
             InitsecondaryAddressComboBox1();
             InitsecondaryAddressComboBox2();
+
+            laserSourceTextBoxSuggestAppend();
         }
+        
         private string ReplaceCommonEscapeSequences(string s)
         {
             return s.Replace("\\n", "\n").Replace("\\r", "\r");
@@ -26,8 +29,8 @@ namespace PolarizationAnalyzer
         #region Polarization Analyzer
 
         //For testing purposes
-        private string text_S0 = "VAL00  77.204;VAL01  16.427;VAL02   0.295;VAL03  39.486;VAL04   0.371;VAL05   0.121;VAL06  56.222;VAL07   0.000;VAL08  10.609;VAL09  -0.758;VAL10   0.363;VAL11   0.543;VAL12 -75.284;VAL13 -71.248;VAL14 -73.429;1000;E08\n";
-
+        //private string text_S0 = "VAL00  77.204;VAL01  16.427;VAL02   0.295;VAL03  39.486;VAL04   0.371;VAL05   0.121;VAL06  56.222;VAL07   0.000;VAL08  10.609;VAL09  -0.758;VAL10   0.363;VAL11   0.543;VAL12 -75.284;VAL13 -71.248;VAL14 -73.429;1000;E08\n";
+        private string text_SB = "S1  0.849;S2  0.528;S3  0.007;PDB -76.34;1000;E00\n";
         //Labels for S0 receive data
         private string[] lables_S0 =
         {
@@ -46,6 +49,17 @@ namespace PolarizationAnalyzer
             "polarized power (dBm)",
             "total power",
             "unpolarized power(dBm)",
+            "device status code",
+            "error code"
+        };
+
+        //Labels for SB receive data
+        private string[] lables_SB =
+        {
+            "S1 normalized Stokes parameter s1",
+            "S2 normalized Stokes parameter s2",
+            "S3 normalized Stokes parameter s3",
+            "PDB polarized optical power in dBm",
             "device status code",
             "error code"
         };
@@ -111,6 +125,27 @@ namespace PolarizationAnalyzer
         }
 
         //Convert the S0 data string to values string array
+        private string[] SB(string data)
+        {
+            int x = 0;
+            string[] values = new string[6];
+
+            for (int i = 0; i < 3; i++)
+            {
+                values[i] = data.Substring(x + 3, 6);
+                x = x + 10;
+            }
+            x = x + 3;
+            values[3] = data.Substring(x, 7);
+            x = x + 8;
+            values[4] = data.Substring(x, 4);
+            x = x + 5;
+            values[5] = ErrorCheck(data.Substring(x, 3));
+
+            return values;
+        }
+
+        //Convert the S0 data string to values string array
         private string[] S0(string data)
         {
             int x = 0;
@@ -123,7 +158,8 @@ namespace PolarizationAnalyzer
             }
 
             values[15] = data.Substring(x, 4);
-            values[16] = ErrorCheck(data.Substring(x + 5, 3));
+            x = x + 5;
+            values[16] = ErrorCheck(data.Substring(x, 3));
 
             return values;
         }
@@ -220,6 +256,34 @@ namespace PolarizationAnalyzer
             }
         }
 
+        private void BtnSB_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                stringReadTextBox1.Enabled = true;
+                stringReadTextBox1.Clear();
+
+                Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences("SB;"));
+                string[] data = SB(InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
+                //string[] data = SB(text_SB);
+
+                for (int i = 0; i < 6; i++)
+                {
+                    stringReadTextBox1.Text += (lables_SB[i] + " - " + data[i] + Environment.NewLine);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
         private void BtnS0_Click(object sender, EventArgs e)
         {       
             try
@@ -274,6 +338,27 @@ namespace PolarizationAnalyzer
                 secondaryAddressComboBox2.Items.Add(i);
             }
             secondaryAddressComboBox2.SelectedIndex = 0;
+        }
+
+        //Display and append suggestions
+        private void laserSourceTextBoxSuggestAppend()
+        {
+            stringToWriteTextBox2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            stringToWriteTextBox2.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            AutoCompleteStringCollection DataCollection = new AutoCompleteStringCollection();
+            itemsLaserSource(DataCollection);
+            stringToWriteTextBox2.AutoCompleteCustomSource = DataCollection;
+        }
+
+        //predefined commands for laser source
+        private void itemsLaserSource(AutoCompleteStringCollection col)
+        {
+            col.Add(":WAVElength?");
+            col.Add(":WAVElength +1.55000000E-006");
+            col.Add(":POWer?");
+            col.Add(":POWer +7.50000000E-004");
+            col.Add(":OUTPut?");
+            col.Add(":OUTPut 1");
         }
 
         private void OpenButton2_Click(object sender, EventArgs e)
@@ -384,6 +469,7 @@ namespace PolarizationAnalyzer
                 MessageBox.Show(ex.Message);
             }
         }
+
     }
 }
 

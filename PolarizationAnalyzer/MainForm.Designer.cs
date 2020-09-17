@@ -77,6 +77,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnFindDevices = new System.Windows.Forms.Button();
             this.richTextBoxDevices = new System.Windows.Forms.RichTextBox();
+            this.btnSB = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown2)).BeginInit();
@@ -191,7 +192,7 @@
             // 
             // stringReadTextBox1
             // 
-            this.stringReadTextBox1.Location = new System.Drawing.Point(209, 71);
+            this.stringReadTextBox1.Location = new System.Drawing.Point(197, 62);
             this.stringReadTextBox1.Name = "stringReadTextBox1";
             this.stringReadTextBox1.ReadOnly = true;
             this.stringReadTextBox1.Size = new System.Drawing.Size(329, 277);
@@ -365,11 +366,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSB);
             this.groupBox1.Controls.Add(this.btnS0);
             this.groupBox1.Controls.Add(this.writeButton1);
             this.groupBox1.Controls.Add(this.readButton1);
             this.groupBox1.Controls.Add(this.stringToWriteTextBox1);
             this.groupBox1.Controls.Add(this.stringToWriteLabel1);
+            this.groupBox1.Controls.Add(this.stringReadTextBox1);
             this.groupBox1.Location = new System.Drawing.Point(12, 9);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(540, 422);
@@ -403,6 +406,15 @@
             this.richTextBoxDevices.TabIndex = 47;
             this.richTextBoxDevices.Text = "";
             // 
+            // btnSB
+            // 
+            this.btnSB.Location = new System.Drawing.Point(347, 383);
+            this.btnSB.Name = "btnSB";
+            this.btnSB.Size = new System.Drawing.Size(75, 23);
+            this.btnSB.TabIndex = 26;
+            this.btnSB.Text = "SB Read";
+            this.btnSB.Click += new System.EventHandler(this.BtnSB_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,7 +439,6 @@
             this.Controls.Add(this.secondaryAddressLabel2);
             this.Controls.Add(this.primaryAddressLabel2);
             this.Controls.Add(this.boardIdLabel2);
-            this.Controls.Add(this.stringReadTextBox1);
             this.Controls.Add(this.stringReadLabel1);
             this.Controls.Add(this.closeButton1);
             this.Controls.Add(this.openButton1);
@@ -492,6 +503,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnFindDevices;
         private System.Windows.Forms.RichTextBox richTextBoxDevices;
+        private System.Windows.Forms.Button btnSB;
     }
 }
 

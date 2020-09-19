@@ -74,10 +74,11 @@
             this.lblPol = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSB = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnFindDevices = new System.Windows.Forms.Button();
             this.richTextBoxDevices = new System.Windows.Forms.RichTextBox();
-            this.btnSB = new System.Windows.Forms.Button();
+            this.btnPMD = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown2)).BeginInit();
@@ -342,7 +343,7 @@
             this.btnForm.Name = "btnForm";
             this.btnForm.Size = new System.Drawing.Size(75, 23);
             this.btnForm.TabIndex = 40;
-            this.btnForm.Text = "New Form";
+            this.btnForm.Text = "Stokes";
             this.btnForm.UseVisualStyleBackColor = true;
             this.btnForm.Click += new System.EventHandler(this.BtnForm_Click);
             // 
@@ -379,6 +380,15 @@
             this.groupBox1.TabIndex = 43;
             this.groupBox1.TabStop = false;
             // 
+            // btnSB
+            // 
+            this.btnSB.Location = new System.Drawing.Point(347, 383);
+            this.btnSB.Name = "btnSB";
+            this.btnSB.Size = new System.Drawing.Size(75, 23);
+            this.btnSB.TabIndex = 26;
+            this.btnSB.Text = "SB Read";
+            this.btnSB.Click += new System.EventHandler(this.BtnSB_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Location = new System.Drawing.Point(558, 9);
@@ -406,20 +416,22 @@
             this.richTextBoxDevices.TabIndex = 47;
             this.richTextBoxDevices.Text = "";
             // 
-            // btnSB
+            // btnPMD
             // 
-            this.btnSB.Location = new System.Drawing.Point(347, 383);
-            this.btnSB.Name = "btnSB";
-            this.btnSB.Size = new System.Drawing.Size(75, 23);
-            this.btnSB.TabIndex = 26;
-            this.btnSB.Text = "SB Read";
-            this.btnSB.Click += new System.EventHandler(this.BtnSB_Click);
+            this.btnPMD.Location = new System.Drawing.Point(1042, 363);
+            this.btnPMD.Name = "btnPMD";
+            this.btnPMD.Size = new System.Drawing.Size(75, 23);
+            this.btnPMD.TabIndex = 48;
+            this.btnPMD.Text = "PMD";
+            this.btnPMD.UseVisualStyleBackColor = true;
+            this.btnPMD.Click += new System.EventHandler(this.BtnPMD_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1129, 449);
+            this.Controls.Add(this.btnPMD);
             this.Controls.Add(this.richTextBoxDevices);
             this.Controls.Add(this.btnFindDevices);
             this.Controls.Add(this.label1);
@@ -504,6 +516,7 @@
         private System.Windows.Forms.Button btnFindDevices;
         private System.Windows.Forms.RichTextBox richTextBoxDevices;
         private System.Windows.Forms.Button btnSB;
+        private System.Windows.Forms.Button btnPMD;
     }
 }
 

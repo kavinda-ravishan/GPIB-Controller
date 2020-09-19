@@ -23,7 +23,6 @@ C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\Polariza
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\bin\Debug\NationalInstruments.NI4882.xml
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.exe.config
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.MainForm.resources
-C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.NewForm.resources
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.Properties.Resources.resources
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.csproj.GenerateResource.cache
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.csproj.CoreCompileInputs.cache
@@ -32,3 +31,5 @@ C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\Polariza
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.pdb
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.csprojAssemblyReference.cache
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\bin\Debug\PolarizationAnalyzer.pdb
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.StoksForm.resources
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.PMDForm.resources

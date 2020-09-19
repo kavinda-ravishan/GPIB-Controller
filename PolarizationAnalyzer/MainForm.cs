@@ -16,153 +16,12 @@ namespace PolarizationAnalyzer
 
             laserSourceTextBoxSuggestAppend();
         }
-        
-        private string ReplaceCommonEscapeSequences(string s)
-        {
-            return s.Replace("\\n", "\n").Replace("\\r", "\r");
-        }
-        private string InsertCommonEscapeSequences(string s)
-        {
-            return s.Replace("\n", "\\n").Replace("\r", "\\r");
-        }
 
         #region Polarization Analyzer
 
         //For testing purposes
         //private string text_S0 = "VAL00  77.204;VAL01  16.427;VAL02   0.295;VAL03  39.486;VAL04   0.371;VAL05   0.121;VAL06  56.222;VAL07   0.000;VAL08  10.609;VAL09  -0.758;VAL10   0.363;VAL11   0.543;VAL12 -75.284;VAL13 -71.248;VAL14 -73.429;1000;E08\n";
-        private string text_SB = "S1  0.849;S2  0.528;S3  0.007;PDB -76.34;1000;E00\n";
-        //Labels for S0 receive data
-        private string[] lables_S0 =
-        {
-            "elevation angle θ",
-            "ellipticity angle η",
-            "axis ratio tan | η |",
-            "degree of polarization DOP",
-            "tan ψ",
-            "power ratio a",
-            "phase difference ∆",
-            "polarized power Ppol",
-            "extinction ratio ER",
-            "normalized Stokes parameter S1",
-            "normalized Stokes parameter S2",
-            "normalized Stokes parameter S3",
-            "polarized power (dBm)",
-            "total power",
-            "unpolarized power(dBm)",
-            "device status code",
-            "error code"
-        };
-
-        //Labels for SB receive data
-        private string[] lables_SB =
-        {
-            "S1 normalized Stokes parameter s1",
-            "S2 normalized Stokes parameter s2",
-            "S3 normalized Stokes parameter s3",
-            "PDB polarized optical power in dBm",
-            "device status code",
-            "error code"
-        };
-
-        //Labels for error messages
-        private string[] ErrorList =
-            {
-                "E00 no error",
-                "E01 incorrect command or wrong character",
-                "E02 string of characters too long (> 250 characters without terminator)",
-                "E03 command buffer overflow(>8 commands without trigger command X; or[GET])",
-                "E04 incorrect parameter format",
-                "E05 parameter outside the allowed range",
-                "E06 parameter has too many digits after the decimal point",
-                "E07 optical power too high",
-                "E08 incorrect operating wavelength or incorrect optical head calibration (degree of polarization measured >100 %)",
-                "E09 no PAN9300 module(in the activated slot)",
-                "E10 no POL 9320-Modul(in the activated slot)",
-                "E12 no PAN-IR module",
-                "E13 no tunable laser",
-                "E14 incorrect type of PAN set",
-                "E15 type of PMD not set",
-                "E16 no reference Jones matrix available",
-                "E17 incorrect start wavelength",
-                "E18 incorrect stop wavelength",
-                "E19 incorrect wavelength step",
-                "E20 incorrect wavelength speed",
-                "E21 incorrect length of fiber",
-                "E22 incorrect K-factor",
-                "E23 incorrect value for delta_mm",
-                "E24 no PMD data available",
-                "E25 no PMD file available",
-                "E26 no turbo mode available for PAN9300",
-                "E29 no tunable laser for PMD measurements available",
-                "E30 No or wrong authorization code",
-                "E31 No turbo file existent",
-                "E33 Power below limit setting",
-                "E34 Insufficient measured points",
-                "E35 Unable to calculate ER",
-                "E36 Not sufficient fiber stress",
-                "E37 No typical PMF behavior(Warning only)",
-                "E38 Bad linear eigenmodes(Warning only)",
-                "E39 Error loading calibration file*.set",
-                "E46 No PAN-NIR",
-                "E47 No PAN-FIR",
-                "E99 1. Status request after switching the unit on or voltage failure of the unit",
-                "EEE"
-        };
-
-        //Convert error codes to corresponding error message
-        private string ErrorCheck(string Error)
-        {
-            string ErrorNo;
-
-            int i;
-            for (i = 0; i < ErrorList.Length-1; i++)
-            {
-                ErrorNo = ErrorList[i].Substring(0, 3);
-
-                if(ErrorNo == Error) break;
-            }
-            return ErrorList[i];
-        }
-
-        //Convert the S0 data string to values string array
-        private string[] SB(string data)
-        {
-            int x = 0;
-            string[] values = new string[6];
-
-            for (int i = 0; i < 3; i++)
-            {
-                values[i] = data.Substring(x + 3, 6);
-                x = x + 10;
-            }
-            x = x + 3;
-            values[3] = data.Substring(x, 7);
-            x = x + 8;
-            values[4] = data.Substring(x, 4);
-            x = x + 5;
-            values[5] = ErrorCheck(data.Substring(x, 3));
-
-            return values;
-        }
-
-        //Convert the S0 data string to values string array
-        private string[] S0(string data)
-        {
-            int x = 0;
-            string[] values = new string[17];
-
-            for (int i = 0; i < 15; i++)
-            {
-                values[i] = data.Substring(x + 5, 8);
-                x = x + 14;
-            }
-
-            values[15] = data.Substring(x, 4);
-            x = x + 5;
-            values[16] = ErrorCheck(data.Substring(x, 3));
-
-            return values;
-        }
+        //private string text_SB = "S1  0.849;S2  0.528;S3  0.007;PDB -76.34;1000;E00\n";
 
         private void SetupControlState1(bool isSessionOpen)
         {
@@ -231,7 +90,7 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences(stringToWriteTextBox1.Text));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences(stringToWriteTextBox1.Text));
             }
             catch (Exception ex)
             {
@@ -244,7 +103,7 @@ namespace PolarizationAnalyzer
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                stringReadTextBox1.Text = InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString());
+                stringReadTextBox1.Text = Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString());
             }
             catch (Exception ex)
             {
@@ -264,13 +123,13 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences("SB;"));
-                string[] data = SB(InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
+                string[] data = Utility.SB(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
                 //string[] data = SB(text_SB);
 
                 for (int i = 0; i < 6; i++)
                 {
-                    stringReadTextBox1.Text += (lables_SB[i] + " - " + data[i] + Environment.NewLine);
+                    stringReadTextBox1.Text += (Utility.lables_SB[i] + " - " + data[i] + Environment.NewLine);
                 }
 
             }
@@ -292,13 +151,13 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences("S0;"));
-                string[] data = S0(InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
+                string[] data = Utility.S0(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
                 //string[] data = S0(text_S0);
 
                 for (int i = 0; i < 17; i++)
                 {
-                    stringReadTextBox1.Text += (lables_S0[i] + " - " + data[i] + Environment.NewLine);
+                    stringReadTextBox1.Text += (Utility.lables_S0[i] + " - " + data[i] + Environment.NewLine);
                 }
 
             }
@@ -404,7 +263,7 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                Devices.deviceLaserSource.Write(ReplaceCommonEscapeSequences(stringToWriteTextBox2.Text));
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(stringToWriteTextBox2.Text));
             }
             catch (Exception ex)
             {
@@ -417,7 +276,7 @@ namespace PolarizationAnalyzer
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                stringReadTextBox2.Text = InsertCommonEscapeSequences(Devices.deviceLaserSource.ReadString());
+                stringReadTextBox2.Text = Utility.InsertCommonEscapeSequences(Devices.deviceLaserSource.ReadString());
             }
             catch (Exception ex)
             {
@@ -436,7 +295,7 @@ namespace PolarizationAnalyzer
             if ((Devices.devicePolarizationAnalyzer != null) & (Devices.deviceLaserSource != null))
             {
                 this.Hide();
-                NewForm newForm = new NewForm();
+                StoksForm newForm = new StoksForm();
                 newForm.RefToMainForm = this;
                 newForm.Show();
             }
@@ -470,6 +329,20 @@ namespace PolarizationAnalyzer
             }
         }
 
+        private void BtnPMD_Click(object sender, EventArgs e)
+        {
+            //if ((Devices.devicePolarizationAnalyzer != null) & (Devices.deviceLaserSource != null))
+            {
+                this.Hide();
+                PMDForm newForm = new PMDForm();
+                newForm.RefToMainForm = this;
+                newForm.Show();
+            }
+            //else
+            {
+                //MessageBox.Show("Device not initialized");
+            }
+        }
     }
 }
 

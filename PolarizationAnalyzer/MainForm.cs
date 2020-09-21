@@ -19,10 +19,6 @@ namespace PolarizationAnalyzer
 
         #region Polarization Analyzer
 
-        //For testing purposes
-        //private string text_S0 = "VAL00  77.204;VAL01  16.427;VAL02   0.295;VAL03  39.486;VAL04   0.371;VAL05   0.121;VAL06  56.222;VAL07   0.000;VAL08  10.609;VAL09  -0.758;VAL10   0.363;VAL11   0.543;VAL12 -75.284;VAL13 -71.248;VAL14 -73.429;1000;E08\n";
-        //private string text_SB = "S1  0.849;S2  0.528;S3  0.007;PDB -76.34;1000;E00\n";
-
         private void SetupControlState1(bool isSessionOpen)
         {
             boardIdNumericUpDown1.Enabled = !isSessionOpen;
@@ -292,16 +288,16 @@ namespace PolarizationAnalyzer
 
         private void BtnForm_Click(object sender, EventArgs e)
         {
-            if ((Devices.devicePolarizationAnalyzer != null) & (Devices.deviceLaserSource != null))
+            //if ((Devices.devicePolarizationAnalyzer != null) & (Devices.deviceLaserSource != null))
             {
                 this.Hide();
                 StoksForm newForm = new StoksForm();
                 newForm.RefToMainForm = this;
                 newForm.Show();
             }
-            else
+            //else
             {
-                MessageBox.Show("Device not initialized");
+                //MessageBox.Show("Device not initialized");
             }
         }
 

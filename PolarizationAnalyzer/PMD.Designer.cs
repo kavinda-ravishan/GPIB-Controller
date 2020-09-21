@@ -34,8 +34,6 @@
             this.lblWAVE_STOP = new System.Windows.Forms.Label();
             this.lblWAVE_STEP = new System.Windows.Forms.Label();
             this.lblWAVE_SPEED = new System.Windows.Forms.Label();
-            this.lblDELTA = new System.Windows.Forms.Label();
-            this.lblK_FACTOR = new System.Windows.Forms.Label();
             this.lblLENGTH = new System.Windows.Forms.Label();
             this.btnSend = new System.Windows.Forms.Button();
             this.txtbPMD_LASER = new System.Windows.Forms.TextBox();
@@ -44,8 +42,6 @@
             this.txtbWAVE_STOP = new System.Windows.Forms.TextBox();
             this.txtbWAVE_STEP = new System.Windows.Forms.TextBox();
             this.txtbWAVE_SPEED = new System.Windows.Forms.TextBox();
-            this.txtbDELTA = new System.Windows.Forms.TextBox();
-            this.txtbK_FACTOR = new System.Windows.Forms.TextBox();
             this.txtbLENGTH = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -103,28 +99,10 @@
             this.lblWAVE_SPEED.TabIndex = 5;
             this.lblWAVE_SPEED.Text = "WAVE SPEED";
             // 
-            // lblDELTA
-            // 
-            this.lblDELTA.AutoSize = true;
-            this.lblDELTA.Location = new System.Drawing.Point(59, 255);
-            this.lblDELTA.Name = "lblDELTA";
-            this.lblDELTA.Size = new System.Drawing.Size(42, 13);
-            this.lblDELTA.TabIndex = 6;
-            this.lblDELTA.Text = "DELTA";
-            // 
-            // lblK_FACTOR
-            // 
-            this.lblK_FACTOR.AutoSize = true;
-            this.lblK_FACTOR.Location = new System.Drawing.Point(59, 296);
-            this.lblK_FACTOR.Name = "lblK_FACTOR";
-            this.lblK_FACTOR.Size = new System.Drawing.Size(60, 13);
-            this.lblK_FACTOR.TabIndex = 7;
-            this.lblK_FACTOR.Text = "K FACTOR";
-            // 
             // lblLENGTH
             // 
             this.lblLENGTH.AutoSize = true;
-            this.lblLENGTH.Location = new System.Drawing.Point(59, 334);
+            this.lblLENGTH.Location = new System.Drawing.Point(59, 261);
             this.lblLENGTH.Name = "lblLENGTH";
             this.lblLENGTH.Size = new System.Drawing.Size(51, 13);
             this.lblLENGTH.TabIndex = 8;
@@ -132,7 +110,7 @@
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(62, 391);
+            this.btnSend.Location = new System.Drawing.Point(58, 330);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 9;
@@ -188,25 +166,9 @@
             this.txtbWAVE_SPEED.TabIndex = 15;
             this.txtbWAVE_SPEED.Text = "1";
             // 
-            // txtbDELTA
-            // 
-            this.txtbDELTA.Location = new System.Drawing.Point(196, 245);
-            this.txtbDELTA.Name = "txtbDELTA";
-            this.txtbDELTA.Size = new System.Drawing.Size(196, 20);
-            this.txtbDELTA.TabIndex = 16;
-            this.txtbDELTA.Text = "0";
-            // 
-            // txtbK_FACTOR
-            // 
-            this.txtbK_FACTOR.Location = new System.Drawing.Point(196, 289);
-            this.txtbK_FACTOR.Name = "txtbK_FACTOR";
-            this.txtbK_FACTOR.Size = new System.Drawing.Size(196, 20);
-            this.txtbK_FACTOR.TabIndex = 17;
-            this.txtbK_FACTOR.Text = "0.1";
-            // 
             // txtbLENGTH
             // 
-            this.txtbLENGTH.Location = new System.Drawing.Point(196, 327);
+            this.txtbLENGTH.Location = new System.Drawing.Point(196, 254);
             this.txtbLENGTH.Name = "txtbLENGTH";
             this.txtbLENGTH.Size = new System.Drawing.Size(196, 20);
             this.txtbLENGTH.TabIndex = 18;
@@ -218,8 +180,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.txtbLENGTH);
-            this.Controls.Add(this.txtbK_FACTOR);
-            this.Controls.Add(this.txtbDELTA);
             this.Controls.Add(this.txtbWAVE_SPEED);
             this.Controls.Add(this.txtbWAVE_STEP);
             this.Controls.Add(this.txtbWAVE_STOP);
@@ -228,8 +188,6 @@
             this.Controls.Add(this.txtbPMD_LASER);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.lblLENGTH);
-            this.Controls.Add(this.lblK_FACTOR);
-            this.Controls.Add(this.lblDELTA);
             this.Controls.Add(this.lblWAVE_SPEED);
             this.Controls.Add(this.lblWAVE_STEP);
             this.Controls.Add(this.lblWAVE_STOP);
@@ -252,8 +210,6 @@
         private System.Windows.Forms.Label lblWAVE_STOP;
         private System.Windows.Forms.Label lblWAVE_STEP;
         private System.Windows.Forms.Label lblWAVE_SPEED;
-        private System.Windows.Forms.Label lblDELTA;
-        private System.Windows.Forms.Label lblK_FACTOR;
         private System.Windows.Forms.Label lblLENGTH;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.TextBox txtbPMD_LASER;
@@ -262,8 +218,6 @@
         private System.Windows.Forms.TextBox txtbWAVE_STOP;
         private System.Windows.Forms.TextBox txtbWAVE_STEP;
         private System.Windows.Forms.TextBox txtbWAVE_SPEED;
-        private System.Windows.Forms.TextBox txtbDELTA;
-        private System.Windows.Forms.TextBox txtbK_FACTOR;
         private System.Windows.Forms.TextBox txtbLENGTH;
     }
 }

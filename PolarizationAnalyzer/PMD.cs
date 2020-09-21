@@ -26,14 +26,13 @@ namespace PolarizationAnalyzer
 
         private void BtnSend_Click(object sender, EventArgs e)
         {
+            
             string PMD_LAS = txtbPMD_LASER.Text; //5;
             string PMD_TYP = txtbPMD_TYPE.Text; //1;
             string WAVE_START = txtbWAVE_START.Text; //1540;
             string WAVE_STOP = txtbWAVE_STOP.Text; //1550;
             string WAVE_STEP = txtbWAVE_STEP.Text; //0.1;
             string WAVE_SPEED = txtbWAVE_SPEED.Text; //1;
-            string DELTA = txtbDELTA.Text; //0;
-            string K_FACTOR = txtbK_FACTOR.Text; //0.1;
             string LENGTH = txtbLENGTH.Text; //1;
 
             string command =
@@ -43,12 +42,11 @@ namespace PolarizationAnalyzer
                 "WAVE_STOP " + WAVE_STOP + ";" +
                 "WAVE_STEP " + WAVE_STEP + ";" +
                 "WAVE_SPEED " + WAVE_SPEED + ";" +
-                "DELTA " + DELTA + ";" +
-                "K_FACTOR " + K_FACTOR + ";" +
                 "LENGTH " + LENGTH + ";" +
                 "PMD_START;X;";
 
             Console.WriteLine(command);
+            
 
             try
             {

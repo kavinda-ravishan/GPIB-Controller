@@ -8,6 +8,10 @@ namespace PolarizationAnalyzer
 {
     static class Utility
     {
+        //For testing purposes
+        public static string text_S0 = "VAL00  77.204;VAL01  16.427;VAL02   0.295;VAL03  39.486;VAL04   0.371;VAL05   0.121;VAL06  56.222;VAL07   0.000;VAL08  10.609;VAL09  -0.758;VAL10   0.363;VAL11   0.543;VAL12 -75.284;VAL13 -71.248;VAL14 -73.429;1000;E08\n";
+        public static string text_SB = "S1  0.849;S2  0.528;S3  0.007;PDB -76.34;1000;E00\n";
+
         //Labels for S0 receive data
         public static string[] lables_S0 =
         {

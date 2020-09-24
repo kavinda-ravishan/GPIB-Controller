@@ -26,7 +26,7 @@ namespace PolarizationAnalyzer
 
         private void BtnSend_Click(object sender, EventArgs e)
         {
-            
+            /*
             string PMD_LAS = txtbPMD_LASER.Text; //5;
             string PMD_TYP = txtbPMD_TYPE.Text; //1;
             string WAVE_START = txtbWAVE_START.Text; //1540;
@@ -46,11 +46,45 @@ namespace PolarizationAnalyzer
                 "PMD_START;X;";
 
             Console.WriteLine(command);
-            
+            */
 
             try
             {
-                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences(command));
+                //:OUTPut 0 //turn on laser
+                //:POWer + 10.00000000E-004   //power 1000uW
+                //:WAVElength + 1.55000000E-006 //wave length 1550.000 nm
+                //L 1550.00;X; //PAT9000B wavelenght
+                //:OUTPut 1 //turn on laser
+                //JM;X; //Mesure JM
+                //Read
+
+                //:OUTPut 0 //turn on laser
+                //:POWer + 10.00000000E-004   //power 1000uW
+                //:WAVElength + 1.55001000E-006 //wave length 1550.010 nm
+                //L 1550.01;X; //PAT9000B wavelenght
+                //:OUTPut 1 //turn on laser
+                //JM;X; //Mesure JM
+                //Read
+                //:OUTPut 0 //turn on laser
+
+
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0"));
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":POWer +10.00000000E-004"));
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":WAVElength +1.55000000E-006"));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("L 1550.00;X;"));
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 1"));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;X;"));
+                Console.WriteLine(Devices.devicePolarizationAnalyzer.ReadString());
+
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0"));
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":POWer +10.00000000E-004"));
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":WAVElength +1.55100000E-006"));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("L 1551.00;X;"));
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 1"));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;X;"));
+                Console.WriteLine(Devices.devicePolarizationAnalyzer.ReadString());
+
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0"));
             }
             catch (Exception ex)
             {

@@ -20,7 +20,7 @@ namespace PolarizationAnalyzer
 
         public Form RefToMainForm { get; set; }
 
-        private void NewForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void StoksForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             RefToMainForm.Show();
         }
@@ -47,8 +47,8 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                string[] data = Utility.SB(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
-                //string[] data = Utility.SB(Utility.text_SB);
+                //string[] data = Utility.SB(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
+                string[] data = Utility.SB_filter(Utility.dataSeparator(Utility.text_J1, 6, 14));
 
                 stringReadTextBox.Clear();
                 for (int i = 0; i < 6; i++)

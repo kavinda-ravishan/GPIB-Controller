@@ -35,6 +35,7 @@ namespace PolarizationAnalyzer
                 Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":POWer +10.00000000E-004"));//:POWer +10.00000000E-004 //power 1000uW
                 stringReadTextBox.Text += (":POWer +10.00000000E-004" + Environment.NewLine);
 
+
                 Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":WAVElength +1.55000000E-006"));//:WAVElength +1.55000000E-006 //wave length 1550.000 nm
                 stringReadTextBox.Text += (":WAVElength +1.55000000E-006" + Environment.NewLine);
 
@@ -43,6 +44,7 @@ namespace PolarizationAnalyzer
 
                 Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;X;"));//JM;X; //Mesure JM
                 stringReadTextBox.Text += ("JM;X;" + Environment.NewLine);
+
 
                 stringReadTextBox.Text += (Devices.devicePolarizationAnalyzer.ReadString() + Environment.NewLine);//Read
 
@@ -56,7 +58,9 @@ namespace PolarizationAnalyzer
                 Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;X;"));//JM;X; //Mesure JM
                 stringReadTextBox.Text += ("JM;X;" + Environment.NewLine);
 
+
                 stringReadTextBox.Text += (Devices.devicePolarizationAnalyzer.ReadString() + Environment.NewLine);//Read
+
 
                 Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0"));//:OUTPut 0 //turn on laser
                 stringReadTextBox.Text += (":OUTPut 0" + Environment.NewLine);

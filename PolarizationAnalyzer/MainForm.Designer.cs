@@ -69,10 +69,11 @@
             this.secondaryAddressLabel2 = new System.Windows.Forms.Label();
             this.primaryAddressLabel2 = new System.Windows.Forms.Label();
             this.boardIdLabel2 = new System.Windows.Forms.Label();
-            this.btnForm = new System.Windows.Forms.Button();
+            this.btnStokes = new System.Windows.Forms.Button();
             this.lblPol = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnJM = new System.Windows.Forms.Button();
             this.btnSB = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnFindDevices = new System.Windows.Forms.Button();
@@ -328,15 +329,15 @@
             this.boardIdLabel2.TabIndex = 26;
             this.boardIdLabel2.Text = "Board ID:";
             // 
-            // btnForm
+            // btnStokes
             // 
-            this.btnForm.Location = new System.Drawing.Point(1042, 317);
-            this.btnForm.Name = "btnForm";
-            this.btnForm.Size = new System.Drawing.Size(75, 23);
-            this.btnForm.TabIndex = 40;
-            this.btnForm.Text = "Stokes";
-            this.btnForm.UseVisualStyleBackColor = true;
-            this.btnForm.Click += new System.EventHandler(this.BtnForm_Click);
+            this.btnStokes.Location = new System.Drawing.Point(1042, 317);
+            this.btnStokes.Name = "btnStokes";
+            this.btnStokes.Size = new System.Drawing.Size(75, 23);
+            this.btnStokes.TabIndex = 40;
+            this.btnStokes.Text = "Stokes";
+            this.btnStokes.UseVisualStyleBackColor = true;
+            this.btnStokes.Click += new System.EventHandler(this.BtnStokes_Click);
             // 
             // lblPol
             // 
@@ -358,6 +359,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnJM);
             this.groupBox1.Controls.Add(this.btnSB);
             this.groupBox1.Controls.Add(this.btnS0);
             this.groupBox1.Controls.Add(this.writeButton1);
@@ -371,9 +373,18 @@
             this.groupBox1.TabIndex = 43;
             this.groupBox1.TabStop = false;
             // 
+            // btnJM
+            // 
+            this.btnJM.Location = new System.Drawing.Point(289, 383);
+            this.btnJM.Name = "btnJM";
+            this.btnJM.Size = new System.Drawing.Size(75, 23);
+            this.btnJM.TabIndex = 27;
+            this.btnJM.Text = "JM Read";
+            this.btnJM.Click += new System.EventHandler(this.BtnJM_Click);
+            // 
             // btnSB
             // 
-            this.btnSB.Location = new System.Drawing.Point(347, 383);
+            this.btnSB.Location = new System.Drawing.Point(370, 383);
             this.btnSB.Name = "btnSB";
             this.btnSB.Size = new System.Drawing.Size(75, 23);
             this.btnSB.TabIndex = 26;
@@ -436,7 +447,7 @@
             this.Controls.Add(this.btnFindDevices);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblPol);
-            this.Controls.Add(this.btnForm);
+            this.Controls.Add(this.btnStokes);
             this.Controls.Add(this.stringToWriteTextBox2);
             this.Controls.Add(this.stringReadTextBox2);
             this.Controls.Add(this.stringReadLabel2);
@@ -507,7 +518,7 @@
         private System.Windows.Forms.Label secondaryAddressLabel2;
         private System.Windows.Forms.Label primaryAddressLabel2;
         private System.Windows.Forms.Label boardIdLabel2;
-        private System.Windows.Forms.Button btnForm;
+        private System.Windows.Forms.Button btnStokes;
         private System.Windows.Forms.Label lblPol;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -517,6 +528,7 @@
         private System.Windows.Forms.Button btnSB;
         private System.Windows.Forms.Button btnPMD;
         private System.Windows.Forms.RichTextBox stringReadTextBox2;
+        private System.Windows.Forms.Button btnJM;
     }
 }
 

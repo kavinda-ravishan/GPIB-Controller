@@ -10,7 +10,13 @@ namespace PolarizationAnalyzer
     {
         //For testing purposes
         public static string text_S0 = "VAL00  77.204;VAL01  16.427;VAL02   0.295;VAL03  39.486;VAL04   0.371;VAL05   0.121;VAL06  56.222;VAL07   0.000;VAL08  10.609;VAL09  -0.758;VAL10   0.363;VAL11   0.543;VAL12 -75.284;VAL13 -71.248;VAL14 -73.429;1000;E08\n";
+
         public static string text_SB = "S1  0.849;S2  0.528;S3  0.007;PDB -76.34;1000;E00\n";
+        
+        //1550.00 nm
+        public static string text_J1 = "J[11]  0.870  7.368;J[12]  0.557 -138.518;J[21]  0.646 -39.584;J[22]  0.736 -8.434;1000;E00\n";
+        //1551.00 nm
+        public static string text_J2 = "J[11]  0.797 -64.374;J[12]  0.605 -66.324;J[21]  0.600 -111.640;J[22]  0.799 63.215;1000;E00\n";
 
         //Labels for S0 receive data
         public static string[] lables_S0 =
@@ -105,44 +111,95 @@ namespace PolarizationAnalyzer
             return ErrorList[i];
         }
 
-        //Convert the S0 data string to values string array
-        public static string[] S0(string data)
-        {
-            int x = 0;
-            string[] values = new string[17];
 
-            for (int i = 0; i < 15; i++)
+        public static string[] dataSeparator(string text, int infoS, int valS)
+        {
+            string[] info = new string[infoS];
+            string[] values = new string[valS];
+
+            int j = 0;
+
+            for (int i = 0; i < text.Length; i++)
             {
-                values[i] = data.Substring(x + 5, 8);
-                x = x + 14;
+                if (text[i] == ';')
+                {
+                    j++;
+                }
+                else
+                {
+                    info[j] += text[i];
+                }
             }
 
-            values[15] = data.Substring(x, 4);
-            x = x + 5;
-            values[16] = ErrorCheck(data.Substring(x, 3));
+            j = 0;
+
+            for (int i = 0; i < info.Length; i++)
+            {
+                for (int k = 0; k < info[i].Length; k++)
+                {
+                    if (info[i][k] == ' ')
+                    {
+                        while (info[i][k + 1] == ' ')
+                        {
+                            k++;
+                        }
+                        j++;
+                    }
+                    else
+                    {
+                        values[j] += info[i][k];
+                    }
+                }
+                j++;
+            }
 
             return values;
         }
 
-        //Convert the SB data string to values string array
-        public static string[] SB(string data)
+        public static string[] S0_filter(string[] text)
         {
-            int x = 0;
-            string[] values = new string[6];
+            string[] S0 = new string[17];
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 15; i++)
             {
-                values[i] = data.Substring(x + 3, 6);
-                x = x + 10;
+                S0[i] = text[i * 2 + 1];
             }
-            x = x + 3;
-            values[3] = data.Substring(x, 7);
-            x = x + 8;
-            values[4] = data.Substring(x, 4);
-            x = x + 5;
-            values[5] = ErrorCheck(data.Substring(x, 3));
 
-            return values;
+            S0[15] = text[30];
+            S0[16] = ErrorCheck(text[31].Substring(0, 3));
+
+            return S0;
+        }
+
+        public static string[] SB_filter(string[] text)
+        {
+            string[] SB = new string[6];
+
+            for (int i = 0; i < 4; i++)
+            {
+                SB[i] = text[i * 2 + 1];
+            }
+
+            SB[4] = text[8];
+            SB[5] = ErrorCheck(text[9].Substring(0, 3));
+
+            return SB;
+        }
+
+        public static string[] JM_filter(string[] text)
+        {
+            string[] JM = new string[10];
+
+            for (int i = 0; i < 4; i++)
+            {
+                JM[i * 2] = text[i * 3 + 1];
+                JM[i * 2 + 1] = text[i * 3 + 2];
+            }
+
+            JM[8] = text[12];
+            JM[9] = ErrorCheck(text[13].Substring(0, 3));
+
+            return JM;
         }
 
         public static string ReplaceCommonEscapeSequences(string s)

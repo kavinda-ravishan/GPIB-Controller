@@ -103,7 +103,7 @@
             this.chart2.ChartAreas.Add(chartArea5);
             legend5.Name = "Legend1";
             this.chart2.Legends.Add(legend5);
-            this.chart2.Location = new System.Drawing.Point(33, 198);
+            this.chart2.Location = new System.Drawing.Point(33, 209);
             this.chart2.Name = "chart2";
             this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
             series5.ChartArea = "ChartArea1";
@@ -149,7 +149,7 @@
             this.Controls.Add(this.chart1);
             this.Name = "StoksForm";
             this.Text = "Stokes";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NewForm_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StoksForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();

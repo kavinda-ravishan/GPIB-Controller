@@ -111,6 +111,35 @@ namespace PolarizationAnalyzer
             }
         }
 
+        private void BtnS0_Click(object sender, EventArgs e)
+        {       
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                stringReadTextBox1.Enabled = true;
+                stringReadTextBox1.Clear();
+
+                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
+                //string[] data = Utility.S0(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
+                string[] data = Utility.S0_filter(Utility.dataSeparator(Utility.text_S0, 17, 32));
+
+                for (int i = 0; i < data.Length; i++)
+                {
+                    stringReadTextBox1.Text += (Utility.lables_S0[i] + " - " + data[i] + Environment.NewLine);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+
+        }
+
         private void BtnSB_Click(object sender, EventArgs e)
         {
             try
@@ -119,11 +148,11 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
-                string[] data = Utility.SB(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
-                //string[] data = SB(text_SB);
+                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
+                //string[] data = Utility.SB(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
+                string[] data = Utility.SB_filter(Utility.dataSeparator(Utility.text_SB, 6, 10));
 
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < data.Length; i++)
                 {
                     stringReadTextBox1.Text += (Utility.lables_SB[i] + " - " + data[i] + Environment.NewLine);
                 }
@@ -139,21 +168,21 @@ namespace PolarizationAnalyzer
             }
         }
 
-        private void BtnS0_Click(object sender, EventArgs e)
-        {       
+        private void BtnJM_Click(object sender, EventArgs e)
+        {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
-                string[] data = Utility.S0(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
-                //string[] data = S0(text_S0);
+                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
+                //string[] data = Utility.S0(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
+                string[] data = Utility.JM_filter(Utility.dataSeparator(Utility.text_J1, 6, 14));
 
-                for (int i = 0; i < 17; i++)
+                for (int i = 0; i < data.Length; i++)
                 {
-                    stringReadTextBox1.Text += (Utility.lables_S0[i] + " - " + data[i] + Environment.NewLine);
+                    stringReadTextBox1.Text += (/*Utility.lables_S0[i] + " - " + */data[i] + Environment.NewLine);
                 }
 
             }
@@ -165,7 +194,6 @@ namespace PolarizationAnalyzer
             {
                 Cursor.Current = Cursors.Default;
             }
-
         }
 
         #endregion
@@ -286,21 +314,7 @@ namespace PolarizationAnalyzer
 
         #endregion
 
-        private void BtnForm_Click(object sender, EventArgs e)
-        {
-            //if ((Devices.devicePolarizationAnalyzer != null) & (Devices.deviceLaserSource != null))
-            {
-                this.Hide();
-                StoksForm newForm = new StoksForm();
-                newForm.RefToMainForm = this;
-                newForm.Show();
-            }
-            //else
-            {
-                //MessageBox.Show("Device not initialized");
-            }
-        }
-
+        #region Common
         private void BtnFindDevices_Click(object sender, EventArgs e)
         {
             try
@@ -339,6 +353,22 @@ namespace PolarizationAnalyzer
                 //MessageBox.Show("Device not initialized");
             }
         }
+
+        private void BtnStokes_Click(object sender, EventArgs e)
+        {
+            //if ((Devices.devicePolarizationAnalyzer != null) & (Devices.deviceLaserSource != null))
+            {
+                this.Hide();
+                StoksForm newForm = new StoksForm();
+                newForm.RefToMainForm = this;
+                newForm.Show();
+            }
+            //else
+            {
+                //MessageBox.Show("Device not initialized");
+            }
+        }
+        #endregion
     }
 }
 

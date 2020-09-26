@@ -26,65 +26,40 @@ namespace PolarizationAnalyzer
 
         private void BtnSend_Click(object sender, EventArgs e)
         {
-            /*
-            string PMD_LAS = txtbPMD_LASER.Text; //5;
-            string PMD_TYP = txtbPMD_TYPE.Text; //1;
-            string WAVE_START = txtbWAVE_START.Text; //1540;
-            string WAVE_STOP = txtbWAVE_STOP.Text; //1550;
-            string WAVE_STEP = txtbWAVE_STEP.Text; //0.1;
-            string WAVE_SPEED = txtbWAVE_SPEED.Text; //1;
-            string LENGTH = txtbLENGTH.Text; //1;
-
-            string command =
-                "PMD_LAS " + PMD_LAS + ";" +
-                "PMD_TYP " + PMD_TYP + ";" +
-                "WAVE_START " + WAVE_START + ";" +
-                "WAVE_STOP " + WAVE_STOP + ";" +
-                "WAVE_STEP " + WAVE_STEP + ";" +
-                "WAVE_SPEED " + WAVE_SPEED + ";" +
-                "LENGTH " + LENGTH + ";" +
-                "PMD_START;X;";
-
-            Console.WriteLine(command);
-            */
-
             try
             {
-                //:OUTPut 0 //turn on laser
-                //:POWer + 10.00000000E-004   //power 1000uW
-                //:WAVElength + 1.55000000E-006 //wave length 1550.000 nm
-                //L 1550.00;X; //PAT9000B wavelenght
-                //:OUTPut 1 //turn on laser
-                //JM;X; //Mesure JM
-                //Read
-
-                //:OUTPut 0 //turn on laser
-                //:POWer + 10.00000000E-004   //power 1000uW
-                //:WAVElength + 1.55001000E-006 //wave length 1550.010 nm
-                //L 1550.01;X; //PAT9000B wavelenght
-                //:OUTPut 1 //turn on laser
-                //JM;X; //Mesure JM
-                //Read
-                //:OUTPut 0 //turn on laser
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 1"));//:OUTPut 1 //turn on laser
+                stringReadTextBox.Text += (":OUTPut 1" + Environment.NewLine);
 
 
-                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0"));
-                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":POWer +10.00000000E-004"));
-                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":WAVElength +1.55000000E-006"));
-                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("L 1550.00;X;"));
-                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 1"));
-                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;X;"));
-                Console.WriteLine(Devices.devicePolarizationAnalyzer.ReadString());
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":POWer +10.00000000E-004"));//:POWer +10.00000000E-004 //power 1000uW
+                stringReadTextBox.Text += (":POWer +10.00000000E-004" + Environment.NewLine);
 
-                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0"));
-                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":POWer +10.00000000E-004"));
-                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":WAVElength +1.55100000E-006"));
-                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("L 1551.00;X;"));
-                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 1"));
-                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;X;"));
-                Console.WriteLine(Devices.devicePolarizationAnalyzer.ReadString());
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":WAVElength +1.55000000E-006"));//:WAVElength +1.55000000E-006 //wave length 1550.000 nm
+                stringReadTextBox.Text += (":WAVElength +1.55000000E-006" + Environment.NewLine);
 
-                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0"));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("L 1550.00;X;"));//L 1550.00;X; //Change PAT9000B oparation wavelenght to 1550.00nm
+                stringReadTextBox.Text += ("L 1550.00;X;" + Environment.NewLine);
+
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;X;"));//JM;X; //Mesure JM
+                stringReadTextBox.Text += ("JM;X;" + Environment.NewLine);
+
+                stringReadTextBox.Text += (Devices.devicePolarizationAnalyzer.ReadString() + Environment.NewLine);//Read
+
+
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":WAVElength +1.55100000E-006"));//:WAVElength +1.55100000E-006 //wave length 1551.000 nm
+                stringReadTextBox.Text += (": WAVElength +1.55100000E-006" + Environment.NewLine);
+
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("L 1551.00;X;"));//L 1551.00;X; //Change PAT9000B oparation wavelenght to 1551.00nm
+                stringReadTextBox.Text += ("L 1551.00;X;" + Environment.NewLine);
+
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;X;"));//JM;X; //Mesure JM
+                stringReadTextBox.Text += ("JM;X;" + Environment.NewLine);
+
+                stringReadTextBox.Text += (Devices.devicePolarizationAnalyzer.ReadString() + Environment.NewLine);//Read
+
+                Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0"));//:OUTPut 0 //turn on laser
+                stringReadTextBox.Text += (":OUTPut 0" + Environment.NewLine);
             }
             catch (Exception ex)
             {

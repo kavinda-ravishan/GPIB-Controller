@@ -57,7 +57,6 @@
             this.stringToWriteTextBox1 = new System.Windows.Forms.TextBox();
             this.btnS0 = new System.Windows.Forms.Button();
             this.stringToWriteTextBox2 = new System.Windows.Forms.TextBox();
-            this.stringReadTextBox2 = new System.Windows.Forms.RichTextBox();
             this.stringReadLabel2 = new System.Windows.Forms.Label();
             this.readButton2 = new System.Windows.Forms.Button();
             this.stringToWriteLabel2 = new System.Windows.Forms.Label();
@@ -79,6 +78,7 @@
             this.btnFindDevices = new System.Windows.Forms.Button();
             this.richTextBoxDevices = new System.Windows.Forms.RichTextBox();
             this.btnPMD = new System.Windows.Forms.Button();
+            this.stringReadTextBox2 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown2)).BeginInit();
@@ -222,15 +222,6 @@
             this.stringToWriteTextBox2.Name = "stringToWriteTextBox2";
             this.stringToWriteTextBox2.Size = new System.Drawing.Size(511, 20);
             this.stringToWriteTextBox2.TabIndex = 39;
-            // 
-            // stringReadTextBox2
-            // 
-            this.stringReadTextBox2.Location = new System.Drawing.Point(759, 71);
-            this.stringReadTextBox2.Name = "stringReadTextBox2";
-            this.stringReadTextBox2.ReadOnly = true;
-            this.stringReadTextBox2.Size = new System.Drawing.Size(329, 152);
-            this.stringReadTextBox2.TabIndex = 38;
-            this.stringReadTextBox2.Text = "";
             // 
             // stringReadLabel2
             // 
@@ -426,6 +417,15 @@
             this.btnPMD.UseVisualStyleBackColor = true;
             this.btnPMD.Click += new System.EventHandler(this.BtnPMD_Click);
             // 
+            // stringReadTextBox2
+            // 
+            this.stringReadTextBox2.Location = new System.Drawing.Point(759, 71);
+            this.stringReadTextBox2.Name = "stringReadTextBox2";
+            this.stringReadTextBox2.ReadOnly = true;
+            this.stringReadTextBox2.Size = new System.Drawing.Size(329, 152);
+            this.stringReadTextBox2.TabIndex = 38;
+            this.stringReadTextBox2.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -495,7 +495,6 @@
         private System.Windows.Forms.TextBox stringToWriteTextBox1;
         private System.Windows.Forms.Button btnS0;
         private System.Windows.Forms.TextBox stringToWriteTextBox2;
-        private System.Windows.Forms.RichTextBox stringReadTextBox2;
         private System.Windows.Forms.Label stringReadLabel2;
         private System.Windows.Forms.Button readButton2;
         private System.Windows.Forms.Label stringToWriteLabel2;
@@ -517,6 +516,7 @@
         private System.Windows.Forms.RichTextBox richTextBoxDevices;
         private System.Windows.Forms.Button btnSB;
         private System.Windows.Forms.Button btnPMD;
+        private System.Windows.Forms.RichTextBox stringReadTextBox2;
     }
 }
 

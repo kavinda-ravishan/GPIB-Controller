@@ -48,12 +48,12 @@ namespace PolarizationAnalyzer
             try
             {
                 //string[] data = Utility.SB(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
-                string[] data = Utility.SB_filter(Utility.dataSeparator(Utility.text_J1, 6, 14));
+                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_J1));
 
                 stringReadTextBox.Clear();
                 for (int i = 0; i < 6; i++)
                 {
-                    stringReadTextBox.Text += (Utility.lables_SB[i] + " - " + data[i] + Environment.NewLine);
+                    stringReadTextBox.Text += (Utility.Lables_SB[i] + " - " + data[i] + Environment.NewLine);
                 }
 
                 if (S1.Count < 50)

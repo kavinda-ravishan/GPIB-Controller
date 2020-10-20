@@ -19,7 +19,7 @@ namespace PolarizationAnalyzer
         public static string text_J2 = "J[11]  0.797 -64.374;J[12]  0.605 -66.324;J[21]  0.600 -111.640;J[22]  0.799 63.215;1000;E00\n";
 
         //Labels for S0 receive data
-        public static string[] lables_S0 =
+        public static string[] Lables_S0 =
         {
             "elevation angle θ",
             "ellipticity angle η",
@@ -41,12 +41,27 @@ namespace PolarizationAnalyzer
         };
 
         //Labels for SB receive data
-        public static string[] lables_SB =
+        public static string[] Lables_SB =
         {
             "S1 normalized Stokes parameter s1",
             "S2 normalized Stokes parameter s2",
             "S3 normalized Stokes parameter s3",
             "PDB polarized optical power in dBm",
+            "device status code",
+            "error code"
+        };
+
+        //Labels for JM receive data
+        public static string[] Lables_JM =
+        {
+            "J[11] modulus",
+            "J[11] phase (degrees)",
+            "J[12] modulus",
+            "J[12] phase (degrees)",
+            "J[21] modulus",
+            "J[21] phase (degrees)",
+            "J[22] modulus",
+            "J[22] phase (degrees)",
             "device status code",
             "error code"
         };
@@ -111,95 +126,70 @@ namespace PolarizationAnalyzer
             return ErrorList[i];
         }
 
-
-        public static string[] dataSeparator(string text, int infoS, int valS)
+        public static List<string> DataSeparator(string text)
         {
-            string[] info = new string[infoS];
-            string[] values = new string[valS];
-
-            int j = 0;
+            List<string> info = new List<string>();
+            string value = "";
 
             for (int i = 0; i < text.Length; i++)
             {
-                if (text[i] == ';')
+                if (text[i] == ';' || i == text.Length - 1)
                 {
-                    j++;
+                    info.Add(value);
+                    value = "";
                 }
                 else
                 {
-                    info[j] += text[i];
+                    value += text[i];
                 }
             }
 
-            j = 0;
-
-            for (int i = 0; i < info.Length; i++)
-            {
-                for (int k = 0; k < info[i].Length; k++)
-                {
-                    if (info[i][k] == ' ')
-                    {
-                        while (info[i][k + 1] == ' ')
-                        {
-                            k++;
-                        }
-                        j++;
-                    }
-                    else
-                    {
-                        values[j] += info[i][k];
-                    }
-                }
-                j++;
-            }
-
-            return values;
+            return info;
         }
 
-        public static string[] S0_filter(string[] text)
+        public static string[] SB_filter(List<string> text)
+        {
+            string[] SB = new string[6];
+
+            for (int i = 0; i < 3; i++)
+            {
+                SB[i] = text[i].Substring(2);
+            }
+
+            SB[3] = text[3].Substring(3);
+            SB[4] = text[4];
+            SB[5] = text[5].Substring(0, 3);
+
+            return SB;
+        }
+
+        public static string[] S0_filter(List<string> text)
         {
             string[] S0 = new string[17];
 
             for (int i = 0; i < 15; i++)
             {
-                S0[i] = text[i * 2 + 1];
+                S0[i] = text[i].Substring(5);
             }
-
-            S0[15] = text[30];
-            S0[16] = ErrorCheck(text[31].Substring(0, 3));
+            S0[15] = text[15];
+            S0[16] = text[16].Substring(0, 3);
 
             return S0;
         }
 
-        public static string[] SB_filter(string[] text)
+        public static string[] JM_filter(List<string> text)
         {
-            string[] SB = new string[6];
+            string[] JMat = new string[10];
 
             for (int i = 0; i < 4; i++)
             {
-                SB[i] = text[i * 2 + 1];
+                JMat[i * 2] = text[i].Substring(5, 7);
+                JMat[(i * 2) + 1] = text[i].Substring(12, 7);
             }
+            JMat[8] = text[4];
+            JMat[9] = text[5].Substring(0, 3);
 
-            SB[4] = text[8];
-            SB[5] = ErrorCheck(text[9].Substring(0, 3));
-
-            return SB;
-        }
-
-        public static string[] JM_filter(string[] text)
-        {
-            string[] JM = new string[10];
-
-            for (int i = 0; i < 4; i++)
-            {
-                JM[i * 2] = text[i * 3 + 1];
-                JM[i * 2 + 1] = text[i * 3 + 2];
-            }
-
-            JM[8] = text[12];
-            JM[9] = ErrorCheck(text[13].Substring(0, 3));
-
-            return JM;
+            return JMat;
         }
 
         public static string ReplaceCommonEscapeSequences(string s)

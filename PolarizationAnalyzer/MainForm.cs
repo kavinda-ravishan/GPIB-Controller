@@ -14,7 +14,7 @@ namespace PolarizationAnalyzer
             InitsecondaryAddressComboBox1();
             InitsecondaryAddressComboBox2();
 
-            laserSourceTextBoxSuggestAppend();
+            LaserSourceTextBoxSuggestAppend();
         }
 
         #region Polarization Analyzer
@@ -30,7 +30,6 @@ namespace PolarizationAnalyzer
             writeButton1.Enabled = isSessionOpen;
             readButton1.Enabled = isSessionOpen;
             stringReadTextBox1.Enabled = isSessionOpen;
-            btnS0.Enabled = isSessionOpen;
         }
 
         private void InitsecondaryAddressComboBox1()
@@ -120,12 +119,12 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Clear();
 
                 //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
-                //string[] data = Utility.S0(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
-                string[] data = Utility.S0_filter(Utility.dataSeparator(Utility.text_S0, 17, 32));
+                //string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.text_S0));
 
                 for (int i = 0; i < data.Length; i++)
                 {
-                    stringReadTextBox1.Text += (Utility.lables_S0[i] + " - " + data[i] + Environment.NewLine);
+                    stringReadTextBox1.Text += (Utility.Lables_S0[i] + " -> " + data[i] + Environment.NewLine);
                 }
 
             }
@@ -149,12 +148,12 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Clear();
 
                 //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
-                //string[] data = Utility.SB(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
-                string[] data = Utility.SB_filter(Utility.dataSeparator(Utility.text_SB, 6, 10));
+                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));
 
                 for (int i = 0; i < data.Length; i++)
                 {
-                    stringReadTextBox1.Text += (Utility.lables_SB[i] + " - " + data[i] + Environment.NewLine);
+                    stringReadTextBox1.Text += (Utility.Lables_SB[i] + " -> " + data[i] + Environment.NewLine);
                 }
 
             }
@@ -176,13 +175,13 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
-                //string[] data = Utility.S0(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
-                string[] data = Utility.JM_filter(Utility.dataSeparator(Utility.text_J1, 6, 14));
+                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;"));
+                //string[] data = Utility.JM_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                string[] data = Utility.JM_filter(Utility.DataSeparator(Utility.text_J1));
 
                 for (int i = 0; i < data.Length; i++)
                 {
-                    stringReadTextBox1.Text += (/*Utility.lables_S0[i] + " - " + */data[i] + Environment.NewLine);
+                    stringReadTextBox1.Text += (Utility.Lables_JM[i] + " -> " + data[i] + Environment.NewLine);
                 }
 
             }
@@ -224,17 +223,17 @@ namespace PolarizationAnalyzer
         }
 
         //Display and append suggestions
-        private void laserSourceTextBoxSuggestAppend()
+        private void LaserSourceTextBoxSuggestAppend()
         {
             stringToWriteTextBox2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             stringToWriteTextBox2.AutoCompleteSource = AutoCompleteSource.CustomSource;
             AutoCompleteStringCollection DataCollection = new AutoCompleteStringCollection();
-            itemsLaserSource(DataCollection);
+            ItemsLaserSource(DataCollection);
             stringToWriteTextBox2.AutoCompleteCustomSource = DataCollection;
         }
 
         //predefined commands for laser source
-        private void itemsLaserSource(AutoCompleteStringCollection col)
+        private void ItemsLaserSource(AutoCompleteStringCollection col)
         {
             col.Add(":WAVElength?");
             col.Add(":WAVElength +1.55000000E-006");

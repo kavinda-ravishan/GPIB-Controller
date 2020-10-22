@@ -76,6 +76,16 @@ namespace PolarizationAnalyzer
             public double PMD;
         }
 
+        public struct PMDSettings
+        {
+            public double start;
+            public double end;
+            public double stepSize;
+            public double length; // in Km
+        }
+
+        PMDData[] data;
+        PMDSettings settings;
 
         // declaring an event using built-in EventHandler
         public event EventHandler<PMDData> DGDMeasured;
@@ -84,8 +94,6 @@ namespace PolarizationAnalyzer
         {
             DGDMeasured?.Invoke(this, data);
         }
-
-        delegate void SetTextCallback(string text);
 
         private void PMDForm_DGDMeasured(object sender, PMDData e)
         {
@@ -112,28 +120,21 @@ namespace PolarizationAnalyzer
         {
             Thread thread = new Thread(() =>
             {
-                string path = @"C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\DGD.xlsx";
-                creat(path);
-                Excel excel = new Excel(path, 1);
-                excel.SelectWorkSheet(1);
-                excel.WriteToCell(0, 0, "Wave Lenght");
-                excel.WriteToCell(0, 1, "DGD");
-                excel.WriteToCell(0, 2, "PMD");
+                settings.start = 1550;
+                settings.end = 1560;
+                settings.stepSize = 1;
+                settings.length = 17; // in Km
+                
+                double lengthSqrt = Math.Sqrt(settings.length);
 
-                double start = 1550;
-                double end = 1560;
-                double stepSize = 1;
-                double length = 17; // in Km
-                double lengthSqrt = Math.Sqrt(length);
-
-                int steps = (int)((end - start) / stepSize) + 3;
+                int steps = (int)((settings.end - settings.start) / settings.stepSize) + 3;
 
                 double[] wavelenght = new double[steps];
 
                 //find wavelenghts need to mesure
                 for (int i = 0; i < steps; i++)
                 {
-                    wavelenght[i] = (start - stepSize) + (i * stepSize);
+                    wavelenght[i] = (settings.start - settings.stepSize) + (i * settings.stepSize);
                 }
 
                 //for save PAT9300 JM information
@@ -141,9 +142,7 @@ namespace PolarizationAnalyzer
 
                 double[] DGDval = new double[2];
 
-                PMDData[] data = new PMDData[steps - 2];
-                double[,] DGDs = new double[steps - 2, 2];
-                double[] PMDs = new double[steps - 2];
+                data = new PMDData[steps - 2];
 
                 int delay = 1000;
 
@@ -167,18 +166,57 @@ namespace PolarizationAnalyzer
                         data[i - 2].waveLenght = DGDval[1];
                         data[i - 2].PMD = DGDval[0] / lengthSqrt;
 
-                        excel.WriteToCell(i - 1, 0, data[i - 2].waveLenght.ToString());
-                        excel.WriteToCell(i - 1, 1, data[i - 2].DGD.ToString());
-                        excel.WriteToCell(i - 1, 2, data[i - 2].PMD.ToString());
-
                         OnDGDMeasured(data[i - 2]);
                     }
                 }
 
                 //Done();
 
+            });
+            thread.Start();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            Thread thread = new Thread(() => {
+                string path = @"C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\DGD.xlsx";
+                creat(path);
+                Excel excel = new Excel(path, 1);
+                excel.SelectWorkSheet(1);
+
+                excel.WriteToCell(0, 0, "From");
+                excel.WriteToCell(0, 1, settings.start.ToString());
+                excel.WriteToCell(0, 2, "nm");
+                excel.WriteToCell(0, 3, "to");
+                excel.WriteToCell(0, 4, settings.end.ToString());
+                excel.WriteToCell(0, 5, "nm");
+
+                excel.WriteToCell(1, 0, "Step size");
+                excel.WriteToCell(1, 1, settings.stepSize.ToString());
+                excel.WriteToCell(1, 2, "nm");
+
+                excel.WriteToCell(2, 0, "Fiber lenght");
+                excel.WriteToCell(2, 1, settings.length.ToString());
+                excel.WriteToCell(2, 2, "Km");
+
+                excel.WriteToCell(4, 0, "Wave Lenght (nm)");
+                excel.WriteToCell(4, 1, "DGD (ps)");
+                excel.WriteToCell(4, 2, "PMD");
+
+                for (int i = 0; i < data.Length; i++)
+                {
+                    excel.WriteToCell(i + 5, 0, data[i].waveLenght.ToString());
+                    excel.WriteToCell(i + 5, 1, data[i].DGD.ToString());
+                    excel.WriteToCell(i + 5, 2, data[i].PMD.ToString());
+                }
                 excel.Save();
                 excel.Close();
+
+                this.Invoke(new MethodInvoker(delegate ()
+                {
+                    stringReadTextBox.Text += ("Excel created." + Environment.NewLine);
+                    stringReadTextBox.Text += (Environment.NewLine);
+                }));
             });
             thread.Start();
         }

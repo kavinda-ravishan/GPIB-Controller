@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.stringReadTextBox = new System.Windows.Forms.RichTextBox();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.txtBoxStart = new System.Windows.Forms.TextBox();
-            this.txtBoxStop = new System.Windows.Forms.TextBox();
+            this.txtBoxEnd = new System.Windows.Forms.TextBox();
             this.txtBoxStep = new System.Windows.Forms.TextBox();
             this.txtBoxLength = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,6 +56,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.lblMaxWL = new System.Windows.Forms.Label();
             this.lblMinWL = new System.Windows.Forms.Label();
+            this.btnLoad = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,9 +81,9 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(1005, 338);
+            this.btnSave.Location = new System.Drawing.Point(950, 338);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(115, 40);
+            this.btnSave.Size = new System.Drawing.Size(100, 40);
             this.btnSave.TabIndex = 41;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -100,18 +101,18 @@
             // 
             // chart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart.Legends.Add(legend3);
             this.chart.Location = new System.Drawing.Point(12, 12);
             this.chart.Name = "chart";
             this.chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "PMD";
-            this.chart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "PMD";
+            this.chart.Series.Add(series3);
             this.chart.Size = new System.Drawing.Size(636, 366);
             this.chart.TabIndex = 43;
             this.chart.Text = "chart1";
@@ -124,13 +125,13 @@
             this.txtBoxStart.TabIndex = 44;
             this.txtBoxStart.Text = "1550";
             // 
-            // txtBoxStop
+            // txtBoxEnd
             // 
-            this.txtBoxStop.Location = new System.Drawing.Point(756, 48);
-            this.txtBoxStop.Name = "txtBoxStop";
-            this.txtBoxStop.Size = new System.Drawing.Size(101, 20);
-            this.txtBoxStop.TabIndex = 45;
-            this.txtBoxStop.Text = "1560";
+            this.txtBoxEnd.Location = new System.Drawing.Point(756, 48);
+            this.txtBoxEnd.Name = "txtBoxEnd";
+            this.txtBoxEnd.Size = new System.Drawing.Size(101, 20);
+            this.txtBoxEnd.TabIndex = 45;
+            this.txtBoxEnd.Text = "1560";
             // 
             // txtBoxStep
             // 
@@ -162,9 +163,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(654, 51);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 13);
+            this.label2.Size = new System.Drawing.Size(84, 13);
             this.label2.TabIndex = 49;
-            this.label2.Text = "Stop  wavelenght";
+            this.label2.Text = "End wavelenght";
             // 
             // label3
             // 
@@ -292,11 +293,22 @@
             this.lblMinWL.TabIndex = 63;
             this.lblMinWL.Text = "---";
             // 
+            // btnLoad
+            // 
+            this.btnLoad.Location = new System.Drawing.Point(1056, 338);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(100, 40);
+            this.btnLoad.TabIndex = 65;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
             // PMDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1168, 388);
+            this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.lblMaxWL);
             this.Controls.Add(this.lblMinWL);
             this.Controls.Add(this.lblMax);
@@ -315,7 +327,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBoxLength);
             this.Controls.Add(this.txtBoxStep);
-            this.Controls.Add(this.txtBoxStop);
+            this.Controls.Add(this.txtBoxEnd);
             this.Controls.Add(this.txtBoxStart);
             this.Controls.Add(this.chart);
             this.Controls.Add(this.btnStop);
@@ -339,7 +351,7 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart;
         private System.Windows.Forms.TextBox txtBoxStart;
-        private System.Windows.Forms.TextBox txtBoxStop;
+        private System.Windows.Forms.TextBox txtBoxEnd;
         private System.Windows.Forms.TextBox txtBoxStep;
         private System.Windows.Forms.TextBox txtBoxLength;
         private System.Windows.Forms.Label label1;
@@ -358,5 +370,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lblMaxWL;
         private System.Windows.Forms.Label lblMinWL;
+        private System.Windows.Forms.Button btnLoad;
     }
 }

@@ -40,7 +40,7 @@ namespace PolarizationAnalyzer
             wb.Worksheets[sheetNumber].Delete();
         }
 
-        public string ReadExcel(int i, int j)
+        public double ReadExcel(int i, int j)
         {
             i++;
             j++;
@@ -51,7 +51,7 @@ namespace PolarizationAnalyzer
             }
             else
             {
-                return "";
+                return 0;
             }
         }
 

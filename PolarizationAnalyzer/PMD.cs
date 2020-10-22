@@ -117,17 +117,12 @@ namespace PolarizationAnalyzer
                 stringReadTextBox.Text += (e.DGD.ToString() + Environment.NewLine);
                 stringReadTextBox.Text += (e.PMD.ToString() + Environment.NewLine);
                 stringReadTextBox.Text += (Environment.NewLine);
+
                 stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
                 stringReadTextBox.ScrollToCaret();
-            }));
 
-            this.Invoke(new MethodInvoker(delegate ()
-            {
                 chart.Series["PMD"].Points.AddXY(e.waveLenght, e.PMD);
-            }));
 
-            this.Invoke(new MethodInvoker(delegate ()
-            {
                 lblMeanPMD.Text = settings.meanPMD.ToString();
                 lblMin.Text = settings.min.ToString();
                 lblMinWL.Text = " | " + settings.minWaveLength.ToString() + "nm";
@@ -146,7 +141,7 @@ namespace PolarizationAnalyzer
             Thread thread = new Thread(() =>
             {
                 settings.start = System.Convert.ToDouble(txtBoxStart.Text);
-                settings.end = System.Convert.ToDouble(txtBoxStop.Text); ;
+                settings.end = System.Convert.ToDouble(txtBoxEnd.Text); ;
                 settings.stepSize = System.Convert.ToDouble(txtBoxStep.Text); ;
                 settings.length = System.Convert.ToDouble(txtBoxLength.Text); ; // in Km
                 settings.meanPMD = 0;
@@ -213,7 +208,7 @@ namespace PolarizationAnalyzer
                             }
                             else
                             {
-                                if(settings.min > data[i - 2].PMD)
+                                if (settings.min > data[i - 2].PMD)
                                 {
                                     settings.min = data[i - 2].PMD;
                                     settings.minWaveLength = data[i - 2].waveLenght;
@@ -226,8 +221,6 @@ namespace PolarizationAnalyzer
                             }
 
                             OnDGDMeasured(data[i - 2]);
-
-                            Thread.Sleep(1000);//for sim
                         }
                     }
                     else break;
@@ -306,6 +299,82 @@ namespace PolarizationAnalyzer
         private void btnStop_Click(object sender, EventArgs e)
         {
             threadRun = false;
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            Thread thread = new Thread(() =>
+            {
+                string path = @"C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\DGD.xlsx";
+                Excel excel = new Excel(path, 1);
+                excel.SelectWorkSheet(1);
+
+                settings.start = System.Convert.ToDouble(excel.ReadExcel(0, 1));
+                settings.end = System.Convert.ToDouble(excel.ReadExcel(0, 4));
+
+                settings.stepSize = System.Convert.ToDouble(excel.ReadExcel(1, 1));
+
+                settings.length = System.Convert.ToDouble(excel.ReadExcel(2, 1));
+
+                settings.meanPMD = System.Convert.ToDouble(excel.ReadExcel(3, 1));
+
+                settings.min = System.Convert.ToDouble(excel.ReadExcel(4, 1));
+                settings.minWaveLength = System.Convert.ToDouble(excel.ReadExcel(4, 3));
+
+                settings.max = System.Convert.ToDouble(excel.ReadExcel(5, 1));
+                settings.maxWaveLength = System.Convert.ToDouble(excel.ReadExcel(5, 3));
+
+                int steps = (int)((settings.end - settings.start) / settings.stepSize) + 3;
+                data = new PMDData[steps - 2];
+
+                for (int i = 0; i < steps - 2; i++)
+                {
+                    data[i].i = System.Convert.ToInt32(excel.ReadExcel(i + 7, 0));
+                    data[i].waveLenght = System.Convert.ToDouble(excel.ReadExcel(i + 7, 1));
+                    data[i].DGD = System.Convert.ToDouble(excel.ReadExcel(i + 7, 2));
+                    data[i].PMD = System.Convert.ToDouble(excel.ReadExcel(i + 7, 3));
+                }
+                excel.Close();
+
+                this.Invoke(new MethodInvoker(delegate ()
+                {
+                    txtBoxStart.Text = settings.start.ToString();
+                    txtBoxEnd.Text = settings.end.ToString();
+                    txtBoxStep.Text = settings.stepSize.ToString();
+                    txtBoxLength.Text = settings.length.ToString();
+
+                    lblMeanPMD.Text = settings.meanPMD.ToString();
+                    lblMin.Text = settings.min.ToString();
+                    lblMinWL.Text = " | " + settings.minWaveLength.ToString() + "nm";
+                    lblMax.Text = settings.max.ToString();
+                    lblMaxWL.Text = " | " + settings.maxWaveLength.ToString() + "nm";
+
+                    stringReadTextBox.Clear();
+
+                    chart.Series["PMD"].Points.Clear();
+
+                    for (int i = 0; i < data.Length; i++)
+                    {
+
+                        chart.Series["PMD"].Points.AddXY(data[i].waveLenght, data[i].PMD);
+
+                        stringReadTextBox.Text += (data[i].waveLenght.ToString() + Environment.NewLine);
+                        stringReadTextBox.Text += (data[i].DGD.ToString() + Environment.NewLine);
+                        stringReadTextBox.Text += (data[i].PMD.ToString() + Environment.NewLine);
+                        stringReadTextBox.Text += (Environment.NewLine);
+
+                        stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
+                        stringReadTextBox.ScrollToCaret();
+                    }
+
+
+                    stringReadTextBox.Text += ("Excel loaded." + Environment.NewLine);
+                    stringReadTextBox.Text += (Environment.NewLine);
+                    stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
+                    stringReadTextBox.ScrollToCaret();
+                }));
+            });
+            thread.Start();
         }
     }
 }

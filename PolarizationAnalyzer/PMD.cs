@@ -111,11 +111,18 @@ namespace PolarizationAnalyzer
                 stringReadTextBox.Text += (e.DGD.ToString() + Environment.NewLine);
                 stringReadTextBox.Text += (e.PMD.ToString() + Environment.NewLine);
                 stringReadTextBox.Text += (Environment.NewLine);
+                stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
+                stringReadTextBox.ScrollToCaret();
             }));
 
             this.Invoke(new MethodInvoker(delegate ()
             {
                 chart.Series["PMD"].Points.AddXY(e.waveLenght, e.PMD);
+            }));
+
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                lblMeanPMD.Text = "aa";
             }));
         }
 
@@ -128,11 +135,11 @@ namespace PolarizationAnalyzer
         {
             Thread thread = new Thread(() =>
             {
-                settings.start = 1550;
-                settings.end = 1560;
-                settings.stepSize = 1;
-                settings.length = 17; // in Km
-                
+                settings.start = System.Convert.ToDouble(txtBoxStart.Text);
+                settings.end = System.Convert.ToDouble(txtBoxStop.Text); ;
+                settings.stepSize = System.Convert.ToDouble(txtBoxStep.Text); ;
+                settings.length = System.Convert.ToDouble(txtBoxLength.Text); ; // in Km
+
                 double lengthSqrt = Math.Sqrt(settings.length);
 
                 int steps = (int)((settings.end - settings.start) / settings.stepSize) + 3;
@@ -200,7 +207,8 @@ namespace PolarizationAnalyzer
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Thread thread = new Thread(() => {
+            Thread thread = new Thread(() =>
+            {
                 string path = @"C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\DGD.xlsx";
                 creat(path);
                 Excel excel = new Excel(path, 1);
@@ -238,6 +246,8 @@ namespace PolarizationAnalyzer
                 {
                     stringReadTextBox.Text += ("Excel created." + Environment.NewLine);
                     stringReadTextBox.Text += (Environment.NewLine);
+                    stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
+                    stringReadTextBox.ScrollToCaret();
                 }));
             });
             thread.Start();

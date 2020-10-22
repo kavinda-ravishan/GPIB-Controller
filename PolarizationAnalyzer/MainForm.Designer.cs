@@ -331,9 +331,9 @@
             // 
             // btnStokes
             // 
-            this.btnStokes.Location = new System.Drawing.Point(1042, 317);
+            this.btnStokes.Location = new System.Drawing.Point(1013, 301);
             this.btnStokes.Name = "btnStokes";
-            this.btnStokes.Size = new System.Drawing.Size(75, 23);
+            this.btnStokes.Size = new System.Drawing.Size(104, 49);
             this.btnStokes.TabIndex = 40;
             this.btnStokes.Text = "Stokes";
             this.btnStokes.UseVisualStyleBackColor = true;
@@ -359,6 +359,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.groupBox1.Controls.Add(this.btnJM);
             this.groupBox1.Controls.Add(this.btnSB);
             this.groupBox1.Controls.Add(this.btnS0);
@@ -393,6 +394,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.groupBox2.Location = new System.Drawing.Point(558, 9);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(559, 278);
@@ -420,9 +422,9 @@
             // 
             // btnPMD
             // 
-            this.btnPMD.Location = new System.Drawing.Point(1042, 363);
+            this.btnPMD.Location = new System.Drawing.Point(1013, 366);
             this.btnPMD.Name = "btnPMD";
-            this.btnPMD.Size = new System.Drawing.Size(75, 23);
+            this.btnPMD.Size = new System.Drawing.Size(104, 49);
             this.btnPMD.TabIndex = 48;
             this.btnPMD.Text = "PMD";
             this.btnPMD.UseVisualStyleBackColor = true;
@@ -473,6 +475,7 @@
             this.Controls.Add(this.boardIdLabel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

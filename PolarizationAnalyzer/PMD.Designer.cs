@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnSend = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.stringReadTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // btnSend
+            // btnStart
             // 
-            this.btnSend.Location = new System.Drawing.Point(165, 221);
-            this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(241, 40);
-            this.btnSend.TabIndex = 9;
-            this.btnSend.Text = "Send";
-            this.btnSend.UseVisualStyleBackColor = true;
-            this.btnSend.Click += new System.EventHandler(this.BtnSend_Click);
+            this.btnStart.Location = new System.Drawing.Point(165, 221);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(241, 40);
+            this.btnStart.TabIndex = 9;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // stringReadTextBox
             // 
@@ -57,7 +57,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(573, 273);
             this.Controls.Add(this.stringReadTextBox);
-            this.Controls.Add(this.btnSend);
+            this.Controls.Add(this.btnStart);
             this.Name = "PMDForm";
             this.Text = "PMD";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PMDForm_FormClosed);
@@ -66,7 +66,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnSend;
+        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.RichTextBox stringReadTextBox;
     }
 }

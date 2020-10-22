@@ -33,3 +33,4 @@ C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\Polariza
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\bin\Debug\PolarizationAnalyzer.pdb
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.StoksForm.resources
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.PMDForm.resources
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Debug\PolarizationAnalyzer.csproj.ResolveComReference.cache

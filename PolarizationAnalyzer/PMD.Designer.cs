@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.stringReadTextBox = new System.Windows.Forms.RichTextBox();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -101,18 +101,22 @@
             // 
             // chart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart.Legends.Add(legend3);
+            chartArea1.AxisX.Title = "Wavelength (nm)";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = "PMD";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart.Legends.Add(legend1);
             this.chart.Location = new System.Drawing.Point(12, 12);
             this.chart.Name = "chart";
             this.chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Legend = "Legend1";
-            series3.Name = "PMD";
-            this.chart.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "PMD";
+            this.chart.Series.Add(series1);
             this.chart.Size = new System.Drawing.Size(636, 366);
             this.chart.TabIndex = 43;
             this.chart.Text = "chart1";
@@ -124,6 +128,7 @@
             this.txtBoxStart.Size = new System.Drawing.Size(101, 20);
             this.txtBoxStart.TabIndex = 44;
             this.txtBoxStart.Text = "1550";
+            this.txtBoxStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtBoxEnd
             // 
@@ -132,6 +137,7 @@
             this.txtBoxEnd.Size = new System.Drawing.Size(101, 20);
             this.txtBoxEnd.TabIndex = 45;
             this.txtBoxEnd.Text = "1560";
+            this.txtBoxEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtBoxStep
             // 
@@ -140,6 +146,7 @@
             this.txtBoxStep.Size = new System.Drawing.Size(101, 20);
             this.txtBoxStep.TabIndex = 46;
             this.txtBoxStep.Text = "1";
+            this.txtBoxStep.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtBoxLength
             // 
@@ -148,6 +155,7 @@
             this.txtBoxLength.Size = new System.Drawing.Size(101, 20);
             this.txtBoxLength.TabIndex = 47;
             this.txtBoxLength.Text = "17";
+            this.txtBoxLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
             // 

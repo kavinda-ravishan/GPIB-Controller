@@ -113,9 +113,9 @@ namespace PolarizationAnalyzer
 
             this.Invoke(new MethodInvoker(delegate ()
             {
-                stringReadTextBox.Text += (e.waveLenght.ToString() + Environment.NewLine);
-                stringReadTextBox.Text += (e.DGD.ToString() + Environment.NewLine);
-                stringReadTextBox.Text += (e.PMD.ToString() + Environment.NewLine);
+                stringReadTextBox.Text += (e.waveLenght.ToString() + " nm" + Environment.NewLine);
+                stringReadTextBox.Text += ("DGD : " + e.DGD.ToString() + " ps" + Environment.NewLine);
+                stringReadTextBox.Text += ("PMD : " + e.PMD.ToString() + Environment.NewLine);
                 stringReadTextBox.Text += (Environment.NewLine);
 
                 stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
@@ -125,9 +125,9 @@ namespace PolarizationAnalyzer
 
                 lblMeanPMD.Text = settings.meanPMD.ToString();
                 lblMin.Text = settings.min.ToString();
-                lblMinWL.Text = " | " + settings.minWaveLength.ToString() + "nm";
+                lblMinWL.Text = " | " + settings.minWaveLength.ToString() + " nm";
                 lblMax.Text = settings.max.ToString();
-                lblMaxWL.Text = " | " + settings.maxWaveLength.ToString() + "nm";
+                lblMaxWL.Text = " | " + settings.maxWaveLength.ToString() + " nm";
             }));
         }
 
@@ -277,10 +277,10 @@ namespace PolarizationAnalyzer
 
                 for (int i = 0; i < data.Length; i++)
                 {
-                    excel.WriteToCell(i + 7, 0, data[i].i.ToString());
-                    excel.WriteToCell(i + 7, 1, data[i].waveLenght.ToString());
-                    excel.WriteToCell(i + 7, 2, data[i].DGD.ToString());
-                    excel.WriteToCell(i + 7, 3, data[i].PMD.ToString());
+                    excel.WriteToCell(i + 8, 0, data[i].i.ToString());
+                    excel.WriteToCell(i + 8, 1, data[i].waveLenght.ToString());
+                    excel.WriteToCell(i + 8, 2, data[i].DGD.ToString());
+                    excel.WriteToCell(i + 8, 3, data[i].PMD.ToString());
                 }
                 excel.Save();
                 excel.Close();
@@ -329,10 +329,10 @@ namespace PolarizationAnalyzer
 
                 for (int i = 0; i < steps - 2; i++)
                 {
-                    data[i].i = System.Convert.ToInt32(excel.ReadExcel(i + 7, 0));
-                    data[i].waveLenght = System.Convert.ToDouble(excel.ReadExcel(i + 7, 1));
-                    data[i].DGD = System.Convert.ToDouble(excel.ReadExcel(i + 7, 2));
-                    data[i].PMD = System.Convert.ToDouble(excel.ReadExcel(i + 7, 3));
+                    data[i].i = System.Convert.ToInt32(excel.ReadExcel(i + 8, 0));
+                    data[i].waveLenght = System.Convert.ToDouble(excel.ReadExcel(i + 8, 1));
+                    data[i].DGD = System.Convert.ToDouble(excel.ReadExcel(i + 8, 2));
+                    data[i].PMD = System.Convert.ToDouble(excel.ReadExcel(i + 8, 3));
                 }
                 excel.Close();
 
@@ -345,9 +345,9 @@ namespace PolarizationAnalyzer
 
                     lblMeanPMD.Text = settings.meanPMD.ToString();
                     lblMin.Text = settings.min.ToString();
-                    lblMinWL.Text = " | " + settings.minWaveLength.ToString() + "nm";
+                    lblMinWL.Text = " | " + settings.minWaveLength.ToString() + " nm";
                     lblMax.Text = settings.max.ToString();
-                    lblMaxWL.Text = " | " + settings.maxWaveLength.ToString() + "nm";
+                    lblMaxWL.Text = " | " + settings.maxWaveLength.ToString() + " nm";
 
                     stringReadTextBox.Clear();
 
@@ -358,9 +358,9 @@ namespace PolarizationAnalyzer
 
                         chart.Series["PMD"].Points.AddXY(data[i].waveLenght, data[i].PMD);
 
-                        stringReadTextBox.Text += (data[i].waveLenght.ToString() + Environment.NewLine);
-                        stringReadTextBox.Text += (data[i].DGD.ToString() + Environment.NewLine);
-                        stringReadTextBox.Text += (data[i].PMD.ToString() + Environment.NewLine);
+                        stringReadTextBox.Text += (data[i].waveLenght.ToString() + " nm" + Environment.NewLine);
+                        stringReadTextBox.Text += ("DGD : " + data[i].DGD.ToString() + " ps" + Environment.NewLine);
+                        stringReadTextBox.Text += ("PMD : " + data[i].PMD.ToString() + Environment.NewLine);
                         stringReadTextBox.Text += (Environment.NewLine);
 
                         stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;

@@ -10,6 +10,7 @@ namespace PolarizationAnalyzer
         {
             InitializeComponent();
             DGDMeasured += PMDForm_DGDMeasured;
+            threadRun = true;
         }
 
         public Form RefToMainForm { get; set; }
@@ -87,6 +88,8 @@ namespace PolarizationAnalyzer
         PMDData[] data;
         PMDSettings settings;
 
+        private static bool threadRun;
+
         // declaring an event using built-in EventHandler
         public event EventHandler<PMDData> DGDMeasured;
 
@@ -108,6 +111,11 @@ namespace PolarizationAnalyzer
                 stringReadTextBox.Text += (e.DGD.ToString() + Environment.NewLine);
                 stringReadTextBox.Text += (e.PMD.ToString() + Environment.NewLine);
                 stringReadTextBox.Text += (Environment.NewLine);
+            }));
+
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                chart.Series["PMD"].Points.AddXY(e.waveLenght, e.PMD);
             }));
         }
 
@@ -139,35 +147,49 @@ namespace PolarizationAnalyzer
 
                 //for save PAT9300 JM information
                 string[] jStrings = new string[steps];
-
                 double[] DGDval = new double[2];
-
                 data = new PMDData[steps - 2];
-
                 int delay = 1000;
+
+                this.Invoke(new MethodInvoker(delegate ()
+                {
+                    stringReadTextBox.Clear();
+                }));
+                this.Invoke(new MethodInvoker(delegate ()
+                {
+                    chart.Series["PMD"].Points.Clear();
+                }));
 
                 //InitDGDMesure(start, 1000);
 
+                threadRun = true;
+
                 for (int i = 0; i < steps; i++)
                 {
-                    if (i < 2)
+                    if (threadRun)
                     {
-                        //jStrings[i] = MesureDGD(wavelenght[i], delay);
-                        jStrings[i] = Utility.text_J1;
+                        if (i < 2)
+                        {
+                            //jStrings[i] = MesureDGD(wavelenght[i], delay);
+                            jStrings[i] = Utility.text_J1;
+                        }
+                        else
+                        {
+                            //jStrings[i] = MesureDGD(wavelenght[i], delay);
+                            jStrings[i] = Utility.text_J2;
+
+                            DGDval = Utility.DGD(jStrings[i - 2], jStrings[i], wavelenght[i - 2], wavelenght[i]);//put jString here
+
+                            data[i - 2].DGD = DGDval[0];
+                            data[i - 2].waveLenght = DGDval[1];
+                            data[i - 2].PMD = DGDval[0] / lengthSqrt;
+
+                            OnDGDMeasured(data[i - 2]);
+
+                            Thread.Sleep(500);//for sim
+                        }
                     }
-                    else
-                    {
-                        //jStrings[i] = MesureDGD(wavelenght[i], delay);
-                        jStrings[i] = Utility.text_J2;
-
-                        DGDval = Utility.DGD(jStrings[i - 2], jStrings[i], wavelenght[i - 2], wavelenght[i]);//put jString here
-
-                        data[i - 2].DGD = DGDval[0];
-                        data[i - 2].waveLenght = DGDval[1];
-                        data[i - 2].PMD = DGDval[0] / lengthSqrt;
-
-                        OnDGDMeasured(data[i - 2]);
-                    }
+                    else break;
                 }
 
                 //Done();
@@ -219,6 +241,11 @@ namespace PolarizationAnalyzer
                 }));
             });
             thread.Start();
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            threadRun = false;
         }
     }
 }

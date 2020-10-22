@@ -82,9 +82,9 @@ namespace PolarizationAnalyzer
                     chart2.Series["S2"].Points.Add(S2[i]);
                     chart3.Series["S3"].Points.Add(S3[i]);
                 }
-                chart1.Update();
-                chart2.Update();
-                chart3.Update();
+                //chart1.Update();
+                //chart2.Update();
+                //chart3.Update();
 
             }
             catch (Exception ex)

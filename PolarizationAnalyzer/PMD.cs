@@ -52,7 +52,7 @@ namespace PolarizationAnalyzer
             Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0")); // turn off the laser
         }
 
-        static string MesureDGD(double wavelenght, int delay)
+        static string GetJonesMatrix(double wavelenght, int delay)
         {
             string jString;
 
@@ -75,6 +75,7 @@ namespace PolarizationAnalyzer
             public double waveLenght;
             public double DGD;
             public double PMD;
+            public int i;
         }
 
         public struct PMDSettings
@@ -83,6 +84,11 @@ namespace PolarizationAnalyzer
             public double end;
             public double stepSize;
             public double length; // in Km
+            public double meanPMD;
+            public double min;
+            public double minWaveLength;
+            public double max;
+            public double maxWaveLength;
         }
 
         PMDData[] data;
@@ -122,7 +128,11 @@ namespace PolarizationAnalyzer
 
             this.Invoke(new MethodInvoker(delegate ()
             {
-                lblMeanPMD.Text = "aa";
+                lblMeanPMD.Text = settings.meanPMD.ToString();
+                lblMin.Text = settings.min.ToString();
+                lblMinWL.Text = " | " + settings.minWaveLength.ToString() + "nm";
+                lblMax.Text = settings.max.ToString();
+                lblMaxWL.Text = " | " + settings.maxWaveLength.ToString() + "nm";
             }));
         }
 
@@ -139,6 +149,7 @@ namespace PolarizationAnalyzer
                 settings.end = System.Convert.ToDouble(txtBoxStop.Text); ;
                 settings.stepSize = System.Convert.ToDouble(txtBoxStep.Text); ;
                 settings.length = System.Convert.ToDouble(txtBoxLength.Text); ; // in Km
+                settings.meanPMD = 0;
 
                 double lengthSqrt = Math.Sqrt(settings.length);
 
@@ -156,6 +167,7 @@ namespace PolarizationAnalyzer
                 string[] jStrings = new string[steps];
                 double[] DGDval = new double[2];
                 data = new PMDData[steps - 2];
+                double sumPMD = 0;
                 int delay = 1000;
 
                 this.Invoke(new MethodInvoker(delegate ()
@@ -177,12 +189,12 @@ namespace PolarizationAnalyzer
                     {
                         if (i < 2)
                         {
-                            //jStrings[i] = MesureDGD(wavelenght[i], delay);
+                            //jStrings[i] = GetJonesMatrix(wavelenght[i], delay);
                             jStrings[i] = Utility.text_J1;
                         }
                         else
                         {
-                            //jStrings[i] = MesureDGD(wavelenght[i], delay);
+                            //jStrings[i] = GetJonesMatrix(wavelenght[i], delay);
                             jStrings[i] = Utility.text_J2;
 
                             DGDval = Utility.DGD(jStrings[i - 2], jStrings[i], wavelenght[i - 2], wavelenght[i]);//put jString here
@@ -190,10 +202,32 @@ namespace PolarizationAnalyzer
                             data[i - 2].DGD = DGDval[0];
                             data[i - 2].waveLenght = DGDval[1];
                             data[i - 2].PMD = DGDval[0] / lengthSqrt;
+                            data[i - 2].i = i - 1;
+                            sumPMD = data[i - 2].PMD + sumPMD;
+                            settings.meanPMD = sumPMD / data[i - 2].i;
+
+                            if (data[i - 2].i == 1)
+                            {
+                                settings.min = data[i - 2].PMD;
+                                settings.max = data[i - 2].PMD;
+                            }
+                            else
+                            {
+                                if(settings.min > data[i - 2].PMD)
+                                {
+                                    settings.min = data[i - 2].PMD;
+                                    settings.minWaveLength = data[i - 2].waveLenght;
+                                }
+                                if (settings.max < data[i - 2].PMD)
+                                {
+                                    settings.max = data[i - 2].PMD;
+                                    settings.maxWaveLength = data[i - 2].waveLenght;
+                                }
+                            }
 
                             OnDGDMeasured(data[i - 2]);
 
-                            Thread.Sleep(500);//for sim
+                            Thread.Sleep(1000);//for sim
                         }
                     }
                     else break;
@@ -229,15 +263,31 @@ namespace PolarizationAnalyzer
                 excel.WriteToCell(2, 1, settings.length.ToString());
                 excel.WriteToCell(2, 2, "Km");
 
-                excel.WriteToCell(4, 0, "Wave Lenght (nm)");
-                excel.WriteToCell(4, 1, "DGD (ps)");
-                excel.WriteToCell(4, 2, "PMD");
+                excel.WriteToCell(3, 0, "Mean PMD");
+                excel.WriteToCell(3, 1, settings.meanPMD.ToString());
+
+                excel.WriteToCell(4, 0, "Minimum PMD");
+                excel.WriteToCell(4, 1, settings.min.ToString());
+                excel.WriteToCell(4, 2, "at");
+                excel.WriteToCell(4, 3, settings.minWaveLength.ToString());
+                excel.WriteToCell(4, 4, "nm");
+
+                excel.WriteToCell(5, 0, "Maximum PMD");
+                excel.WriteToCell(5, 1, settings.max.ToString());
+                excel.WriteToCell(5, 2, "at");
+                excel.WriteToCell(5, 3, settings.maxWaveLength.ToString());
+                excel.WriteToCell(5, 4, "nm");
+
+                excel.WriteToCell(7, 1, "Wave Lenght (nm)");
+                excel.WriteToCell(7, 2, "DGD (ps)");
+                excel.WriteToCell(7, 3, "PMD");
 
                 for (int i = 0; i < data.Length; i++)
                 {
-                    excel.WriteToCell(i + 5, 0, data[i].waveLenght.ToString());
-                    excel.WriteToCell(i + 5, 1, data[i].DGD.ToString());
-                    excel.WriteToCell(i + 5, 2, data[i].PMD.ToString());
+                    excel.WriteToCell(i + 7, 0, data[i].i.ToString());
+                    excel.WriteToCell(i + 7, 1, data[i].waveLenght.ToString());
+                    excel.WriteToCell(i + 7, 2, data[i].DGD.ToString());
+                    excel.WriteToCell(i + 7, 3, data[i].PMD.ToString());
                 }
                 excel.Save();
                 excel.Close();

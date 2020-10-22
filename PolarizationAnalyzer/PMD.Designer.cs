@@ -50,12 +50,18 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.lblMeanPMD = new System.Windows.Forms.Label();
+            this.lblMin = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lblMax = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lblMaxWL = new System.Windows.Forms.Label();
+            this.lblMinWL = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.SuspendLayout();
             // 
             // stringReadTextBox
             // 
-            this.stringReadTextBox.Location = new System.Drawing.Point(862, 12);
+            this.stringReadTextBox.Location = new System.Drawing.Point(942, 12);
             this.stringReadTextBox.Name = "stringReadTextBox";
             this.stringReadTextBox.ReadOnly = true;
             this.stringReadTextBox.Size = new System.Drawing.Size(214, 320);
@@ -64,9 +70,9 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(12, 338);
+            this.btnStart.Location = new System.Drawing.Point(657, 338);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(163, 40);
+            this.btnStart.Size = new System.Drawing.Size(127, 40);
             this.btnStart.TabIndex = 40;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -74,7 +80,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(961, 338);
+            this.btnSave.Location = new System.Drawing.Point(1005, 338);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(115, 40);
             this.btnSave.TabIndex = 41;
@@ -84,9 +90,9 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(228, 338);
+            this.btnStop.Location = new System.Drawing.Point(790, 338);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(163, 40);
+            this.btnStop.Size = new System.Drawing.Size(127, 40);
             this.btnStop.TabIndex = 42;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -106,7 +112,7 @@
             series1.Legend = "Legend1";
             series1.Name = "PMD";
             this.chart.Series.Add(series1);
-            this.chart.Size = new System.Drawing.Size(636, 320);
+            this.chart.Size = new System.Drawing.Size(636, 366);
             this.chart.TabIndex = 43;
             this.chart.Text = "chart1";
             // 
@@ -114,7 +120,7 @@
             // 
             this.txtBoxStart.Location = new System.Drawing.Point(756, 12);
             this.txtBoxStart.Name = "txtBoxStart";
-            this.txtBoxStart.Size = new System.Drawing.Size(64, 20);
+            this.txtBoxStart.Size = new System.Drawing.Size(101, 20);
             this.txtBoxStart.TabIndex = 44;
             this.txtBoxStart.Text = "1550";
             // 
@@ -122,7 +128,7 @@
             // 
             this.txtBoxStop.Location = new System.Drawing.Point(756, 48);
             this.txtBoxStop.Name = "txtBoxStop";
-            this.txtBoxStop.Size = new System.Drawing.Size(64, 20);
+            this.txtBoxStop.Size = new System.Drawing.Size(101, 20);
             this.txtBoxStop.TabIndex = 45;
             this.txtBoxStop.Text = "1560";
             // 
@@ -130,7 +136,7 @@
             // 
             this.txtBoxStep.Location = new System.Drawing.Point(756, 89);
             this.txtBoxStep.Name = "txtBoxStep";
-            this.txtBoxStep.Size = new System.Drawing.Size(64, 20);
+            this.txtBoxStep.Size = new System.Drawing.Size(101, 20);
             this.txtBoxStep.TabIndex = 46;
             this.txtBoxStep.Text = "1";
             // 
@@ -138,7 +144,7 @@
             // 
             this.txtBoxLength.Location = new System.Drawing.Point(756, 129);
             this.txtBoxLength.Name = "txtBoxLength";
-            this.txtBoxLength.Size = new System.Drawing.Size(64, 20);
+            this.txtBoxLength.Size = new System.Drawing.Size(101, 20);
             this.txtBoxLength.TabIndex = 47;
             this.txtBoxLength.Text = "17";
             // 
@@ -181,7 +187,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(826, 15);
+            this.label5.Location = new System.Drawing.Point(874, 15);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(21, 13);
             this.label5.TabIndex = 52;
@@ -190,7 +196,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(826, 51);
+            this.label6.Location = new System.Drawing.Point(874, 51);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(21, 13);
             this.label6.TabIndex = 53;
@@ -199,7 +205,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(826, 92);
+            this.label7.Location = new System.Drawing.Point(874, 92);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(21, 13);
             this.label7.TabIndex = 54;
@@ -208,7 +214,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(826, 132);
+            this.label8.Location = new System.Drawing.Point(874, 132);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(22, 13);
             this.label8.TabIndex = 55;
@@ -232,11 +238,71 @@
             this.lblMeanPMD.TabIndex = 57;
             this.lblMeanPMD.Text = "---";
             // 
+            // lblMin
+            // 
+            this.lblMin.AutoSize = true;
+            this.lblMin.Location = new System.Drawing.Point(753, 235);
+            this.lblMin.Name = "lblMin";
+            this.lblMin.Size = new System.Drawing.Size(16, 13);
+            this.lblMin.TabIndex = 59;
+            this.lblMin.Text = "---";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(654, 235);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 13);
+            this.label11.TabIndex = 58;
+            this.label11.Text = "Min PMD";
+            // 
+            // lblMax
+            // 
+            this.lblMax.AutoSize = true;
+            this.lblMax.Location = new System.Drawing.Point(753, 264);
+            this.lblMax.Name = "lblMax";
+            this.lblMax.Size = new System.Drawing.Size(16, 13);
+            this.lblMax.TabIndex = 61;
+            this.lblMax.Text = "---";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(654, 264);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(54, 13);
+            this.label13.TabIndex = 60;
+            this.label13.Text = "Max PMD";
+            // 
+            // lblMaxWL
+            // 
+            this.lblMaxWL.AutoSize = true;
+            this.lblMaxWL.Location = new System.Drawing.Point(874, 264);
+            this.lblMaxWL.Name = "lblMaxWL";
+            this.lblMaxWL.Size = new System.Drawing.Size(16, 13);
+            this.lblMaxWL.TabIndex = 64;
+            this.lblMaxWL.Text = "---";
+            // 
+            // lblMinWL
+            // 
+            this.lblMinWL.AutoSize = true;
+            this.lblMinWL.Location = new System.Drawing.Point(874, 235);
+            this.lblMinWL.Name = "lblMinWL";
+            this.lblMinWL.Size = new System.Drawing.Size(16, 13);
+            this.lblMinWL.TabIndex = 63;
+            this.lblMinWL.Text = "---";
+            // 
             // PMDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1088, 388);
+            this.ClientSize = new System.Drawing.Size(1168, 388);
+            this.Controls.Add(this.lblMaxWL);
+            this.Controls.Add(this.lblMinWL);
+            this.Controls.Add(this.lblMax);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.lblMin);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.lblMeanPMD);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -286,5 +352,11 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblMeanPMD;
+        private System.Windows.Forms.Label lblMin;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblMax;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblMaxWL;
+        private System.Windows.Forms.Label lblMinWL;
     }
 }

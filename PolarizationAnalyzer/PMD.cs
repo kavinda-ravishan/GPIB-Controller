@@ -234,66 +234,82 @@ namespace PolarizationAnalyzer
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Thread thread = new Thread(() =>
+            string path = " ";
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = @"C:\";
+            saveFileDialog.Title = "Save excel files";
+            saveFileDialog.CheckFileExists = true;
+            saveFileDialog.CheckPathExists = true;
+            //saveFileDialog.DefaultExt = "xlsx";
+            //saveFileDialog.Filter = "Excel files(*.xlsx) | *.xlsx | All files(*.*) | *.* ";
+            //saveFileDialog.FilterIndex = 2;
+            saveFileDialog.RestoreDirectory = true;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string path = @"C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\DGD.xlsx";
-                creat(path);
-                Excel excel = new Excel(path, 1);
-                excel.SelectWorkSheet(1);
+                path = saveFileDialog.FileName;
 
-                excel.WriteToCell(0, 0, "From");
-                excel.WriteToCell(0, 1, settings.start.ToString());
-                excel.WriteToCell(0, 2, "nm");
-                excel.WriteToCell(0, 3, "to");
-                excel.WriteToCell(0, 4, settings.end.ToString());
-                excel.WriteToCell(0, 5, "nm");
 
-                excel.WriteToCell(1, 0, "Step size");
-                excel.WriteToCell(1, 1, settings.stepSize.ToString());
-                excel.WriteToCell(1, 2, "nm");
-
-                excel.WriteToCell(2, 0, "Fiber lenght");
-                excel.WriteToCell(2, 1, settings.length.ToString());
-                excel.WriteToCell(2, 2, "Km");
-
-                excel.WriteToCell(3, 0, "Mean PMD");
-                excel.WriteToCell(3, 1, settings.meanPMD.ToString());
-
-                excel.WriteToCell(4, 0, "Minimum PMD");
-                excel.WriteToCell(4, 1, settings.min.ToString());
-                excel.WriteToCell(4, 2, "at");
-                excel.WriteToCell(4, 3, settings.minWaveLength.ToString());
-                excel.WriteToCell(4, 4, "nm");
-
-                excel.WriteToCell(5, 0, "Maximum PMD");
-                excel.WriteToCell(5, 1, settings.max.ToString());
-                excel.WriteToCell(5, 2, "at");
-                excel.WriteToCell(5, 3, settings.maxWaveLength.ToString());
-                excel.WriteToCell(5, 4, "nm");
-
-                excel.WriteToCell(7, 1, "Wave Lenght (nm)");
-                excel.WriteToCell(7, 2, "DGD (ps)");
-                excel.WriteToCell(7, 3, "PMD");
-
-                for (int i = 0; i < data.Length; i++)
+                Thread thread = new Thread(() =>
                 {
-                    excel.WriteToCell(i + 8, 0, data[i].i.ToString());
-                    excel.WriteToCell(i + 8, 1, data[i].waveLenght.ToString());
-                    excel.WriteToCell(i + 8, 2, data[i].DGD.ToString());
-                    excel.WriteToCell(i + 8, 3, data[i].PMD.ToString());
-                }
-                excel.Save();
-                excel.Close();
+                    creat(path);
+                    Excel excel = new Excel(path, 1);
+                    excel.SelectWorkSheet(1);
 
-                this.Invoke(new MethodInvoker(delegate ()
-                {
-                    stringReadTextBox.Text += ("Excel created." + Environment.NewLine);
-                    stringReadTextBox.Text += (Environment.NewLine);
-                    stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
-                    stringReadTextBox.ScrollToCaret();
-                }));
-            });
-            thread.Start();
+                    excel.WriteToCell(0, 0, "From");
+                    excel.WriteToCell(0, 1, settings.start.ToString());
+                    excel.WriteToCell(0, 2, "nm");
+                    excel.WriteToCell(0, 3, "to");
+                    excel.WriteToCell(0, 4, settings.end.ToString());
+                    excel.WriteToCell(0, 5, "nm");
+
+                    excel.WriteToCell(1, 0, "Step size");
+                    excel.WriteToCell(1, 1, settings.stepSize.ToString());
+                    excel.WriteToCell(1, 2, "nm");
+
+                    excel.WriteToCell(2, 0, "Fiber lenght");
+                    excel.WriteToCell(2, 1, settings.length.ToString());
+                    excel.WriteToCell(2, 2, "Km");
+
+                    excel.WriteToCell(3, 0, "Mean PMD");
+                    excel.WriteToCell(3, 1, settings.meanPMD.ToString());
+
+                    excel.WriteToCell(4, 0, "Minimum PMD");
+                    excel.WriteToCell(4, 1, settings.min.ToString());
+                    excel.WriteToCell(4, 2, "at");
+                    excel.WriteToCell(4, 3, settings.minWaveLength.ToString());
+                    excel.WriteToCell(4, 4, "nm");
+
+                    excel.WriteToCell(5, 0, "Maximum PMD");
+                    excel.WriteToCell(5, 1, settings.max.ToString());
+                    excel.WriteToCell(5, 2, "at");
+                    excel.WriteToCell(5, 3, settings.maxWaveLength.ToString());
+                    excel.WriteToCell(5, 4, "nm");
+
+                    excel.WriteToCell(7, 1, "Wave Lenght (nm)");
+                    excel.WriteToCell(7, 2, "DGD (ps)");
+                    excel.WriteToCell(7, 3, "PMD");
+
+                    for (int i = 0; i < data.Length; i++)
+                    {
+                        excel.WriteToCell(i + 8, 0, data[i].i.ToString());
+                        excel.WriteToCell(i + 8, 1, data[i].waveLenght.ToString());
+                        excel.WriteToCell(i + 8, 2, data[i].DGD.ToString());
+                        excel.WriteToCell(i + 8, 3, data[i].PMD.ToString());
+                    }
+                    excel.Save();
+                    excel.Close();
+
+                    this.Invoke(new MethodInvoker(delegate ()
+                    {
+                        stringReadTextBox.Text += ("Excel created." + Environment.NewLine);
+                        stringReadTextBox.Text += (Environment.NewLine);
+                        stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
+                        stringReadTextBox.ScrollToCaret();
+                    }));
+                });
+                thread.Start();
+            }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -303,78 +319,93 @@ namespace PolarizationAnalyzer
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            Thread thread = new Thread(() =>
+            string path = " ";
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = @"C:\";
+            openFileDialog.Title = "Load excel file";
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.CheckPathExists = true;
+            openFileDialog.DefaultExt = "xlsx";
+            openFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string path = @"C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\DGD.xlsx";
-                Excel excel = new Excel(path, 1);
-                excel.SelectWorkSheet(1);
+                path = openFileDialog.FileName;
 
-                settings.start = System.Convert.ToDouble(excel.ReadExcel(0, 1));
-                settings.end = System.Convert.ToDouble(excel.ReadExcel(0, 4));
-
-                settings.stepSize = System.Convert.ToDouble(excel.ReadExcel(1, 1));
-
-                settings.length = System.Convert.ToDouble(excel.ReadExcel(2, 1));
-
-                settings.meanPMD = System.Convert.ToDouble(excel.ReadExcel(3, 1));
-
-                settings.min = System.Convert.ToDouble(excel.ReadExcel(4, 1));
-                settings.minWaveLength = System.Convert.ToDouble(excel.ReadExcel(4, 3));
-
-                settings.max = System.Convert.ToDouble(excel.ReadExcel(5, 1));
-                settings.maxWaveLength = System.Convert.ToDouble(excel.ReadExcel(5, 3));
-
-                int steps = (int)((settings.end - settings.start) / settings.stepSize) + 3;
-                data = new PMDData[steps - 2];
-
-                for (int i = 0; i < steps - 2; i++)
+                Thread thread = new Thread(() =>
                 {
-                    data[i].i = System.Convert.ToInt32(excel.ReadExcel(i + 8, 0));
-                    data[i].waveLenght = System.Convert.ToDouble(excel.ReadExcel(i + 8, 1));
-                    data[i].DGD = System.Convert.ToDouble(excel.ReadExcel(i + 8, 2));
-                    data[i].PMD = System.Convert.ToDouble(excel.ReadExcel(i + 8, 3));
-                }
-                excel.Close();
+                    Excel excel = new Excel(path, 1);
+                    excel.SelectWorkSheet(1);
 
-                this.Invoke(new MethodInvoker(delegate ()
-                {
-                    txtBoxStart.Text = settings.start.ToString();
-                    txtBoxEnd.Text = settings.end.ToString();
-                    txtBoxStep.Text = settings.stepSize.ToString();
-                    txtBoxLength.Text = settings.length.ToString();
+                    settings.start = System.Convert.ToDouble(excel.ReadExcel(0, 1));
+                    settings.end = System.Convert.ToDouble(excel.ReadExcel(0, 4));
 
-                    lblMeanPMD.Text = settings.meanPMD.ToString();
-                    lblMin.Text = settings.min.ToString();
-                    lblMinWL.Text = " | " + settings.minWaveLength.ToString() + " nm";
-                    lblMax.Text = settings.max.ToString();
-                    lblMaxWL.Text = " | " + settings.maxWaveLength.ToString() + " nm";
+                    settings.stepSize = System.Convert.ToDouble(excel.ReadExcel(1, 1));
 
-                    stringReadTextBox.Clear();
+                    settings.length = System.Convert.ToDouble(excel.ReadExcel(2, 1));
 
-                    chart.Series["PMD"].Points.Clear();
+                    settings.meanPMD = System.Convert.ToDouble(excel.ReadExcel(3, 1));
 
-                    for (int i = 0; i < data.Length; i++)
+                    settings.min = System.Convert.ToDouble(excel.ReadExcel(4, 1));
+                    settings.minWaveLength = System.Convert.ToDouble(excel.ReadExcel(4, 3));
+
+                    settings.max = System.Convert.ToDouble(excel.ReadExcel(5, 1));
+                    settings.maxWaveLength = System.Convert.ToDouble(excel.ReadExcel(5, 3));
+
+                    int steps = (int)((settings.end - settings.start) / settings.stepSize) + 3;
+                    data = new PMDData[steps - 2];
+
+                    for (int i = 0; i < steps - 2; i++)
                     {
+                        data[i].i = System.Convert.ToInt32(excel.ReadExcel(i + 8, 0));
+                        data[i].waveLenght = System.Convert.ToDouble(excel.ReadExcel(i + 8, 1));
+                        data[i].DGD = System.Convert.ToDouble(excel.ReadExcel(i + 8, 2));
+                        data[i].PMD = System.Convert.ToDouble(excel.ReadExcel(i + 8, 3));
+                    }
+                    excel.Close();
 
-                        chart.Series["PMD"].Points.AddXY(data[i].waveLenght, data[i].PMD);
+                    this.Invoke(new MethodInvoker(delegate ()
+                    {
+                        txtBoxStart.Text = settings.start.ToString();
+                        txtBoxEnd.Text = settings.end.ToString();
+                        txtBoxStep.Text = settings.stepSize.ToString();
+                        txtBoxLength.Text = settings.length.ToString();
 
-                        stringReadTextBox.Text += (data[i].waveLenght.ToString() + " nm" + Environment.NewLine);
-                        stringReadTextBox.Text += ("DGD : " + data[i].DGD.ToString() + " ps" + Environment.NewLine);
-                        stringReadTextBox.Text += ("PMD : " + data[i].PMD.ToString() + Environment.NewLine);
+                        lblMeanPMD.Text = settings.meanPMD.ToString();
+                        lblMin.Text = settings.min.ToString();
+                        lblMinWL.Text = " | " + settings.minWaveLength.ToString() + " nm";
+                        lblMax.Text = settings.max.ToString();
+                        lblMaxWL.Text = " | " + settings.maxWaveLength.ToString() + " nm";
+
+                        stringReadTextBox.Clear();
+
+                        chart.Series["PMD"].Points.Clear();
+
+                        for (int i = 0; i < data.Length; i++)
+                        {
+
+                            chart.Series["PMD"].Points.AddXY(data[i].waveLenght, data[i].PMD);
+
+                            stringReadTextBox.Text += (data[i].waveLenght.ToString() + " nm" + Environment.NewLine);
+                            stringReadTextBox.Text += ("DGD : " + data[i].DGD.ToString() + " ps" + Environment.NewLine);
+                            stringReadTextBox.Text += ("PMD : " + data[i].PMD.ToString() + Environment.NewLine);
+                            stringReadTextBox.Text += (Environment.NewLine);
+
+                            stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
+                            stringReadTextBox.ScrollToCaret();
+                        }
+
+
+                        stringReadTextBox.Text += ("Excel loaded." + Environment.NewLine);
                         stringReadTextBox.Text += (Environment.NewLine);
-
                         stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
                         stringReadTextBox.ScrollToCaret();
-                    }
-
-
-                    stringReadTextBox.Text += ("Excel loaded." + Environment.NewLine);
-                    stringReadTextBox.Text += (Environment.NewLine);
-                    stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
-                    stringReadTextBox.ScrollToCaret();
-                }));
-            });
-            thread.Start();
+                    }));
+                });
+                thread.Start();
+            }
         }
     }
 }

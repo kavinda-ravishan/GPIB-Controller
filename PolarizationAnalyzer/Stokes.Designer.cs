@@ -38,6 +38,7 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StoksForm));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
@@ -45,9 +46,11 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.picCloseButton = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).BeginInit();
             this.SuspendLayout();
             // 
             // chart1
@@ -76,7 +79,7 @@
             legend1.ShadowColor = System.Drawing.Color.Black;
             legend1.TitleBackColor = System.Drawing.Color.White;
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(33, 12);
+            this.chart1.Location = new System.Drawing.Point(33, 46);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series1.BorderWidth = 3;
@@ -100,7 +103,7 @@
             this.btnStart.BackColor = System.Drawing.Color.Blue;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(823, 226);
+            this.btnStart.Location = new System.Drawing.Point(823, 266);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(113, 42);
             this.btnStart.TabIndex = 1;
@@ -113,7 +116,7 @@
             this.btnStop.BackColor = System.Drawing.Color.Blue;
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(964, 226);
+            this.btnStop.Location = new System.Drawing.Point(984, 266);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(113, 42);
             this.btnStop.TabIndex = 2;
@@ -125,10 +128,10 @@
             // 
             this.stringReadTextBox.BackColor = System.Drawing.Color.DarkBlue;
             this.stringReadTextBox.ForeColor = System.Drawing.Color.White;
-            this.stringReadTextBox.Location = new System.Drawing.Point(823, 12);
+            this.stringReadTextBox.Location = new System.Drawing.Point(823, 46);
             this.stringReadTextBox.Name = "stringReadTextBox";
             this.stringReadTextBox.ReadOnly = true;
-            this.stringReadTextBox.Size = new System.Drawing.Size(254, 208);
+            this.stringReadTextBox.Size = new System.Drawing.Size(274, 208);
             this.stringReadTextBox.TabIndex = 22;
             this.stringReadTextBox.Text = "";
             // 
@@ -163,7 +166,7 @@
             legend2.ShadowColor = System.Drawing.Color.Black;
             legend2.TitleBackColor = System.Drawing.Color.White;
             this.chart2.Legends.Add(legend2);
-            this.chart2.Location = new System.Drawing.Point(33, 178);
+            this.chart2.Location = new System.Drawing.Point(33, 229);
             this.chart2.Name = "chart2";
             this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series2.BorderWidth = 3;
@@ -208,7 +211,7 @@
             legend3.ShadowColor = System.Drawing.Color.Black;
             legend3.TitleBackColor = System.Drawing.Color.White;
             this.chart3.Legends.Add(legend3);
-            this.chart3.Location = new System.Drawing.Point(33, 344);
+            this.chart3.Location = new System.Drawing.Point(33, 408);
             this.chart3.Name = "chart3";
             this.chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series3.BorderWidth = 3;
@@ -227,23 +230,35 @@
             this.chart3.TabIndex = 24;
             this.chart3.Text = "chart3";
             // 
+            // picCloseButton
+            // 
+            this.picCloseButton.Image = ((System.Drawing.Image)(resources.GetObject("picCloseButton.Image")));
+            this.picCloseButton.Location = new System.Drawing.Point(1070, 10);
+            this.picCloseButton.Name = "picCloseButton";
+            this.picCloseButton.Size = new System.Drawing.Size(27, 24);
+            this.picCloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCloseButton.TabIndex = 50;
+            this.picCloseButton.TabStop = false;
+            this.picCloseButton.Click += new System.EventHandler(this.picCloseButton_Click);
+            // 
             // StoksForm
             // 
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1109, 515);
+            this.ClientSize = new System.Drawing.Size(1109, 580);
+            this.Controls.Add(this.picCloseButton);
             this.Controls.Add(this.chart3);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.stringReadTextBox);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.chart1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "StoksForm";
             this.Text = "Stokes";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StoksForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -257,5 +272,6 @@
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart3;
+        private System.Windows.Forms.PictureBox picCloseButton;
     }
 }

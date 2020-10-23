@@ -41,6 +41,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.boardIdLabel1 = new System.Windows.Forms.Label();
             this.primaryAddressLabel1 = new System.Windows.Forms.Label();
             this.secondaryAddressLabel1 = new System.Windows.Forms.Label();
@@ -80,12 +81,14 @@
             this.richTextBoxDevices = new System.Windows.Forms.RichTextBox();
             this.btnPMD = new System.Windows.Forms.Button();
             this.stringReadTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.picCloseButton = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown2)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).BeginInit();
             this.SuspendLayout();
             // 
             // boardIdLabel1
@@ -93,7 +96,7 @@
             this.boardIdLabel1.AutoSize = true;
             this.boardIdLabel1.BackColor = System.Drawing.Color.Black;
             this.boardIdLabel1.ForeColor = System.Drawing.Color.White;
-            this.boardIdLabel1.Location = new System.Drawing.Point(71, 55);
+            this.boardIdLabel1.Location = new System.Drawing.Point(71, 87);
             this.boardIdLabel1.Name = "boardIdLabel1";
             this.boardIdLabel1.Size = new System.Drawing.Size(52, 13);
             this.boardIdLabel1.TabIndex = 0;
@@ -104,7 +107,7 @@
             this.primaryAddressLabel1.AutoSize = true;
             this.primaryAddressLabel1.BackColor = System.Drawing.Color.Black;
             this.primaryAddressLabel1.ForeColor = System.Drawing.Color.White;
-            this.primaryAddressLabel1.Location = new System.Drawing.Point(38, 81);
+            this.primaryAddressLabel1.Location = new System.Drawing.Point(38, 113);
             this.primaryAddressLabel1.Name = "primaryAddressLabel1";
             this.primaryAddressLabel1.Size = new System.Drawing.Size(85, 13);
             this.primaryAddressLabel1.TabIndex = 2;
@@ -115,7 +118,7 @@
             this.secondaryAddressLabel1.AutoSize = true;
             this.secondaryAddressLabel1.BackColor = System.Drawing.Color.Black;
             this.secondaryAddressLabel1.ForeColor = System.Drawing.Color.White;
-            this.secondaryAddressLabel1.Location = new System.Drawing.Point(21, 108);
+            this.secondaryAddressLabel1.Location = new System.Drawing.Point(21, 140);
             this.secondaryAddressLabel1.Name = "secondaryAddressLabel1";
             this.secondaryAddressLabel1.Size = new System.Drawing.Size(102, 13);
             this.secondaryAddressLabel1.TabIndex = 4;
@@ -124,7 +127,7 @@
             // secondaryAddressComboBox1
             // 
             this.secondaryAddressComboBox1.BackColor = System.Drawing.Color.White;
-            this.secondaryAddressComboBox1.Location = new System.Drawing.Point(129, 105);
+            this.secondaryAddressComboBox1.Location = new System.Drawing.Point(129, 137);
             this.secondaryAddressComboBox1.Name = "secondaryAddressComboBox1";
             this.secondaryAddressComboBox1.Size = new System.Drawing.Size(56, 21);
             this.secondaryAddressComboBox1.TabIndex = 5;
@@ -133,7 +136,7 @@
             // 
             this.primaryAddressNumericUpDown1.BackColor = System.Drawing.Color.White;
             this.primaryAddressNumericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.primaryAddressNumericUpDown1.Location = new System.Drawing.Point(129, 79);
+            this.primaryAddressNumericUpDown1.Location = new System.Drawing.Point(129, 111);
             this.primaryAddressNumericUpDown1.Name = "primaryAddressNumericUpDown1";
             this.primaryAddressNumericUpDown1.Size = new System.Drawing.Size(40, 20);
             this.primaryAddressNumericUpDown1.TabIndex = 3;
@@ -147,7 +150,7 @@
             // 
             this.boardIdNumericUpDown1.BackColor = System.Drawing.Color.White;
             this.boardIdNumericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.boardIdNumericUpDown1.Location = new System.Drawing.Point(129, 53);
+            this.boardIdNumericUpDown1.Location = new System.Drawing.Point(129, 85);
             this.boardIdNumericUpDown1.Name = "boardIdNumericUpDown1";
             this.boardIdNumericUpDown1.Size = new System.Drawing.Size(40, 20);
             this.boardIdNumericUpDown1.TabIndex = 1;
@@ -157,7 +160,7 @@
             this.closeButton1.BackColor = System.Drawing.Color.Blue;
             this.closeButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closeButton1.ForeColor = System.Drawing.Color.White;
-            this.closeButton1.Location = new System.Drawing.Point(113, 150);
+            this.closeButton1.Location = new System.Drawing.Point(113, 182);
             this.closeButton1.Name = "closeButton1";
             this.closeButton1.Size = new System.Drawing.Size(81, 33);
             this.closeButton1.TabIndex = 7;
@@ -170,7 +173,7 @@
             this.openButton1.BackColor = System.Drawing.Color.Blue;
             this.openButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openButton1.ForeColor = System.Drawing.Color.White;
-            this.openButton1.Location = new System.Drawing.Point(21, 150);
+            this.openButton1.Location = new System.Drawing.Point(21, 182);
             this.openButton1.Name = "openButton1";
             this.openButton1.Size = new System.Drawing.Size(81, 33);
             this.openButton1.TabIndex = 6;
@@ -182,7 +185,7 @@
             // 
             this.stringReadLabel1.BackColor = System.Drawing.Color.Black;
             this.stringReadLabel1.ForeColor = System.Drawing.Color.White;
-            this.stringReadLabel1.Location = new System.Drawing.Point(206, 45);
+            this.stringReadLabel1.Location = new System.Drawing.Point(206, 77);
             this.stringReadLabel1.Name = "stringReadLabel1";
             this.stringReadLabel1.Size = new System.Drawing.Size(75, 23);
             this.stringReadLabel1.TabIndex = 16;
@@ -263,7 +266,7 @@
             this.stringToWriteTextBox2.BackColor = System.Drawing.Color.White;
             this.stringToWriteTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.stringToWriteTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stringToWriteTextBox2.Location = new System.Drawing.Point(577, 224);
+            this.stringToWriteTextBox2.Location = new System.Drawing.Point(577, 256);
             this.stringToWriteTextBox2.Name = "stringToWriteTextBox2";
             this.stringToWriteTextBox2.Size = new System.Drawing.Size(511, 19);
             this.stringToWriteTextBox2.TabIndex = 39;
@@ -272,7 +275,7 @@
             // 
             this.stringReadLabel2.BackColor = System.Drawing.Color.Black;
             this.stringReadLabel2.ForeColor = System.Drawing.Color.White;
-            this.stringReadLabel2.Location = new System.Drawing.Point(756, 45);
+            this.stringReadLabel2.Location = new System.Drawing.Point(756, 77);
             this.stringReadLabel2.Name = "stringReadLabel2";
             this.stringReadLabel2.Size = new System.Drawing.Size(75, 23);
             this.stringReadLabel2.TabIndex = 37;
@@ -295,7 +298,7 @@
             // 
             this.stringToWriteLabel2.BackColor = System.Drawing.Color.Black;
             this.stringToWriteLabel2.ForeColor = System.Drawing.Color.White;
-            this.stringToWriteLabel2.Location = new System.Drawing.Point(574, 200);
+            this.stringToWriteLabel2.Location = new System.Drawing.Point(574, 232);
             this.stringToWriteLabel2.Name = "stringToWriteLabel2";
             this.stringToWriteLabel2.Size = new System.Drawing.Size(100, 23);
             this.stringToWriteLabel2.TabIndex = 35;
@@ -306,7 +309,7 @@
             this.writeButton2.BackColor = System.Drawing.Color.Blue;
             this.writeButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.writeButton2.ForeColor = System.Drawing.Color.White;
-            this.writeButton2.Location = new System.Drawing.Point(579, 252);
+            this.writeButton2.Location = new System.Drawing.Point(579, 284);
             this.writeButton2.Name = "writeButton2";
             this.writeButton2.Size = new System.Drawing.Size(81, 33);
             this.writeButton2.TabIndex = 34;
@@ -319,7 +322,7 @@
             this.closeButton2.BackColor = System.Drawing.Color.Blue;
             this.closeButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closeButton2.ForeColor = System.Drawing.Color.White;
-            this.closeButton2.Location = new System.Drawing.Point(665, 150);
+            this.closeButton2.Location = new System.Drawing.Point(665, 182);
             this.closeButton2.Name = "closeButton2";
             this.closeButton2.Size = new System.Drawing.Size(81, 33);
             this.closeButton2.TabIndex = 33;
@@ -332,7 +335,7 @@
             this.openButton2.BackColor = System.Drawing.Color.Blue;
             this.openButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openButton2.ForeColor = System.Drawing.Color.White;
-            this.openButton2.Location = new System.Drawing.Point(570, 150);
+            this.openButton2.Location = new System.Drawing.Point(570, 182);
             this.openButton2.Name = "openButton2";
             this.openButton2.Size = new System.Drawing.Size(81, 33);
             this.openButton2.TabIndex = 32;
@@ -343,7 +346,7 @@
             // secondaryAddressComboBox2
             // 
             this.secondaryAddressComboBox2.BackColor = System.Drawing.Color.White;
-            this.secondaryAddressComboBox2.Location = new System.Drawing.Point(679, 105);
+            this.secondaryAddressComboBox2.Location = new System.Drawing.Point(679, 137);
             this.secondaryAddressComboBox2.Name = "secondaryAddressComboBox2";
             this.secondaryAddressComboBox2.Size = new System.Drawing.Size(56, 21);
             this.secondaryAddressComboBox2.TabIndex = 31;
@@ -352,7 +355,7 @@
             // 
             this.primaryAddressNumericUpDown2.BackColor = System.Drawing.Color.White;
             this.primaryAddressNumericUpDown2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.primaryAddressNumericUpDown2.Location = new System.Drawing.Point(679, 79);
+            this.primaryAddressNumericUpDown2.Location = new System.Drawing.Point(679, 111);
             this.primaryAddressNumericUpDown2.Name = "primaryAddressNumericUpDown2";
             this.primaryAddressNumericUpDown2.Size = new System.Drawing.Size(40, 20);
             this.primaryAddressNumericUpDown2.TabIndex = 29;
@@ -366,7 +369,7 @@
             // 
             this.boardIdNumericUpDown2.BackColor = System.Drawing.Color.White;
             this.boardIdNumericUpDown2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.boardIdNumericUpDown2.Location = new System.Drawing.Point(679, 53);
+            this.boardIdNumericUpDown2.Location = new System.Drawing.Point(679, 85);
             this.boardIdNumericUpDown2.Name = "boardIdNumericUpDown2";
             this.boardIdNumericUpDown2.Size = new System.Drawing.Size(40, 20);
             this.boardIdNumericUpDown2.TabIndex = 27;
@@ -376,7 +379,7 @@
             this.secondaryAddressLabel2.AutoSize = true;
             this.secondaryAddressLabel2.BackColor = System.Drawing.Color.Black;
             this.secondaryAddressLabel2.ForeColor = System.Drawing.Color.White;
-            this.secondaryAddressLabel2.Location = new System.Drawing.Point(571, 108);
+            this.secondaryAddressLabel2.Location = new System.Drawing.Point(571, 140);
             this.secondaryAddressLabel2.Name = "secondaryAddressLabel2";
             this.secondaryAddressLabel2.Size = new System.Drawing.Size(102, 13);
             this.secondaryAddressLabel2.TabIndex = 30;
@@ -387,7 +390,7 @@
             this.primaryAddressLabel2.AutoSize = true;
             this.primaryAddressLabel2.BackColor = System.Drawing.Color.Black;
             this.primaryAddressLabel2.ForeColor = System.Drawing.Color.White;
-            this.primaryAddressLabel2.Location = new System.Drawing.Point(588, 81);
+            this.primaryAddressLabel2.Location = new System.Drawing.Point(588, 113);
             this.primaryAddressLabel2.Name = "primaryAddressLabel2";
             this.primaryAddressLabel2.Size = new System.Drawing.Size(85, 13);
             this.primaryAddressLabel2.TabIndex = 28;
@@ -398,7 +401,7 @@
             this.boardIdLabel2.AutoSize = true;
             this.boardIdLabel2.BackColor = System.Drawing.Color.Black;
             this.boardIdLabel2.ForeColor = System.Drawing.Color.White;
-            this.boardIdLabel2.Location = new System.Drawing.Point(621, 55);
+            this.boardIdLabel2.Location = new System.Drawing.Point(621, 87);
             this.boardIdLabel2.Name = "boardIdLabel2";
             this.boardIdLabel2.Size = new System.Drawing.Size(52, 13);
             this.boardIdLabel2.TabIndex = 26;
@@ -409,7 +412,7 @@
             this.btnStokes.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnStokes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStokes.ForeColor = System.Drawing.Color.White;
-            this.btnStokes.Location = new System.Drawing.Point(1013, 301);
+            this.btnStokes.Location = new System.Drawing.Point(1013, 335);
             this.btnStokes.Name = "btnStokes";
             this.btnStokes.Size = new System.Drawing.Size(104, 49);
             this.btnStokes.TabIndex = 40;
@@ -420,7 +423,7 @@
             // lblPol
             // 
             this.lblPol.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPol.Location = new System.Drawing.Point(272, 9);
+            this.lblPol.Location = new System.Drawing.Point(272, 41);
             this.lblPol.Name = "lblPol";
             this.lblPol.Size = new System.Drawing.Size(178, 23);
             this.lblPol.TabIndex = 41;
@@ -429,7 +432,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(817, 9);
+            this.label1.Location = new System.Drawing.Point(817, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(122, 23);
             this.label1.TabIndex = 42;
@@ -447,7 +450,7 @@
             this.groupBox1.Controls.Add(this.stringToWriteLabel1);
             this.groupBox1.Controls.Add(this.stringReadTextBox1);
             this.groupBox1.ForeColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Location = new System.Drawing.Point(12, 9);
+            this.groupBox1.Location = new System.Drawing.Point(12, 41);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(540, 428);
             this.groupBox1.TabIndex = 43;
@@ -484,7 +487,7 @@
             this.groupBox2.BackColor = System.Drawing.Color.Black;
             this.groupBox2.Controls.Add(this.readButton2);
             this.groupBox2.ForeColor = System.Drawing.Color.Transparent;
-            this.groupBox2.Location = new System.Drawing.Point(558, 9);
+            this.groupBox2.Location = new System.Drawing.Point(558, 41);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(559, 286);
             this.groupBox2.TabIndex = 44;
@@ -495,7 +498,7 @@
             this.btnFindDevices.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnFindDevices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFindDevices.ForeColor = System.Drawing.Color.White;
-            this.btnFindDevices.Location = new System.Drawing.Point(591, 351);
+            this.btnFindDevices.Location = new System.Drawing.Point(591, 372);
             this.btnFindDevices.Name = "btnFindDevices";
             this.btnFindDevices.Size = new System.Drawing.Size(117, 49);
             this.btnFindDevices.TabIndex = 46;
@@ -507,7 +510,7 @@
             // 
             this.richTextBoxDevices.BackColor = System.Drawing.Color.DarkBlue;
             this.richTextBoxDevices.ForeColor = System.Drawing.Color.White;
-            this.richTextBoxDevices.Location = new System.Drawing.Point(742, 303);
+            this.richTextBoxDevices.Location = new System.Drawing.Point(742, 335);
             this.richTextBoxDevices.Name = "richTextBoxDevices";
             this.richTextBoxDevices.ReadOnly = true;
             this.richTextBoxDevices.Size = new System.Drawing.Size(258, 128);
@@ -519,7 +522,7 @@
             this.btnPMD.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnPMD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPMD.ForeColor = System.Drawing.Color.White;
-            this.btnPMD.Location = new System.Drawing.Point(1013, 366);
+            this.btnPMD.Location = new System.Drawing.Point(1013, 414);
             this.btnPMD.Name = "btnPMD";
             this.btnPMD.Size = new System.Drawing.Size(104, 49);
             this.btnPMD.TabIndex = 48;
@@ -531,19 +534,31 @@
             // 
             this.stringReadTextBox2.BackColor = System.Drawing.Color.DarkBlue;
             this.stringReadTextBox2.ForeColor = System.Drawing.Color.White;
-            this.stringReadTextBox2.Location = new System.Drawing.Point(759, 65);
+            this.stringReadTextBox2.Location = new System.Drawing.Point(759, 97);
             this.stringReadTextBox2.Name = "stringReadTextBox2";
             this.stringReadTextBox2.ReadOnly = true;
             this.stringReadTextBox2.Size = new System.Drawing.Size(329, 152);
             this.stringReadTextBox2.TabIndex = 38;
             this.stringReadTextBox2.Text = "";
             // 
+            // picCloseButton
+            // 
+            this.picCloseButton.Image = ((System.Drawing.Image)(resources.GetObject("picCloseButton.Image")));
+            this.picCloseButton.Location = new System.Drawing.Point(1090, 11);
+            this.picCloseButton.Name = "picCloseButton";
+            this.picCloseButton.Size = new System.Drawing.Size(27, 24);
+            this.picCloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCloseButton.TabIndex = 50;
+            this.picCloseButton.TabStop = false;
+            this.picCloseButton.Click += new System.EventHandler(this.picCloseButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1129, 449);
+            this.ClientSize = new System.Drawing.Size(1129, 477);
+            this.Controls.Add(this.picCloseButton);
             this.Controls.Add(this.btnPMD);
             this.Controls.Add(this.richTextBoxDevices);
             this.Controls.Add(this.btnFindDevices);
@@ -575,7 +590,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -587,6 +602,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -633,6 +649,7 @@
         private System.Windows.Forms.Button btnPMD;
         private System.Windows.Forms.RichTextBox stringReadTextBox2;
         private System.Windows.Forms.Button btnJM;
+        private System.Windows.Forms.PictureBox picCloseButton;
     }
 }
 

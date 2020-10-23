@@ -17,16 +17,11 @@ namespace PolarizationAnalyzer
 
         public Form RefToMainForm { get; set; }
 
-        private void StoksForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            RefToMainForm.Show();
-        }
-
         private void BtnStart_Click(object sender, EventArgs e)
         {
             try
             {
-                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
                 timer.Enabled = true;
             }
             catch(Exception ex)
@@ -44,8 +39,8 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
+                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
 
                 stringReadTextBox.Clear();
                 for (int i = 0; i < 6; i++)
@@ -88,6 +83,26 @@ namespace PolarizationAnalyzer
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void picCloseButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            RefToMainForm.Show();
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case 0x84:
+                    base.WndProc(ref m);
+                    if ((int)m.Result == 0x1)
+                        m.Result = (IntPtr)0x2;
+                    return;
+            }
+
+            base.WndProc(ref m);
         }
     }
 }

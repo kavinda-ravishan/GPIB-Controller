@@ -17,6 +17,28 @@ namespace PolarizationAnalyzer
             LaserSourceTextBoxSuggestAppend();
         }
 
+        private void picCloseButton_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are You Sure To Exit Programme ?", "Exit", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                Application.Exit();
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case 0x84:
+                    base.WndProc(ref m);
+                    if ((int)m.Result == 0x1)
+                        m.Result = (IntPtr)0x2;
+                    return;
+            }
+
+            base.WndProc(ref m);
+        }
+
         #region Polarization Analyzer
 
         private void SetupControlState1(bool isSessionOpen)
@@ -30,6 +52,9 @@ namespace PolarizationAnalyzer
             writeButton1.Enabled = isSessionOpen;
             readButton1.Enabled = isSessionOpen;
             //stringReadTextBox1.Enabled = isSessionOpen;
+            btnJM.Enabled = isSessionOpen;
+            btnS0.Enabled = isSessionOpen;
+            btnSB.Enabled = isSessionOpen;
         }
 
         private void InitsecondaryAddressComboBox1()
@@ -118,9 +143,9 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
-                //string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.text_S0)); //for testing
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
+                string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                //string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.text_S0)); //for testing
 
                 for (int i = 0; i < data.Length; i++)
                 {
@@ -368,6 +393,7 @@ namespace PolarizationAnalyzer
             }
         }
         #endregion
+
     }
 }
 

@@ -19,7 +19,7 @@ namespace PolarizationAnalyzer
 
         private void picCloseButton_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are You Sure To Exit Programme ?", "Exit", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (MessageBox.Show("Do you want to close this application ?", "Exit", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 Application.Exit();
             }

@@ -29,7 +29,7 @@ namespace PolarizationAnalyzer
             stringToWriteTextBox1.Enabled = isSessionOpen;
             writeButton1.Enabled = isSessionOpen;
             readButton1.Enabled = isSessionOpen;
-            stringReadTextBox1.Enabled = isSessionOpen;
+            //stringReadTextBox1.Enabled = isSessionOpen;
         }
 
         private void InitsecondaryAddressComboBox1()
@@ -118,9 +118,9 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
-                string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                //string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.text_S0)); //for testing
+                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
+                //string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.text_S0)); //for testing
 
                 for (int i = 0; i < data.Length; i++)
                 {
@@ -209,7 +209,7 @@ namespace PolarizationAnalyzer
             stringToWriteTextBox2.Enabled = isSessionOpen;
             writeButton2.Enabled = isSessionOpen;
             readButton2.Enabled = isSessionOpen;
-            stringReadTextBox2.Enabled = isSessionOpen;
+            //stringReadTextBox2.Enabled = isSessionOpen;
         }
 
         private void InitsecondaryAddressComboBox2()

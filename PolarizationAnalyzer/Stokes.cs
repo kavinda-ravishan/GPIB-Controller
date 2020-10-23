@@ -6,8 +6,6 @@ namespace PolarizationAnalyzer
 {
     public partial class StoksForm : Form
     {
-        private Random rand = new Random();
-
         private List<double> S1 = new List<double>();
         private List<double> S2 = new List<double>();
         private List<double> S3 = new List<double>();
@@ -28,7 +26,7 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
+                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
                 timer.Enabled = true;
             }
             catch(Exception ex)
@@ -46,8 +44,8 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
+                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
 
                 stringReadTextBox.Clear();
                 for (int i = 0; i < 6; i++)

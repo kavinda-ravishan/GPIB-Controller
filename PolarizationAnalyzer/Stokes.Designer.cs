@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.stringReadTextBox = new System.Windows.Forms.RichTextBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
@@ -52,105 +52,185 @@
             // 
             // chart1
             // 
-            this.chart1.BackImageTransparentColor = System.Drawing.Color.Transparent;
-            this.chart1.BackSecondaryColor = System.Drawing.Color.Transparent;
-            this.chart1.BorderlineColor = System.Drawing.Color.Transparent;
-            chartArea4.BorderColor = System.Drawing.Color.Transparent;
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart1.Legends.Add(legend4);
-            this.chart1.Location = new System.Drawing.Point(33, 32);
+            this.chart1.BackColor = System.Drawing.Color.Maroon;
+            this.chart1.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.DarkHorizontal;
+            this.chart1.BackImageTransparentColor = System.Drawing.Color.Black;
+            this.chart1.BackSecondaryColor = System.Drawing.Color.Black;
+            this.chart1.BorderlineColor = System.Drawing.Color.Black;
+            chartArea1.AxisX.InterlacedColor = System.Drawing.Color.White;
+            chartArea1.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea1.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea1.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea1.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea1.AxisY.MajorTickMark.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet;
+            chartArea1.BackColor = System.Drawing.Color.White;
+            chartArea1.BorderColor = System.Drawing.Color.Transparent;
+            chartArea1.Name = "ChartArea1";
+            chartArea1.ShadowColor = System.Drawing.Color.Black;
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.BackColor = System.Drawing.Color.Transparent;
+            legend1.BorderColor = System.Drawing.Color.Transparent;
+            legend1.ForeColor = System.Drawing.Color.White;
+            legend1.InterlacedRowsColor = System.Drawing.Color.Transparent;
+            legend1.Name = "Legend1";
+            legend1.ShadowColor = System.Drawing.Color.Black;
+            legend1.TitleBackColor = System.Drawing.Color.White;
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(33, 12);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Legend = "Legend1";
-            series4.Name = "S1";
-            this.chart1.Series.Add(series4);
+            series1.BorderWidth = 3;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.Color.Blue;
+            series1.LabelBackColor = System.Drawing.Color.Black;
+            series1.LabelBorderColor = System.Drawing.Color.Black;
+            series1.Legend = "Legend1";
+            series1.MarkerBorderColor = System.Drawing.Color.Maroon;
+            series1.MarkerColor = System.Drawing.Color.Maroon;
+            series1.Name = "S1";
+            series1.ShadowColor = System.Drawing.Color.Black;
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(755, 160);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(823, 257);
+            this.btnStart.BackColor = System.Drawing.Color.Blue;
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStart.ForeColor = System.Drawing.Color.White;
+            this.btnStart.Location = new System.Drawing.Point(823, 226);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(113, 42);
             this.btnStart.TabIndex = 1;
             this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(964, 257);
+            this.btnStop.BackColor = System.Drawing.Color.Blue;
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStop.ForeColor = System.Drawing.Color.White;
+            this.btnStop.Location = new System.Drawing.Point(964, 226);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(113, 42);
             this.btnStop.TabIndex = 2;
             this.btnStop.Text = "Stop";
-            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.UseVisualStyleBackColor = false;
             this.btnStop.Click += new System.EventHandler(this.BtnStop_Click);
             // 
             // stringReadTextBox
             // 
-            this.stringReadTextBox.Location = new System.Drawing.Point(823, 32);
+            this.stringReadTextBox.BackColor = System.Drawing.Color.DarkBlue;
+            this.stringReadTextBox.ForeColor = System.Drawing.Color.White;
+            this.stringReadTextBox.Location = new System.Drawing.Point(823, 12);
             this.stringReadTextBox.Name = "stringReadTextBox";
             this.stringReadTextBox.ReadOnly = true;
             this.stringReadTextBox.Size = new System.Drawing.Size(254, 208);
             this.stringReadTextBox.TabIndex = 22;
             this.stringReadTextBox.Text = "";
             // 
+            // timer
+            // 
+            this.timer.Interval = 500;
+            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
+            // 
             // chart2
             // 
-            this.chart2.BackImageTransparentColor = System.Drawing.Color.Transparent;
-            this.chart2.BackSecondaryColor = System.Drawing.Color.Transparent;
-            this.chart2.BorderlineColor = System.Drawing.Color.Transparent;
-            chartArea5.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chart2.Legends.Add(legend5);
-            this.chart2.Location = new System.Drawing.Point(33, 209);
+            this.chart2.BackColor = System.Drawing.Color.Maroon;
+            this.chart2.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.DarkHorizontal;
+            this.chart2.BackImageTransparentColor = System.Drawing.Color.Black;
+            this.chart2.BackSecondaryColor = System.Drawing.Color.Black;
+            this.chart2.BorderlineColor = System.Drawing.Color.Black;
+            chartArea2.AxisX.InterlacedColor = System.Drawing.Color.White;
+            chartArea2.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea2.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea2.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea2.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea2.AxisY.MajorTickMark.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet;
+            chartArea2.BackColor = System.Drawing.Color.White;
+            chartArea2.BorderColor = System.Drawing.Color.Transparent;
+            chartArea2.Name = "ChartArea1";
+            chartArea2.ShadowColor = System.Drawing.Color.Black;
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.BackColor = System.Drawing.Color.Transparent;
+            legend2.BorderColor = System.Drawing.Color.Transparent;
+            legend2.ForeColor = System.Drawing.Color.White;
+            legend2.InterlacedRowsColor = System.Drawing.Color.Transparent;
+            legend2.Name = "Legend1";
+            legend2.ShadowColor = System.Drawing.Color.Black;
+            legend2.TitleBackColor = System.Drawing.Color.White;
+            this.chart2.Legends.Add(legend2);
+            this.chart2.Location = new System.Drawing.Point(33, 178);
             this.chart2.Name = "chart2";
             this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Legend = "Legend1";
-            series5.Name = "S2";
-            this.chart2.Series.Add(series5);
+            series2.BorderWidth = 3;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Color = System.Drawing.Color.Blue;
+            series2.LabelBackColor = System.Drawing.Color.Black;
+            series2.LabelBorderColor = System.Drawing.Color.Black;
+            series2.Legend = "Legend1";
+            series2.MarkerBorderColor = System.Drawing.Color.Maroon;
+            series2.MarkerColor = System.Drawing.Color.Maroon;
+            series2.Name = "S2";
+            series2.ShadowColor = System.Drawing.Color.Black;
+            this.chart2.Series.Add(series2);
             this.chart2.Size = new System.Drawing.Size(755, 160);
             this.chart2.TabIndex = 23;
             this.chart2.Text = "chart2";
             // 
             // chart3
             // 
-            this.chart3.BackImageTransparentColor = System.Drawing.Color.Transparent;
-            this.chart3.BackSecondaryColor = System.Drawing.Color.Transparent;
-            this.chart3.BorderlineColor = System.Drawing.Color.Transparent;
-            chartArea6.Name = "ChartArea1";
-            this.chart3.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chart3.Legends.Add(legend6);
-            this.chart3.Location = new System.Drawing.Point(33, 388);
+            this.chart3.BackColor = System.Drawing.Color.Maroon;
+            this.chart3.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.DarkHorizontal;
+            this.chart3.BackImageTransparentColor = System.Drawing.Color.Black;
+            this.chart3.BackSecondaryColor = System.Drawing.Color.Black;
+            this.chart3.BorderlineColor = System.Drawing.Color.Black;
+            chartArea3.AxisX.InterlacedColor = System.Drawing.Color.White;
+            chartArea3.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea3.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea3.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea3.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea3.AxisY.MajorTickMark.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet;
+            chartArea3.BackColor = System.Drawing.Color.White;
+            chartArea3.BorderColor = System.Drawing.Color.Transparent;
+            chartArea3.Name = "ChartArea1";
+            chartArea3.ShadowColor = System.Drawing.Color.Black;
+            this.chart3.ChartAreas.Add(chartArea3);
+            legend3.BackColor = System.Drawing.Color.Transparent;
+            legend3.BorderColor = System.Drawing.Color.Transparent;
+            legend3.ForeColor = System.Drawing.Color.White;
+            legend3.InterlacedRowsColor = System.Drawing.Color.Transparent;
+            legend3.Name = "Legend1";
+            legend3.ShadowColor = System.Drawing.Color.Black;
+            legend3.TitleBackColor = System.Drawing.Color.White;
+            this.chart3.Legends.Add(legend3);
+            this.chart3.Location = new System.Drawing.Point(33, 344);
             this.chart3.Name = "chart3";
             this.chart3.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Legend = "Legend1";
-            series6.Name = "S3";
-            this.chart3.Series.Add(series6);
+            series3.BorderWidth = 3;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Color = System.Drawing.Color.Blue;
+            series3.LabelBackColor = System.Drawing.Color.Black;
+            series3.LabelBorderColor = System.Drawing.Color.Black;
+            series3.Legend = "Legend1";
+            series3.MarkerBorderColor = System.Drawing.Color.Maroon;
+            series3.MarkerColor = System.Drawing.Color.Maroon;
+            series3.Name = "S3";
+            series3.ShadowColor = System.Drawing.Color.Black;
+            this.chart3.Series.Add(series3);
             this.chart3.Size = new System.Drawing.Size(755, 160);
             this.chart3.TabIndex = 24;
             this.chart3.Text = "chart3";
             // 
-            // timer
-            // 
-            this.timer.Interval = 500;
-            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
-            // 
             // StoksForm
             // 
-            this.ClientSize = new System.Drawing.Size(1109, 601);
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(1109, 515);
             this.Controls.Add(this.chart3);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.stringReadTextBox);
@@ -174,8 +254,8 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.RichTextBox stringReadTextBox;
+        private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart3;
-        private System.Windows.Forms.Timer timer;
     }
 }

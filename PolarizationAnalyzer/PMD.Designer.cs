@@ -62,6 +62,8 @@
             // 
             // stringReadTextBox
             // 
+            this.stringReadTextBox.BackColor = System.Drawing.Color.DarkBlue;
+            this.stringReadTextBox.ForeColor = System.Drawing.Color.White;
             this.stringReadTextBox.Location = new System.Drawing.Point(942, 12);
             this.stringReadTextBox.Name = "stringReadTextBox";
             this.stringReadTextBox.ReadOnly = true;
@@ -71,32 +73,41 @@
             // 
             // btnStart
             // 
+            this.btnStart.BackColor = System.Drawing.Color.Blue;
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStart.ForeColor = System.Drawing.Color.White;
             this.btnStart.Location = new System.Drawing.Point(657, 338);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(127, 40);
             this.btnStart.TabIndex = 40;
             this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnSave
             // 
+            this.btnSave.BackColor = System.Drawing.Color.Blue;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.Location = new System.Drawing.Point(950, 338);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 40);
             this.btnSave.TabIndex = 41;
             this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnStop
             // 
+            this.btnStop.BackColor = System.Drawing.Color.Blue;
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStop.ForeColor = System.Drawing.Color.White;
             this.btnStop.Location = new System.Drawing.Point(790, 338);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(127, 40);
             this.btnStop.TabIndex = 42;
             this.btnStop.Text = "Stop";
-            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.UseVisualStyleBackColor = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // chart
@@ -112,10 +123,12 @@
             this.chart.Location = new System.Drawing.Point(12, 12);
             this.chart.Name = "chart";
             this.chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            series1.BorderWidth = 3;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.Name = "PMD";
+            series1.ShadowColor = System.Drawing.Color.Black;
             this.chart.Series.Add(series1);
             this.chart.Size = new System.Drawing.Size(636, 366);
             this.chart.TabIndex = 43;
@@ -160,6 +173,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Black;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(654, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 13);
@@ -169,6 +184,8 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Black;
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(654, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 13);
@@ -178,6 +195,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Black;
+            this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(654, 92);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 13);
@@ -187,6 +206,8 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Black;
+            this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(654, 132);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 13);
@@ -196,6 +217,8 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Black;
+            this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(874, 15);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(21, 13);
@@ -205,6 +228,8 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Black;
+            this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(874, 51);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(21, 13);
@@ -214,6 +239,8 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Black;
+            this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(874, 92);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(21, 13);
@@ -223,6 +250,8 @@
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Black;
+            this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(874, 132);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(22, 13);
@@ -232,6 +261,8 @@
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Black;
+            this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(654, 207);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(61, 13);
@@ -241,6 +272,8 @@
             // lblMeanPMD
             // 
             this.lblMeanPMD.AutoSize = true;
+            this.lblMeanPMD.BackColor = System.Drawing.Color.Black;
+            this.lblMeanPMD.ForeColor = System.Drawing.Color.White;
             this.lblMeanPMD.Location = new System.Drawing.Point(753, 207);
             this.lblMeanPMD.Name = "lblMeanPMD";
             this.lblMeanPMD.Size = new System.Drawing.Size(16, 13);
@@ -250,6 +283,8 @@
             // lblMin
             // 
             this.lblMin.AutoSize = true;
+            this.lblMin.BackColor = System.Drawing.Color.Black;
+            this.lblMin.ForeColor = System.Drawing.Color.White;
             this.lblMin.Location = new System.Drawing.Point(753, 235);
             this.lblMin.Name = "lblMin";
             this.lblMin.Size = new System.Drawing.Size(16, 13);
@@ -259,6 +294,8 @@
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Black;
+            this.label11.ForeColor = System.Drawing.Color.White;
             this.label11.Location = new System.Drawing.Point(654, 235);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(51, 13);
@@ -268,6 +305,8 @@
             // lblMax
             // 
             this.lblMax.AutoSize = true;
+            this.lblMax.BackColor = System.Drawing.Color.Black;
+            this.lblMax.ForeColor = System.Drawing.Color.White;
             this.lblMax.Location = new System.Drawing.Point(753, 264);
             this.lblMax.Name = "lblMax";
             this.lblMax.Size = new System.Drawing.Size(16, 13);
@@ -277,6 +316,8 @@
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Black;
+            this.label13.ForeColor = System.Drawing.Color.White;
             this.label13.Location = new System.Drawing.Point(654, 264);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(54, 13);
@@ -286,6 +327,8 @@
             // lblMaxWL
             // 
             this.lblMaxWL.AutoSize = true;
+            this.lblMaxWL.BackColor = System.Drawing.Color.Black;
+            this.lblMaxWL.ForeColor = System.Drawing.Color.White;
             this.lblMaxWL.Location = new System.Drawing.Point(874, 264);
             this.lblMaxWL.Name = "lblMaxWL";
             this.lblMaxWL.Size = new System.Drawing.Size(16, 13);
@@ -295,6 +338,8 @@
             // lblMinWL
             // 
             this.lblMinWL.AutoSize = true;
+            this.lblMinWL.BackColor = System.Drawing.Color.Black;
+            this.lblMinWL.ForeColor = System.Drawing.Color.White;
             this.lblMinWL.Location = new System.Drawing.Point(874, 235);
             this.lblMinWL.Name = "lblMinWL";
             this.lblMinWL.Size = new System.Drawing.Size(16, 13);
@@ -303,18 +348,22 @@
             // 
             // btnLoad
             // 
+            this.btnLoad.BackColor = System.Drawing.Color.Blue;
+            this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoad.ForeColor = System.Drawing.Color.White;
             this.btnLoad.Location = new System.Drawing.Point(1056, 338);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(100, 40);
             this.btnLoad.TabIndex = 65;
             this.btnLoad.Text = "Load";
-            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.UseVisualStyleBackColor = false;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // PMDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1168, 388);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.lblMaxWL);

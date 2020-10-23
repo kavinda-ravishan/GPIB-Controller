@@ -174,7 +174,7 @@ namespace PolarizationAnalyzer
                     chart.Series["PMD"].Points.Clear();
                 }));
 
-                //InitDGDMesure(start, 1000);
+                InitDGDMesure(settings.start, 1000);
 
                 threadRun = true;
 
@@ -184,13 +184,13 @@ namespace PolarizationAnalyzer
                     {
                         if (i < 2)
                         {
-                            //jStrings[i] = GetJonesMatrix(wavelenght[i], delay);
-                            jStrings[i] = Utility.text_J1;
+                            jStrings[i] = GetJonesMatrix(wavelenght[i], delay);
+                            //jStrings[i] = Utility.text_J1;//for testing
                         }
                         else
                         {
-                            //jStrings[i] = GetJonesMatrix(wavelenght[i], delay);
-                            jStrings[i] = Utility.text_J2;
+                            jStrings[i] = GetJonesMatrix(wavelenght[i], delay);
+                            //jStrings[i] = Utility.text_J2;//for testing
 
                             DGDval = Utility.DGD(jStrings[i - 2], jStrings[i], wavelenght[i - 2], wavelenght[i]);//put jString here
 
@@ -226,7 +226,7 @@ namespace PolarizationAnalyzer
                     else break;
                 }
 
-                //Done();
+                Done();
 
             });
             thread.Start();

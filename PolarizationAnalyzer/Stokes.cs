@@ -28,7 +28,7 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
                 timer.Enabled = true;
             }
             catch(Exception ex)
@@ -46,8 +46,8 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                //string[] data = Utility.SB(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString()));
-                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));
+                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
 
                 stringReadTextBox.Clear();
                 for (int i = 0; i < 6; i++)
@@ -88,7 +88,7 @@ namespace PolarizationAnalyzer
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
     }

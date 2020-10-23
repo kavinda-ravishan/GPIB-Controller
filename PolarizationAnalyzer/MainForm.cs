@@ -118,9 +118,9 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
-                //string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.text_S0));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
+                string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                //string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.text_S0)); //for testing
 
                 for (int i = 0; i < data.Length; i++)
                 {
@@ -147,9 +147,9 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
-                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
+                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
 
                 for (int i = 0; i < data.Length; i++)
                 {
@@ -175,9 +175,9 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;"));
-                //string[] data = Utility.JM_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                string[] data = Utility.JM_filter(Utility.DataSeparator(Utility.text_J1));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;"));
+                string[] data = Utility.JM_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                //string[] data = Utility.JM_filter(Utility.DataSeparator(Utility.text_J1));//for testing
 
                 for (int i = 0; i < data.Length; i++)
                 {
@@ -340,31 +340,31 @@ namespace PolarizationAnalyzer
 
         private void BtnPMD_Click(object sender, EventArgs e)
         {
-            //if ((Devices.devicePolarizationAnalyzer != null) & (Devices.deviceLaserSource != null))
+            if ((Devices.devicePolarizationAnalyzer != null) & (Devices.deviceLaserSource != null))
             {
                 this.Hide();
                 PMDForm newForm = new PMDForm();
                 newForm.RefToMainForm = this;
                 newForm.Show();
             }
-            //else
+            else
             {
-                //MessageBox.Show("Device not initialized");
+                MessageBox.Show("Device not initialized");
             }
         }
 
         private void BtnStokes_Click(object sender, EventArgs e)
         {
-            //if ((Devices.devicePolarizationAnalyzer != null) & (Devices.deviceLaserSource != null))
+            if (Devices.devicePolarizationAnalyzer != null)
             {
                 this.Hide();
                 StoksForm newForm = new StoksForm();
                 newForm.RefToMainForm = this;
                 newForm.Show();
             }
-            //else
+            else
             {
-                //MessageBox.Show("Device not initialized");
+                MessageBox.Show("Device not initialized");
             }
         }
         #endregion

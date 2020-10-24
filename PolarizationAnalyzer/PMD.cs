@@ -271,7 +271,7 @@ namespace PolarizationAnalyzer
                 DialogResult result = folderDlg.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    path = folderDlg.SelectedPath + "\\Data.xlsx";
+                    path = folderDlg.SelectedPath + "\\" + txtBoxFileName.Text + ".xlsx";
 
                     Thread thread = new Thread(() =>
                     {

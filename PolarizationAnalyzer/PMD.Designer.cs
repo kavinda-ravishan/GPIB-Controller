@@ -72,18 +72,22 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtBoxLaserPower = new System.Windows.Forms.TextBox();
             this.lbltitle = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.txtBoxFileName = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // stringReadTextBox
             // 
             this.stringReadTextBox.BackColor = System.Drawing.Color.DarkBlue;
             this.stringReadTextBox.ForeColor = System.Drawing.Color.White;
-            this.stringReadTextBox.Location = new System.Drawing.Point(942, 47);
+            this.stringReadTextBox.Location = new System.Drawing.Point(10, 10);
             this.stringReadTextBox.Name = "stringReadTextBox";
             this.stringReadTextBox.ReadOnly = true;
-            this.stringReadTextBox.Size = new System.Drawing.Size(214, 320);
+            this.stringReadTextBox.Size = new System.Drawing.Size(214, 421);
             this.stringReadTextBox.TabIndex = 39;
             this.stringReadTextBox.Text = "";
             // 
@@ -105,7 +109,7 @@
             this.btnSave.BackColor = System.Drawing.Color.Blue;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(942, 373);
+            this.btnSave.Location = new System.Drawing.Point(10, 525);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 40);
             this.btnSave.TabIndex = 41;
@@ -367,7 +371,7 @@
             this.btnLoad.BackColor = System.Drawing.Color.Blue;
             this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoad.ForeColor = System.Drawing.Color.White;
-            this.btnLoad.Location = new System.Drawing.Point(1056, 373);
+            this.btnLoad.Location = new System.Drawing.Point(124, 525);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(100, 40);
             this.btnLoad.TabIndex = 65;
@@ -391,7 +395,7 @@
             this.lblJ11.AutoSize = true;
             this.lblJ11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblJ11.ForeColor = System.Drawing.Color.White;
-            this.lblJ11.Location = new System.Drawing.Point(168, 505);
+            this.lblJ11.Location = new System.Drawing.Point(77, 505);
             this.lblJ11.Name = "lblJ11";
             this.lblJ11.Size = new System.Drawing.Size(16, 13);
             this.lblJ11.TabIndex = 68;
@@ -402,7 +406,7 @@
             this.lblJ12.AutoSize = true;
             this.lblJ12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblJ12.ForeColor = System.Drawing.Color.White;
-            this.lblJ12.Location = new System.Drawing.Point(499, 505);
+            this.lblJ12.Location = new System.Drawing.Point(408, 505);
             this.lblJ12.Name = "lblJ12";
             this.lblJ12.Size = new System.Drawing.Size(16, 13);
             this.lblJ12.TabIndex = 69;
@@ -413,7 +417,7 @@
             this.lblJ21.AutoSize = true;
             this.lblJ21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblJ21.ForeColor = System.Drawing.Color.White;
-            this.lblJ21.Location = new System.Drawing.Point(168, 592);
+            this.lblJ21.Location = new System.Drawing.Point(77, 592);
             this.lblJ21.Name = "lblJ21";
             this.lblJ21.Size = new System.Drawing.Size(16, 13);
             this.lblJ21.TabIndex = 70;
@@ -424,7 +428,7 @@
             this.lblJ22.AutoSize = true;
             this.lblJ22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblJ22.ForeColor = System.Drawing.Color.White;
-            this.lblJ22.Location = new System.Drawing.Point(499, 592);
+            this.lblJ22.Location = new System.Drawing.Point(408, 592);
             this.lblJ22.Name = "lblJ22";
             this.lblJ22.Size = new System.Drawing.Size(16, 13);
             this.lblJ22.TabIndex = 72;
@@ -445,7 +449,7 @@
             this.btnShowRefJonesMat.BackColor = System.Drawing.Color.Blue;
             this.btnShowRefJonesMat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShowRefJonesMat.ForeColor = System.Drawing.Color.White;
-            this.btnShowRefJonesMat.Location = new System.Drawing.Point(752, 585);
+            this.btnShowRefJonesMat.Location = new System.Drawing.Point(657, 583);
             this.btnShowRefJonesMat.Name = "btnShowRefJonesMat";
             this.btnShowRefJonesMat.Size = new System.Drawing.Size(165, 40);
             this.btnShowRefJonesMat.TabIndex = 74;
@@ -458,7 +462,7 @@
             this.btnMeasureRefJonesMat.BackColor = System.Drawing.Color.Blue;
             this.btnMeasureRefJonesMat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMeasureRefJonesMat.ForeColor = System.Drawing.Color.White;
-            this.btnMeasureRefJonesMat.Location = new System.Drawing.Point(752, 464);
+            this.btnMeasureRefJonesMat.Location = new System.Drawing.Point(657, 464);
             this.btnMeasureRefJonesMat.Name = "btnMeasureRefJonesMat";
             this.btnMeasureRefJonesMat.Size = new System.Drawing.Size(165, 40);
             this.btnMeasureRefJonesMat.TabIndex = 75;
@@ -471,7 +475,7 @@
             this.btnResetRefJonesMat.BackColor = System.Drawing.Color.Blue;
             this.btnResetRefJonesMat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResetRefJonesMat.ForeColor = System.Drawing.Color.White;
-            this.btnResetRefJonesMat.Location = new System.Drawing.Point(752, 524);
+            this.btnResetRefJonesMat.Location = new System.Drawing.Point(657, 524);
             this.btnResetRefJonesMat.Name = "btnResetRefJonesMat";
             this.btnResetRefJonesMat.Size = new System.Drawing.Size(165, 40);
             this.btnResetRefJonesMat.TabIndex = 76;
@@ -482,7 +486,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.panel1.Location = new System.Drawing.Point(110, 462);
+            this.panel1.Location = new System.Drawing.Point(12, 460);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(628, 163);
             this.panel1.TabIndex = 77;
@@ -529,6 +533,38 @@
             this.lbltitle.TabIndex = 81;
             this.lbltitle.Text = "PMD analysis tool";
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.panel2.Controls.Add(this.label14);
+            this.panel2.Controls.Add(this.txtBoxFileName);
+            this.panel2.Controls.Add(this.stringReadTextBox);
+            this.panel2.Controls.Add(this.btnSave);
+            this.panel2.Controls.Add(this.btnLoad);
+            this.panel2.Location = new System.Drawing.Point(923, 45);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(233, 578);
+            this.panel2.TabIndex = 82;
+            // 
+            // txtBoxFileName
+            // 
+            this.txtBoxFileName.Location = new System.Drawing.Point(10, 490);
+            this.txtBoxFileName.Name = "txtBoxFileName";
+            this.txtBoxFileName.Size = new System.Drawing.Size(214, 20);
+            this.txtBoxFileName.TabIndex = 83;
+            this.txtBoxFileName.Text = "data";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label14.ForeColor = System.Drawing.Color.White;
+            this.label14.Location = new System.Drawing.Point(7, 460);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(58, 13);
+            this.label14.TabIndex = 83;
+            this.label14.Text = "File name :";
+            // 
             // PMDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -548,7 +584,6 @@
             this.Controls.Add(this.lblJ12);
             this.Controls.Add(this.lblJ11);
             this.Controls.Add(this.picCloseButton);
-            this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.lblMaxWL);
             this.Controls.Add(this.lblMinWL);
             this.Controls.Add(this.lblMax);
@@ -571,15 +606,16 @@
             this.Controls.Add(this.txtBoxStart);
             this.Controls.Add(this.chart);
             this.Controls.Add(this.btnStop);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.stringReadTextBox);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PMDForm";
             this.Text = "PMD";
             ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -626,5 +662,8 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtBoxLaserPower;
         private System.Windows.Forms.Label lbltitle;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtBoxFileName;
     }
 }

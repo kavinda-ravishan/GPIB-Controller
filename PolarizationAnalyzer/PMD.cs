@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -11,6 +12,8 @@ namespace PolarizationAnalyzer
             InitializeComponent();
             DGDMeasured += PMDForm_DGDMeasured;
             threadRun = true;
+
+            refjonesMat = CMath.UnitMatrix();
         }
 
         public Form RefToMainForm { get; set; }
@@ -62,12 +65,20 @@ namespace PolarizationAnalyzer
             Console.WriteLine("Set PAT9000 WL - " + wavelenght.ToString());
             Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtPol(wavelenght)));//change wavelength pol
             System.Threading.Thread.Sleep(delay);
-
+            
             Console.WriteLine("Read JM        - " + wavelenght.ToString());
             Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("K 0;JM;X"));
             jString = Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString());//put JM data here
             Console.WriteLine();
             return jString;
+        }
+
+        static string GetComplexString(ComplexCar complex)
+        {
+            if (complex.imag >= 0)
+                return complex.real.ToString() + " +" + complex.imag.ToString() + " i";
+            else
+                return complex.real.ToString() + " " + complex.imag.ToString() + " i";
         }
 
         public struct PMDData
@@ -89,10 +100,13 @@ namespace PolarizationAnalyzer
             public double minWaveLength;
             public double max;
             public double maxWaveLength;
+            public int laserPower;
         }
 
         PMDData[] data;
         PMDSettings settings;
+
+        JonesMatCar refjonesMat;
 
         private static bool threadRun;
 
@@ -139,8 +153,9 @@ namespace PolarizationAnalyzer
                 {
                     settings.start = System.Convert.ToDouble(txtBoxStart.Text);
                     settings.end = System.Convert.ToDouble(txtBoxEnd.Text); ;
-                    settings.stepSize = System.Convert.ToDouble(txtBoxStep.Text); ;
-                    settings.length = System.Convert.ToDouble(txtBoxLength.Text); ; // in Km
+                    settings.stepSize = System.Convert.ToDouble(txtBoxStep.Text);
+                    settings.length = System.Convert.ToDouble(txtBoxLength.Text); // in Km
+                    settings.laserPower = System.Convert.ToInt32(txtBoxLaserPower.Text);
                     settings.meanPMD = 0;
 
                     double lengthSqrt = Math.Sqrt(settings.length);
@@ -171,7 +186,7 @@ namespace PolarizationAnalyzer
                         chart.Series["PMD"].Points.Clear();
                     }));
 
-                    InitDGDMesure(settings.start, 1000);
+                    InitDGDMesure(settings.start, settings.laserPower);
 
                     threadRun = true;
 
@@ -189,8 +204,7 @@ namespace PolarizationAnalyzer
                                 jStrings[i] = GetJonesMatrix(wavelenght[i], delay);
                                 //jStrings[i] = Utility.text_J2;//for testing
 
-                                DGDval = Utility.DGD(jStrings[i - 2], jStrings[i], wavelenght[i - 2], wavelenght[i]);//put jString here
-
+                                DGDval = Utility.DGD(jStrings[i - 2], jStrings[i], refjonesMat, wavelenght[i - 2], wavelenght[i]);//Meaure DGD for arg1 and arg2 jones matrices
                                 data[i - 2].DGD = DGDval[0];
                                 data[i - 2].waveLenght = DGDval[1];
                                 data[i - 2].PMD = DGDval[0] / lengthSqrt;
@@ -229,7 +243,6 @@ namespace PolarizationAnalyzer
                 {
                     MessageBox.Show(ex.Message);
                 }
-
             });
             thread.Start();
         }
@@ -435,6 +448,56 @@ namespace PolarizationAnalyzer
             }
 
             base.WndProc(ref m);
+        }
+
+        private void btnShowRefJonesMat_Click(object sender, EventArgs e)
+        {
+            lblJ11.Text = GetComplexString(refjonesMat.J11);
+            lblJ12.Text = GetComplexString(refjonesMat.J12);
+            lblJ21.Text = GetComplexString(refjonesMat.J21);
+            lblJ22.Text = GetComplexString(refjonesMat.J22);
+        }
+
+        private void btnResetRefJonesMat_Click(object sender, EventArgs e)
+        {
+            refjonesMat = CMath.UnitMatrix();
+
+            lblJ11.Text = GetComplexString(refjonesMat.J11);
+            lblJ12.Text = GetComplexString(refjonesMat.J12);
+            lblJ21.Text = GetComplexString(refjonesMat.J21);
+            lblJ22.Text = GetComplexString(refjonesMat.J22);
+        }
+
+        private void btnMeasureRefJonesMat_Click(object sender, EventArgs e)
+        {
+            Thread thread = new Thread(() =>
+            {
+                try
+                {
+                    InitDGDMesure(System.Convert.ToDouble(txtBoxStart.Text), System.Convert.ToInt32(txtBoxLaserPower.Text));
+                    string jString = GetJonesMatrix(System.Convert.ToDouble(txtBoxStart.Text), 1000);
+                    Done();
+
+                    double[] jMatValues = Utility.JonesString2Double(jString);
+                    //double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing
+                    
+                    JonesMatPol matPol = Utility.JonesDoubleArray2JonesMat(jMatValues);
+                    refjonesMat = CMath.Pol2Car(matPol);
+
+                    this.Invoke(new MethodInvoker(delegate ()
+                    {
+                        lblJ11.Text = GetComplexString(refjonesMat.J11);
+                        lblJ12.Text = GetComplexString(refjonesMat.J12);
+                        lblJ21.Text = GetComplexString(refjonesMat.J21);
+                        lblJ22.Text = GetComplexString(refjonesMat.J22);
+                    }));
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            });
+            thread.Start();
         }
     }
 }

@@ -59,6 +59,18 @@
             this.lblMinWL = new System.Windows.Forms.Label();
             this.btnLoad = new System.Windows.Forms.Button();
             this.picCloseButton = new System.Windows.Forms.PictureBox();
+            this.lblJ11 = new System.Windows.Forms.Label();
+            this.lblJ12 = new System.Windows.Forms.Label();
+            this.lblJ21 = new System.Windows.Forms.Label();
+            this.lblJ22 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.btnShowRefJonesMat = new System.Windows.Forms.Button();
+            this.btnMeasureRefJonesMat = new System.Windows.Forms.Button();
+            this.btnResetRefJonesMat = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtBoxLaserPower = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).BeginInit();
             this.SuspendLayout();
@@ -266,7 +278,7 @@
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Black;
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(654, 242);
+            this.label9.Location = new System.Drawing.Point(654, 273);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(61, 13);
             this.label9.TabIndex = 56;
@@ -277,7 +289,7 @@
             this.lblMeanPMD.AutoSize = true;
             this.lblMeanPMD.BackColor = System.Drawing.Color.Black;
             this.lblMeanPMD.ForeColor = System.Drawing.Color.White;
-            this.lblMeanPMD.Location = new System.Drawing.Point(753, 242);
+            this.lblMeanPMD.Location = new System.Drawing.Point(753, 273);
             this.lblMeanPMD.Name = "lblMeanPMD";
             this.lblMeanPMD.Size = new System.Drawing.Size(16, 13);
             this.lblMeanPMD.TabIndex = 57;
@@ -288,7 +300,7 @@
             this.lblMin.AutoSize = true;
             this.lblMin.BackColor = System.Drawing.Color.Black;
             this.lblMin.ForeColor = System.Drawing.Color.White;
-            this.lblMin.Location = new System.Drawing.Point(753, 270);
+            this.lblMin.Location = new System.Drawing.Point(753, 301);
             this.lblMin.Name = "lblMin";
             this.lblMin.Size = new System.Drawing.Size(16, 13);
             this.lblMin.TabIndex = 59;
@@ -299,7 +311,7 @@
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.Black;
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(654, 270);
+            this.label11.Location = new System.Drawing.Point(654, 301);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(51, 13);
             this.label11.TabIndex = 58;
@@ -310,7 +322,7 @@
             this.lblMax.AutoSize = true;
             this.lblMax.BackColor = System.Drawing.Color.Black;
             this.lblMax.ForeColor = System.Drawing.Color.White;
-            this.lblMax.Location = new System.Drawing.Point(753, 299);
+            this.lblMax.Location = new System.Drawing.Point(753, 330);
             this.lblMax.Name = "lblMax";
             this.lblMax.Size = new System.Drawing.Size(16, 13);
             this.lblMax.TabIndex = 61;
@@ -321,7 +333,7 @@
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.Black;
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(654, 299);
+            this.label13.Location = new System.Drawing.Point(654, 330);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(54, 13);
             this.label13.TabIndex = 60;
@@ -332,7 +344,7 @@
             this.lblMaxWL.AutoSize = true;
             this.lblMaxWL.BackColor = System.Drawing.Color.Black;
             this.lblMaxWL.ForeColor = System.Drawing.Color.White;
-            this.lblMaxWL.Location = new System.Drawing.Point(874, 299);
+            this.lblMaxWL.Location = new System.Drawing.Point(874, 330);
             this.lblMaxWL.Name = "lblMaxWL";
             this.lblMaxWL.Size = new System.Drawing.Size(16, 13);
             this.lblMaxWL.TabIndex = 64;
@@ -343,7 +355,7 @@
             this.lblMinWL.AutoSize = true;
             this.lblMinWL.BackColor = System.Drawing.Color.Black;
             this.lblMinWL.ForeColor = System.Drawing.Color.White;
-            this.lblMinWL.Location = new System.Drawing.Point(874, 270);
+            this.lblMinWL.Location = new System.Drawing.Point(874, 301);
             this.lblMinWL.Name = "lblMinWL";
             this.lblMinWL.Size = new System.Drawing.Size(16, 13);
             this.lblMinWL.TabIndex = 63;
@@ -373,12 +385,155 @@
             this.picCloseButton.TabStop = false;
             this.picCloseButton.Click += new System.EventHandler(this.picCloseButton_Click);
             // 
+            // lblJ11
+            // 
+            this.lblJ11.AutoSize = true;
+            this.lblJ11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblJ11.ForeColor = System.Drawing.Color.White;
+            this.lblJ11.Location = new System.Drawing.Point(168, 505);
+            this.lblJ11.Name = "lblJ11";
+            this.lblJ11.Size = new System.Drawing.Size(16, 13);
+            this.lblJ11.TabIndex = 68;
+            this.lblJ11.Text = "---";
+            // 
+            // lblJ12
+            // 
+            this.lblJ12.AutoSize = true;
+            this.lblJ12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblJ12.ForeColor = System.Drawing.Color.White;
+            this.lblJ12.Location = new System.Drawing.Point(499, 505);
+            this.lblJ12.Name = "lblJ12";
+            this.lblJ12.Size = new System.Drawing.Size(16, 13);
+            this.lblJ12.TabIndex = 69;
+            this.lblJ12.Text = "---";
+            // 
+            // lblJ21
+            // 
+            this.lblJ21.AutoSize = true;
+            this.lblJ21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblJ21.ForeColor = System.Drawing.Color.White;
+            this.lblJ21.Location = new System.Drawing.Point(168, 592);
+            this.lblJ21.Name = "lblJ21";
+            this.lblJ21.Size = new System.Drawing.Size(16, 13);
+            this.lblJ21.TabIndex = 70;
+            this.lblJ21.Text = "---";
+            // 
+            // lblJ22
+            // 
+            this.lblJ22.AutoSize = true;
+            this.lblJ22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblJ22.ForeColor = System.Drawing.Color.White;
+            this.lblJ22.Location = new System.Drawing.Point(499, 592);
+            this.lblJ22.Name = "lblJ22";
+            this.lblJ22.Size = new System.Drawing.Size(16, 13);
+            this.lblJ22.TabIndex = 72;
+            this.lblJ22.Text = "---";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.White;
+            this.label15.Location = new System.Drawing.Point(12, 430);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(121, 13);
+            this.label15.TabIndex = 73;
+            this.label15.Text = "Reference jones matrix :";
+            // 
+            // btnShowRefJonesMat
+            // 
+            this.btnShowRefJonesMat.BackColor = System.Drawing.Color.Blue;
+            this.btnShowRefJonesMat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowRefJonesMat.ForeColor = System.Drawing.Color.White;
+            this.btnShowRefJonesMat.Location = new System.Drawing.Point(752, 585);
+            this.btnShowRefJonesMat.Name = "btnShowRefJonesMat";
+            this.btnShowRefJonesMat.Size = new System.Drawing.Size(165, 40);
+            this.btnShowRefJonesMat.TabIndex = 74;
+            this.btnShowRefJonesMat.Text = "Show reference jones matrix";
+            this.btnShowRefJonesMat.UseVisualStyleBackColor = false;
+            this.btnShowRefJonesMat.Click += new System.EventHandler(this.btnShowRefJonesMat_Click);
+            // 
+            // btnMeasureRefJonesMat
+            // 
+            this.btnMeasureRefJonesMat.BackColor = System.Drawing.Color.Blue;
+            this.btnMeasureRefJonesMat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMeasureRefJonesMat.ForeColor = System.Drawing.Color.White;
+            this.btnMeasureRefJonesMat.Location = new System.Drawing.Point(752, 464);
+            this.btnMeasureRefJonesMat.Name = "btnMeasureRefJonesMat";
+            this.btnMeasureRefJonesMat.Size = new System.Drawing.Size(165, 40);
+            this.btnMeasureRefJonesMat.TabIndex = 75;
+            this.btnMeasureRefJonesMat.Text = "Measure reference jones matrix";
+            this.btnMeasureRefJonesMat.UseVisualStyleBackColor = false;
+            this.btnMeasureRefJonesMat.Click += new System.EventHandler(this.btnMeasureRefJonesMat_Click);
+            // 
+            // btnResetRefJonesMat
+            // 
+            this.btnResetRefJonesMat.BackColor = System.Drawing.Color.Blue;
+            this.btnResetRefJonesMat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnResetRefJonesMat.ForeColor = System.Drawing.Color.White;
+            this.btnResetRefJonesMat.Location = new System.Drawing.Point(752, 524);
+            this.btnResetRefJonesMat.Name = "btnResetRefJonesMat";
+            this.btnResetRefJonesMat.Size = new System.Drawing.Size(165, 40);
+            this.btnResetRefJonesMat.TabIndex = 76;
+            this.btnResetRefJonesMat.Text = "Reset reference jones matrix";
+            this.btnResetRefJonesMat.UseVisualStyleBackColor = false;
+            this.btnResetRefJonesMat.Click += new System.EventHandler(this.btnResetRefJonesMat_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.panel1.Location = new System.Drawing.Point(110, 462);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(628, 163);
+            this.panel1.TabIndex = 77;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Black;
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(874, 205);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(24, 13);
+            this.label10.TabIndex = 80;
+            this.label10.Text = "uW";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Black;
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(654, 205);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(60, 13);
+            this.label12.TabIndex = 79;
+            this.label12.Text = "Laer power";
+            // 
+            // txtBoxLaserPower
+            // 
+            this.txtBoxLaserPower.Location = new System.Drawing.Point(756, 202);
+            this.txtBoxLaserPower.Name = "txtBoxLaserPower";
+            this.txtBoxLaserPower.Size = new System.Drawing.Size(101, 20);
+            this.txtBoxLaserPower.TabIndex = 78;
+            this.txtBoxLaserPower.Text = "1000";
+            this.txtBoxLaserPower.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // PMDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1168, 431);
+            this.ClientSize = new System.Drawing.Size(1168, 635);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtBoxLaserPower);
+            this.Controls.Add(this.btnResetRefJonesMat);
+            this.Controls.Add(this.btnMeasureRefJonesMat);
+            this.Controls.Add(this.btnShowRefJonesMat);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.lblJ22);
+            this.Controls.Add(this.lblJ21);
+            this.Controls.Add(this.lblJ12);
+            this.Controls.Add(this.lblJ11);
             this.Controls.Add(this.picCloseButton);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.lblMaxWL);
@@ -406,6 +561,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.stringReadTextBox);
+            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PMDForm";
             this.Text = "PMD";
@@ -444,5 +600,17 @@
         private System.Windows.Forms.Label lblMinWL;
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.PictureBox picCloseButton;
+        private System.Windows.Forms.Label lblJ11;
+        private System.Windows.Forms.Label lblJ12;
+        private System.Windows.Forms.Label lblJ21;
+        private System.Windows.Forms.Label lblJ22;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button btnShowRefJonesMat;
+        private System.Windows.Forms.Button btnMeasureRefJonesMat;
+        private System.Windows.Forms.Button btnResetRefJonesMat;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtBoxLaserPower;
     }
 }

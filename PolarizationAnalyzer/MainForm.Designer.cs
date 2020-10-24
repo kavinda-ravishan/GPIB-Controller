@@ -196,7 +196,7 @@
             this.readButton1.BackColor = System.Drawing.Color.Blue;
             this.readButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.readButton1.ForeColor = System.Drawing.Color.White;
-            this.readButton1.Location = new System.Drawing.Point(111, 383);
+            this.readButton1.Location = new System.Drawing.Point(111, 385);
             this.readButton1.Name = "readButton1";
             this.readButton1.Size = new System.Drawing.Size(81, 33);
             this.readButton1.TabIndex = 15;
@@ -219,7 +219,7 @@
             this.writeButton1.BackColor = System.Drawing.Color.Blue;
             this.writeButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.writeButton1.ForeColor = System.Drawing.Color.White;
-            this.writeButton1.Location = new System.Drawing.Point(11, 383);
+            this.writeButton1.Location = new System.Drawing.Point(15, 385);
             this.writeButton1.Name = "writeButton1";
             this.writeButton1.Size = new System.Drawing.Size(81, 33);
             this.writeButton1.TabIndex = 13;
@@ -241,11 +241,10 @@
             // stringToWriteTextBox1
             // 
             this.stringToWriteTextBox1.BackColor = System.Drawing.Color.White;
-            this.stringToWriteTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.stringToWriteTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stringToWriteTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stringToWriteTextBox1.Location = new System.Drawing.Point(15, 357);
             this.stringToWriteTextBox1.Name = "stringToWriteTextBox1";
-            this.stringToWriteTextBox1.Size = new System.Drawing.Size(511, 19);
+            this.stringToWriteTextBox1.Size = new System.Drawing.Size(511, 23);
             this.stringToWriteTextBox1.TabIndex = 22;
             // 
             // btnS0
@@ -253,7 +252,7 @@
             this.btnS0.BackColor = System.Drawing.Color.Blue;
             this.btnS0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnS0.ForeColor = System.Drawing.Color.White;
-            this.btnS0.Location = new System.Drawing.Point(445, 383);
+            this.btnS0.Location = new System.Drawing.Point(445, 385);
             this.btnS0.Name = "btnS0";
             this.btnS0.Size = new System.Drawing.Size(81, 33);
             this.btnS0.TabIndex = 25;
@@ -264,11 +263,10 @@
             // stringToWriteTextBox2
             // 
             this.stringToWriteTextBox2.BackColor = System.Drawing.Color.White;
-            this.stringToWriteTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.stringToWriteTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stringToWriteTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stringToWriteTextBox2.Location = new System.Drawing.Point(577, 256);
             this.stringToWriteTextBox2.Name = "stringToWriteTextBox2";
-            this.stringToWriteTextBox2.Size = new System.Drawing.Size(511, 19);
+            this.stringToWriteTextBox2.Size = new System.Drawing.Size(511, 23);
             this.stringToWriteTextBox2.TabIndex = 39;
             // 
             // stringReadLabel2
@@ -286,7 +284,7 @@
             this.readButton2.BackColor = System.Drawing.Color.Blue;
             this.readButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.readButton2.ForeColor = System.Drawing.Color.White;
-            this.readButton2.Location = new System.Drawing.Point(121, 243);
+            this.readButton2.Location = new System.Drawing.Point(121, 245);
             this.readButton2.Name = "readButton2";
             this.readButton2.Size = new System.Drawing.Size(81, 33);
             this.readButton2.TabIndex = 36;
@@ -309,7 +307,7 @@
             this.writeButton2.BackColor = System.Drawing.Color.Blue;
             this.writeButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.writeButton2.ForeColor = System.Drawing.Color.White;
-            this.writeButton2.Location = new System.Drawing.Point(579, 284);
+            this.writeButton2.Location = new System.Drawing.Point(579, 286);
             this.writeButton2.Name = "writeButton2";
             this.writeButton2.Size = new System.Drawing.Size(81, 33);
             this.writeButton2.TabIndex = 34;
@@ -461,7 +459,7 @@
             this.btnJM.BackColor = System.Drawing.Color.Blue;
             this.btnJM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnJM.ForeColor = System.Drawing.Color.White;
-            this.btnJM.Location = new System.Drawing.Point(270, 383);
+            this.btnJM.Location = new System.Drawing.Point(270, 385);
             this.btnJM.Name = "btnJM";
             this.btnJM.Size = new System.Drawing.Size(81, 33);
             this.btnJM.TabIndex = 27;
@@ -474,7 +472,7 @@
             this.btnSB.BackColor = System.Drawing.Color.Blue;
             this.btnSB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSB.ForeColor = System.Drawing.Color.White;
-            this.btnSB.Location = new System.Drawing.Point(357, 383);
+            this.btnSB.Location = new System.Drawing.Point(357, 385);
             this.btnSB.Name = "btnSB";
             this.btnSB.Size = new System.Drawing.Size(81, 33);
             this.btnSB.TabIndex = 26;

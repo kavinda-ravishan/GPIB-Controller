@@ -9,7 +9,7 @@ namespace PolarizationAnalyzer
     static class Utility
     {
 
-        //---------------------- For testing ------------------------------------------------------------------------------------------------//
+        #region test data
 
         public static string text_S0 = "VAL00  77.204;VAL01  16.427;VAL02   0.295;VAL03  39.486;VAL04   0.371;VAL05   0.121;VAL06  56.222;VAL07   0.000;VAL08  10.609;VAL09  -0.758;VAL10   0.363;VAL11   0.543;VAL12 -75.284;VAL13 -71.248;VAL14 -73.429;1000;E08\n";
 
@@ -24,7 +24,8 @@ namespace PolarizationAnalyzer
         //1551.00 
         public static string text_J2 = "J[11]  0.797 -64.374;J[12]  0.605 -66.324;J[21]  0.600 -111.640;J[22]  0.799 63.215;1000;E00\n";
 
-        //-----------------------------------------------------------------------------------------------------------------------------------//
+        #endregion
+
         public const double C = 299792458;
 
         public static string ReplaceCommonEscapeSequences(string s)
@@ -251,7 +252,7 @@ namespace PolarizationAnalyzer
             return C / (wavelength * 1000);
         }
 
-        public static double[] DGD(string j1, string j2, double w1, double w2)
+        public static double[] DGD(string j1, string j2, JonesMatCar refJonesMat,double w1, double w2)
         {
             double[] jValues1 = JonesString2Double(j1);
             double[] jValues2 = JonesString2Double(j2);
@@ -259,8 +260,8 @@ namespace PolarizationAnalyzer
             JonesMatPol mat1 = JonesDoubleArray2JonesMat(jValues1);
             JonesMatPol mat2 = JonesDoubleArray2JonesMat(jValues2);
 
-            JonesMatCar J1 = CMath.Pol2Car(mat1);
-            JonesMatCar J2 = CMath.Pol2Car(mat2);
+            JonesMatCar J1 = refJonesMat * CMath.Pol2Car(mat1);
+            JonesMatCar J2 = refJonesMat * CMath.Pol2Car(mat2);
 
             JonesMatCar J1Inv = CMath.Inverse(J1);
 

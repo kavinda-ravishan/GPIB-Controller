@@ -279,5 +279,20 @@ namespace PolarizationAnalyzer
 
             return complexCar;
         }
+
+        public static JonesMatCar UnitMatrix()
+        {
+            JonesMatCar mat = new JonesMatCar();
+
+            ComplexCar one = new ComplexCar(1, 0);
+            ComplexCar zero = new ComplexCar(0, 0);
+
+            mat.J11 = one;
+            mat.J12 = zero;
+            mat.J21 = zero;
+            mat.J22 = one;
+
+            return mat;
+        }
     }
 }

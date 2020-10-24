@@ -412,9 +412,9 @@
             this.btnStokes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStokes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStokes.ForeColor = System.Drawing.Color.White;
-            this.btnStokes.Location = new System.Drawing.Point(570, 346);
+            this.btnStokes.Location = new System.Drawing.Point(570, 411);
             this.btnStokes.Name = "btnStokes";
-            this.btnStokes.Size = new System.Drawing.Size(117, 49);
+            this.btnStokes.Size = new System.Drawing.Size(117, 62);
             this.btnStokes.TabIndex = 40;
             this.btnStokes.Text = "Stokes Plotter";
             this.btnStokes.UseVisualStyleBackColor = false;
@@ -524,9 +524,9 @@
             this.btnPMD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPMD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPMD.ForeColor = System.Drawing.Color.White;
-            this.btnPMD.Location = new System.Drawing.Point(570, 420);
+            this.btnPMD.Location = new System.Drawing.Point(570, 333);
             this.btnPMD.Name = "btnPMD";
-            this.btnPMD.Size = new System.Drawing.Size(117, 49);
+            this.btnPMD.Size = new System.Drawing.Size(117, 62);
             this.btnPMD.TabIndex = 48;
             this.btnPMD.Text = "PMD Analysis";
             this.btnPMD.UseVisualStyleBackColor = false;

@@ -105,6 +105,7 @@ namespace PolarizationAnalyzer
             public double max;
             public double maxWaveLength;
             public int laserPower;
+            public int delay;
         }
 
         PMDData[] data;
@@ -162,6 +163,7 @@ namespace PolarizationAnalyzer
                     settings.stepSize = System.Convert.ToDouble(txtBoxStep.Text);
                     settings.length = System.Convert.ToDouble(txtBoxLength.Text); // in Km
                     settings.laserPower = System.Convert.ToInt32(txtBoxLaserPower.Text);
+                    settings.delay = System.Convert.ToInt32(txtBoxDelay.Text);
                     settings.meanPMD = 0;
 
                     double lengthSqrt = Math.Sqrt(settings.length);
@@ -183,8 +185,6 @@ namespace PolarizationAnalyzer
                     data = new PMDData[steps - 2];
                     double sumPMD = 0;
                     
-                    int delay = 1000;
-
                     //Invoke methods for allow cross thread oparations
                     this.Invoke(new MethodInvoker(delegate ()
                     {
@@ -206,12 +206,12 @@ namespace PolarizationAnalyzer
                         {
                             if (i < 2)
                             {
-                                jStrings[i] = GetJonesMatrix(wavelenght[i], delay);
+                                jStrings[i] = GetJonesMatrix(wavelenght[i], settings.delay);
                                 //jStrings[i] = Utility.text_J1;//for testing
                             }
                             else
                             {
-                                jStrings[i] = GetJonesMatrix(wavelenght[i], delay);
+                                jStrings[i] = GetJonesMatrix(wavelenght[i], settings.delay);
                                 //jStrings[i] = Utility.text_J1;//for testing
 
                                 DGDval = Utility.DGD(jStrings[i - 2], jStrings[i], refJonesMat, wavelenght[i - 2], wavelenght[i]);//Meaure DGD for arg1 and arg2 jones matrices
@@ -490,7 +490,7 @@ namespace PolarizationAnalyzer
                 try
                 {
                     InitDGDMesure(System.Convert.ToDouble(txtBoxStart.Text), System.Convert.ToInt32(txtBoxLaserPower.Text));
-                    string jString = GetJonesMatrix(System.Convert.ToDouble(txtBoxStart.Text), 1000);
+                    string jString = GetJonesMatrix(System.Convert.ToDouble(txtBoxStart.Text), System.Convert.ToInt32(txtBoxDelay.Text));
                     Done();
 
                     double[] jMatValues = Utility.JonesString2Double(jString);

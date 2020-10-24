@@ -82,7 +82,7 @@
             this.btnPMD = new System.Windows.Forms.Button();
             this.stringReadTextBox2 = new System.Windows.Forms.RichTextBox();
             this.picCloseButton = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbltitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown2)).BeginInit();
@@ -408,14 +408,15 @@
             // 
             // btnStokes
             // 
-            this.btnStokes.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnStokes.BackColor = System.Drawing.Color.Indigo;
             this.btnStokes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStokes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStokes.ForeColor = System.Drawing.Color.White;
             this.btnStokes.Location = new System.Drawing.Point(570, 346);
             this.btnStokes.Name = "btnStokes";
-            this.btnStokes.Size = new System.Drawing.Size(104, 49);
+            this.btnStokes.Size = new System.Drawing.Size(117, 49);
             this.btnStokes.TabIndex = 40;
-            this.btnStokes.Text = "Stokes";
+            this.btnStokes.Text = "Stokes Plotter";
             this.btnStokes.UseVisualStyleBackColor = false;
             this.btnStokes.Click += new System.EventHandler(this.BtnStokes_Click);
             // 
@@ -519,14 +520,15 @@
             // 
             // btnPMD
             // 
-            this.btnPMD.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnPMD.BackColor = System.Drawing.Color.Indigo;
             this.btnPMD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPMD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPMD.ForeColor = System.Drawing.Color.White;
             this.btnPMD.Location = new System.Drawing.Point(570, 420);
             this.btnPMD.Name = "btnPMD";
-            this.btnPMD.Size = new System.Drawing.Size(104, 49);
+            this.btnPMD.Size = new System.Drawing.Size(117, 49);
             this.btnPMD.TabIndex = 48;
-            this.btnPMD.Text = "PMD";
+            this.btnPMD.Text = "PMD Analysis";
             this.btnPMD.UseVisualStyleBackColor = false;
             this.btnPMD.Click += new System.EventHandler(this.BtnPMD_Click);
             // 
@@ -552,16 +554,16 @@
             this.picCloseButton.TabStop = false;
             this.picCloseButton.Click += new System.EventHandler(this.picCloseButton_Click);
             // 
-            // label2
+            // lbltitle
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Orbitron", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(8, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(141, 20);
-            this.label2.TabIndex = 52;
-            this.label2.Text = "GPIB controler";
+            this.lbltitle.AutoSize = true;
+            this.lbltitle.Font = new System.Drawing.Font("Orbitron", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltitle.ForeColor = System.Drawing.Color.White;
+            this.lbltitle.Location = new System.Drawing.Point(8, 15);
+            this.lbltitle.Name = "lbltitle";
+            this.lbltitle.Size = new System.Drawing.Size(141, 20);
+            this.lbltitle.TabIndex = 52;
+            this.lbltitle.Text = "GPIB controler";
             // 
             // MainForm
             // 
@@ -569,7 +571,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1129, 477);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbltitle);
             this.Controls.Add(this.picCloseButton);
             this.Controls.Add(this.btnPMD);
             this.Controls.Add(this.richTextBoxDevices);
@@ -662,7 +664,7 @@
         private System.Windows.Forms.RichTextBox stringReadTextBox2;
         private System.Windows.Forms.Button btnJM;
         private System.Windows.Forms.PictureBox picCloseButton;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbltitle;
     }
 }
 

@@ -42,15 +42,20 @@ namespace PolarizationAnalyzer
 
         static void InitDGDMesure(double start, double power)
         {
+            Console.WriteLine("Set Source Power - " + power.ToString());
             Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgPowerSrc(power))); // set power to 1000uW
+            Console.WriteLine("Laser is ON !");
             Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 1")); // turn on the laser
             Console.WriteLine("Set Source  WL - " + start.ToString());
             Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtSrc(start)));//change wavelength source
+            Console.WriteLine("Set PAT9000 WL - " + start.ToString());
+            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtPol(start)));//change wavelength pol
             Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("PO;X;"));//Optimizing the polarizer position in the module
         }
 
         static void Done()
         {
+            Console.WriteLine("Laser is Off !");
             Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0")); // turn off the laser
         }
 

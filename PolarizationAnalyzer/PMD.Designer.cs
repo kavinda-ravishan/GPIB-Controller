@@ -435,9 +435,9 @@
             this.label15.ForeColor = System.Drawing.Color.White;
             this.label15.Location = new System.Drawing.Point(12, 430);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(121, 13);
+            this.label15.Size = new System.Drawing.Size(154, 13);
             this.label15.TabIndex = 73;
-            this.label15.Text = "Reference jones matrix :";
+            this.label15.Text = "Inverse reference jones matrix :";
             // 
             // btnShowRefJonesMat
             // 

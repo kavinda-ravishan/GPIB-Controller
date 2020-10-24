@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -13,7 +12,7 @@ namespace PolarizationAnalyzer
             DGDMeasured += PMDForm_DGDMeasured;
             threadRun = true;
 
-            refjonesMat = CMath.UnitMatrix();
+            refJonesMat = CMath.UnitMatrix();
         }
 
         public Form RefToMainForm { get; set; }
@@ -106,7 +105,7 @@ namespace PolarizationAnalyzer
         PMDData[] data;
         PMDSettings settings;
 
-        JonesMatCar refjonesMat;
+        JonesMatCar refJonesMat;
 
         private static bool threadRun;
 
@@ -202,9 +201,9 @@ namespace PolarizationAnalyzer
                             else
                             {
                                 jStrings[i] = GetJonesMatrix(wavelenght[i], delay);
-                                //jStrings[i] = Utility.text_J2;//for testing
+                                //jStrings[i] = Utility.text_J1;//for testing
 
-                                DGDval = Utility.DGD(jStrings[i - 2], jStrings[i], refjonesMat, wavelenght[i - 2], wavelenght[i]);//Meaure DGD for arg1 and arg2 jones matrices
+                                DGDval = Utility.DGD(jStrings[i - 2], jStrings[i], refJonesMat, wavelenght[i - 2], wavelenght[i]);//Meaure DGD for arg1 and arg2 jones matrices
                                 data[i - 2].DGD = DGDval[0];
                                 data[i - 2].waveLenght = DGDval[1];
                                 data[i - 2].PMD = DGDval[0] / lengthSqrt;
@@ -452,20 +451,20 @@ namespace PolarizationAnalyzer
 
         private void btnShowRefJonesMat_Click(object sender, EventArgs e)
         {
-            lblJ11.Text = GetComplexString(refjonesMat.J11);
-            lblJ12.Text = GetComplexString(refjonesMat.J12);
-            lblJ21.Text = GetComplexString(refjonesMat.J21);
-            lblJ22.Text = GetComplexString(refjonesMat.J22);
+            lblJ11.Text = GetComplexString(refJonesMat.J11);
+            lblJ12.Text = GetComplexString(refJonesMat.J12);
+            lblJ21.Text = GetComplexString(refJonesMat.J21);
+            lblJ22.Text = GetComplexString(refJonesMat.J22);
         }
 
         private void btnResetRefJonesMat_Click(object sender, EventArgs e)
         {
-            refjonesMat = CMath.UnitMatrix();
+            refJonesMat = CMath.UnitMatrix();
 
-            lblJ11.Text = GetComplexString(refjonesMat.J11);
-            lblJ12.Text = GetComplexString(refjonesMat.J12);
-            lblJ21.Text = GetComplexString(refjonesMat.J21);
-            lblJ22.Text = GetComplexString(refjonesMat.J22);
+            lblJ11.Text = GetComplexString(refJonesMat.J11);
+            lblJ12.Text = GetComplexString(refJonesMat.J12);
+            lblJ21.Text = GetComplexString(refJonesMat.J21);
+            lblJ22.Text = GetComplexString(refJonesMat.J22);
         }
 
         private void btnMeasureRefJonesMat_Click(object sender, EventArgs e)
@@ -482,14 +481,14 @@ namespace PolarizationAnalyzer
                     //double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing
                     
                     JonesMatPol matPol = Utility.JonesDoubleArray2JonesMat(jMatValues);
-                    refjonesMat = CMath.Pol2Car(matPol);
+                    refJonesMat = CMath.Inverse(CMath.Pol2Car(matPol));
 
                     this.Invoke(new MethodInvoker(delegate ()
                     {
-                        lblJ11.Text = GetComplexString(refjonesMat.J11);
-                        lblJ12.Text = GetComplexString(refjonesMat.J12);
-                        lblJ21.Text = GetComplexString(refjonesMat.J21);
-                        lblJ22.Text = GetComplexString(refjonesMat.J22);
+                        lblJ11.Text = GetComplexString(refJonesMat.J11);
+                        lblJ12.Text = GetComplexString(refJonesMat.J12);
+                        lblJ21.Text = GetComplexString(refJonesMat.J21);
+                        lblJ22.Text = GetComplexString(refJonesMat.J22);
                     }));
                 }
                 catch(Exception ex)

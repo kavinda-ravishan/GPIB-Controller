@@ -252,11 +252,11 @@
             this.btnS0.BackColor = System.Drawing.Color.Blue;
             this.btnS0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnS0.ForeColor = System.Drawing.Color.White;
-            this.btnS0.Location = new System.Drawing.Point(445, 385);
+            this.btnS0.Location = new System.Drawing.Point(9, 269);
             this.btnS0.Name = "btnS0";
-            this.btnS0.Size = new System.Drawing.Size(81, 33);
+            this.btnS0.Size = new System.Drawing.Size(173, 33);
             this.btnS0.TabIndex = 25;
-            this.btnS0.Text = "S0 Read";
+            this.btnS0.Text = "Read all basic parameters";
             this.btnS0.UseVisualStyleBackColor = false;
             this.btnS0.Click += new System.EventHandler(this.BtnS0_Click);
             // 
@@ -410,7 +410,7 @@
             this.btnStokes.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnStokes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStokes.ForeColor = System.Drawing.Color.White;
-            this.btnStokes.Location = new System.Drawing.Point(1013, 335);
+            this.btnStokes.Location = new System.Drawing.Point(570, 346);
             this.btnStokes.Name = "btnStokes";
             this.btnStokes.Size = new System.Drawing.Size(104, 49);
             this.btnStokes.TabIndex = 40;
@@ -459,11 +459,11 @@
             this.btnJM.BackColor = System.Drawing.Color.Blue;
             this.btnJM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnJM.ForeColor = System.Drawing.Color.White;
-            this.btnJM.Location = new System.Drawing.Point(270, 385);
+            this.btnJM.Location = new System.Drawing.Point(9, 191);
             this.btnJM.Name = "btnJM";
-            this.btnJM.Size = new System.Drawing.Size(81, 33);
+            this.btnJM.Size = new System.Drawing.Size(173, 33);
             this.btnJM.TabIndex = 27;
-            this.btnJM.Text = "JM Read";
+            this.btnJM.Text = "Read Jones matrix";
             this.btnJM.UseVisualStyleBackColor = false;
             this.btnJM.Click += new System.EventHandler(this.BtnJM_Click);
             // 
@@ -472,11 +472,11 @@
             this.btnSB.BackColor = System.Drawing.Color.Blue;
             this.btnSB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSB.ForeColor = System.Drawing.Color.White;
-            this.btnSB.Location = new System.Drawing.Point(357, 385);
+            this.btnSB.Location = new System.Drawing.Point(9, 230);
             this.btnSB.Name = "btnSB";
-            this.btnSB.Size = new System.Drawing.Size(81, 33);
+            this.btnSB.Size = new System.Drawing.Size(173, 33);
             this.btnSB.TabIndex = 26;
-            this.btnSB.Text = "SB Read";
+            this.btnSB.Text = "Read Stokes parameters";
             this.btnSB.UseVisualStyleBackColor = false;
             this.btnSB.Click += new System.EventHandler(this.BtnSB_Click);
             // 
@@ -495,12 +495,13 @@
             // 
             this.btnFindDevices.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnFindDevices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFindDevices.Font = new System.Drawing.Font("Fugaz One", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFindDevices.ForeColor = System.Drawing.Color.White;
-            this.btnFindDevices.Location = new System.Drawing.Point(591, 372);
+            this.btnFindDevices.Location = new System.Drawing.Point(747, 333);
             this.btnFindDevices.Name = "btnFindDevices";
-            this.btnFindDevices.Size = new System.Drawing.Size(117, 49);
+            this.btnFindDevices.Size = new System.Drawing.Size(106, 136);
             this.btnFindDevices.TabIndex = 46;
-            this.btnFindDevices.Text = "Find Devices";
+            this.btnFindDevices.Text = "Find all connected devices";
             this.btnFindDevices.UseVisualStyleBackColor = false;
             this.btnFindDevices.Click += new System.EventHandler(this.BtnFindDevices_Click);
             // 
@@ -508,10 +509,10 @@
             // 
             this.richTextBoxDevices.BackColor = System.Drawing.Color.DarkBlue;
             this.richTextBoxDevices.ForeColor = System.Drawing.Color.White;
-            this.richTextBoxDevices.Location = new System.Drawing.Point(742, 335);
+            this.richTextBoxDevices.Location = new System.Drawing.Point(859, 333);
             this.richTextBoxDevices.Name = "richTextBoxDevices";
             this.richTextBoxDevices.ReadOnly = true;
-            this.richTextBoxDevices.Size = new System.Drawing.Size(258, 128);
+            this.richTextBoxDevices.Size = new System.Drawing.Size(258, 136);
             this.richTextBoxDevices.TabIndex = 47;
             this.richTextBoxDevices.Text = "";
             // 
@@ -520,7 +521,7 @@
             this.btnPMD.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnPMD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPMD.ForeColor = System.Drawing.Color.White;
-            this.btnPMD.Location = new System.Drawing.Point(1013, 414);
+            this.btnPMD.Location = new System.Drawing.Point(570, 420);
             this.btnPMD.Name = "btnPMD";
             this.btnPMD.Size = new System.Drawing.Size(104, 49);
             this.btnPMD.TabIndex = 48;

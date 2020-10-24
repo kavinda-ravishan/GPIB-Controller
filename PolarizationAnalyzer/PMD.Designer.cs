@@ -38,7 +38,7 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.txtBoxStart = new System.Windows.Forms.TextBox();
-            this.txtBoxEnd = new System.Windows.Forms.TextBox();
+            this.txtBoxStop = new System.Windows.Forms.TextBox();
             this.txtBoxStep = new System.Windows.Forms.TextBox();
             this.txtBoxLength = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -163,14 +163,14 @@
             this.txtBoxStart.Text = "1550";
             this.txtBoxStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // txtBoxEnd
+            // txtBoxStop
             // 
-            this.txtBoxEnd.Location = new System.Drawing.Point(756, 83);
-            this.txtBoxEnd.Name = "txtBoxEnd";
-            this.txtBoxEnd.Size = new System.Drawing.Size(101, 20);
-            this.txtBoxEnd.TabIndex = 45;
-            this.txtBoxEnd.Text = "1560";
-            this.txtBoxEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtBoxStop.Location = new System.Drawing.Point(756, 83);
+            this.txtBoxStop.Name = "txtBoxStop";
+            this.txtBoxStop.Size = new System.Drawing.Size(101, 20);
+            this.txtBoxStop.TabIndex = 45;
+            this.txtBoxStop.Text = "1560";
+            this.txtBoxStop.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtBoxStep
             // 
@@ -208,9 +208,9 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(654, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.Size = new System.Drawing.Size(87, 13);
             this.label2.TabIndex = 49;
-            this.label2.Text = "End wavelenght";
+            this.label2.Text = "Stop wavelenght";
             // 
             // label3
             // 
@@ -602,7 +602,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBoxLength);
             this.Controls.Add(this.txtBoxStep);
-            this.Controls.Add(this.txtBoxEnd);
+            this.Controls.Add(this.txtBoxStop);
             this.Controls.Add(this.txtBoxStart);
             this.Controls.Add(this.chart);
             this.Controls.Add(this.btnStop);
@@ -628,7 +628,7 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart;
         private System.Windows.Forms.TextBox txtBoxStart;
-        private System.Windows.Forms.TextBox txtBoxEnd;
+        private System.Windows.Forms.TextBox txtBoxStop;
         private System.Windows.Forms.TextBox txtBoxStep;
         private System.Windows.Forms.TextBox txtBoxLength;
         private System.Windows.Forms.Label label1;

@@ -96,7 +96,7 @@ namespace PolarizationAnalyzer
         public struct PMDSettings
         {
             public double start;
-            public double end;
+            public double stop;
             public double stepSize;
             public double length; // in Km
             public double meanPMD;
@@ -158,7 +158,7 @@ namespace PolarizationAnalyzer
                 {
                     //take user inputs
                     settings.start = System.Convert.ToDouble(txtBoxStart.Text);
-                    settings.end = System.Convert.ToDouble(txtBoxEnd.Text); ;
+                    settings.stop = System.Convert.ToDouble(txtBoxStop.Text); ;
                     settings.stepSize = System.Convert.ToDouble(txtBoxStep.Text);
                     settings.length = System.Convert.ToDouble(txtBoxLength.Text); // in Km
                     settings.laserPower = System.Convert.ToInt32(txtBoxLaserPower.Text);
@@ -167,7 +167,7 @@ namespace PolarizationAnalyzer
                     double lengthSqrt = Math.Sqrt(settings.length);
 
                     //calculate number of steps needed
-                    int steps = (int)((settings.end - settings.start) / settings.stepSize) + 3;
+                    int steps = (int)((settings.stop - settings.start) / settings.stepSize) + 3;
 
                     double[] wavelenght = new double[steps];
 
@@ -275,61 +275,68 @@ namespace PolarizationAnalyzer
 
                     Thread thread = new Thread(() =>
                     {
-                        creat(path);
-                        Excel excel = new Excel(path, 1);
-                        excel.SelectWorkSheet(1);
-
-                        excel.WriteToCell(0, 0, "From");
-                        excel.WriteToCell(0, 1, settings.start.ToString());
-                        excel.WriteToCell(0, 2, "nm");
-                        excel.WriteToCell(0, 3, "to");
-                        excel.WriteToCell(0, 4, settings.end.ToString());
-                        excel.WriteToCell(0, 5, "nm");
-
-                        excel.WriteToCell(1, 0, "Step size");
-                        excel.WriteToCell(1, 1, settings.stepSize.ToString());
-                        excel.WriteToCell(1, 2, "nm");
-
-                        excel.WriteToCell(2, 0, "Fiber lenght");
-                        excel.WriteToCell(2, 1, settings.length.ToString());
-                        excel.WriteToCell(2, 2, "Km");
-
-                        excel.WriteToCell(3, 0, "Mean PMD");
-                        excel.WriteToCell(3, 1, settings.meanPMD.ToString());
-
-                        excel.WriteToCell(4, 0, "Minimum PMD");
-                        excel.WriteToCell(4, 1, settings.min.ToString());
-                        excel.WriteToCell(4, 2, "at");
-                        excel.WriteToCell(4, 3, settings.minWaveLength.ToString());
-                        excel.WriteToCell(4, 4, "nm");
-
-                        excel.WriteToCell(5, 0, "Maximum PMD");
-                        excel.WriteToCell(5, 1, settings.max.ToString());
-                        excel.WriteToCell(5, 2, "at");
-                        excel.WriteToCell(5, 3, settings.maxWaveLength.ToString());
-                        excel.WriteToCell(5, 4, "nm");
-
-                        excel.WriteToCell(7, 1, "Wave Lenght (nm)");
-                        excel.WriteToCell(7, 2, "DGD (ps)");
-                        excel.WriteToCell(7, 3, "PMD");
-
-                        for (int i = 0; i < data.Length; i++)
+                        try
                         {
-                            excel.WriteToCell(i + 8, 0, data[i].i.ToString());
-                            excel.WriteToCell(i + 8, 1, data[i].waveLenght.ToString());
-                            excel.WriteToCell(i + 8, 2, data[i].DGD.ToString());
-                            excel.WriteToCell(i + 8, 3, data[i].PMD.ToString());
+                            creat(path);
+                            Excel excel = new Excel(path, 1);
+                            excel.SelectWorkSheet(1);
+
+                            excel.WriteToCell(0, 0, "From");
+                            excel.WriteToCell(0, 1, settings.start.ToString());
+                            excel.WriteToCell(0, 2, "nm");
+                            excel.WriteToCell(0, 3, "to");
+                            excel.WriteToCell(0, 4, settings.stop.ToString());
+                            excel.WriteToCell(0, 5, "nm");
+
+                            excel.WriteToCell(1, 0, "Step size");
+                            excel.WriteToCell(1, 1, settings.stepSize.ToString());
+                            excel.WriteToCell(1, 2, "nm");
+
+                            excel.WriteToCell(2, 0, "Fiber lenght");
+                            excel.WriteToCell(2, 1, settings.length.ToString());
+                            excel.WriteToCell(2, 2, "Km");
+
+                            excel.WriteToCell(3, 0, "Mean PMD");
+                            excel.WriteToCell(3, 1, settings.meanPMD.ToString());
+
+                            excel.WriteToCell(4, 0, "Minimum PMD");
+                            excel.WriteToCell(4, 1, settings.min.ToString());
+                            excel.WriteToCell(4, 2, "at");
+                            excel.WriteToCell(4, 3, settings.minWaveLength.ToString());
+                            excel.WriteToCell(4, 4, "nm");
+
+                            excel.WriteToCell(5, 0, "Maximum PMD");
+                            excel.WriteToCell(5, 1, settings.max.ToString());
+                            excel.WriteToCell(5, 2, "at");
+                            excel.WriteToCell(5, 3, settings.maxWaveLength.ToString());
+                            excel.WriteToCell(5, 4, "nm");
+
+                            excel.WriteToCell(7, 1, "Wave Lenght (nm)");
+                            excel.WriteToCell(7, 2, "DGD (ps)");
+                            excel.WriteToCell(7, 3, "PMD");
+
+                            for (int i = 0; i < data.Length; i++)
+                            {
+                                excel.WriteToCell(i + 8, 0, data[i].i.ToString());
+                                excel.WriteToCell(i + 8, 1, data[i].waveLenght.ToString());
+                                excel.WriteToCell(i + 8, 2, data[i].DGD.ToString());
+                                excel.WriteToCell(i + 8, 3, data[i].PMD.ToString());
+                            }
+                            excel.Save();
+                            excel.Close();
+
+                            this.Invoke(new MethodInvoker(delegate ()
+                            {
+                                stringReadTextBox.Text += ("Excel created." + Environment.NewLine);
+                                stringReadTextBox.Text += (Environment.NewLine);
+                                stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
+                                stringReadTextBox.ScrollToCaret();
+                            }));
                         }
-                        excel.Save();
-                        excel.Close();
-
-                        this.Invoke(new MethodInvoker(delegate ()
+                        catch(Exception ex)
                         {
-                            stringReadTextBox.Text += ("Excel created." + Environment.NewLine);
-                            stringReadTextBox.Text += (Environment.NewLine);
-                            stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
-                            stringReadTextBox.ScrollToCaret();
-                        }));
+                            MessageBox.Show(ex.Message);
+                        }
                     });
                     thread.Start();
                 }
@@ -369,7 +376,7 @@ namespace PolarizationAnalyzer
                     excel.SelectWorkSheet(1);
 
                     settings.start = System.Convert.ToDouble(excel.ReadExcel(0, 1));
-                    settings.end = System.Convert.ToDouble(excel.ReadExcel(0, 4));
+                    settings.stop = System.Convert.ToDouble(excel.ReadExcel(0, 4));
 
                     settings.stepSize = System.Convert.ToDouble(excel.ReadExcel(1, 1));
 
@@ -383,7 +390,7 @@ namespace PolarizationAnalyzer
                     settings.max = System.Convert.ToDouble(excel.ReadExcel(5, 1));
                     settings.maxWaveLength = System.Convert.ToDouble(excel.ReadExcel(5, 3));
 
-                    int steps = (int)((settings.end - settings.start) / settings.stepSize) + 3;
+                    int steps = (int)((settings.stop - settings.start) / settings.stepSize) + 3;
                     data = new PMDData[steps - 2];
 
                     for (int i = 0; i < steps - 2; i++)
@@ -398,7 +405,7 @@ namespace PolarizationAnalyzer
                     this.Invoke(new MethodInvoker(delegate ()
                     {
                         txtBoxStart.Text = settings.start.ToString();
-                        txtBoxEnd.Text = settings.end.ToString();
+                        txtBoxStop.Text = settings.stop.ToString();
                         txtBoxStep.Text = settings.stepSize.ToString();
                         txtBoxLength.Text = settings.length.ToString();
 

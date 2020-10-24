@@ -131,6 +131,7 @@ namespace PolarizationAnalyzer
 
             this.Invoke(new MethodInvoker(delegate ()
             {
+                //update labels and chart
                 stringReadTextBox.Text += (e.waveLenght.ToString() + " nm" + Environment.NewLine);
                 stringReadTextBox.Text += ("DGD : " + e.DGD.ToString() + " ps" + Environment.NewLine);
                 stringReadTextBox.Text += ("PMD : " + e.PMD.ToString() + Environment.NewLine);
@@ -155,6 +156,7 @@ namespace PolarizationAnalyzer
             {
                 try
                 {
+                    //take user inputs
                     settings.start = System.Convert.ToDouble(txtBoxStart.Text);
                     settings.end = System.Convert.ToDouble(txtBoxEnd.Text); ;
                     settings.stepSize = System.Convert.ToDouble(txtBoxStep.Text);
@@ -164,6 +166,7 @@ namespace PolarizationAnalyzer
 
                     double lengthSqrt = Math.Sqrt(settings.length);
 
+                    //calculate number of steps needed
                     int steps = (int)((settings.end - settings.start) / settings.stepSize) + 3;
 
                     double[] wavelenght = new double[steps];
@@ -179,8 +182,10 @@ namespace PolarizationAnalyzer
                     double[] DGDval = new double[2];
                     data = new PMDData[steps - 2];
                     double sumPMD = 0;
+                    
                     int delay = 1000;
 
+                    //Invoke methods for allow cross thread oparations
                     this.Invoke(new MethodInvoker(delegate ()
                     {
                         stringReadTextBox.Clear();
@@ -190,6 +195,7 @@ namespace PolarizationAnalyzer
                         chart.Series["PMD"].Points.Clear();
                     }));
 
+                    //laser on
                     InitDGDMesure(settings.start, settings.laserPower);
 
                     threadRun = true;
@@ -213,9 +219,11 @@ namespace PolarizationAnalyzer
                                 data[i - 2].waveLenght = DGDval[1];
                                 data[i - 2].PMD = DGDval[0] / lengthSqrt;
                                 data[i - 2].i = i - 1;
+
                                 sumPMD = data[i - 2].PMD + sumPMD;
                                 settings.meanPMD = sumPMD / data[i - 2].i;
 
+                                //for find minimum and maximum values
                                 if (data[i - 2].i == 1)
                                 {
                                     settings.min = data[i - 2].PMD;
@@ -234,13 +242,13 @@ namespace PolarizationAnalyzer
                                         settings.maxWaveLength = data[i - 2].waveLenght;
                                     }
                                 }
-
+                                //call event for show update chart and labels
                                 OnDGDMeasured(data[i - 2]);
                             }
                         }
                         else break;
                     }
-
+                    //laser off
                     Done();
                 }
                 catch(Exception ex)
@@ -257,19 +265,13 @@ namespace PolarizationAnalyzer
             {
                 string path = " ";
 
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.InitialDirectory = @"C:\";
-                saveFileDialog.Title = "Save excel files";
-                saveFileDialog.CheckFileExists = true;
-                saveFileDialog.CheckPathExists = true;
-                //saveFileDialog.DefaultExt = "xlsx";
-                //saveFileDialog.Filter = "Excel files(*.xlsx) | *.xlsx | All files(*.*) | *.* ";
-                //saveFileDialog.FilterIndex = 2;
-                saveFileDialog.RestoreDirectory = true;
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                FolderBrowserDialog folderDlg = new FolderBrowserDialog();
+                folderDlg.ShowNewFolderButton = true;
+                // Show the FolderBrowserDialog.  
+                DialogResult result = folderDlg.ShowDialog();
+                if (result == DialogResult.OK)
                 {
-                    path = saveFileDialog.FileName;
-
+                    path = folderDlg.SelectedPath + "\\Data.xlsx";
 
                     Thread thread = new Thread(() =>
                     {
@@ -336,6 +338,7 @@ namespace PolarizationAnalyzer
             {
                 MessageBox.Show("No data available.");
             }
+            
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -440,6 +443,7 @@ namespace PolarizationAnalyzer
             RefToMainForm.Show();
         }
 
+        //For allow user to drag the window by click and holding
         protected override void WndProc(ref Message m)
         {
             switch (m.Msg)
@@ -490,6 +494,7 @@ namespace PolarizationAnalyzer
 
                     this.Invoke(new MethodInvoker(delegate ()
                     {
+                        //update labels
                         lblJ11.Text = GetComplexString(refJonesMat.J11);
                         lblJ12.Text = GetComplexString(refJonesMat.J12);
                         lblJ21.Text = GetComplexString(refJonesMat.J21);

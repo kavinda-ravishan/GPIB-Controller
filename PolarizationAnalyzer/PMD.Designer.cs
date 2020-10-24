@@ -395,7 +395,7 @@
             this.lblJ11.AutoSize = true;
             this.lblJ11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblJ11.ForeColor = System.Drawing.Color.White;
-            this.lblJ11.Location = new System.Drawing.Point(77, 505);
+            this.lblJ11.Location = new System.Drawing.Point(77, 492);
             this.lblJ11.Name = "lblJ11";
             this.lblJ11.Size = new System.Drawing.Size(16, 13);
             this.lblJ11.TabIndex = 68;
@@ -406,7 +406,7 @@
             this.lblJ12.AutoSize = true;
             this.lblJ12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblJ12.ForeColor = System.Drawing.Color.White;
-            this.lblJ12.Location = new System.Drawing.Point(408, 505);
+            this.lblJ12.Location = new System.Drawing.Point(408, 492);
             this.lblJ12.Name = "lblJ12";
             this.lblJ12.Size = new System.Drawing.Size(16, 13);
             this.lblJ12.TabIndex = 69;
@@ -417,7 +417,7 @@
             this.lblJ21.AutoSize = true;
             this.lblJ21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblJ21.ForeColor = System.Drawing.Color.White;
-            this.lblJ21.Location = new System.Drawing.Point(77, 592);
+            this.lblJ21.Location = new System.Drawing.Point(77, 579);
             this.lblJ21.Name = "lblJ21";
             this.lblJ21.Size = new System.Drawing.Size(16, 13);
             this.lblJ21.TabIndex = 70;
@@ -428,7 +428,7 @@
             this.lblJ22.AutoSize = true;
             this.lblJ22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblJ22.ForeColor = System.Drawing.Color.White;
-            this.lblJ22.Location = new System.Drawing.Point(408, 592);
+            this.lblJ22.Location = new System.Drawing.Point(408, 579);
             this.lblJ22.Name = "lblJ22";
             this.lblJ22.Size = new System.Drawing.Size(16, 13);
             this.lblJ22.TabIndex = 72;

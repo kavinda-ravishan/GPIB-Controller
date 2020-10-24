@@ -364,7 +364,7 @@ namespace PolarizationAnalyzer
             openFileDialog.CheckPathExists = true;
             openFileDialog.DefaultExt = "xlsx";
             openFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
-            openFileDialog.FilterIndex = 2;
+            openFileDialog.FilterIndex = 1;
             openFileDialog.RestoreDirectory = true;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {

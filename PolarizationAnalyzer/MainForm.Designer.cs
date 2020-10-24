@@ -82,6 +82,7 @@
             this.btnPMD = new System.Windows.Forms.Button();
             this.stringReadTextBox2 = new System.Windows.Forms.RichTextBox();
             this.picCloseButton = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown2)).BeginInit();
@@ -551,12 +552,24 @@
             this.picCloseButton.TabStop = false;
             this.picCloseButton.Click += new System.EventHandler(this.picCloseButton_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Orbitron", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(8, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(141, 20);
+            this.label2.TabIndex = 52;
+            this.label2.Text = "GPIB controler";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1129, 477);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.picCloseButton);
             this.Controls.Add(this.btnPMD);
             this.Controls.Add(this.richTextBoxDevices);
@@ -649,6 +662,7 @@
         private System.Windows.Forms.RichTextBox stringReadTextBox2;
         private System.Windows.Forms.Button btnJM;
         private System.Windows.Forms.PictureBox picCloseButton;
+        private System.Windows.Forms.Label label2;
     }
 }
 

@@ -78,9 +78,11 @@
             this.label16 = new System.Windows.Forms.Label();
             this.txtBoxDelay = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // stringReadTextBox
@@ -530,7 +532,7 @@
             this.lbltitle.AutoSize = true;
             this.lbltitle.Font = new System.Drawing.Font("Orbitron", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbltitle.ForeColor = System.Drawing.Color.White;
-            this.lbltitle.Location = new System.Drawing.Point(8, 16);
+            this.lbltitle.Location = new System.Drawing.Point(45, 12);
             this.lbltitle.Name = "lbltitle";
             this.lbltitle.Size = new System.Drawing.Size(171, 20);
             this.lbltitle.TabIndex = 81;
@@ -599,12 +601,23 @@
             this.label17.TabIndex = 85;
             this.label17.Text = "ms";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(27, 24);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 86;
+            this.pictureBox1.TabStop = false;
+            // 
             // PMDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1192, 635);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.txtBoxDelay);
             this.Controls.Add(this.label16);
@@ -655,6 +668,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -707,5 +721,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtBoxDelay;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

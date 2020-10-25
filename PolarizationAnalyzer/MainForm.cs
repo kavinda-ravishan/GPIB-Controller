@@ -143,9 +143,9 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
-                string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                //string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.text_S0)); //for testing
+                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
+                //string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.text_S0)); //for testing
 
                 for (int i = 0; i < data.Length; i++)
                 {
@@ -172,9 +172,9 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
-                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
+                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
+                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
 
                 for (int i = 0; i < data.Length; i++)
                 {
@@ -200,9 +200,9 @@ namespace PolarizationAnalyzer
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
 
-                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;"));
-                string[] data = Utility.JM_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                //string[] data = Utility.JM_filter(Utility.DataSeparator(Utility.text_J1));//for testing
+                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;"));
+                //string[] data = Utility.JM_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                string[] data = Utility.JM_filter(Utility.DataSeparator(Utility.text_J1));//for testing
 
                 for (int i = 0; i < data.Length; i++)
                 {

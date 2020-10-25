@@ -83,6 +83,7 @@
             this.stringReadTextBox2 = new System.Windows.Forms.RichTextBox();
             this.picCloseButton = new System.Windows.Forms.PictureBox();
             this.lbltitle = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown2)).BeginInit();
@@ -90,6 +91,7 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // boardIdLabel1
@@ -559,11 +561,21 @@
             this.lbltitle.AutoSize = true;
             this.lbltitle.Font = new System.Drawing.Font("Orbitron", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbltitle.ForeColor = System.Drawing.Color.White;
-            this.lbltitle.Location = new System.Drawing.Point(8, 15);
+            this.lbltitle.Location = new System.Drawing.Point(45, 11);
             this.lbltitle.Name = "lbltitle";
             this.lbltitle.Size = new System.Drawing.Size(141, 20);
             this.lbltitle.TabIndex = 52;
             this.lbltitle.Text = "GPIB controler";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(12, 11);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(27, 24);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 53;
+            this.pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
@@ -571,6 +583,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1129, 477);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbltitle);
             this.Controls.Add(this.picCloseButton);
             this.Controls.Add(this.btnPMD);
@@ -619,6 +632,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -667,6 +681,7 @@
         private System.Windows.Forms.Button btnJM;
         private System.Windows.Forms.PictureBox picCloseButton;
         private System.Windows.Forms.Label lbltitle;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

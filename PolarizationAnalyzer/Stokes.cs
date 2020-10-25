@@ -23,7 +23,7 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
+                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
                 points = System.Convert.ToInt32(txtBoxNumPoints.Text);
                 
                 chart1.Series["S1"].Points.Clear();
@@ -57,8 +57,8 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
+                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
 
                 stringReadTextBox.Clear();
                 for (int i = 0; i < 6; i++)

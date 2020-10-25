@@ -142,7 +142,7 @@
             this.primaryAddressNumericUpDown1.Size = new System.Drawing.Size(40, 20);
             this.primaryAddressNumericUpDown1.TabIndex = 3;
             this.primaryAddressNumericUpDown1.Value = new decimal(new int[] {
-            2,
+            9,
             0,
             0,
             0});
@@ -359,7 +359,7 @@
             this.primaryAddressNumericUpDown2.Size = new System.Drawing.Size(40, 20);
             this.primaryAddressNumericUpDown2.TabIndex = 29;
             this.primaryAddressNumericUpDown2.Value = new decimal(new int[] {
-            2,
+            24,
             0,
             0,
             0});

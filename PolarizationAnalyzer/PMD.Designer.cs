@@ -73,8 +73,8 @@
             this.txtBoxLaserPower = new System.Windows.Forms.TextBox();
             this.lbltitle = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.txtBoxFileName = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.txtBoxFileName = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.txtBoxDelay = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -385,7 +385,7 @@
             // picCloseButton
             // 
             this.picCloseButton.Image = ((System.Drawing.Image)(resources.GetObject("picCloseButton.Image")));
-            this.picCloseButton.Location = new System.Drawing.Point(1129, 12);
+            this.picCloseButton.Location = new System.Drawing.Point(1153, 12);
             this.picCloseButton.Name = "picCloseButton";
             this.picCloseButton.Size = new System.Drawing.Size(27, 24);
             this.picCloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -443,9 +443,9 @@
             this.label15.ForeColor = System.Drawing.Color.White;
             this.label15.Location = new System.Drawing.Point(12, 430);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(154, 13);
+            this.label15.Size = new System.Drawing.Size(157, 13);
             this.label15.TabIndex = 73;
-            this.label15.Text = "Inverse reference jones matrix :";
+            this.label15.Text = "Inverse reference Jones matrix :";
             // 
             // btnShowRefJonesMat
             // 
@@ -454,9 +454,9 @@
             this.btnShowRefJonesMat.ForeColor = System.Drawing.Color.White;
             this.btnShowRefJonesMat.Location = new System.Drawing.Point(657, 583);
             this.btnShowRefJonesMat.Name = "btnShowRefJonesMat";
-            this.btnShowRefJonesMat.Size = new System.Drawing.Size(165, 40);
+            this.btnShowRefJonesMat.Size = new System.Drawing.Size(171, 40);
             this.btnShowRefJonesMat.TabIndex = 74;
-            this.btnShowRefJonesMat.Text = "Show reference jones matrix";
+            this.btnShowRefJonesMat.Text = "Show reference Jones matrix";
             this.btnShowRefJonesMat.UseVisualStyleBackColor = false;
             this.btnShowRefJonesMat.Click += new System.EventHandler(this.btnShowRefJonesMat_Click);
             // 
@@ -467,9 +467,9 @@
             this.btnMeasureRefJonesMat.ForeColor = System.Drawing.Color.White;
             this.btnMeasureRefJonesMat.Location = new System.Drawing.Point(657, 464);
             this.btnMeasureRefJonesMat.Name = "btnMeasureRefJonesMat";
-            this.btnMeasureRefJonesMat.Size = new System.Drawing.Size(165, 40);
+            this.btnMeasureRefJonesMat.Size = new System.Drawing.Size(171, 40);
             this.btnMeasureRefJonesMat.TabIndex = 75;
-            this.btnMeasureRefJonesMat.Text = "Measure reference jones matrix";
+            this.btnMeasureRefJonesMat.Text = "Measure reference Jones matrix";
             this.btnMeasureRefJonesMat.UseVisualStyleBackColor = false;
             this.btnMeasureRefJonesMat.Click += new System.EventHandler(this.btnMeasureRefJonesMat_Click);
             // 
@@ -480,9 +480,9 @@
             this.btnResetRefJonesMat.ForeColor = System.Drawing.Color.White;
             this.btnResetRefJonesMat.Location = new System.Drawing.Point(657, 524);
             this.btnResetRefJonesMat.Name = "btnResetRefJonesMat";
-            this.btnResetRefJonesMat.Size = new System.Drawing.Size(165, 40);
+            this.btnResetRefJonesMat.Size = new System.Drawing.Size(171, 40);
             this.btnResetRefJonesMat.TabIndex = 76;
-            this.btnResetRefJonesMat.Text = "Reset reference jones matrix";
+            this.btnResetRefJonesMat.Text = "Reset reference Jones matrix";
             this.btnResetRefJonesMat.UseVisualStyleBackColor = false;
             this.btnResetRefJonesMat.Click += new System.EventHandler(this.btnResetRefJonesMat_Click);
             // 
@@ -544,18 +544,10 @@
             this.panel2.Controls.Add(this.stringReadTextBox);
             this.panel2.Controls.Add(this.btnSave);
             this.panel2.Controls.Add(this.btnLoad);
-            this.panel2.Location = new System.Drawing.Point(923, 45);
+            this.panel2.Location = new System.Drawing.Point(947, 45);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(233, 578);
             this.panel2.TabIndex = 82;
-            // 
-            // txtBoxFileName
-            // 
-            this.txtBoxFileName.Location = new System.Drawing.Point(10, 490);
-            this.txtBoxFileName.Name = "txtBoxFileName";
-            this.txtBoxFileName.Size = new System.Drawing.Size(214, 20);
-            this.txtBoxFileName.TabIndex = 83;
-            this.txtBoxFileName.Text = "data";
             // 
             // label14
             // 
@@ -567,6 +559,14 @@
             this.label14.Size = new System.Drawing.Size(58, 13);
             this.label14.TabIndex = 83;
             this.label14.Text = "File name :";
+            // 
+            // txtBoxFileName
+            // 
+            this.txtBoxFileName.Location = new System.Drawing.Point(10, 490);
+            this.txtBoxFileName.Name = "txtBoxFileName";
+            this.txtBoxFileName.Size = new System.Drawing.Size(214, 20);
+            this.txtBoxFileName.TabIndex = 83;
+            this.txtBoxFileName.Text = "data";
             // 
             // label16
             // 
@@ -604,7 +604,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1168, 635);
+            this.ClientSize = new System.Drawing.Size(1192, 635);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.txtBoxDelay);
             this.Controls.Add(this.label16);

@@ -393,7 +393,6 @@ namespace PolarizationAnalyzer
             }
         }
         #endregion
-
     }
 }
 

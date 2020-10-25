@@ -10,6 +10,8 @@ namespace PolarizationAnalyzer
         private List<double> S2 = new List<double>();
         private List<double> S3 = new List<double>();
 
+        private int points;
+
         public StoksForm()
         {
             InitializeComponent();
@@ -21,7 +23,21 @@ namespace PolarizationAnalyzer
         {
             try
             {
-                Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
+                //Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
+                points = System.Convert.ToInt32(txtBoxNumPoints.Text);
+                
+                chart1.Series["S1"].Points.Clear();
+                chart2.Series["S2"].Points.Clear();
+                chart3.Series["S3"].Points.Clear();
+
+                S1.Clear();
+                S1.Clear();
+                S1.Clear();
+
+                txtBoxNumPoints.Enabled = false;
+                txtBoxTimer.Enabled = false;
+
+                timer.Interval = System.Convert.ToInt32(txtBoxTimer.Text);
                 timer.Enabled = true;
             }
             catch(Exception ex)
@@ -33,14 +49,16 @@ namespace PolarizationAnalyzer
         private void BtnStop_Click(object sender, EventArgs e)
         {
             timer.Enabled = false;
+            txtBoxNumPoints.Enabled = true;
+            txtBoxTimer.Enabled = true;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
             try
             {
-                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
+                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
+                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
 
                 stringReadTextBox.Clear();
                 for (int i = 0; i < 6; i++)
@@ -48,7 +66,7 @@ namespace PolarizationAnalyzer
                     stringReadTextBox.Text += (Utility.Lables_SB[i] + " - " + data[i] + Environment.NewLine);
                 }
 
-                if (S1.Count < 20)
+                if ( (S1.Count < points || points == 0) && S1.Count < 1000)
                 {
                     S1.Add(Convert.ToDouble(data[0]));
                     S2.Add(Convert.ToDouble(data[1]));

@@ -292,7 +292,7 @@ namespace PolarizationAnalyzer
                             excel.WriteToCell(1, 1, settings.stepSize.ToString());
                             excel.WriteToCell(1, 2, "nm");
 
-                            excel.WriteToCell(2, 0, "Fiber lenght");
+                            excel.WriteToCell(2, 0, "Fiber length");
                             excel.WriteToCell(2, 1, settings.length.ToString());
                             excel.WriteToCell(2, 2, "Km");
 

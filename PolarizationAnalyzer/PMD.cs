@@ -311,7 +311,7 @@ namespace PolarizationAnalyzer
                             excel.WriteToCell(5, 3, settings.maxWaveLength.ToString());
                             excel.WriteToCell(5, 4, "nm");
 
-                            excel.WriteToCell(7, 1, "Wave Lenght (nm)");
+                            excel.WriteToCell(7, 1, "Wave Length (nm)");
                             excel.WriteToCell(7, 2, "DGD (ps)");
                             excel.WriteToCell(7, 3, "PMD");
 

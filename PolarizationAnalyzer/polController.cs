@@ -22,6 +22,58 @@ namespace PolarizationAnalyzer
             excel.Close();
         }
 
+        static string MsgWaveLenghtSrc(double waveLenght = 1551.120)
+        {
+            return ":WAVElength " + waveLenght.ToString() + "nm";
+        }
+
+        static string MsgPowerSrc(double power = 1000)
+        {
+            return ":POWer " + power.ToString() + "uW";
+        }
+
+        static string MsgWaveLenghtPol(double waveLenght = 1551.12)
+        {
+            return "L " + waveLenght.ToString() + ";X;";
+        }
+
+        static void InitDGDMesure(double start, double power)
+        {
+            Console.WriteLine("Set Source Power - " + power.ToString());
+            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgPowerSrc(power))); // set power to 1000uW
+            Console.WriteLine("Laser is ON !");
+            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 1")); // turn on the laser
+            Console.WriteLine("Set Source  WL - " + start.ToString());
+            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtSrc(start)));//change wavelength source
+            Console.WriteLine("Set PAT9000 WL - " + start.ToString());
+            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtPol(start)));//change wavelength pol
+            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("PO;X;"));//Optimizing the polarizer position in the module
+        }
+
+        static void Done()
+        {
+            Console.WriteLine("Laser is Off !");
+            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0")); // turn off the laser
+        }
+
+        static string GetJonesMatrix(double wavelenght, int delay)
+        {
+            string jString;
+
+            Console.WriteLine("Set Source  WL - " + wavelenght.ToString());
+            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtSrc(wavelenght)));//change wavelength source
+
+            Console.WriteLine("Set PAT9000 WL - " + wavelenght.ToString());
+            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtPol(wavelenght)));//change wavelength pol
+            System.Threading.Thread.Sleep(delay);
+
+            Console.WriteLine("Read JM        - " + wavelenght.ToString());
+            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("K 0;JM;X"));
+            jString = Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString());//put JM data here
+            Console.WriteLine();
+            return jString;
+        }
+
         private void PolController_ServoRotated(object sender, string e)
         {
             this.Invoke(new MethodInvoker(delegate ()
@@ -33,7 +85,13 @@ namespace PolarizationAnalyzer
 
             PMDData pMD = new PMDData();
 
-            pMD.DGD = 0;
+            //string jStringw1 = GetJonesMatrix(pMDCharacteristics.waveLength - 1, 1000);
+            string jStringw1 = Utility.text_J1_1;//for testing
+            //string jStringw2 = GetJonesMatrix(pMDCharacteristics.waveLength + 1, 1000);
+            string jStringw2 = Utility.text_J1_2;//for testing
+
+            double[] DGD = Utility.DGD(jStringw1, jStringw2, CMath.UnitMatrix(), pMDCharacteristics.waveLength - 1, pMDCharacteristics.waveLength + 1);
+            pMD.DGD = DGD[0];
             pMD.ServoAngle = servoAngle;
 
             pMDCharacteristics.PMDDatas.Add(pMD);
@@ -172,16 +230,18 @@ namespace PolarizationAnalyzer
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            pMDCharacteristics = new PMDCharacteristics();
-            pMDCharacteristics.PMDDatas = new List<PMDData>();
-
-            int stepSize = System.Convert.ToInt32(txtBoxStepSize.Text);
-
-            pMDCharacteristics.stepSize = stepSize;
-            pMDCharacteristics.waveLength = System.Convert.ToDouble(txtBoxWavelength.Text);
-
             if (serialPort != null)
             {
+                pMDCharacteristics = new PMDCharacteristics();
+                pMDCharacteristics.PMDDatas = new List<PMDData>();
+
+                int stepSize = System.Convert.ToInt32(txtBoxStepSize.Text);
+
+                pMDCharacteristics.stepSize = stepSize;
+                pMDCharacteristics.waveLength = System.Convert.ToDouble(txtBoxWavelength.Text);
+
+                //InitDGDMesure(pMDCharacteristics.waveLength, 1000);
+
                 Thread thread = new Thread(() =>
                 {
                     threadRun = true;
@@ -208,6 +268,7 @@ namespace PolarizationAnalyzer
                         if (threadRun == false)
                             break;
                     }
+                    //Done();
                 });
                 thread.Start();
             }

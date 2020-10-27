@@ -84,6 +84,7 @@
             this.picCloseButton = new System.Windows.Forms.PictureBox();
             this.lbltitle = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnPolController = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boardIdNumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.primaryAddressNumericUpDown2)).BeginInit();
@@ -414,9 +415,9 @@
             this.btnStokes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStokes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStokes.ForeColor = System.Drawing.Color.White;
-            this.btnStokes.Location = new System.Drawing.Point(558, 407);
+            this.btnStokes.Location = new System.Drawing.Point(558, 383);
             this.btnStokes.Name = "btnStokes";
-            this.btnStokes.Size = new System.Drawing.Size(117, 62);
+            this.btnStokes.Size = new System.Drawing.Size(177, 37);
             this.btnStokes.TabIndex = 40;
             this.btnStokes.Text = "Stokes Plotter";
             this.btnStokes.UseVisualStyleBackColor = false;
@@ -526,9 +527,9 @@
             this.btnPMD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPMD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPMD.ForeColor = System.Drawing.Color.White;
-            this.btnPMD.Location = new System.Drawing.Point(558, 333);
+            this.btnPMD.Location = new System.Drawing.Point(560, 333);
             this.btnPMD.Name = "btnPMD";
-            this.btnPMD.Size = new System.Drawing.Size(117, 62);
+            this.btnPMD.Size = new System.Drawing.Size(177, 37);
             this.btnPMD.TabIndex = 48;
             this.btnPMD.Text = "PMD Analysis";
             this.btnPMD.UseVisualStyleBackColor = false;
@@ -577,12 +578,27 @@
             this.pictureBox1.TabIndex = 53;
             this.pictureBox1.TabStop = false;
             // 
+            // btnPolController
+            // 
+            this.btnPolController.BackColor = System.Drawing.Color.Indigo;
+            this.btnPolController.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPolController.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPolController.ForeColor = System.Drawing.Color.White;
+            this.btnPolController.Location = new System.Drawing.Point(559, 432);
+            this.btnPolController.Name = "btnPolController";
+            this.btnPolController.Size = new System.Drawing.Size(177, 37);
+            this.btnPolController.TabIndex = 54;
+            this.btnPolController.Text = "Polarization Controller";
+            this.btnPolController.UseVisualStyleBackColor = false;
+            this.btnPolController.Click += new System.EventHandler(this.btnPolController_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1129, 477);
+            this.Controls.Add(this.btnPolController);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbltitle);
             this.Controls.Add(this.picCloseButton);
@@ -682,6 +698,7 @@
         private System.Windows.Forms.PictureBox picCloseButton;
         private System.Windows.Forms.Label lbltitle;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnPolController;
     }
 }
 

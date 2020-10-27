@@ -393,6 +393,14 @@ namespace PolarizationAnalyzer
             }
         }
         #endregion
+
+        private void btnPolController_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            polController newForm = new polController();
+            newForm.RefToMainForm = this;
+            newForm.Show();
+        }
     }
 }
 

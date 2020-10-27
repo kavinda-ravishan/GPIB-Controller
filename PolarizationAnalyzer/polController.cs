@@ -14,6 +14,20 @@ namespace PolarizationAnalyzer
             ServoRotated += PolController_ServoRotated;
         }
 
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case 0x84:
+                    base.WndProc(ref m);
+                    if ((int)m.Result == 0x1)
+                        m.Result = (IntPtr)0x2;
+                    return;
+            }
+
+            base.WndProc(ref m);
+        }
+
         static void creat(string path)
         {
             Excel excel = new Excel();
@@ -85,10 +99,10 @@ namespace PolarizationAnalyzer
 
             PMDData pMD = new PMDData();
 
-            //string jStringw1 = GetJonesMatrix(pMDCharacteristics.waveLength - 1, 1000);
-            string jStringw1 = Utility.text_J1_1;//for testing
-            //string jStringw2 = GetJonesMatrix(pMDCharacteristics.waveLength + 1, 1000);
-            string jStringw2 = Utility.text_J1_2;//for testing
+            string jStringw1 = GetJonesMatrix(pMDCharacteristics.waveLength - 1, 1000);
+            //string jStringw1 = Utility.text_J1_1;//for testing
+            string jStringw2 = GetJonesMatrix(pMDCharacteristics.waveLength + 1, 1000);
+            //string jStringw2 = Utility.text_J1_2;//for testing
 
             double[] DGD = Utility.DGD(jStringw1, jStringw2, CMath.UnitMatrix(), pMDCharacteristics.waveLength - 1, pMDCharacteristics.waveLength + 1);
             pMD.DGD = DGD[0];
@@ -123,12 +137,6 @@ namespace PolarizationAnalyzer
         bool threadRun;
 
         public Form RefToMainForm { get; set; }
-
-        private void polController_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            //this.Close();
-            RefToMainForm.Show();
-        }
 
         private void btnFindPorts_Click(object sender, EventArgs e)
         {
@@ -240,7 +248,7 @@ namespace PolarizationAnalyzer
                 pMDCharacteristics.stepSize = stepSize;
                 pMDCharacteristics.waveLength = System.Convert.ToDouble(txtBoxWavelength.Text);
 
-                //InitDGDMesure(pMDCharacteristics.waveLength, 1000);
+                InitDGDMesure(pMDCharacteristics.waveLength, 1000);
 
                 Thread thread = new Thread(() =>
                 {
@@ -268,7 +276,7 @@ namespace PolarizationAnalyzer
                         if (threadRun == false)
                             break;
                     }
-                    //Done();
+                    Done();
                 });
                 thread.Start();
             }
@@ -324,6 +332,12 @@ namespace PolarizationAnalyzer
                 });
                 thread.Start();
             }
+        }
+
+        private void picCloseButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            RefToMainForm.Show();
         }
     }
 }

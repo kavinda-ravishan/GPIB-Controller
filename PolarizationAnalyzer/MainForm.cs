@@ -396,10 +396,17 @@ namespace PolarizationAnalyzer
 
         private void btnPolController_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            polController newForm = new polController();
-            newForm.RefToMainForm = this;
-            newForm.Show();
+            if (Devices.devicePolarizationAnalyzer != null && Devices.deviceLaserSource != null)
+            {
+                this.Hide();
+                polController newForm = new polController();
+                newForm.RefToMainForm = this;
+                newForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Device not initialized");
+            }
         }
     }
 }

@@ -355,14 +355,14 @@ namespace PolarizationAnalyzer
                         excel.WriteToCell(0, 0, "Wavelength");
                         excel.WriteToCell(0, 1, pMDCharacteristics.waveLength.ToString());
 
-                        excel.WriteToCell(1, 0, "DGD");
+                        excel.WriteToCell(1, 0, "PMD");
                         excel.WriteToCell(1, 1, "Servo A");
                         excel.WriteToCell(1, 2, "Servo B");
                         excel.WriteToCell(1, 3, "Servo C");
 
                         for (int i = 0; i < pMDCharacteristics.PMDDatas.Count; i++)
                         {
-                            excel.WriteToCell(i + 2, 0, pMDCharacteristics.PMDDatas[i].DGD.ToString());
+                            excel.WriteToCell(i + 2, 0, pMDCharacteristics.PMDDatas[i].PMD.ToString());
                             excel.WriteToCell(i + 2, 1, pMDCharacteristics.PMDDatas[i].ServoAngle.servoA.ToString());
                             excel.WriteToCell(i + 2, 2, pMDCharacteristics.PMDDatas[i].ServoAngle.servoB.ToString());
                             excel.WriteToCell(i + 2, 3, pMDCharacteristics.PMDDatas[i].ServoAngle.servoC.ToString());

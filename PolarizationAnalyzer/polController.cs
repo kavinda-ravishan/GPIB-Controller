@@ -14,6 +14,8 @@ namespace PolarizationAnalyzer
             ServoRotated += PolController_ServoRotated;
         }
 
+        double sqrtFiberLength;
+
         protected override void WndProc(ref Message m)
         {
             switch (m.Msg)
@@ -26,6 +28,14 @@ namespace PolarizationAnalyzer
             }
 
             base.WndProc(ref m);
+        }
+
+        static string GetComplexString(ComplexCar complex)
+        {
+            if (complex.imag >= 0)
+                return complex.real.ToString() + " +" + complex.imag.ToString() + " i";
+            else
+                return complex.real.ToString() + " " + complex.imag.ToString() + " i";
         }
 
         static void creat(string path)
@@ -99,13 +109,21 @@ namespace PolarizationAnalyzer
 
             PMDData pMD = new PMDData();
 
-            string jStringw1 = GetJonesMatrix(pMDCharacteristics.waveLength - 1, 1000);
+            string jStringw1 = GetJonesMatrix(pMDCharacteristics.waveLength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
             //string jStringw1 = Utility.text_J1_1;//for testing
-            string jStringw2 = GetJonesMatrix(pMDCharacteristics.waveLength + 1, 1000);
+            string jStringw2 = GetJonesMatrix(pMDCharacteristics.waveLength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
             //string jStringw2 = Utility.text_J1_2;//for testing
 
-            double[] DGD = Utility.DGD(jStringw1, jStringw2, CMath.UnitMatrix(), pMDCharacteristics.waveLength - 1, pMDCharacteristics.waveLength + 1);
+            double[] DGD = Utility.DGD(
+                jStringw1, 
+                jStringw2, 
+                refJonesMat, 
+                pMDCharacteristics.waveLength - pMDCharacteristics.waveLengthStepSize, 
+                pMDCharacteristics.waveLength + pMDCharacteristics.waveLengthStepSize
+                );
+
             pMD.DGD = DGD[0];
+            pMD.PMD = DGD[0] / sqrtFiberLength;
             pMD.ServoAngle = servoAngle;
 
             pMDCharacteristics.PMDDatas.Add(pMD);
@@ -121,11 +139,16 @@ namespace PolarizationAnalyzer
         {
             public ServoAngle ServoAngle;
             public double DGD;
+            public double PMD;
         }
         public struct PMDCharacteristics
         {
             public int stepSize;
             public double waveLength;
+            public double waveLengthStepSize;
+            public double laserPower;
+            public int delay;
+            public double fiberLength;
             public List<PMDData> PMDDatas;
         }
         private string[] portNames;
@@ -135,6 +158,8 @@ namespace PolarizationAnalyzer
         string ack;
         bool nextMeasurement;
         bool threadRun;
+
+        JonesMatCar refJonesMat;
 
         public Form RefToMainForm { get; set; }
 
@@ -213,7 +238,6 @@ namespace PolarizationAnalyzer
 
                 if (ack == "PMD\r")
                 {
-                    OnServoRotated(ack);
                     nextMeasurement = true;
                 }
 
@@ -247,8 +271,14 @@ namespace PolarizationAnalyzer
 
                 pMDCharacteristics.stepSize = stepSize;
                 pMDCharacteristics.waveLength = System.Convert.ToDouble(txtBoxWavelength.Text);
+                pMDCharacteristics.waveLengthStepSize = System.Convert.ToDouble(txtBoxWaveStep.Text);
+                pMDCharacteristics.laserPower = System.Convert.ToDouble(txtBoxLaserPower.Text);
+                pMDCharacteristics.delay = System.Convert.ToInt32(txtBoxDelay.Text);
+                pMDCharacteristics.fiberLength = System.Convert.ToDouble(txtBoxFiberLength.Text);
 
-                InitDGDMesure(pMDCharacteristics.waveLength, 1000);
+                sqrtFiberLength = Math.Sqrt(pMDCharacteristics.fiberLength);
+
+                InitDGDMesure(pMDCharacteristics.waveLength, pMDCharacteristics.laserPower);
 
                 Thread thread = new Thread(() =>
                 {
@@ -267,6 +297,7 @@ namespace PolarizationAnalyzer
 
                                 nextMeasurement = false;
                                 while (!nextMeasurement) { }
+                                OnServoRotated(ack);
                                 if (threadRun == false)
                                     break;
                             }
@@ -338,6 +369,57 @@ namespace PolarizationAnalyzer
         {
             this.Close();
             RefToMainForm.Show();
+        }
+
+        private void btnMeasureRefJonesMat_Click(object sender, EventArgs e)
+        {
+            Thread thread = new Thread(() =>
+            {
+                try
+                {
+                    InitDGDMesure(System.Convert.ToDouble(txtBoxWavelength.Text), System.Convert.ToInt32(txtBoxLaserPower.Text));
+                    string jString = GetJonesMatrix(System.Convert.ToDouble(txtBoxWavelength.Text), System.Convert.ToInt32(txtBoxDelay.Text));
+                    Done();
+
+                    double[] jMatValues = Utility.JonesString2Double(jString);
+                    //double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing
+
+                    JonesMatPol matPol = Utility.JonesDoubleArray2JonesMat(jMatValues);
+                    refJonesMat = CMath.Inverse(CMath.Pol2Car(matPol));
+
+                    this.Invoke(new MethodInvoker(delegate ()
+                    {
+                        //update labels
+                        lblJ11.Text = GetComplexString(refJonesMat.J11);
+                        lblJ12.Text = GetComplexString(refJonesMat.J12);
+                        lblJ21.Text = GetComplexString(refJonesMat.J21);
+                        lblJ22.Text = GetComplexString(refJonesMat.J22);
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            });
+            thread.Start();
+        }
+
+        private void btnResetRefJonesMat_Click(object sender, EventArgs e)
+        {
+            refJonesMat = CMath.UnitMatrix();
+
+            lblJ11.Text = GetComplexString(refJonesMat.J11);
+            lblJ12.Text = GetComplexString(refJonesMat.J12);
+            lblJ21.Text = GetComplexString(refJonesMat.J21);
+            lblJ22.Text = GetComplexString(refJonesMat.J22);
+        }
+
+        private void btnShowRefJonesMat_Click(object sender, EventArgs e)
+        {
+            lblJ11.Text = GetComplexString(refJonesMat.J11);
+            lblJ12.Text = GetComplexString(refJonesMat.J12);
+            lblJ21.Text = GetComplexString(refJonesMat.J21);
+            lblJ22.Text = GetComplexString(refJonesMat.J22);
         }
     }
 }

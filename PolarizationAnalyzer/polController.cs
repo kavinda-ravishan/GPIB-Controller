@@ -12,6 +12,7 @@ namespace PolarizationAnalyzer
         {
             InitializeComponent();
             ServoRotated += PolController_ServoRotated;
+            refJonesMat = CMath.UnitMatrix();
         }
 
         double sqrtFiberLength;
@@ -122,11 +123,24 @@ namespace PolarizationAnalyzer
                 pMDCharacteristics.waveLength + pMDCharacteristics.waveLengthStepSize
                 );
 
+
             pMD.DGD = DGD[0];
             pMD.PMD = DGD[0] / sqrtFiberLength;
             pMD.ServoAngle = servoAngle;
 
             pMDCharacteristics.PMDDatas.Add(pMD);
+
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                //update labels and chart
+                stringReadTextBox.Text += (pMDCharacteristics.waveLength.ToString() + " nm" + Environment.NewLine);
+                stringReadTextBox.Text += ("DGD : " + pMD.DGD.ToString() + " ps" + Environment.NewLine);
+                stringReadTextBox.Text += ("PMD : " + pMD.PMD.ToString() + Environment.NewLine);
+                stringReadTextBox.Text += (Environment.NewLine);
+
+                stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
+                stringReadTextBox.ScrollToCaret();
+            }));
         }
 
         public struct ServoAngle
@@ -339,7 +353,7 @@ namespace PolarizationAnalyzer
                         excel.SelectWorkSheet(1);
 
                         excel.WriteToCell(0, 0, "Wavelength");
-                        excel.WriteToCell(1, 0, pMDCharacteristics.waveLength.ToString());
+                        excel.WriteToCell(0, 1, pMDCharacteristics.waveLength.ToString());
 
                         excel.WriteToCell(1, 0, "DGD");
                         excel.WriteToCell(1, 1, "Servo A");
@@ -355,6 +369,14 @@ namespace PolarizationAnalyzer
                         }
                         excel.Save();
                         excel.Close();
+
+                        this.Invoke(new MethodInvoker(delegate ()
+                        {
+                            stringReadTextBox.Text += ("Excel created." + Environment.NewLine);
+                            stringReadTextBox.Text += (Environment.NewLine);
+                            stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
+                            stringReadTextBox.ScrollToCaret();
+                        }));
                     }
                     catch (Exception ex)
                     {

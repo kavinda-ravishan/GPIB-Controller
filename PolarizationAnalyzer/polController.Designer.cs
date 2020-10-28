@@ -145,6 +145,7 @@
             this.txtBoxServoA.Size = new System.Drawing.Size(33, 20);
             this.txtBoxServoA.TabIndex = 8;
             this.txtBoxServoA.Text = "0";
+            this.txtBoxServoA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnWrite
             // 
@@ -176,6 +177,7 @@
             this.txtBoxServoB.Size = new System.Drawing.Size(33, 20);
             this.txtBoxServoB.TabIndex = 9;
             this.txtBoxServoB.Text = "0";
+            this.txtBoxServoB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtBoxServoC
             // 
@@ -184,6 +186,7 @@
             this.txtBoxServoC.Size = new System.Drawing.Size(33, 20);
             this.txtBoxServoC.TabIndex = 10;
             this.txtBoxServoC.Text = "0";
+            this.txtBoxServoC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtBoxStepSize
             // 

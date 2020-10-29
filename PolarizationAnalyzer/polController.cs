@@ -110,10 +110,10 @@ namespace PolarizationAnalyzer
 
             PMDData pMD = new PMDData();
 
-            string jStringw1 = GetJonesMatrix(pMDCharacteristics.waveLength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            //string jStringw1 = Utility.text_J1_1;//for testing
-            string jStringw2 = GetJonesMatrix(pMDCharacteristics.waveLength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            //string jStringw2 = Utility.text_J1_2;//for testing
+            //string jStringw1 = GetJonesMatrix(pMDCharacteristics.waveLength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            string jStringw1 = Utility.text_J1_1;//for testing
+            //string jStringw2 = GetJonesMatrix(pMDCharacteristics.waveLength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            string jStringw2 = Utility.text_J1_2;//for testing
 
             double[] DGD = Utility.DGD(
                 jStringw1, 
@@ -163,6 +163,8 @@ namespace PolarizationAnalyzer
             public double laserPower;
             public int delay;
             public double fiberLength;
+            public int start;
+            public int stop;
             public List<PMDData> PMDDatas;
         }
         private string[] portNames;
@@ -289,19 +291,21 @@ namespace PolarizationAnalyzer
                 pMDCharacteristics.laserPower = System.Convert.ToDouble(txtBoxLaserPower.Text);
                 pMDCharacteristics.delay = System.Convert.ToInt32(txtBoxDelay.Text);
                 pMDCharacteristics.fiberLength = System.Convert.ToDouble(txtBoxFiberLength.Text);
+                pMDCharacteristics.start = System.Convert.ToInt32(txtBoxStart.Text);
+                pMDCharacteristics.stop = System.Convert.ToInt32(txtBoxStop.Text);
 
                 sqrtFiberLength = Math.Sqrt(pMDCharacteristics.fiberLength);
 
-                InitDGDMesure(pMDCharacteristics.waveLength, pMDCharacteristics.laserPower);
+                //InitDGDMesure(pMDCharacteristics.waveLength, pMDCharacteristics.laserPower);
 
                 Thread thread = new Thread(() =>
                 {
                     threadRun = true;
-                    for (int A = 0; A <= 180; A = A + stepSize)
+                    for (int A = pMDCharacteristics.start; A <= pMDCharacteristics.stop; A = A + pMDCharacteristics.stepSize)
                     {
-                        for (int B = 0; B <= 180; B = B + stepSize)
+                        for (int B = pMDCharacteristics.start; B <= pMDCharacteristics.stop; B = B + pMDCharacteristics.stepSize)
                         {
-                            for (int C = 0; C <= 180; C = C + stepSize)
+                            for (int C = pMDCharacteristics.start; C <= pMDCharacteristics.stop; C = C + pMDCharacteristics.stepSize)
                             {
                                 servoAngle.servoA = A.ToString();
                                 servoAngle.servoB = B.ToString();
@@ -321,7 +325,7 @@ namespace PolarizationAnalyzer
                         if (threadRun == false)
                             break;
                     }
-                    Done();
+                    //Done();
                 });
                 thread.Start();
             }

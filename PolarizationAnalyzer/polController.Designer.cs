@@ -84,6 +84,10 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.txtBoxStart = new System.Windows.Forms.TextBox();
+            this.txtBoxStop = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).BeginInit();
             this.panel2.SuspendLayout();
@@ -675,12 +679,54 @@
             this.label20.TabIndex = 116;
             this.label20.Text = "A";
             // 
+            // txtBoxStart
+            // 
+            this.txtBoxStart.Location = new System.Drawing.Point(323, 29);
+            this.txtBoxStart.Name = "txtBoxStart";
+            this.txtBoxStart.Size = new System.Drawing.Size(62, 20);
+            this.txtBoxStart.TabIndex = 119;
+            this.txtBoxStart.Text = "30";
+            this.txtBoxStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtBoxStop
+            // 
+            this.txtBoxStop.Location = new System.Drawing.Point(438, 29);
+            this.txtBoxStop.Name = "txtBoxStop";
+            this.txtBoxStop.Size = new System.Drawing.Size(62, 20);
+            this.txtBoxStop.TabIndex = 120;
+            this.txtBoxStop.Text = "150";
+            this.txtBoxStop.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.ForeColor = System.Drawing.Color.White;
+            this.label21.Location = new System.Drawing.Point(288, 32);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(29, 13);
+            this.label21.TabIndex = 121;
+            this.label21.Text = "Start";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.ForeColor = System.Drawing.Color.White;
+            this.label22.Location = new System.Drawing.Point(403, 32);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(29, 13);
+            this.label22.TabIndex = 122;
+            this.label22.Text = "Stop";
+            // 
             // polController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(867, 563);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.txtBoxStop);
+            this.Controls.Add(this.txtBoxStart);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label20);
@@ -736,6 +782,8 @@
             this.Controls.Add(this.btnFindPorts);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(867, 563);
+            this.MinimumSize = new System.Drawing.Size(867, 563);
             this.Name = "polController";
             this.Text = "Polarization controller";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -803,5 +851,9 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox txtBoxStart;
+        private System.Windows.Forms.TextBox txtBoxStop;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
     }
 }

@@ -110,10 +110,10 @@ namespace PolarizationAnalyzer
 
             PMDData pMD = new PMDData();
 
-            //string jStringw1 = GetJonesMatrix(pMDCharacteristics.waveLength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            string jStringw1 = Utility.text_J1_1;//for testing
-            //string jStringw2 = GetJonesMatrix(pMDCharacteristics.waveLength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            string jStringw2 = Utility.text_J1_2;//for testing
+            string jStringw1 = GetJonesMatrix(pMDCharacteristics.waveLength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            //string jStringw1 = Utility.text_J1_1;//for testing
+            string jStringw2 = GetJonesMatrix(pMDCharacteristics.waveLength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            //string jStringw2 = Utility.text_J1_2;//for testing
 
             double[] DGD = Utility.DGD(
                 jStringw1, 
@@ -296,7 +296,7 @@ namespace PolarizationAnalyzer
 
                 sqrtFiberLength = Math.Sqrt(pMDCharacteristics.fiberLength);
 
-                //InitDGDMesure(pMDCharacteristics.waveLength, pMDCharacteristics.laserPower);
+                InitDGDMesure(pMDCharacteristics.waveLength, pMDCharacteristics.laserPower);
 
                 Thread thread = new Thread(() =>
                 {
@@ -325,7 +325,7 @@ namespace PolarizationAnalyzer
                         if (threadRun == false)
                             break;
                     }
-                    //Done();
+                    Done();
                 });
                 thread.Start();
             }

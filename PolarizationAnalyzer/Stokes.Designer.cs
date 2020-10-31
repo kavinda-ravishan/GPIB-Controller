@@ -256,9 +256,9 @@
             this.lbltitle.ForeColor = System.Drawing.Color.White;
             this.lbltitle.Location = new System.Drawing.Point(66, 9);
             this.lbltitle.Name = "lbltitle";
-            this.lbltitle.Size = new System.Drawing.Size(319, 20);
+            this.lbltitle.Size = new System.Drawing.Size(323, 20);
             this.lbltitle.TabIndex = 51;
-            this.lbltitle.Text = "Realtime Stokes parameter plotter";
+            this.lbltitle.Text = "Realtime Stokes Parameter Plotter";
             // 
             // label1
             // 

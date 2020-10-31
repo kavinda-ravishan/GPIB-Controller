@@ -33,3 +33,4 @@ C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\Polariza
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Release\PolarizationAnalyzer.csproj.CopyComplete
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Release\PolarizationAnalyzer.exe
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Release\PolarizationAnalyzer.pdb
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\PolarizationAnalyzer\obj\Release\PolarizationAnalyzer.polController.resources

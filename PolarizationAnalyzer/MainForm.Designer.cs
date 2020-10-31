@@ -564,9 +564,9 @@
             this.lbltitle.ForeColor = System.Drawing.Color.White;
             this.lbltitle.Location = new System.Drawing.Point(45, 11);
             this.lbltitle.Name = "lbltitle";
-            this.lbltitle.Size = new System.Drawing.Size(141, 20);
+            this.lbltitle.Size = new System.Drawing.Size(143, 20);
             this.lbltitle.TabIndex = 52;
-            this.lbltitle.Text = "GPIB controler";
+            this.lbltitle.Text = "GPIB Controler";
             // 
             // pictureBox1
             // 

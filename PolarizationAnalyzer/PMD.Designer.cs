@@ -107,7 +107,7 @@
             this.btnStart.TabIndex = 40;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = false;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
             // btnSave
             // 
@@ -120,7 +120,7 @@
             this.btnSave.TabIndex = 41;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // btnStop
             // 
@@ -133,7 +133,7 @@
             this.btnStop.TabIndex = 42;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = false;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            this.btnStop.Click += new System.EventHandler(this.BtnStop_Click);
             // 
             // chart
             // 
@@ -382,7 +382,7 @@
             this.btnLoad.TabIndex = 65;
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = false;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            this.btnLoad.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // picCloseButton
             // 
@@ -393,7 +393,7 @@
             this.picCloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picCloseButton.TabIndex = 66;
             this.picCloseButton.TabStop = false;
-            this.picCloseButton.Click += new System.EventHandler(this.picCloseButton_Click);
+            this.picCloseButton.Click += new System.EventHandler(this.PicCloseButton_Click);
             // 
             // lblJ11
             // 
@@ -460,7 +460,7 @@
             this.btnShowRefJonesMat.TabIndex = 74;
             this.btnShowRefJonesMat.Text = "Show reference Jones matrix";
             this.btnShowRefJonesMat.UseVisualStyleBackColor = false;
-            this.btnShowRefJonesMat.Click += new System.EventHandler(this.btnShowRefJonesMat_Click);
+            this.btnShowRefJonesMat.Click += new System.EventHandler(this.BtnShowRefJonesMat_Click);
             // 
             // btnMeasureRefJonesMat
             // 
@@ -473,7 +473,7 @@
             this.btnMeasureRefJonesMat.TabIndex = 75;
             this.btnMeasureRefJonesMat.Text = "Measure reference Jones matrix";
             this.btnMeasureRefJonesMat.UseVisualStyleBackColor = false;
-            this.btnMeasureRefJonesMat.Click += new System.EventHandler(this.btnMeasureRefJonesMat_Click);
+            this.btnMeasureRefJonesMat.Click += new System.EventHandler(this.BtnMeasureRefJonesMat_Click);
             // 
             // btnResetRefJonesMat
             // 
@@ -486,7 +486,7 @@
             this.btnResetRefJonesMat.TabIndex = 76;
             this.btnResetRefJonesMat.Text = "Reset reference Jones matrix";
             this.btnResetRefJonesMat.UseVisualStyleBackColor = false;
-            this.btnResetRefJonesMat.Click += new System.EventHandler(this.btnResetRefJonesMat_Click);
+            this.btnResetRefJonesMat.Click += new System.EventHandler(this.BtnResetRefJonesMat_Click);
             // 
             // panel1
             // 

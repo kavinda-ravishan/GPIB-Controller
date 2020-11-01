@@ -17,7 +17,7 @@ namespace PolarizationAnalyzer
 
         public Form RefToMainForm { get; set; }
 
-        static void creat(string path)
+        static void Creat(string path)
         {
             Excel excel = new Excel();
             excel.CreatNewFile();
@@ -77,7 +77,7 @@ namespace PolarizationAnalyzer
             return jString;
         }
 
-        static string GetComplexString(ComplexCar complex)
+        static string GetComplexString(CMath.ComplexCar complex)
         {
             if (complex.imag >= 0)
                 return complex.real.ToString() + " +" + complex.imag.ToString() + " i";
@@ -111,7 +111,7 @@ namespace PolarizationAnalyzer
         PMDData[] data;
         PMDSettings settings;
 
-        JonesMatCar refJonesMat;
+        CMath.JonesMatCar refJonesMat;
 
         private static bool threadRun;
 
@@ -151,8 +151,9 @@ namespace PolarizationAnalyzer
             }));
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private void BtnStart_Click(object sender, EventArgs e)
         {
+            //all long runnog oparations done in separate threads for avoid ui freezing issue.
             Thread thread = new Thread(() =>
             {
                 try
@@ -259,14 +260,16 @@ namespace PolarizationAnalyzer
             thread.Start();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             if (settings.length != 0)
             {
                 string path = " ";
 
-                FolderBrowserDialog folderDlg = new FolderBrowserDialog();
-                folderDlg.ShowNewFolderButton = true;
+                FolderBrowserDialog folderDlg = new FolderBrowserDialog
+                {
+                    ShowNewFolderButton = true
+                };
                 // Show the FolderBrowserDialog.  
                 DialogResult result = folderDlg.ShowDialog();
                 if (result == DialogResult.OK)
@@ -277,7 +280,7 @@ namespace PolarizationAnalyzer
                     {
                         try
                         {
-                            creat(path);
+                            Creat(path);
                             Excel excel = new Excel(path, 1);
                             excel.SelectWorkSheet(1);
 
@@ -348,24 +351,26 @@ namespace PolarizationAnalyzer
             
         }
 
-        private void btnStop_Click(object sender, EventArgs e)
+        private void BtnStop_Click(object sender, EventArgs e)
         {
             threadRun = false;
         }
 
-        private void btnLoad_Click(object sender, EventArgs e)
+        private void BtnLoad_Click(object sender, EventArgs e)
         {
             string path = " ";
 
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = @"C:\";
-            openFileDialog.Title = "Load excel file";
-            openFileDialog.CheckFileExists = true;
-            openFileDialog.CheckPathExists = true;
-            openFileDialog.DefaultExt = "xlsx";
-            openFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.RestoreDirectory = true;
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                InitialDirectory = @"C:\",
+                Title = "Load excel file",
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = "xlsx",
+                Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*",
+                FilterIndex = 1,
+                RestoreDirectory = true
+            };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 path = openFileDialog.FileName;
@@ -444,7 +449,7 @@ namespace PolarizationAnalyzer
             }
         }
 
-        private void picCloseButton_Click(object sender, EventArgs e)
+        private void PicCloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
             RefToMainForm.Show();
@@ -465,7 +470,7 @@ namespace PolarizationAnalyzer
             base.WndProc(ref m);
         }
 
-        private void btnShowRefJonesMat_Click(object sender, EventArgs e)
+        private void BtnShowRefJonesMat_Click(object sender, EventArgs e)
         {
             lblJ11.Text = GetComplexString(refJonesMat.J11);
             lblJ12.Text = GetComplexString(refJonesMat.J12);
@@ -473,7 +478,7 @@ namespace PolarizationAnalyzer
             lblJ22.Text = GetComplexString(refJonesMat.J22);
         }
 
-        private void btnResetRefJonesMat_Click(object sender, EventArgs e)
+        private void BtnResetRefJonesMat_Click(object sender, EventArgs e)
         {
             refJonesMat = CMath.UnitMatrix();
 
@@ -483,7 +488,7 @@ namespace PolarizationAnalyzer
             lblJ22.Text = GetComplexString(refJonesMat.J22);
         }
 
-        private void btnMeasureRefJonesMat_Click(object sender, EventArgs e)
+        private void BtnMeasureRefJonesMat_Click(object sender, EventArgs e)
         {
             Thread thread = new Thread(() =>
             {
@@ -495,8 +500,8 @@ namespace PolarizationAnalyzer
 
                     double[] jMatValues = Utility.JonesString2Double(jString);
                     //double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing
-                    
-                    JonesMatPol matPol = Utility.JonesDoubleArray2JonesMat(jMatValues);
+
+                    CMath.JonesMatPol matPol = Utility.JonesDoubleArray2JonesMat(jMatValues);
                     refJonesMat = CMath.Inverse(CMath.Pol2Car(matPol));
 
                     this.Invoke(new MethodInvoker(delegate ()

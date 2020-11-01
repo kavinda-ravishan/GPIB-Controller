@@ -228,9 +228,9 @@ namespace PolarizationAnalyzer
         }
 
         //Jones double array comes with angle degries function convert it to red
-        public static JonesMatPol JonesDoubleArray2JonesMat(double[] jonesValues)
+        public static CMath.JonesMatPol JonesDoubleArray2JonesMat(double[] jonesValues)
         {
-            JonesMatPol mat;
+            CMath.JonesMatPol mat;
 
             mat.J11.mod = jonesValues[0];
             mat.J11.ang = CMath.Deg2Red(jonesValues[1]);
@@ -252,24 +252,24 @@ namespace PolarizationAnalyzer
             return C / (wavelength * 1000);
         }
 
-        public static double[] DGD(string j1, string j2, JonesMatCar refJonesMat,double w1, double w2)
+        public static double[] DGD(string j1, string j2, CMath.JonesMatCar refJonesMat,double w1, double w2)
         {
             double[] jValues1 = JonesString2Double(j1);
             double[] jValues2 = JonesString2Double(j2);
 
-            JonesMatPol mat1 = JonesDoubleArray2JonesMat(jValues1);
-            JonesMatPol mat2 = JonesDoubleArray2JonesMat(jValues2);
+            CMath.JonesMatPol mat1 = JonesDoubleArray2JonesMat(jValues1);
+            CMath.JonesMatPol mat2 = JonesDoubleArray2JonesMat(jValues2);
 
-            JonesMatCar J1 = refJonesMat * CMath.Pol2Car(mat1);
-            JonesMatCar J2 = refJonesMat * CMath.Pol2Car(mat2);
+            CMath.JonesMatCar J1 = refJonesMat * CMath.Pol2Car(mat1);
+            CMath.JonesMatCar J2 = refJonesMat * CMath.Pol2Car(mat2);
 
-            JonesMatCar J1Inv = CMath.Inverse(J1);
+            CMath.JonesMatCar J1Inv = CMath.Inverse(J1);
 
-            JonesMatCar J2_J1Inv = J2 * J1Inv;
+            CMath.JonesMatCar J2_J1Inv = J2 * J1Inv;
 
-            ComplexCar[] complexCars = CMath.Eigenvalues(J2_J1Inv);
+            CMath.ComplexCar[] complexCars = CMath.Eigenvalues(J2_J1Inv);
 
-            ComplexPol[] complexPols = new ComplexPol[2];
+            CMath.ComplexPol[] complexPols = new CMath.ComplexPol[2];
 
             complexPols[0] = CMath.Car2Pol(complexCars[0]);
             complexPols[1] = CMath.Car2Pol(complexCars[1]);

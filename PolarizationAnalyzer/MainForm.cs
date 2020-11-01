@@ -17,7 +17,7 @@ namespace PolarizationAnalyzer
             LaserSourceTextBoxSuggestAppend();
         }
 
-        private void picCloseButton_Click(object sender, EventArgs e)
+        private void PicCloseButton_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Do you want to close this application ?", "Exit", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
@@ -368,8 +368,10 @@ namespace PolarizationAnalyzer
             if ((Devices.devicePolarizationAnalyzer != null) & (Devices.deviceLaserSource != null))
             {
                 this.Hide();
-                PMDForm newForm = new PMDForm();
-                newForm.RefToMainForm = this;
+                PMDForm newForm = new PMDForm
+                {
+                    RefToMainForm = this
+                };
                 newForm.Show();
             }
             else
@@ -383,8 +385,10 @@ namespace PolarizationAnalyzer
             if (Devices.devicePolarizationAnalyzer != null)
             {
                 this.Hide();
-                StoksForm newForm = new StoksForm();
-                newForm.RefToMainForm = this;
+                StoksForm newForm = new StoksForm
+                {
+                    RefToMainForm = this
+                };
                 newForm.Show();
             }
             else
@@ -394,13 +398,15 @@ namespace PolarizationAnalyzer
         }
         #endregion
 
-        private void btnPolController_Click(object sender, EventArgs e)
+        private void BtnPolController_Click(object sender, EventArgs e)
         {
             if (Devices.devicePolarizationAnalyzer != null && Devices.deviceLaserSource != null)
             {
                 this.Hide();
-                polController newForm = new polController();
-                newForm.RefToMainForm = this;
+                polController newForm = new polController
+                {
+                    RefToMainForm = this
+                };
                 newForm.Show();
             }
             else

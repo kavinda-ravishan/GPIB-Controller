@@ -2,128 +2,128 @@
 
 namespace PolarizationAnalyzer
 {
-    struct ComplexCar
-    {
-        public double real;
-        public double imag;
-
-        public ComplexCar(double Real = 0, double Imag = 0)
-        {
-            real = Real;
-            imag = Imag;
-        }
-
-        public static ComplexCar operator +(ComplexCar c1, ComplexCar c2)
-        {
-            ComplexCar temp;
-            temp.real = c1.real + c2.real;
-            temp.imag = c1.imag + c2.imag;
-
-            return temp;
-        }
-        public static ComplexCar operator -(ComplexCar c1, ComplexCar c2)
-        {
-            ComplexCar temp;
-            temp.real = c1.real - c2.real;
-            temp.imag = c1.imag - c2.imag;
-
-            return temp;
-        }
-        public static ComplexCar operator *(double c, ComplexCar c1)
-        {
-            ComplexCar temp;
-            temp.real = c1.real * c;
-            temp.imag = c1.imag * c;
-
-            return temp;
-        }
-        public static ComplexCar operator /(ComplexCar c1, double c)
-        {
-            ComplexCar temp;
-            temp.real = c1.real / c;
-            temp.imag = c1.imag / c;
-
-            return temp;
-        }
-        public static ComplexCar operator *(ComplexCar c1, ComplexCar c2)
-        {
-            ComplexCar temp;
-            temp.real = (c1.real * c2.real) - (c1.imag * c2.imag);
-            temp.imag = (c1.real * c2.imag) + (c1.imag * c2.real);
-
-            return temp;
-        }
-        public static ComplexCar operator /(ComplexCar c1, ComplexCar c2)
-        {
-            ComplexCar temp;
-            double div = (c2.real * c2.real) + (c2.imag * c2.imag);
-
-            temp.real = ((c1.real * c2.real) + (c1.imag * c2.imag)) / div;
-            temp.imag = ((c1.imag * c2.real) - (c1.real * c2.imag)) / div;
-
-            return temp;
-        }
-    }
-
-    struct ComplexPol
-    {
-        public double mod;
-        public double ang; // in rad
-
-        public ComplexPol(double Mod = 0, double Ang = 0)
-        {
-            mod = Mod;
-            ang = Ang;
-        }
-
-        public static ComplexPol operator *(ComplexPol c1, ComplexPol c2)
-        {
-            ComplexPol temp;
-            temp.mod = c1.mod * c2.mod;
-            temp.ang = c1.ang + c2.ang;
-
-            return temp;
-        }
-        public static ComplexPol operator /(ComplexPol c1, ComplexPol c2)
-        {
-            ComplexPol temp;
-            temp.mod = c1.mod / c2.mod;
-            temp.ang = c1.ang - c2.ang;
-
-            return temp;
-        }
-    }
-
-    struct JonesMatCar
-    {
-        public ComplexCar J11;
-        public ComplexCar J12;
-        public ComplexCar J21;
-        public ComplexCar J22;
-
-        public static JonesMatCar operator *(JonesMatCar j1, JonesMatCar j2)
-        {
-            JonesMatCar temp;
-
-            temp.J11 = (j1.J11 * j2.J11) + (j1.J12 * j2.J21);
-            temp.J12 = (j1.J11 * j2.J12) + (j1.J12 * j2.J22);
-            temp.J21 = (j1.J21 * j2.J11) + (j1.J22 * j2.J21);
-            temp.J22 = (j1.J21 * j2.J12) + (j1.J22 * j2.J22);
-
-            return temp;
-        }
-    }
-
-    struct JonesMatPol
-    {
-        public ComplexPol J11;
-        public ComplexPol J12;
-        public ComplexPol J21;
-        public ComplexPol J22;
-    }
-
     static class CMath
     {
+        public struct ComplexCar
+        {
+            public double real;
+            public double imag;
+
+            public ComplexCar(double Real = 0, double Imag = 0)
+            {
+                real = Real;
+                imag = Imag;
+            }
+
+            public static ComplexCar operator +(ComplexCar c1, ComplexCar c2)
+            {
+                ComplexCar temp;
+                temp.real = c1.real + c2.real;
+                temp.imag = c1.imag + c2.imag;
+
+                return temp;
+            }
+            public static ComplexCar operator -(ComplexCar c1, ComplexCar c2)
+            {
+                ComplexCar temp;
+                temp.real = c1.real - c2.real;
+                temp.imag = c1.imag - c2.imag;
+
+                return temp;
+            }
+            public static ComplexCar operator *(double c, ComplexCar c1)
+            {
+                ComplexCar temp;
+                temp.real = c1.real * c;
+                temp.imag = c1.imag * c;
+
+                return temp;
+            }
+            public static ComplexCar operator /(ComplexCar c1, double c)
+            {
+                ComplexCar temp;
+                temp.real = c1.real / c;
+                temp.imag = c1.imag / c;
+
+                return temp;
+            }
+            public static ComplexCar operator *(ComplexCar c1, ComplexCar c2)
+            {
+                ComplexCar temp;
+                temp.real = (c1.real * c2.real) - (c1.imag * c2.imag);
+                temp.imag = (c1.real * c2.imag) + (c1.imag * c2.real);
+
+                return temp;
+            }
+            public static ComplexCar operator /(ComplexCar c1, ComplexCar c2)
+            {
+                ComplexCar temp;
+                double div = (c2.real * c2.real) + (c2.imag * c2.imag);
+
+                temp.real = ((c1.real * c2.real) + (c1.imag * c2.imag)) / div;
+                temp.imag = ((c1.imag * c2.real) - (c1.real * c2.imag)) / div;
+
+                return temp;
+            }
+        }
+
+        public struct ComplexPol
+        {
+            public double mod;
+            public double ang; // in rad
+
+            public ComplexPol(double Mod = 0, double Ang = 0)
+            {
+                mod = Mod;
+                ang = Ang;
+            }
+
+            public static ComplexPol operator *(ComplexPol c1, ComplexPol c2)
+            {
+                ComplexPol temp;
+                temp.mod = c1.mod * c2.mod;
+                temp.ang = c1.ang + c2.ang;
+
+                return temp;
+            }
+            public static ComplexPol operator /(ComplexPol c1, ComplexPol c2)
+            {
+                ComplexPol temp;
+                temp.mod = c1.mod / c2.mod;
+                temp.ang = c1.ang - c2.ang;
+
+                return temp;
+            }
+        }
+
+        public struct JonesMatCar
+        {
+            public ComplexCar J11;
+            public ComplexCar J12;
+            public ComplexCar J21;
+            public ComplexCar J22;
+
+            public static JonesMatCar operator *(JonesMatCar j1, JonesMatCar j2)
+            {
+                JonesMatCar temp;
+
+                temp.J11 = (j1.J11 * j2.J11) + (j1.J12 * j2.J21);
+                temp.J12 = (j1.J11 * j2.J12) + (j1.J12 * j2.J22);
+                temp.J21 = (j1.J21 * j2.J11) + (j1.J22 * j2.J21);
+                temp.J22 = (j1.J21 * j2.J12) + (j1.J22 * j2.J22);
+
+                return temp;
+            }
+        }
+
+        public struct JonesMatPol
+        {
+            public ComplexPol J11;
+            public ComplexPol J12;
+            public ComplexPol J21;
+            public ComplexPol J22;
+        }
+
         #region print
         public static void Print(ComplexCar complexCar)
         {

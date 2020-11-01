@@ -31,7 +31,7 @@ namespace PolarizationAnalyzer
             base.WndProc(ref m);
         }
 
-        static string GetComplexString(ComplexCar complex)
+        static string GetComplexString(CMath.ComplexCar complex)
         {
             if (complex.imag >= 0)
                 return complex.real.ToString() + " +" + complex.imag.ToString() + " i";
@@ -39,7 +39,7 @@ namespace PolarizationAnalyzer
                 return complex.real.ToString() + " " + complex.imag.ToString() + " i";
         }
 
-        static void creat(string path)
+        static void Creat(string path)
         {
             Excel excel = new Excel();
             excel.CreatNewFile();
@@ -175,11 +175,11 @@ namespace PolarizationAnalyzer
         bool nextMeasurement;
         bool threadRun;
 
-        JonesMatCar refJonesMat;
+        CMath.JonesMatCar refJonesMat;
 
         public Form RefToMainForm { get; set; }
 
-        private void btnFindPorts_Click(object sender, EventArgs e)
+        private void BtnFindPorts_Click(object sender, EventArgs e)
         {
             cmbCOMPorts.Items.Clear();
             portNames = SerialPort.GetPortNames();
@@ -190,7 +190,7 @@ namespace PolarizationAnalyzer
             }
         }
 
-        private void btnConnect_Click(object sender, EventArgs e)
+        private void BtnConnect_Click(object sender, EventArgs e)
         {
             if (cmbCOMPorts.SelectedIndex > -1)
             {
@@ -216,8 +216,8 @@ namespace PolarizationAnalyzer
                 }
             }
         }
-
-        private void btnDisconnect_Click(object sender, EventArgs e)
+        
+        private void BtnDisconnect_Click(object sender, EventArgs e)
         {
             serialPort.Close();
             serialPort.Dispose();
@@ -226,7 +226,7 @@ namespace PolarizationAnalyzer
             btnDisconnect.Enabled = false;
         }
 
-        private void btnWrite_Click(object sender, EventArgs e)
+        private void BtnWrite_Click(object sender, EventArgs e)
         {
             if (serialPort != null)
             {
@@ -276,45 +276,47 @@ namespace PolarizationAnalyzer
             ServoRotated?.Invoke(this, ack);
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private void BtnStart_Click(object sender, EventArgs e)
         {
             if (serialPort != null)
             {
-                pMDCharacteristics = new PMDCharacteristics();
-                pMDCharacteristics.PMDDatas = new List<PMDData>();
+                pMDCharacteristics = new PMDCharacteristics
+                {
+                    PMDDatas = new List<PMDData>(),
 
-                int stepSize = System.Convert.ToInt32(txtBoxStepSize.Text);
-
-                pMDCharacteristics.stepSize = stepSize;
-                pMDCharacteristics.waveLength = System.Convert.ToDouble(txtBoxWavelength.Text);
-                pMDCharacteristics.waveLengthStepSize = System.Convert.ToDouble(txtBoxWaveStep.Text);
-                pMDCharacteristics.laserPower = System.Convert.ToDouble(txtBoxLaserPower.Text);
-                pMDCharacteristics.delay = System.Convert.ToInt32(txtBoxDelay.Text);
-                pMDCharacteristics.fiberLength = System.Convert.ToDouble(txtBoxFiberLength.Text);
-                pMDCharacteristics.start = System.Convert.ToInt32(txtBoxStart.Text);
-                pMDCharacteristics.stop = System.Convert.ToInt32(txtBoxStop.Text);
+                    //Read user inputs
+                    stepSize = System.Convert.ToInt32(txtBoxStepSize.Text),
+                    waveLength = System.Convert.ToDouble(txtBoxWavelength.Text),
+                    waveLengthStepSize = System.Convert.ToDouble(txtBoxWaveStep.Text),
+                    laserPower = System.Convert.ToDouble(txtBoxLaserPower.Text),
+                    delay = System.Convert.ToInt32(txtBoxDelay.Text),
+                    fiberLength = System.Convert.ToDouble(txtBoxFiberLength.Text),
+                    start = System.Convert.ToInt32(txtBoxStart.Text),
+                    stop = System.Convert.ToInt32(txtBoxStop.Text)
+                };
 
                 sqrtFiberLength = Math.Sqrt(pMDCharacteristics.fiberLength);
 
                 InitDGDMesure(pMDCharacteristics.waveLength, pMDCharacteristics.laserPower);
 
+                //all long runnog oparations done in separate threads for avoid ui freezing issue.
                 Thread thread = new Thread(() =>
                 {
                     threadRun = true;
-                    for (int A = pMDCharacteristics.start; A <= pMDCharacteristics.stop; A = A + pMDCharacteristics.stepSize)
+                    for (int A = pMDCharacteristics.start; A <= pMDCharacteristics.stop; A += pMDCharacteristics.stepSize)
                     {
-                        for (int B = pMDCharacteristics.start; B <= pMDCharacteristics.stop; B = B + pMDCharacteristics.stepSize)
+                        for (int B = pMDCharacteristics.start; B <= pMDCharacteristics.stop; B += pMDCharacteristics.stepSize)
                         {
-                            for (int C = pMDCharacteristics.start; C <= pMDCharacteristics.stop; C = C + pMDCharacteristics.stepSize)
+                            for (int C = pMDCharacteristics.start; C <= pMDCharacteristics.stop; C += pMDCharacteristics.stepSize)
                             {
                                 servoAngle.servoA = A.ToString();
                                 servoAngle.servoB = B.ToString();
                                 servoAngle.servoC = C.ToString();
 
-                                serialPort.WriteLine("PMD" + servoAngle.servoA + ":" + servoAngle.servoB + ":" + servoAngle.servoC);
+                                serialPort.WriteLine("PMD" + servoAngle.servoA + ":" + servoAngle.servoB + ":" + servoAngle.servoC);//Prepare data string and send to arduino
 
                                 nextMeasurement = false;
-                                while (!nextMeasurement) { }
+                                while (!nextMeasurement) { }//wait until arduino send rotate complete message
                                 OnServoRotated(ack);
                                 if (threadRun == false)
                                     break;
@@ -331,17 +333,19 @@ namespace PolarizationAnalyzer
             }
         }
 
-        private void btnStop_Click(object sender, EventArgs e)
+        private void BtnStop_Click(object sender, EventArgs e)
         {
             threadRun = false;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             string path = " ";
 
-            FolderBrowserDialog folderDlg = new FolderBrowserDialog();
-            folderDlg.ShowNewFolderButton = true;
+            FolderBrowserDialog folderDlg = new FolderBrowserDialog
+            {
+                ShowNewFolderButton = true
+            };
             // Show the FolderBrowserDialog.  
             DialogResult result = folderDlg.ShowDialog();
             if (result == DialogResult.OK)
@@ -352,7 +356,7 @@ namespace PolarizationAnalyzer
                 {
                     try
                     {
-                        creat(path);
+                        Creat(path);
                         Excel excel = new Excel(path, 1);
                         excel.SelectWorkSheet(1);
 
@@ -391,13 +395,13 @@ namespace PolarizationAnalyzer
             }
         }
 
-        private void picCloseButton_Click(object sender, EventArgs e)
+        private void PicCloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
             RefToMainForm.Show();
         }
 
-        private void btnMeasureRefJonesMat_Click(object sender, EventArgs e)
+        private void BtnMeasureRefJonesMat_Click(object sender, EventArgs e)
         {
             Thread thread = new Thread(() =>
             {
@@ -410,7 +414,7 @@ namespace PolarizationAnalyzer
                     double[] jMatValues = Utility.JonesString2Double(jString);
                     //double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing
 
-                    JonesMatPol matPol = Utility.JonesDoubleArray2JonesMat(jMatValues);
+                    CMath.JonesMatPol matPol = Utility.JonesDoubleArray2JonesMat(jMatValues);
                     refJonesMat = CMath.Inverse(CMath.Pol2Car(matPol));
 
                     this.Invoke(new MethodInvoker(delegate ()
@@ -430,7 +434,7 @@ namespace PolarizationAnalyzer
             thread.Start();
         }
 
-        private void btnResetRefJonesMat_Click(object sender, EventArgs e)
+        private void BtnResetRefJonesMat_Click(object sender, EventArgs e)
         {
             refJonesMat = CMath.UnitMatrix();
 
@@ -440,7 +444,7 @@ namespace PolarizationAnalyzer
             lblJ22.Text = GetComplexString(refJonesMat.J22);
         }
 
-        private void btnShowRefJonesMat_Click(object sender, EventArgs e)
+        private void BtnShowRefJonesMat_Click(object sender, EventArgs e)
         {
             lblJ11.Text = GetComplexString(refJonesMat.J11);
             lblJ12.Text = GetComplexString(refJonesMat.J12);

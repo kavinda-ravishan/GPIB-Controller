@@ -555,7 +555,7 @@
             this.picCloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picCloseButton.TabIndex = 50;
             this.picCloseButton.TabStop = false;
-            this.picCloseButton.Click += new System.EventHandler(this.picCloseButton_Click);
+            this.picCloseButton.Click += new System.EventHandler(this.PicCloseButton_Click);
             // 
             // lbltitle
             // 
@@ -590,7 +590,7 @@
             this.btnPolController.TabIndex = 54;
             this.btnPolController.Text = "Polarization Controller";
             this.btnPolController.UseVisualStyleBackColor = false;
-            this.btnPolController.Click += new System.EventHandler(this.btnPolController_Click);
+            this.btnPolController.Click += new System.EventHandler(this.BtnPolController_Click);
             // 
             // MainForm
             // 

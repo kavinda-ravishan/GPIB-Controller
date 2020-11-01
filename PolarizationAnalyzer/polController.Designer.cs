@@ -105,7 +105,7 @@
             this.btnDisconnect.TabIndex = 7;
             this.btnDisconnect.Text = "Disconnect";
             this.btnDisconnect.UseVisualStyleBackColor = false;
-            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
+            this.btnDisconnect.Click += new System.EventHandler(this.BtnDisconnect_Click);
             // 
             // btnConnect
             // 
@@ -118,7 +118,7 @@
             this.btnConnect.TabIndex = 6;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = false;
-            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            this.btnConnect.Click += new System.EventHandler(this.BtnConnect_Click);
             // 
             // cmbCOMPorts
             // 
@@ -140,7 +140,7 @@
             this.btnFindPorts.TabIndex = 4;
             this.btnFindPorts.Text = "Find Ports";
             this.btnFindPorts.UseVisualStyleBackColor = false;
-            this.btnFindPorts.Click += new System.EventHandler(this.btnFindPorts_Click);
+            this.btnFindPorts.Click += new System.EventHandler(this.BtnFindPorts_Click);
             // 
             // txtBoxServoA
             // 
@@ -162,7 +162,7 @@
             this.btnWrite.TabIndex = 11;
             this.btnWrite.Text = "Write";
             this.btnWrite.UseVisualStyleBackColor = false;
-            this.btnWrite.Click += new System.EventHandler(this.btnWrite_Click);
+            this.btnWrite.Click += new System.EventHandler(this.BtnWrite_Click);
             // 
             // lblRData
             // 
@@ -223,7 +223,7 @@
             this.btnStart.TabIndex = 15;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = false;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
             // lblServoA
             // 
@@ -266,7 +266,7 @@
             this.btnStop.TabIndex = 19;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = false;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            this.btnStop.Click += new System.EventHandler(this.BtnStop_Click);
             // 
             // label2
             // 
@@ -299,7 +299,7 @@
             this.btnSave.TabIndex = 22;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // label3
             // 
@@ -350,7 +350,7 @@
             this.picCloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picCloseButton.TabIndex = 88;
             this.picCloseButton.TabStop = false;
-            this.picCloseButton.Click += new System.EventHandler(this.picCloseButton_Click);
+            this.picCloseButton.Click += new System.EventHandler(this.PicCloseButton_Click);
             // 
             // label4
             // 
@@ -443,7 +443,7 @@
             this.btnResetRefJonesMat.TabIndex = 104;
             this.btnResetRefJonesMat.Text = "Reset reference Jones matrix";
             this.btnResetRefJonesMat.UseVisualStyleBackColor = false;
-            this.btnResetRefJonesMat.Click += new System.EventHandler(this.btnResetRefJonesMat_Click);
+            this.btnResetRefJonesMat.Click += new System.EventHandler(this.BtnResetRefJonesMat_Click);
             // 
             // btnMeasureRefJonesMat
             // 
@@ -456,7 +456,7 @@
             this.btnMeasureRefJonesMat.TabIndex = 103;
             this.btnMeasureRefJonesMat.Text = "Measure reference Jones matrix";
             this.btnMeasureRefJonesMat.UseVisualStyleBackColor = false;
-            this.btnMeasureRefJonesMat.Click += new System.EventHandler(this.btnMeasureRefJonesMat_Click);
+            this.btnMeasureRefJonesMat.Click += new System.EventHandler(this.BtnMeasureRefJonesMat_Click);
             // 
             // btnShowRefJonesMat
             // 
@@ -469,7 +469,7 @@
             this.btnShowRefJonesMat.TabIndex = 102;
             this.btnShowRefJonesMat.Text = "Show reference Jones matrix";
             this.btnShowRefJonesMat.UseVisualStyleBackColor = false;
-            this.btnShowRefJonesMat.Click += new System.EventHandler(this.btnShowRefJonesMat_Click);
+            this.btnShowRefJonesMat.Click += new System.EventHandler(this.BtnShowRefJonesMat_Click);
             // 
             // label15
             // 

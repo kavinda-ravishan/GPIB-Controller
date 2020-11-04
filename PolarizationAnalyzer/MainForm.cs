@@ -149,7 +149,7 @@ namespace PolarizationAnalyzer
 
                 for (int i = 0; i < data.Length; i++)
                 {
-                    stringReadTextBox1.Text += (Utility.Lables_S0[i] + " -> " + data[i] + Environment.NewLine);
+                    stringReadTextBox1.Text += (Utility.Labels_S0[i] + " -> " + data[i] + Environment.NewLine);
                 }
 
             }
@@ -178,7 +178,7 @@ namespace PolarizationAnalyzer
 
                 for (int i = 0; i < data.Length; i++)
                 {
-                    stringReadTextBox1.Text += (Utility.Lables_SB[i] + " -> " + data[i] + Environment.NewLine);
+                    stringReadTextBox1.Text += (Utility.Labels_SB[i] + " -> " + data[i] + Environment.NewLine);
                 }
 
             }
@@ -206,7 +206,7 @@ namespace PolarizationAnalyzer
 
                 for (int i = 0; i < data.Length; i++)
                 {
-                    stringReadTextBox1.Text += (Utility.Lables_JM[i] + " -> " + data[i] + Environment.NewLine);
+                    stringReadTextBox1.Text += (Utility.Labels_JM[i] + " -> " + data[i] + Environment.NewLine);
                 }
 
             }

@@ -63,7 +63,7 @@ namespace PolarizationAnalyzer
                 stringReadTextBox.Clear();
                 for (int i = 0; i < 6; i++)
                 {
-                    stringReadTextBox.Text += (Utility.Lables_SB[i] + " - " + data[i] + Environment.NewLine);
+                    stringReadTextBox.Text += (Utility.Labels_SB[i] + " - " + data[i] + Environment.NewLine);
                 }
 
                 if ( (S1.Count < points || points == 0) && S1.Count < 1000)

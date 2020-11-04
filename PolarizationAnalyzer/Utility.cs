@@ -38,7 +38,7 @@ namespace PolarizationAnalyzer
         }
 
         //Labels for S0 receive data
-        public static string[] Lables_S0 =
+        public static string[] Labels_S0 =
         {
             "elevation angle θ",
             "ellipticity angle η",
@@ -60,7 +60,7 @@ namespace PolarizationAnalyzer
         };
 
         //Labels for SB receive data
-        public static string[] Lables_SB =
+        public static string[] Labels_SB =
         {
             "S1 normalized Stokes parameter s1",
             "S2 normalized Stokes parameter s2",
@@ -71,7 +71,7 @@ namespace PolarizationAnalyzer
         };
 
         //Labels for JM receive data
-        public static string[] Lables_JM =
+        public static string[] Labels_JM =
         {
             "J[11] modulus",
             "J[11] phase (degrees)",

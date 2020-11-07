@@ -247,7 +247,7 @@
             this.picCloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picCloseButton.TabIndex = 50;
             this.picCloseButton.TabStop = false;
-            this.picCloseButton.Click += new System.EventHandler(this.PicCloseButton_Click);
+            this.picCloseButton.Click += new System.EventHandler(this.picCloseButton_Click);
             // 
             // lbltitle
             // 

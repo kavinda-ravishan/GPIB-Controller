@@ -1,6 +1,5 @@
-﻿namespace GPIBController 
-{ 
-
+﻿namespace GPIBController
+{
     partial class polController
     {
         /// <summary>

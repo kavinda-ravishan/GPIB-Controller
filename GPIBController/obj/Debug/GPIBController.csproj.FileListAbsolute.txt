@@ -1,0 +1,20 @@
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\bin\Debug\NationalInstruments.Common.dll
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\bin\Debug\NationalInstruments.NI4882.dll
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\bin\Debug\NationalInstruments.Common.xml
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\bin\Debug\NationalInstruments.NI4882.xml
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIBController.csprojAssemblyReference.cache
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIBController.csproj.ResolveComReference.cache
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIBController.csproj.GenerateResource.cache
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIBController.csproj.CoreCompileInputs.cache
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIBController.csproj.CopyComplete
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\bin\Debug\GPIB Controller.exe.config
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\bin\Debug\GPIB Controller.exe
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\bin\Debug\GPIB Controller.pdb
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIB Controller.exe.config
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIBController.MainForm.resources
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIBController.polController.resources
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIBController.StoksForm.resources
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIBController.PMDForm.resources
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIBController.Properties.Resources.resources
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIB Controller.exe
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIB Controller.pdb

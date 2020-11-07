@@ -103,7 +103,7 @@ namespace GPIBController
             }
         }
 
-        private void PicCloseButton_Click(object sender, EventArgs e)
+        private void picCloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
             RefToMainForm.Show();

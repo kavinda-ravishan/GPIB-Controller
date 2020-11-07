@@ -60,23 +60,23 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="polController.cs">
+    <Compile Include="PolarizationControllerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="polController.Designer.cs">
-      <DependentUpon>polController.cs</DependentUpon>
+    <Compile Include="PolarizationControllerForm.Designer.cs">
+      <DependentUpon>PolarizationControllerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Stokes.cs">
+    <Compile Include="StokesPlotterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Stokes.Designer.cs">
-      <DependentUpon>Stokes.cs</DependentUpon>
+    <Compile Include="StokesPlotterForm.Designer.cs">
+      <DependentUpon>StokesPlotterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PMD.cs">
+    <Compile Include="PMDForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PMD.Designer.cs">
-      <DependentUpon>PMD.cs</DependentUpon>
+    <Compile Include="PMDForm.Designer.cs">
+      <DependentUpon>PMDForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,14 +84,14 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="polController.resx">
-      <DependentUpon>polController.cs</DependentUpon>
+    <EmbeddedResource Include="PolarizationControllerForm.resx">
+      <DependentUpon>PolarizationControllerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Stokes.resx">
-      <DependentUpon>Stokes.cs</DependentUpon>
+    <EmbeddedResource Include="StokesPlotterForm.resx">
+      <DependentUpon>StokesPlotterForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PMD.resx">
-      <DependentUpon>PMD.cs</DependentUpon>
+    <EmbeddedResource Include="PMDForm.resx">
+      <DependentUpon>PMDForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

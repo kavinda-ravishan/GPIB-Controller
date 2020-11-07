@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace GPIBController
 {
-    public partial class polController : Form
+    public partial class PolarizationControllerForm : Form
     {
-        public polController()
+        public PolarizationControllerForm()
         {
             InitializeComponent();
             ServoRotated += PolController_ServoRotated;

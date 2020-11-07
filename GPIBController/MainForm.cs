@@ -403,7 +403,7 @@ namespace GPIBController
             if (Devices.devicePolarizationAnalyzer != null && Devices.deviceLaserSource != null)
             {
                 this.Hide();
-                polController newForm = new polController
+                PolarizationControllerForm newForm = new PolarizationControllerForm
                 {
                     RefToMainForm = this
                 };

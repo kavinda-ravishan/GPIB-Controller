@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PolarizationControllerForm));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnDisconnect = new System.Windows.Forms.Button();
             this.btnConnect = new System.Windows.Forms.Button();
             this.cmbCOMPorts = new System.Windows.Forms.ComboBox();
@@ -88,9 +91,14 @@
             this.txtBoxStop = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.btnLoad = new System.Windows.Forms.Button();
+            this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtBoxChartStepSize = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDisconnect
@@ -293,9 +301,9 @@
             this.btnSave.BackColor = System.Drawing.Color.Blue;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(652, 296);
+            this.btnSave.Location = new System.Drawing.Point(25, 262);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(179, 34);
+            this.btnSave.Size = new System.Drawing.Size(112, 34);
             this.btnSave.TabIndex = 22;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = false;
@@ -306,15 +314,15 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(600, 273);
+            this.label3.Location = new System.Drawing.Point(22, 233);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 13);
+            this.label3.Size = new System.Drawing.Size(32, 13);
             this.label3.TabIndex = 24;
-            this.label3.Text = "Path";
+            this.label3.Text = "Path:";
             // 
             // txtBoxPath
             // 
-            this.txtBoxPath.Location = new System.Drawing.Point(652, 270);
+            this.txtBoxPath.Location = new System.Drawing.Point(628, 275);
             this.txtBoxPath.Name = "txtBoxPath";
             this.txtBoxPath.Size = new System.Drawing.Size(179, 20);
             this.txtBoxPath.TabIndex = 23;
@@ -344,7 +352,7 @@
             // picCloseButton
             // 
             this.picCloseButton.Image = ((System.Drawing.Image)(resources.GetObject("picCloseButton.Image")));
-            this.picCloseButton.Location = new System.Drawing.Point(828, 10);
+            this.picCloseButton.Location = new System.Drawing.Point(1215, 6);
             this.picCloseButton.Name = "picCloseButton";
             this.picCloseButton.Size = new System.Drawing.Size(27, 24);
             this.picCloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -536,8 +544,11 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.panel2.Controls.Add(this.btnLoad);
             this.panel2.Controls.Add(this.stringReadTextBox);
-            this.panel2.Location = new System.Drawing.Point(576, 40);
+            this.panel2.Controls.Add(this.btnSave);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Location = new System.Drawing.Point(552, 45);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(279, 307);
             this.panel2.TabIndex = 106;
@@ -717,12 +728,66 @@
             this.label22.TabIndex = 122;
             this.label22.Text = "Stop";
             // 
-            // polController
+            // btnLoad
+            // 
+            this.btnLoad.BackColor = System.Drawing.Color.Blue;
+            this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoad.ForeColor = System.Drawing.Color.White;
+            this.btnLoad.Location = new System.Drawing.Point(143, 262);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(112, 34);
+            this.btnLoad.TabIndex = 123;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = false;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
+            // chart
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea1);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.chart.Legends.Add(legend1);
+            this.chart.Location = new System.Drawing.Point(837, 44);
+            this.chart.Name = "chart";
+            series1.ChartArea = "ChartArea1";
+            series1.IsXValueIndexed = true;
+            series1.Legend = "Legend1";
+            series1.Name = "Data";
+            this.chart.Series.Add(series1);
+            this.chart.Size = new System.Drawing.Size(405, 442);
+            this.chart.TabIndex = 123;
+            this.chart.Text = "chart1";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.BackColor = System.Drawing.Color.Black;
+            this.label23.ForeColor = System.Drawing.Color.White;
+            this.label23.Location = new System.Drawing.Point(915, 519);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(92, 13);
+            this.label23.TabIndex = 125;
+            this.label23.Text = "Step size of chart:";
+            // 
+            // txtBoxChartStepSize
+            // 
+            this.txtBoxChartStepSize.Location = new System.Drawing.Point(1013, 516);
+            this.txtBoxChartStepSize.Name = "txtBoxChartStepSize";
+            this.txtBoxChartStepSize.Size = new System.Drawing.Size(103, 20);
+            this.txtBoxChartStepSize.TabIndex = 124;
+            this.txtBoxChartStepSize.Text = "0.01";
+            this.txtBoxChartStepSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // PolarizationControllerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(867, 563);
+            this.ClientSize = new System.Drawing.Size(1254, 563);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.txtBoxChartStepSize);
+            this.Controls.Add(this.chart);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.txtBoxStop);
@@ -759,9 +824,7 @@
             this.Controls.Add(this.picCloseButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbltitle);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtBoxPath);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtBoxWavelength);
             this.Controls.Add(this.btnStop);
@@ -782,13 +845,15 @@
             this.Controls.Add(this.btnFindPorts);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MaximumSize = new System.Drawing.Size(867, 563);
-            this.MinimumSize = new System.Drawing.Size(867, 563);
-            this.Name = "polController";
+            this.MaximumSize = new System.Drawing.Size(1254, 563);
+            this.MinimumSize = new System.Drawing.Size(1254, 563);
+            this.Name = "PolarizationControllerForm";
             this.Text = "Polarization controller";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -855,5 +920,9 @@
         private System.Windows.Forms.TextBox txtBoxStop;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button btnLoad;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox txtBoxChartStepSize;
     }
 }

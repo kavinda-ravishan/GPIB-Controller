@@ -31,8 +31,8 @@ namespace GPIBController
                 chart3.Series["S3"].Points.Clear();
 
                 S1.Clear();
-                S1.Clear();
-                S1.Clear();
+                S2.Clear();
+                S3.Clear();
 
                 txtBoxNumPoints.Enabled = false;
                 txtBoxTimer.Enabled = false;

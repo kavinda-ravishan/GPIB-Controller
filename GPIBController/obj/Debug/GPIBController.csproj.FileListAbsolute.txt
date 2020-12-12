@@ -18,3 +18,4 @@ C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBCont
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIB Controller.exe
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIB Controller.pdb
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIBController.PolarizationControllerForm.resources
+C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Debug\GPIBController.HistogramForm.resources

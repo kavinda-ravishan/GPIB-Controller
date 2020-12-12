@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PolarizationControllerForm));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnDisconnect = new System.Windows.Forms.Button();
             this.btnConnect = new System.Windows.Forms.Button();
             this.cmbCOMPorts = new System.Windows.Forms.ComboBox();
@@ -43,7 +40,6 @@
             this.txtBoxServoC = new System.Windows.Forms.TextBox();
             this.txtBoxStepSize = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnStart = new System.Windows.Forms.Button();
             this.lblServoA = new System.Windows.Forms.Label();
             this.lblServoB = new System.Windows.Forms.Label();
             this.lblServoC = new System.Windows.Forms.Label();
@@ -74,13 +70,13 @@
             this.lblJ11 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnShowHIst = new System.Windows.Forms.Button();
             this.stringReadTextBox = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -91,14 +87,15 @@
             this.txtBoxStop = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.btnLoad = new System.Windows.Forms.Button();
-            this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label13 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.txtBoxChartStepSize = new System.Windows.Forms.TextBox();
+            this.listView = new System.Windows.Forms.ListView();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDisconnect
@@ -107,7 +104,7 @@
             this.btnDisconnect.Enabled = false;
             this.btnDisconnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDisconnect.ForeColor = System.Drawing.Color.White;
-            this.btnDisconnect.Location = new System.Drawing.Point(169, 94);
+            this.btnDisconnect.Location = new System.Drawing.Point(169, 109);
             this.btnDisconnect.Name = "btnDisconnect";
             this.btnDisconnect.Size = new System.Drawing.Size(78, 40);
             this.btnDisconnect.TabIndex = 7;
@@ -120,7 +117,7 @@
             this.btnConnect.BackColor = System.Drawing.Color.Blue;
             this.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConnect.ForeColor = System.Drawing.Color.White;
-            this.btnConnect.Location = new System.Drawing.Point(45, 94);
+            this.btnConnect.Location = new System.Drawing.Point(45, 109);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(78, 40);
             this.btnConnect.TabIndex = 6;
@@ -132,7 +129,7 @@
             // 
             this.cmbCOMPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCOMPorts.FormattingEnabled = true;
-            this.cmbCOMPorts.Location = new System.Drawing.Point(45, 46);
+            this.cmbCOMPorts.Location = new System.Drawing.Point(45, 61);
             this.cmbCOMPorts.Name = "cmbCOMPorts";
             this.cmbCOMPorts.Size = new System.Drawing.Size(114, 21);
             this.cmbCOMPorts.TabIndex = 5;
@@ -142,7 +139,7 @@
             this.btnFindPorts.BackColor = System.Drawing.Color.Blue;
             this.btnFindPorts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFindPorts.ForeColor = System.Drawing.Color.White;
-            this.btnFindPorts.Location = new System.Drawing.Point(169, 44);
+            this.btnFindPorts.Location = new System.Drawing.Point(169, 59);
             this.btnFindPorts.Name = "btnFindPorts";
             this.btnFindPorts.Size = new System.Drawing.Size(78, 23);
             this.btnFindPorts.TabIndex = 4;
@@ -152,7 +149,7 @@
             // 
             // txtBoxServoA
             // 
-            this.txtBoxServoA.Location = new System.Drawing.Point(45, 192);
+            this.txtBoxServoA.Location = new System.Drawing.Point(45, 207);
             this.txtBoxServoA.Name = "txtBoxServoA";
             this.txtBoxServoA.Size = new System.Drawing.Size(33, 20);
             this.txtBoxServoA.TabIndex = 8;
@@ -164,7 +161,7 @@
             this.btnWrite.BackColor = System.Drawing.Color.Blue;
             this.btnWrite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWrite.ForeColor = System.Drawing.Color.White;
-            this.btnWrite.Location = new System.Drawing.Point(45, 228);
+            this.btnWrite.Location = new System.Drawing.Point(45, 243);
             this.btnWrite.Name = "btnWrite";
             this.btnWrite.Size = new System.Drawing.Size(195, 34);
             this.btnWrite.TabIndex = 11;
@@ -176,7 +173,7 @@
             // 
             this.lblRData.AutoSize = true;
             this.lblRData.ForeColor = System.Drawing.Color.White;
-            this.lblRData.Location = new System.Drawing.Point(123, 300);
+            this.lblRData.Location = new System.Drawing.Point(123, 315);
             this.lblRData.Name = "lblRData";
             this.lblRData.Size = new System.Drawing.Size(16, 13);
             this.lblRData.TabIndex = 11;
@@ -184,7 +181,7 @@
             // 
             // txtBoxServoB
             // 
-            this.txtBoxServoB.Location = new System.Drawing.Point(126, 192);
+            this.txtBoxServoB.Location = new System.Drawing.Point(126, 207);
             this.txtBoxServoB.Name = "txtBoxServoB";
             this.txtBoxServoB.Size = new System.Drawing.Size(33, 20);
             this.txtBoxServoB.TabIndex = 9;
@@ -193,7 +190,7 @@
             // 
             // txtBoxServoC
             // 
-            this.txtBoxServoC.Location = new System.Drawing.Point(207, 192);
+            this.txtBoxServoC.Location = new System.Drawing.Point(207, 207);
             this.txtBoxServoC.Name = "txtBoxServoC";
             this.txtBoxServoC.Size = new System.Drawing.Size(33, 20);
             this.txtBoxServoC.TabIndex = 10;
@@ -202,7 +199,7 @@
             // 
             // txtBoxStepSize
             // 
-            this.txtBoxStepSize.Location = new System.Drawing.Point(393, 77);
+            this.txtBoxStepSize.Location = new System.Drawing.Point(653, 203);
             this.txtBoxStepSize.Name = "txtBoxStepSize";
             this.txtBoxStepSize.Size = new System.Drawing.Size(100, 20);
             this.txtBoxStepSize.TabIndex = 13;
@@ -214,30 +211,17 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Black;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(284, 80);
+            this.label1.Location = new System.Drawing.Point(544, 206);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 14;
             this.label1.Text = "Step size";
             // 
-            // btnStart
-            // 
-            this.btnStart.BackColor = System.Drawing.Color.Blue;
-            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(303, 261);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 35);
-            this.btnStart.TabIndex = 15;
-            this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = false;
-            this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
-            // 
             // lblServoA
             // 
             this.lblServoA.AutoSize = true;
             this.lblServoA.ForeColor = System.Drawing.Color.White;
-            this.lblServoA.Location = new System.Drawing.Point(332, 351);
+            this.lblServoA.Location = new System.Drawing.Point(588, 332);
             this.lblServoA.Name = "lblServoA";
             this.lblServoA.Size = new System.Drawing.Size(16, 13);
             this.lblServoA.TabIndex = 16;
@@ -247,7 +231,7 @@
             // 
             this.lblServoB.AutoSize = true;
             this.lblServoB.ForeColor = System.Drawing.Color.White;
-            this.lblServoB.Location = new System.Drawing.Point(392, 351);
+            this.lblServoB.Location = new System.Drawing.Point(648, 332);
             this.lblServoB.Name = "lblServoB";
             this.lblServoB.Size = new System.Drawing.Size(16, 13);
             this.lblServoB.TabIndex = 17;
@@ -257,7 +241,7 @@
             // 
             this.lblServoC.AutoSize = true;
             this.lblServoC.ForeColor = System.Drawing.Color.White;
-            this.lblServoC.Location = new System.Drawing.Point(453, 351);
+            this.lblServoC.Location = new System.Drawing.Point(709, 332);
             this.lblServoC.Name = "lblServoC";
             this.lblServoC.Size = new System.Drawing.Size(16, 13);
             this.lblServoC.TabIndex = 18;
@@ -268,9 +252,9 @@
             this.btnStop.BackColor = System.Drawing.Color.Blue;
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(418, 261);
+            this.btnStop.Location = new System.Drawing.Point(670, 242);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(75, 35);
+            this.btnStop.Size = new System.Drawing.Size(83, 35);
             this.btnStop.TabIndex = 19;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = false;
@@ -281,7 +265,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Black;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(284, 105);
+            this.label2.Location = new System.Drawing.Point(308, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 21;
@@ -289,7 +273,7 @@
             // 
             // txtBoxWavelength
             // 
-            this.txtBoxWavelength.Location = new System.Drawing.Point(393, 102);
+            this.txtBoxWavelength.Location = new System.Drawing.Point(379, 62);
             this.txtBoxWavelength.Name = "txtBoxWavelength";
             this.txtBoxWavelength.Size = new System.Drawing.Size(100, 20);
             this.txtBoxWavelength.TabIndex = 20;
@@ -301,7 +285,7 @@
             this.btnSave.BackColor = System.Drawing.Color.Blue;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(25, 262);
+            this.btnSave.Location = new System.Drawing.Point(25, 455);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(112, 34);
             this.btnSave.TabIndex = 22;
@@ -314,17 +298,18 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(22, 233);
+            this.label3.Location = new System.Drawing.Point(22, 426);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 24;
-            this.label3.Text = "Path:";
+            this.label3.Text = "File name:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // txtBoxPath
             // 
-            this.txtBoxPath.Location = new System.Drawing.Point(628, 275);
+            this.txtBoxPath.Location = new System.Drawing.Point(83, 423);
             this.txtBoxPath.Name = "txtBoxPath";
-            this.txtBoxPath.Size = new System.Drawing.Size(179, 20);
+            this.txtBoxPath.Size = new System.Drawing.Size(172, 20);
             this.txtBoxPath.TabIndex = 23;
             this.txtBoxPath.Text = "data";
             // 
@@ -352,7 +337,7 @@
             // picCloseButton
             // 
             this.picCloseButton.Image = ((System.Drawing.Image)(resources.GetObject("picCloseButton.Image")));
-            this.picCloseButton.Location = new System.Drawing.Point(1215, 6);
+            this.picCloseButton.Location = new System.Drawing.Point(1113, 10);
             this.picCloseButton.Name = "picCloseButton";
             this.picCloseButton.Size = new System.Drawing.Size(27, 24);
             this.picCloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -365,7 +350,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Black;
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(284, 131);
+            this.label4.Location = new System.Drawing.Point(544, 65);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(103, 13);
             this.label4.TabIndex = 90;
@@ -373,7 +358,7 @@
             // 
             // txtBoxWaveStep
             // 
-            this.txtBoxWaveStep.Location = new System.Drawing.Point(393, 128);
+            this.txtBoxWaveStep.Location = new System.Drawing.Point(653, 62);
             this.txtBoxWaveStep.Name = "txtBoxWaveStep";
             this.txtBoxWaveStep.Size = new System.Drawing.Size(100, 20);
             this.txtBoxWaveStep.TabIndex = 89;
@@ -385,7 +370,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Black;
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(284, 183);
+            this.label5.Location = new System.Drawing.Point(544, 117);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 13);
             this.label5.TabIndex = 92;
@@ -393,7 +378,7 @@
             // 
             // txtBoxLaserPower
             // 
-            this.txtBoxLaserPower.Location = new System.Drawing.Point(393, 180);
+            this.txtBoxLaserPower.Location = new System.Drawing.Point(653, 114);
             this.txtBoxLaserPower.Name = "txtBoxLaserPower";
             this.txtBoxLaserPower.Size = new System.Drawing.Size(100, 20);
             this.txtBoxLaserPower.TabIndex = 91;
@@ -405,7 +390,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Black;
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(284, 209);
+            this.label6.Location = new System.Drawing.Point(544, 143);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(34, 13);
             this.label6.TabIndex = 94;
@@ -413,7 +398,7 @@
             // 
             // txtBoxDelay
             // 
-            this.txtBoxDelay.Location = new System.Drawing.Point(393, 206);
+            this.txtBoxDelay.Location = new System.Drawing.Point(653, 140);
             this.txtBoxDelay.Name = "txtBoxDelay";
             this.txtBoxDelay.Size = new System.Drawing.Size(100, 20);
             this.txtBoxDelay.TabIndex = 93;
@@ -425,7 +410,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Black;
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(284, 157);
+            this.label7.Location = new System.Drawing.Point(544, 91);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(62, 13);
             this.label7.TabIndex = 96;
@@ -433,7 +418,7 @@
             // 
             // txtBoxFiberLength
             // 
-            this.txtBoxFiberLength.Location = new System.Drawing.Point(393, 154);
+            this.txtBoxFiberLength.Location = new System.Drawing.Point(653, 88);
             this.txtBoxFiberLength.Name = "txtBoxFiberLength";
             this.txtBoxFiberLength.Size = new System.Drawing.Size(100, 20);
             this.txtBoxFiberLength.TabIndex = 95;
@@ -544,23 +529,37 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.panel2.Controls.Add(this.btnLoad);
+            this.panel2.Controls.Add(this.btnShowHIst);
             this.panel2.Controls.Add(this.stringReadTextBox);
             this.panel2.Controls.Add(this.btnSave);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(552, 45);
+            this.panel2.Controls.Add(this.txtBoxPath);
+            this.panel2.Location = new System.Drawing.Point(861, 46);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(279, 307);
+            this.panel2.Size = new System.Drawing.Size(279, 499);
             this.panel2.TabIndex = 106;
+            // 
+            // btnShowHIst
+            // 
+            this.btnShowHIst.BackColor = System.Drawing.Color.Blue;
+            this.btnShowHIst.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowHIst.ForeColor = System.Drawing.Color.White;
+            this.btnShowHIst.Location = new System.Drawing.Point(143, 455);
+            this.btnShowHIst.Name = "btnShowHIst";
+            this.btnShowHIst.Size = new System.Drawing.Size(112, 34);
+            this.btnShowHIst.TabIndex = 123;
+            this.btnShowHIst.Text = "Show histogram";
+            this.btnShowHIst.UseVisualStyleBackColor = false;
+            this.btnShowHIst.Click += new System.EventHandler(this.btnShowHist_Click);
             // 
             // stringReadTextBox
             // 
             this.stringReadTextBox.BackColor = System.Drawing.Color.DarkBlue;
             this.stringReadTextBox.ForeColor = System.Drawing.Color.White;
-            this.stringReadTextBox.Location = new System.Drawing.Point(41, 15);
+            this.stringReadTextBox.Location = new System.Drawing.Point(25, 15);
             this.stringReadTextBox.Name = "stringReadTextBox";
             this.stringReadTextBox.ReadOnly = true;
-            this.stringReadTextBox.Size = new System.Drawing.Size(214, 188);
+            this.stringReadTextBox.Size = new System.Drawing.Size(230, 387);
             this.stringReadTextBox.TabIndex = 39;
             this.stringReadTextBox.Text = "";
             // 
@@ -569,7 +568,7 @@
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Black;
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(499, 159);
+            this.label8.Location = new System.Drawing.Point(759, 93);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(22, 13);
             this.label8.TabIndex = 112;
@@ -580,7 +579,7 @@
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Black;
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(499, 211);
+            this.label9.Location = new System.Drawing.Point(759, 145);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(20, 13);
             this.label9.TabIndex = 111;
@@ -591,7 +590,7 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Black;
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(499, 185);
+            this.label10.Location = new System.Drawing.Point(759, 119);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(24, 13);
             this.label10.TabIndex = 110;
@@ -602,7 +601,7 @@
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.Black;
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(499, 133);
+            this.label11.Location = new System.Drawing.Point(759, 67);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(21, 13);
             this.label11.TabIndex = 109;
@@ -613,28 +612,17 @@
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.Black;
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(499, 107);
+            this.label12.Location = new System.Drawing.Point(485, 65);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(21, 13);
             this.label12.TabIndex = 108;
             this.label12.Text = "nm";
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.Black;
-            this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(499, 82);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(47, 13);
-            this.label13.TabIndex = 107;
-            this.label13.Text = "Degrees";
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(213, 154);
+            this.label14.Location = new System.Drawing.Point(213, 169);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(14, 13);
             this.label14.TabIndex = 115;
@@ -644,7 +632,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(134, 154);
+            this.label16.Location = new System.Drawing.Point(134, 169);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(14, 13);
             this.label16.TabIndex = 114;
@@ -654,7 +642,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(53, 154);
+            this.label17.Location = new System.Drawing.Point(53, 169);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(14, 13);
             this.label17.TabIndex = 113;
@@ -664,7 +652,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(453, 323);
+            this.label18.Location = new System.Drawing.Point(709, 304);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(14, 13);
             this.label18.TabIndex = 118;
@@ -674,7 +662,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.ForeColor = System.Drawing.Color.White;
-            this.label19.Location = new System.Drawing.Point(392, 323);
+            this.label19.Location = new System.Drawing.Point(648, 304);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(14, 13);
             this.label19.TabIndex = 117;
@@ -684,7 +672,7 @@
             // 
             this.label20.AutoSize = true;
             this.label20.ForeColor = System.Drawing.Color.White;
-            this.label20.Location = new System.Drawing.Point(332, 323);
+            this.label20.Location = new System.Drawing.Point(588, 304);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(14, 13);
             this.label20.TabIndex = 116;
@@ -692,7 +680,7 @@
             // 
             // txtBoxStart
             // 
-            this.txtBoxStart.Location = new System.Drawing.Point(316, 45);
+            this.txtBoxStart.Location = new System.Drawing.Point(579, 177);
             this.txtBoxStart.Name = "txtBoxStart";
             this.txtBoxStart.Size = new System.Drawing.Size(62, 20);
             this.txtBoxStart.TabIndex = 119;
@@ -701,7 +689,7 @@
             // 
             // txtBoxStop
             // 
-            this.txtBoxStop.Location = new System.Drawing.Point(431, 45);
+            this.txtBoxStop.Location = new System.Drawing.Point(691, 177);
             this.txtBoxStop.Name = "txtBoxStop";
             this.txtBoxStop.Size = new System.Drawing.Size(62, 20);
             this.txtBoxStop.TabIndex = 120;
@@ -712,82 +700,107 @@
             // 
             this.label21.AutoSize = true;
             this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Location = new System.Drawing.Point(281, 48);
+            this.label21.Location = new System.Drawing.Point(544, 180);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(29, 13);
+            this.label21.Size = new System.Drawing.Size(30, 13);
             this.label21.TabIndex = 121;
-            this.label21.Text = "Start";
+            this.label21.Text = "From";
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.ForeColor = System.Drawing.Color.White;
-            this.label22.Location = new System.Drawing.Point(396, 48);
+            this.label22.Location = new System.Drawing.Point(656, 180);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(29, 13);
+            this.label22.Size = new System.Drawing.Size(20, 13);
             this.label22.TabIndex = 122;
-            this.label22.Text = "Stop";
+            this.label22.Text = "To";
             // 
-            // btnLoad
+            // label13
             // 
-            this.btnLoad.BackColor = System.Drawing.Color.Blue;
-            this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoad.ForeColor = System.Drawing.Color.White;
-            this.btnLoad.Location = new System.Drawing.Point(143, 262);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(112, 34);
-            this.btnLoad.TabIndex = 123;
-            this.btnLoad.Text = "Load";
-            this.btnLoad.UseVisualStyleBackColor = false;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-            // 
-            // chart
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea1);
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.chart.Legends.Add(legend1);
-            this.chart.Location = new System.Drawing.Point(837, 44);
-            this.chart.Name = "chart";
-            series1.ChartArea = "ChartArea1";
-            series1.IsXValueIndexed = true;
-            series1.Legend = "Legend1";
-            series1.Name = "Data";
-            this.chart.Series.Add(series1);
-            this.chart.Size = new System.Drawing.Size(405, 442);
-            this.chart.TabIndex = 123;
-            this.chart.Text = "chart1";
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Black;
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(759, 206);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(47, 13);
+            this.label13.TabIndex = 123;
+            this.label13.Text = "Degrees";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.BackColor = System.Drawing.Color.Black;
             this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(915, 519);
+            this.label23.Location = new System.Drawing.Point(759, 180);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(92, 13);
-            this.label23.TabIndex = 125;
-            this.label23.Text = "Step size of chart:";
+            this.label23.Size = new System.Drawing.Size(47, 13);
+            this.label23.TabIndex = 124;
+            this.label23.Text = "Degrees";
             // 
-            // txtBoxChartStepSize
+            // listView
             // 
-            this.txtBoxChartStepSize.Location = new System.Drawing.Point(1013, 516);
-            this.txtBoxChartStepSize.Name = "txtBoxChartStepSize";
-            this.txtBoxChartStepSize.Size = new System.Drawing.Size(103, 20);
-            this.txtBoxChartStepSize.TabIndex = 124;
-            this.txtBoxChartStepSize.Text = "0.01";
-            this.txtBoxChartStepSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.listView.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.listView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listView.HideSelection = false;
+            this.listView.Location = new System.Drawing.Point(379, 91);
+            this.listView.Name = "listView";
+            this.listView.Size = new System.Drawing.Size(100, 136);
+            this.listView.TabIndex = 125;
+            this.listView.UseCompatibleStateImageBehavior = false;
+            this.listView.View = System.Windows.Forms.View.List;
+            // 
+            // btnStart
+            // 
+            this.btnStart.BackColor = System.Drawing.Color.Blue;
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStart.ForeColor = System.Drawing.Color.White;
+            this.btnStart.Location = new System.Drawing.Point(547, 242);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(83, 35);
+            this.btnStart.TabIndex = 126;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = false;
+            this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackColor = System.Drawing.Color.Blue;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.ForeColor = System.Drawing.Color.White;
+            this.btnAdd.Location = new System.Drawing.Point(311, 91);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(62, 136);
+            this.btnAdd.TabIndex = 127;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.Blue;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.ForeColor = System.Drawing.Color.White;
+            this.btnClear.Location = new System.Drawing.Point(311, 242);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(168, 35);
+            this.btnClear.TabIndex = 128;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // PolarizationControllerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1254, 563);
+            this.ClientSize = new System.Drawing.Size(1151, 563);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.listView);
             this.Controls.Add(this.label23);
-            this.Controls.Add(this.txtBoxChartStepSize);
-            this.Controls.Add(this.chart);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.txtBoxStop);
@@ -803,7 +816,6 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.label13);
             this.Controls.Add(this.btnResetRefJonesMat);
             this.Controls.Add(this.btnMeasureRefJonesMat);
             this.Controls.Add(this.btnShowRefJonesMat);
@@ -824,14 +836,12 @@
             this.Controls.Add(this.picCloseButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbltitle);
-            this.Controls.Add(this.txtBoxPath);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtBoxWavelength);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.lblServoC);
             this.Controls.Add(this.lblServoB);
             this.Controls.Add(this.lblServoA);
-            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBoxStepSize);
             this.Controls.Add(this.txtBoxServoC);
@@ -845,15 +855,12 @@
             this.Controls.Add(this.btnFindPorts);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MaximumSize = new System.Drawing.Size(1254, 563);
-            this.MinimumSize = new System.Drawing.Size(1254, 563);
             this.Name = "PolarizationControllerForm";
             this.Text = "Polarization controller";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -872,7 +879,6 @@
         private System.Windows.Forms.TextBox txtBoxServoC;
         private System.Windows.Forms.TextBox txtBoxStepSize;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label lblServoA;
         private System.Windows.Forms.Label lblServoB;
         private System.Windows.Forms.Label lblServoC;
@@ -909,7 +915,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
@@ -920,9 +925,12 @@
         private System.Windows.Forms.TextBox txtBoxStop;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Button btnLoad;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart;
+        private System.Windows.Forms.Button btnShowHIst;
+        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox txtBoxChartStepSize;
+        private System.Windows.Forms.ListView listView;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnClear;
     }
 }

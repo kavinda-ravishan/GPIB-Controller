@@ -14,6 +14,7 @@ namespace GPIBController
             InitializeComponent();
             ServoRotated += PolController_ServoRotated;
             refJonesMat = CMath.UnitMatrix();
+            wavelengths = new List<double>();
         }
 
         double sqrtFiberLength;
@@ -111,17 +112,17 @@ namespace GPIBController
 
             PMDData pMD = new PMDData();
 
-            string jStringw1 = GetJonesMatrix(pMDCharacteristics.waveLength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            string jStringw1 = GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
             //string jStringw1 = Utility.text_J1_1;//for testing
-            string jStringw2 = GetJonesMatrix(pMDCharacteristics.waveLength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            string jStringw2 = GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
             //string jStringw2 = Utility.text_J1_2;//for testing
 
             double[] DGD = Utility.DGD(
                 jStringw1,
                 jStringw2,
                 refJonesMat,
-                pMDCharacteristics.waveLength - pMDCharacteristics.waveLengthStepSize,
-                pMDCharacteristics.waveLength + pMDCharacteristics.waveLengthStepSize
+                pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize,
+                pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize
                 );
 
 
@@ -134,7 +135,7 @@ namespace GPIBController
             this.Invoke(new MethodInvoker(delegate ()
             {
                 //update labels and chart
-                stringReadTextBox.Text += (pMDCharacteristics.waveLength.ToString() + " nm" + Environment.NewLine);
+                stringReadTextBox.Text += (pMDCharacteristics.wavelength.ToString() + " nm" + Environment.NewLine);
                 stringReadTextBox.Text += ("DGD : " + pMD.DGD.ToString() + " ps" + Environment.NewLine);
                 stringReadTextBox.Text += ("PMD : " + pMD.PMD.ToString() + Environment.NewLine);
                 stringReadTextBox.Text += (Environment.NewLine);
@@ -159,7 +160,7 @@ namespace GPIBController
         public struct PMDCharacteristics
         {
             public int stepSize;
-            public double waveLength;
+            public double wavelength;
             public double waveLengthStepSize;
             public double laserPower;
             public int delay;
@@ -175,7 +176,7 @@ namespace GPIBController
         string ack;
         bool nextMeasurement;
         bool threadRun;
-        List<double> PMD;
+        List<double> wavelengths;
 
         CMath.JonesMatCar refJonesMat;
 
@@ -280,7 +281,7 @@ namespace GPIBController
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
-            if (serialPort != null)
+            if (serialPort != null && wavelengths.Count != 0)
             {
                 pMDCharacteristics = new PMDCharacteristics
                 {
@@ -288,7 +289,7 @@ namespace GPIBController
 
                     //Read user inputs
                     stepSize = System.Convert.ToInt32(txtBoxStepSize.Text),
-                    waveLength = System.Convert.ToDouble(txtBoxWavelength.Text),
+                    wavelength = 0,
                     waveLengthStepSize = System.Convert.ToDouble(txtBoxWaveStep.Text),
                     laserPower = System.Convert.ToDouble(txtBoxLaserPower.Text),
                     delay = System.Convert.ToInt32(txtBoxDelay.Text),
@@ -299,35 +300,40 @@ namespace GPIBController
 
                 sqrtFiberLength = Math.Sqrt(pMDCharacteristics.fiberLength);
 
-                InitDGDMesure(pMDCharacteristics.waveLength, pMDCharacteristics.laserPower);
-
                 //all long runnog oparations done in separate threads for avoid ui freezing issue.
                 Thread thread = new Thread(() =>
                 {
                     threadRun = true;
-                    for (int A = pMDCharacteristics.start; A <= pMDCharacteristics.stop; A += pMDCharacteristics.stepSize)
+
+                    for (int i = 0; i < wavelengths.Count; i++)
                     {
-                        for (int B = pMDCharacteristics.start; B <= pMDCharacteristics.stop; B += pMDCharacteristics.stepSize)
+                        pMDCharacteristics.wavelength = wavelengths[i];
+                        InitDGDMesure(pMDCharacteristics.wavelength, pMDCharacteristics.laserPower);
+
+                        for (int A = pMDCharacteristics.start; A <= pMDCharacteristics.stop; A += pMDCharacteristics.stepSize)
                         {
-                            for (int C = pMDCharacteristics.start; C <= pMDCharacteristics.stop; C += pMDCharacteristics.stepSize)
+                            for (int B = pMDCharacteristics.start; B <= pMDCharacteristics.stop; B += pMDCharacteristics.stepSize)
                             {
-                                servoAngle.servoA = A.ToString();
-                                servoAngle.servoB = B.ToString();
-                                servoAngle.servoC = C.ToString();
+                                for (int C = pMDCharacteristics.start; C <= pMDCharacteristics.stop; C += pMDCharacteristics.stepSize)
+                                {
+                                    servoAngle.servoA = A.ToString();
+                                    servoAngle.servoB = B.ToString();
+                                    servoAngle.servoC = C.ToString();
 
-                                serialPort.WriteLine("PMD" + servoAngle.servoA + ":" + servoAngle.servoB + ":" + servoAngle.servoC);//Prepare data string and send to arduino
+                                    serialPort.WriteLine("PMD" + servoAngle.servoA + ":" + servoAngle.servoB + ":" + servoAngle.servoC);//Prepare data string and send to arduino
 
-                                nextMeasurement = false;
-                                while (!nextMeasurement) { }//wait until arduino send rotate complete message
-                                OnServoRotated(ack);
+                                    nextMeasurement = false;
+                                    while (!nextMeasurement) { }//wait until arduino send rotate complete message
+                                    OnServoRotated(ack);
+                                    if (threadRun == false)
+                                        break;
+                                }
                                 if (threadRun == false)
                                     break;
                             }
                             if (threadRun == false)
                                 break;
                         }
-                        if (threadRun == false)
-                            break;
                     }
                     Done();
                 });
@@ -362,8 +368,11 @@ namespace GPIBController
                         Excel excel = new Excel(path, 1);
                         excel.SelectWorkSheet(1);
 
-                        excel.WriteToCell(0, 0, "Wavelength");
-                        excel.WriteToCell(0, 1, pMDCharacteristics.waveLength.ToString());
+                        excel.WriteToCell(0, 0, "Wavelengths");
+                        for (int i = 0; i < wavelengths.Count; i++)
+                        {
+                            excel.WriteToCell(0, i + 1, wavelengths[i].ToString());
+                        }
 
                         excel.WriteToCell(1, 0, "PMD");
                         excel.WriteToCell(1, 1, "Servo A");
@@ -454,87 +463,31 @@ namespace GPIBController
             lblJ22.Text = GetComplexString(refJonesMat.J22);
         }
 
-        private void btnLoad_Click(object sender, EventArgs e)
+        private void btnShowHist_Click(object sender, EventArgs e)
         {
-            string path = " ";
-
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            this.Hide();
+            HistogramForm newForm = new HistogramForm
             {
-                InitialDirectory = @"C:\",
-                Title = "Load excel file",
-                CheckFileExists = true,
-                CheckPathExists = true,
-                DefaultExt = "xlsx",
-                Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*",
-                FilterIndex = 1,
-                RestoreDirectory = true
+                RefToPolonForm = this
             };
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            newForm.Show();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            wavelengths.Add(System.Convert.ToDouble(txtBoxWavelength.Text));
+
+            listView.Items.Clear();
+            for (int i = 0; i < wavelengths.Count; i++)
             {
-                path = openFileDialog.FileName;
-
-                Thread thread = new Thread(() =>
-                {
-                    Excel excel = new Excel(path, 1);
-                    excel.SelectWorkSheet(1);
-
-                    PMD = new List<double>();
-
-                    int i = 0;
-                    double data = 0;
-                    double max = excel.ReadExcel(i + 2, 0);
-                    double min = excel.ReadExcel(i + 2, 0);
-
-                    while (true)
-                    {
-                        data = excel.ReadExcel(i + 2, 0);
-                        if (data != -1)
-                        {
-                            PMD.Add(data);
-                            if (max < excel.ReadExcel(i + 2, 0)) max = excel.ReadExcel(i + 2, 0);
-                            if (min > excel.ReadExcel(i + 2, 0)) min = excel.ReadExcel(i + 2, 0);
-                        }
-                        else break;
-                        i++;
-                    }
-                    excel.Close();
-
-                    double stepSize = System.Convert.ToDouble(txtBoxChartStepSize.Text);
-                    double steps = (max - min) / stepSize;
-
-                    List<double> histY = new List<double>();
-                    List<double> histX = new List<double>();
-
-                    double temp = min;
-
-                    for (i = 0; i < steps; i++)
-                    {
-                        histY.Add(0);
-                        histX.Add(temp - (stepSize / 2));
-                        temp = temp + stepSize;
-                    }
-
-                    for (i = 0; i < PMD.Count; i++)
-                    {
-                        histY[(int)((PMD[i] - min) / stepSize)]++;
-                    }
-
-                    this.Invoke(new MethodInvoker(delegate ()
-                    {
-                        stringReadTextBox.Text += ("Excel loaded." + Environment.NewLine);
-                        stringReadTextBox.Text += (Environment.NewLine);
-                        stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
-                        stringReadTextBox.ScrollToCaret();
-
-                        chart.Series["Data"].Points.Clear();
-                        for (i = 0; i < histY.Count; i++)
-                        {
-                            chart.Series["Data"].Points.AddXY(histX[i], histY[i]);
-                        }
-                    }));
-                });
-                thread.Start();
+                listView.Items.Add(wavelengths[i].ToString() + " nm", i);
             }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            wavelengths.Clear();
+            listView.Items.Clear();
         }
     }
 }

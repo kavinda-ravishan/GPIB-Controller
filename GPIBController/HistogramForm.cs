@@ -16,6 +16,9 @@ namespace GPIBController
         public HistogramForm()
         {
             InitializeComponent();
+            PMD = new List<double>();
+            histY = new List<double>();
+            histX = new List<double>();
         }
 
         protected override void WndProc(ref Message m)
@@ -34,6 +37,12 @@ namespace GPIBController
 
         public Form RefToPolonForm { get; set; }
         List<double> PMD;
+        List<double> histY;
+        List<double> histX;
+        int i;
+        double max;
+        double min;
+        double data;
 
         private void picCloseButton_Click(object sender, EventArgs e)
         {
@@ -65,12 +74,14 @@ namespace GPIBController
                     Excel excel = new Excel(path, 1);
                     excel.SelectWorkSheet(1);
 
-                    PMD = new List<double>();
+                    i = 0;
+                    data = 0;
+                    max = excel.ReadExcel(i + 2, 0);
+                    min = excel.ReadExcel(i + 2, 0);
 
-                    int i = 0;
-                    double data = 0;
-                    double max = excel.ReadExcel(i + 2, 0);
-                    double min = excel.ReadExcel(i + 2, 0);
+                    PMD.Clear();
+                    histY.Clear();
+                    histX.Clear();
 
                     while (true)
                     {
@@ -80,6 +91,11 @@ namespace GPIBController
                             PMD.Add(data);
                             if (max < excel.ReadExcel(i + 2, 0)) max = excel.ReadExcel(i + 2, 0);
                             if (min > excel.ReadExcel(i + 2, 0)) min = excel.ReadExcel(i + 2, 0);
+                            
+                            this.Invoke(new MethodInvoker(delegate ()
+                            {
+                                lblStatus.Text = i.ToString() + " : " + data.ToString();
+                            }));
                         }
                         else break;
                         i++;
@@ -89,8 +105,57 @@ namespace GPIBController
                     double stepSize = System.Convert.ToDouble(txtBoxChartStepSize.Text);
                     double steps = (max - min) / stepSize;
 
-                    List<double> histY = new List<double>();
-                    List<double> histX = new List<double>();
+                    double temp = min;
+
+                    for (i = 0; i < steps; i++)
+                    {
+                        histY.Add(0);
+                        histX.Add(temp - (stepSize / 2));
+                        temp = temp + stepSize;
+
+                        this.Invoke(new MethodInvoker(delegate ()
+                        {
+                            lblStatus.Text = i.ToString();
+                        }));
+                    }
+
+                    for (i = 0; i < PMD.Count; i++)
+                    {
+                        histY[(int)((PMD[i] - min) / stepSize)]++;
+
+                        this.Invoke(new MethodInvoker(delegate ()
+                        {
+                            lblStatus.Text = i.ToString();
+                        }));
+                    }
+
+                    this.Invoke(new MethodInvoker(delegate ()
+                    {
+                        chart.Series["Data"].Points.Clear();
+                        for (i = 0; i < histY.Count; i++)
+                        {
+                            chart.Series["Data"].Points.AddXY(histX[i], histY[i]);
+
+                            lblStatus.Text = data.ToString();
+                        }
+                        lblStatus.Text = "---";
+                    }));
+                });
+                thread.Start();
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if(PMD.Count != 0)
+            {
+                Thread thread = new Thread(() =>
+                {
+                    histY.Clear();
+                    histX.Clear();
+
+                    double stepSize = System.Convert.ToDouble(txtBoxChartStepSize.Text);
+                    double steps = (max - min) / stepSize;
 
                     double temp = min;
 
@@ -99,11 +164,21 @@ namespace GPIBController
                         histY.Add(0);
                         histX.Add(temp - (stepSize / 2));
                         temp = temp + stepSize;
+
+                        this.Invoke(new MethodInvoker(delegate ()
+                        {
+                            lblStatus.Text = i.ToString();
+                        }));
                     }
 
                     for (i = 0; i < PMD.Count; i++)
                     {
                         histY[(int)((PMD[i] - min) / stepSize)]++;
+
+                        this.Invoke(new MethodInvoker(delegate ()
+                        {
+                            lblStatus.Text = i.ToString();
+                        }));
                     }
 
                     this.Invoke(new MethodInvoker(delegate ()
@@ -113,9 +188,14 @@ namespace GPIBController
                         {
                             chart.Series["Data"].Points.AddXY(histX[i], histY[i]);
                         }
+                        lblStatus.Text = "---";
                     }));
                 });
                 thread.Start();
+            }
+            else
+            {
+                MessageBox.Show("Please load PMD data !");
             }
         }
     }

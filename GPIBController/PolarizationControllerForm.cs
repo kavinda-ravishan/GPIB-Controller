@@ -64,20 +64,24 @@ namespace GPIBController
             return "L " + waveLenght.ToString() + ";X;";
         }
 
-        static void InitDGDMesure(double start, double power)
+        static void InitDGDMesure(double wavelength)
+        {
+            Console.WriteLine("Set Source  WL - " + wavelength.ToString());
+            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtSrc(wavelength)));//change wavelength source
+            Console.WriteLine("Set PAT9000 WL - " + wavelength.ToString());
+            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtPol(wavelength)));//change wavelength pol
+            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("PO;X;"));//Optimizing the polarizer position in the module
+        }
+
+        static void LaserOn(double power)
         {
             Console.WriteLine("Set Source Power - " + power.ToString());
             Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgPowerSrc(power))); // set power to 1000uW
             Console.WriteLine("Laser is ON !");
             Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 1")); // turn on the laser
-            Console.WriteLine("Set Source  WL - " + start.ToString());
-            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtSrc(start)));//change wavelength source
-            Console.WriteLine("Set PAT9000 WL - " + start.ToString());
-            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtPol(start)));//change wavelength pol
-            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("PO;X;"));//Optimizing the polarizer position in the module
         }
 
-        static void Done()
+        static void LaserOff()
         {
             Console.WriteLine("Laser is Off !");
             Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0")); // turn off the laser
@@ -305,10 +309,12 @@ namespace GPIBController
                 {
                     threadRun = true;
 
+                    LaserOn(pMDCharacteristics.laserPower);
+
                     for (int i = 0; i < wavelengths.Count; i++)
                     {
                         pMDCharacteristics.wavelength = wavelengths[i];
-                        InitDGDMesure(pMDCharacteristics.wavelength, pMDCharacteristics.laserPower);
+                        InitDGDMesure(pMDCharacteristics.wavelength);
 
                         for (int A = pMDCharacteristics.start; A <= pMDCharacteristics.stop; A += pMDCharacteristics.stepSize)
                         {
@@ -335,7 +341,7 @@ namespace GPIBController
                                 break;
                         }
                     }
-                    Done();
+                    LaserOff();
                 });
                 thread.Start();
             }
@@ -418,9 +424,10 @@ namespace GPIBController
             {
                 try
                 {
-                    InitDGDMesure(System.Convert.ToDouble(txtBoxWavelength.Text), System.Convert.ToInt32(txtBoxLaserPower.Text));
+                    LaserOn(System.Convert.ToInt32(txtBoxLaserPower.Text));
+                    InitDGDMesure(System.Convert.ToDouble(txtBoxWavelength.Text));
                     string jString = GetJonesMatrix(System.Convert.ToDouble(txtBoxWavelength.Text), System.Convert.ToInt32(txtBoxDelay.Text));
-                    Done();
+                    LaserOff();
 
                     double[] jMatValues = Utility.JonesString2Double(jString);
                     //double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing

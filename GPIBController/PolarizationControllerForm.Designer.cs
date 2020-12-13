@@ -795,7 +795,7 @@
             // 
             this.lblProgress.AutoSize = true;
             this.lblProgress.ForeColor = System.Drawing.Color.White;
-            this.lblProgress.Location = new System.Drawing.Point(357, 321);
+            this.lblProgress.Location = new System.Drawing.Point(308, 321);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(16, 13);
             this.lblProgress.TabIndex = 129;

@@ -53,6 +53,13 @@ namespace GPIBController
         int progress;
         int progressTotal;
         float progressPercentage;
+        DateTime dateTimeStart;
+        int timePastSeonds;
+        int eta;
+        int seconds;
+        int minutes;
+        int hours;
+        string etaTime;
 
         protected override void WndProc(ref Message m)
         {
@@ -79,10 +86,10 @@ namespace GPIBController
 
             PMDData pMD = new PMDData();
 
-            string jStringw1 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            //string jStringw1 = Utility.text_J1_1;//for testing
-            string jStringw2 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            //string jStringw2 = Utility.text_J1_2;//for testing
+            //string jStringw1 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            string jStringw1 = Utility.text_J1_1;//for testing
+            //string jStringw2 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            string jStringw2 = Utility.text_J1_2;//for testing
 
             double[] DGD = Utility.DGD(
                 jStringw1,
@@ -101,6 +108,14 @@ namespace GPIBController
 
             progress++;
             progressPercentage = (progress * 100f) / progressTotal;
+            timePastSeonds = (int)(DateTime.Now - dateTimeStart).TotalSeconds;
+            eta = (int)((timePastSeonds * 100f) / progressPercentage) - timePastSeonds;
+
+            seconds = eta % 60;
+            hours = eta / 3600;
+            minutes = (eta / 60) - (hours * 60);
+
+            etaTime = hours + ":" + minutes + ":" + seconds;
 
             this.Invoke(new MethodInvoker(delegate ()
             {
@@ -113,7 +128,10 @@ namespace GPIBController
                 stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
                 stringReadTextBox.ScrollToCaret();
 
-                lblProgress.Text = progress.ToString() + "/" + progressTotal.ToString() + "  [ " + progressPercentage + "% ]";
+                lblProgress.Text = progress.ToString() + "/" + progressTotal.ToString() +
+                "  [ " + progressPercentage + "% ]" +
+                "  " + etaTime;
+
                 progressBar.Value = (int)progressPercentage;
             }));
         }
@@ -243,14 +261,16 @@ namespace GPIBController
                 progressTotal = ((pMDCharacteristics.stop - pMDCharacteristics.start) / pMDCharacteristics.stepSize) + 1;
                 progressTotal = progressTotal * progressTotal * progressTotal * wavelengths.Count;
                 progressBar.Value = 0;
+                dateTimeStart = DateTime.Now;
+                eta = 0;
 
                 //all long running oparations done in separate threads for avoid ui freezing issue.
                 Thread thread = new Thread(() =>
                 {
                     threadRun = true;
 
-                    DeviceControl.LaserOn(pMDCharacteristics.laserPower);
-                    DeviceControl.InitDGDMesure(pMDCharacteristics.wavelength);
+                    //DeviceControl.LaserOn(pMDCharacteristics.laserPower);
+                    //DeviceControl.InitDGDMesure(pMDCharacteristics.wavelength);
 
                     for (int i = 0; i < wavelengths.Count; i++)// loop go through all wavelenghts need to measure
                     {
@@ -283,7 +303,7 @@ namespace GPIBController
                                 break;
                         }
                     }
-                    DeviceControl.LaserOff();
+                    //DeviceControl.LaserOff();
                 });
                 thread.Start();
             }

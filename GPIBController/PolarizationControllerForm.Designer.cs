@@ -794,7 +794,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1151, 563);
+            this.ClientSize = new System.Drawing.Size(1150, 570);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnStart);
@@ -855,6 +855,8 @@
             this.Controls.Add(this.btnFindPorts);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(1150, 570);
+            this.MinimumSize = new System.Drawing.Size(1150, 570);
             this.Name = "PolarizationControllerForm";
             this.Text = "Polarization controller";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

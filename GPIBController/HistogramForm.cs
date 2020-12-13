@@ -67,6 +67,8 @@ namespace GPIBController
             };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                lblStatus.Text = "Loaing";
+
                 path = openFileDialog.FileName;
 
                 Thread thread = new Thread(() =>

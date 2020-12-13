@@ -1,5 +1,4 @@
-﻿using Microsoft.Office.Interop.Excel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Threading;
@@ -18,65 +17,6 @@ namespace GPIBController
         }
 
         double sqrtFiberLength;
-
-        protected override void WndProc(ref Message m)
-        {
-            switch (m.Msg)
-            {
-                case 0x84:
-                    base.WndProc(ref m);
-                    if ((int)m.Result == 0x1)
-                        m.Result = (IntPtr)0x2;
-                    return;
-            }
-
-            base.WndProc(ref m);
-        }
-
-        private void PolController_ServoRotated(object sender, string e)
-        {
-            this.Invoke(new MethodInvoker(delegate ()
-            {
-                lblServoA.Text = servoAngle.servoA;
-                lblServoB.Text = servoAngle.servoB;
-                lblServoC.Text = servoAngle.servoC;
-            }));
-
-            PMDData pMD = new PMDData();
-
-            //string jStringw1 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            string jStringw1 = Utility.text_J1_1;//for testing
-            //string jStringw2 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            string jStringw2 = Utility.text_J1_2;//for testing
-
-            double[] DGD = Utility.DGD(
-                jStringw1,
-                jStringw2,
-                refJonesMat,
-                pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize,
-                pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize
-                );
-
-
-            pMD.DGD = DGD[0];
-            pMD.PMD = DGD[0] / sqrtFiberLength;
-            pMD.ServoAngle = servoAngle;
-
-            pMDCharacteristics.PMDDatas.Add(pMD);
-
-            this.Invoke(new MethodInvoker(delegate ()
-            {
-                //update labels and chart
-                stringReadTextBox.Text += (pMDCharacteristics.wavelength.ToString() + " nm" + Environment.NewLine);
-                stringReadTextBox.Text += ("DGD : " + pMD.DGD.ToString() + " ps" + Environment.NewLine);
-                stringReadTextBox.Text += ("PMD : " + pMD.PMD.ToString() + Environment.NewLine);
-                stringReadTextBox.Text += (Environment.NewLine);
-
-                stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
-                stringReadTextBox.ScrollToCaret();
-            }));
-        }
-
         public struct ServoAngle
         {
             public string servoA;
@@ -109,8 +49,74 @@ namespace GPIBController
         bool nextMeasurement;
         bool threadRun;
         List<double> wavelengths;
-
         CMath.JonesMatCar refJonesMat;
+        int progress;
+        int progressTotal;
+        float progressPercentage;
+
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case 0x84:
+                    base.WndProc(ref m);
+                    if ((int)m.Result == 0x1)
+                        m.Result = (IntPtr)0x2;
+                    return;
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void PolController_ServoRotated(object sender, string e)
+        {
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                lblServoA.Text = servoAngle.servoA;
+                lblServoB.Text = servoAngle.servoB;
+                lblServoC.Text = servoAngle.servoC;
+            }));
+
+            PMDData pMD = new PMDData();
+
+            string jStringw1 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            //string jStringw1 = Utility.text_J1_1;//for testing
+            string jStringw2 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            //string jStringw2 = Utility.text_J1_2;//for testing
+
+            double[] DGD = Utility.DGD(
+                jStringw1,
+                jStringw2,
+                refJonesMat,
+                pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize,
+                pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize
+                );
+
+
+            pMD.DGD = DGD[0];
+            pMD.PMD = DGD[0] / sqrtFiberLength;
+            pMD.ServoAngle = servoAngle;
+
+            pMDCharacteristics.PMDDatas.Add(pMD);
+
+            progress++;
+            progressPercentage = (progress * 100f) / progressTotal;
+
+            this.Invoke(new MethodInvoker(delegate ()
+            {
+                //update labels and chart
+                stringReadTextBox.Text += (pMDCharacteristics.wavelength.ToString() + " nm" + Environment.NewLine);
+                stringReadTextBox.Text += ("DGD : " + pMD.DGD.ToString() + " ps" + Environment.NewLine);
+                stringReadTextBox.Text += ("PMD : " + pMD.PMD.ToString() + Environment.NewLine);
+                stringReadTextBox.Text += (Environment.NewLine);
+
+                stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
+                stringReadTextBox.ScrollToCaret();
+
+                lblProgress.Text = progress.ToString() + "/" + progressTotal.ToString() + "  [ " + progressPercentage + "% ]";
+                progressBar.Value = (int)progressPercentage;
+            }));
+        }
 
         public Form RefToMainForm { get; set; }
 
@@ -232,13 +238,19 @@ namespace GPIBController
 
                 sqrtFiberLength = Math.Sqrt(pMDCharacteristics.fiberLength);
 
+                progress = 0;
+                progressPercentage = 0;
+                progressTotal = ((pMDCharacteristics.stop - pMDCharacteristics.start) / pMDCharacteristics.stepSize) + 1;
+                progressTotal = progressTotal * progressTotal * progressTotal * wavelengths.Count;
+                progressBar.Value = 0;
+
                 //all long running oparations done in separate threads for avoid ui freezing issue.
                 Thread thread = new Thread(() =>
                 {
                     threadRun = true;
 
-                    //DeviceControl.LaserOn(pMDCharacteristics.laserPower);
-                    //DeviceControl.InitDGDMesure(pMDCharacteristics.wavelength);
+                    DeviceControl.LaserOn(pMDCharacteristics.laserPower);
+                    DeviceControl.InitDGDMesure(pMDCharacteristics.wavelength);
 
                     for (int i = 0; i < wavelengths.Count; i++)// loop go through all wavelenghts need to measure
                     {
@@ -258,7 +270,9 @@ namespace GPIBController
 
                                     nextMeasurement = false;
                                     while (!nextMeasurement) { }//wait until arduino send rotate complete message
+
                                     OnServoRotated(ack);
+
                                     if (threadRun == false)
                                         break;
                                 }
@@ -269,7 +283,7 @@ namespace GPIBController
                                 break;
                         }
                     }
-                    //DeviceControl.LaserOff();
+                    DeviceControl.LaserOff();
                 });
                 thread.Start();
             }

@@ -93,6 +93,8 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.lblProgress = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).BeginInit();
             this.panel2.SuspendLayout();
@@ -173,7 +175,7 @@
             // 
             this.lblRData.AutoSize = true;
             this.lblRData.ForeColor = System.Drawing.Color.White;
-            this.lblRData.Location = new System.Drawing.Point(123, 315);
+            this.lblRData.Location = new System.Drawing.Point(123, 321);
             this.lblRData.Name = "lblRData";
             this.lblRData.Size = new System.Drawing.Size(16, 13);
             this.lblRData.TabIndex = 11;
@@ -221,7 +223,7 @@
             // 
             this.lblServoA.AutoSize = true;
             this.lblServoA.ForeColor = System.Drawing.Color.White;
-            this.lblServoA.Location = new System.Drawing.Point(588, 332);
+            this.lblServoA.Location = new System.Drawing.Point(583, 321);
             this.lblServoA.Name = "lblServoA";
             this.lblServoA.Size = new System.Drawing.Size(16, 13);
             this.lblServoA.TabIndex = 16;
@@ -231,7 +233,7 @@
             // 
             this.lblServoB.AutoSize = true;
             this.lblServoB.ForeColor = System.Drawing.Color.White;
-            this.lblServoB.Location = new System.Drawing.Point(648, 332);
+            this.lblServoB.Location = new System.Drawing.Point(643, 321);
             this.lblServoB.Name = "lblServoB";
             this.lblServoB.Size = new System.Drawing.Size(16, 13);
             this.lblServoB.TabIndex = 17;
@@ -241,7 +243,7 @@
             // 
             this.lblServoC.AutoSize = true;
             this.lblServoC.ForeColor = System.Drawing.Color.White;
-            this.lblServoC.Location = new System.Drawing.Point(709, 332);
+            this.lblServoC.Location = new System.Drawing.Point(704, 321);
             this.lblServoC.Name = "lblServoC";
             this.lblServoC.Size = new System.Drawing.Size(16, 13);
             this.lblServoC.TabIndex = 18;
@@ -252,7 +254,7 @@
             this.btnStop.BackColor = System.Drawing.Color.Blue;
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(670, 242);
+            this.btnStop.Location = new System.Drawing.Point(670, 243);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(83, 35);
             this.btnStop.TabIndex = 19;
@@ -430,7 +432,7 @@
             this.btnResetRefJonesMat.BackColor = System.Drawing.Color.Blue;
             this.btnResetRefJonesMat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResetRefJonesMat.ForeColor = System.Drawing.Color.White;
-            this.btnResetRefJonesMat.Location = new System.Drawing.Point(660, 446);
+            this.btnResetRefJonesMat.Location = new System.Drawing.Point(663, 459);
             this.btnResetRefJonesMat.Name = "btnResetRefJonesMat";
             this.btnResetRefJonesMat.Size = new System.Drawing.Size(171, 40);
             this.btnResetRefJonesMat.TabIndex = 104;
@@ -443,7 +445,7 @@
             this.btnMeasureRefJonesMat.BackColor = System.Drawing.Color.Blue;
             this.btnMeasureRefJonesMat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMeasureRefJonesMat.ForeColor = System.Drawing.Color.White;
-            this.btnMeasureRefJonesMat.Location = new System.Drawing.Point(660, 386);
+            this.btnMeasureRefJonesMat.Location = new System.Drawing.Point(663, 399);
             this.btnMeasureRefJonesMat.Name = "btnMeasureRefJonesMat";
             this.btnMeasureRefJonesMat.Size = new System.Drawing.Size(171, 40);
             this.btnMeasureRefJonesMat.TabIndex = 103;
@@ -456,7 +458,7 @@
             this.btnShowRefJonesMat.BackColor = System.Drawing.Color.Blue;
             this.btnShowRefJonesMat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShowRefJonesMat.ForeColor = System.Drawing.Color.White;
-            this.btnShowRefJonesMat.Location = new System.Drawing.Point(660, 505);
+            this.btnShowRefJonesMat.Location = new System.Drawing.Point(663, 518);
             this.btnShowRefJonesMat.Name = "btnShowRefJonesMat";
             this.btnShowRefJonesMat.Size = new System.Drawing.Size(171, 40);
             this.btnShowRefJonesMat.TabIndex = 102;
@@ -468,7 +470,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(15, 352);
+            this.label15.Location = new System.Drawing.Point(15, 379);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(157, 13);
             this.label15.TabIndex = 101;
@@ -479,7 +481,7 @@
             this.lblJ22.AutoSize = true;
             this.lblJ22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblJ22.ForeColor = System.Drawing.Color.White;
-            this.lblJ22.Location = new System.Drawing.Point(411, 501);
+            this.lblJ22.Location = new System.Drawing.Point(414, 514);
             this.lblJ22.Name = "lblJ22";
             this.lblJ22.Size = new System.Drawing.Size(16, 13);
             this.lblJ22.TabIndex = 100;
@@ -490,7 +492,7 @@
             this.lblJ21.AutoSize = true;
             this.lblJ21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblJ21.ForeColor = System.Drawing.Color.White;
-            this.lblJ21.Location = new System.Drawing.Point(80, 501);
+            this.lblJ21.Location = new System.Drawing.Point(83, 514);
             this.lblJ21.Name = "lblJ21";
             this.lblJ21.Size = new System.Drawing.Size(16, 13);
             this.lblJ21.TabIndex = 99;
@@ -501,7 +503,7 @@
             this.lblJ12.AutoSize = true;
             this.lblJ12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblJ12.ForeColor = System.Drawing.Color.White;
-            this.lblJ12.Location = new System.Drawing.Point(411, 414);
+            this.lblJ12.Location = new System.Drawing.Point(414, 427);
             this.lblJ12.Name = "lblJ12";
             this.lblJ12.Size = new System.Drawing.Size(16, 13);
             this.lblJ12.TabIndex = 98;
@@ -512,7 +514,7 @@
             this.lblJ11.AutoSize = true;
             this.lblJ11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblJ11.ForeColor = System.Drawing.Color.White;
-            this.lblJ11.Location = new System.Drawing.Point(80, 414);
+            this.lblJ11.Location = new System.Drawing.Point(83, 427);
             this.lblJ11.Name = "lblJ11";
             this.lblJ11.Size = new System.Drawing.Size(16, 13);
             this.lblJ11.TabIndex = 97;
@@ -521,7 +523,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.panel1.Location = new System.Drawing.Point(15, 382);
+            this.panel1.Location = new System.Drawing.Point(18, 395);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(628, 163);
             this.panel1.TabIndex = 105;
@@ -536,7 +538,7 @@
             this.panel2.Controls.Add(this.txtBoxPath);
             this.panel2.Location = new System.Drawing.Point(861, 46);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(279, 499);
+            this.panel2.Size = new System.Drawing.Size(279, 512);
             this.panel2.TabIndex = 106;
             // 
             // btnShowHIst
@@ -652,7 +654,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(709, 304);
+            this.label18.Location = new System.Drawing.Point(704, 293);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(14, 13);
             this.label18.TabIndex = 118;
@@ -662,7 +664,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.ForeColor = System.Drawing.Color.White;
-            this.label19.Location = new System.Drawing.Point(648, 304);
+            this.label19.Location = new System.Drawing.Point(643, 293);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(14, 13);
             this.label19.TabIndex = 117;
@@ -672,7 +674,7 @@
             // 
             this.label20.AutoSize = true;
             this.label20.ForeColor = System.Drawing.Color.White;
-            this.label20.Location = new System.Drawing.Point(588, 304);
+            this.label20.Location = new System.Drawing.Point(583, 293);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(14, 13);
             this.label20.TabIndex = 116;
@@ -789,12 +791,31 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // lblProgress
+            // 
+            this.lblProgress.AutoSize = true;
+            this.lblProgress.ForeColor = System.Drawing.Color.White;
+            this.lblProgress.Location = new System.Drawing.Point(357, 321);
+            this.lblProgress.Name = "lblProgress";
+            this.lblProgress.Size = new System.Drawing.Size(16, 13);
+            this.lblProgress.TabIndex = 129;
+            this.lblProgress.Text = "---";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(8, 348);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(847, 14);
+            this.progressBar.TabIndex = 130;
+            // 
             // PolarizationControllerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1150, 570);
+            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnStart);
@@ -934,5 +955,7 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Label lblProgress;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }

@@ -77,5 +77,13 @@ namespace GPIBController
             wb.Close();
             excel.Quit();
         }
+
+        public static void Creat(string path)
+        {
+            Excel excel = new Excel();
+            excel.CreatNewFile();
+            excel.SaveAs(path);
+            excel.Close();
+        }
     }
 }

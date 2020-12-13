@@ -165,6 +165,14 @@ namespace GPIBController
             Print(mat.J22);
             Console.WriteLine();
         }
+
+        public static string GetComplexString(CMath.ComplexCar complex)
+        {
+            if (complex.imag >= 0)
+                return complex.real.ToString() + " +" + complex.imag.ToString() + " i";
+            else
+                return complex.real.ToString() + " " + complex.imag.ToString() + " i";
+        }
         #endregion
 
         public static double Deg2Red(double deg)

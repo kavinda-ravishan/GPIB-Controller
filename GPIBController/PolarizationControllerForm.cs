@@ -33,78 +33,6 @@ namespace GPIBController
             base.WndProc(ref m);
         }
 
-        static string GetComplexString(CMath.ComplexCar complex)
-        {
-            if (complex.imag >= 0)
-                return complex.real.ToString() + " +" + complex.imag.ToString() + " i";
-            else
-                return complex.real.ToString() + " " + complex.imag.ToString() + " i";
-        }
-
-        static void Creat(string path)
-        {
-            Excel excel = new Excel();
-            excel.CreatNewFile();
-            excel.SaveAs(path);
-            excel.Close();
-        }
-
-        static string MsgWaveLenghtSrc(double waveLenght = 1551.120)
-        {
-            return ":WAVElength " + waveLenght.ToString() + "nm";
-        }
-
-        static string MsgPowerSrc(double power = 1000)
-        {
-            return ":POWer " + power.ToString() + "uW";
-        }
-
-        static string MsgWaveLenghtPol(double waveLenght = 1551.12)
-        {
-            return "L " + waveLenght.ToString() + ";X;";
-        }
-
-        static void InitDGDMesure(double wavelength)
-        {
-            Console.WriteLine("Set Source  WL - " + wavelength.ToString());
-            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtSrc(wavelength)));//change wavelength source
-            Console.WriteLine("Set PAT9000 WL - " + wavelength.ToString());
-            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtPol(wavelength)));//change wavelength pol
-            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("PO;X;"));//Optimizing the polarizer position in the module
-        }
-
-        static void LaserOn(double power)
-        {
-            Console.WriteLine("Set Source Power - " + power.ToString());
-            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgPowerSrc(power))); // set power to 1000uW
-            Console.WriteLine("Laser is ON !");
-            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 1")); // turn on the laser
-        }
-
-        static void LaserOff()
-        {
-            Console.WriteLine("Laser is Off !");
-            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0")); // turn off the laser
-        }
-
-        static string GetJonesMatrix(double wavelenght, int delay)
-        {
-            string jString;
-
-            Console.WriteLine("Set Source  WL - " + wavelenght.ToString());
-            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtSrc(wavelenght)));//change wavelength source
-
-            Console.WriteLine("Set PAT9000 WL - " + wavelenght.ToString());
-            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtPol(wavelenght)));//change wavelength pol
-            System.Threading.Thread.Sleep(delay);
-
-            Console.WriteLine("Read JM        - " + wavelenght.ToString());
-            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("K 0;JM;X"));
-            jString = Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString());//put JM data here
-            Console.WriteLine();
-            return jString;
-        }
-
         private void PolController_ServoRotated(object sender, string e)
         {
             this.Invoke(new MethodInvoker(delegate ()
@@ -116,10 +44,10 @@ namespace GPIBController
 
             PMDData pMD = new PMDData();
 
-            string jStringw1 = GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            //string jStringw1 = Utility.text_J1_1;//for testing
-            string jStringw2 = GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            //string jStringw2 = Utility.text_J1_2;//for testing
+            //string jStringw1 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            string jStringw1 = Utility.text_J1_1;//for testing
+            //string jStringw2 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            string jStringw2 = Utility.text_J1_2;//for testing
 
             double[] DGD = Utility.DGD(
                 jStringw1,
@@ -304,17 +232,17 @@ namespace GPIBController
 
                 sqrtFiberLength = Math.Sqrt(pMDCharacteristics.fiberLength);
 
-                //all long runnog oparations done in separate threads for avoid ui freezing issue.
+                //all long running oparations done in separate threads for avoid ui freezing issue.
                 Thread thread = new Thread(() =>
                 {
                     threadRun = true;
 
-                    LaserOn(pMDCharacteristics.laserPower);
+                    //DeviceControl.LaserOn(pMDCharacteristics.laserPower);
+                    //DeviceControl.InitDGDMesure(pMDCharacteristics.wavelength);
 
-                    for (int i = 0; i < wavelengths.Count; i++)
+                    for (int i = 0; i < wavelengths.Count; i++)// loop go through all wavelenghts need to measure
                     {
                         pMDCharacteristics.wavelength = wavelengths[i];
-                        InitDGDMesure(pMDCharacteristics.wavelength);
 
                         for (int A = pMDCharacteristics.start; A <= pMDCharacteristics.stop; A += pMDCharacteristics.stepSize)
                         {
@@ -341,7 +269,7 @@ namespace GPIBController
                                 break;
                         }
                     }
-                    LaserOff();
+                    //DeviceControl.LaserOff();
                 });
                 thread.Start();
             }
@@ -370,7 +298,7 @@ namespace GPIBController
                 {
                     try
                     {
-                        Creat(path);
+                        Excel.Creat(path);
                         Excel excel = new Excel(path, 1);
                         excel.SelectWorkSheet(1);
 
@@ -424,10 +352,10 @@ namespace GPIBController
             {
                 try
                 {
-                    LaserOn(System.Convert.ToInt32(txtBoxLaserPower.Text));
-                    InitDGDMesure(System.Convert.ToDouble(txtBoxWavelength.Text));
-                    string jString = GetJonesMatrix(System.Convert.ToDouble(txtBoxWavelength.Text), System.Convert.ToInt32(txtBoxDelay.Text));
-                    LaserOff();
+                    DeviceControl.LaserOn(System.Convert.ToInt32(txtBoxLaserPower.Text));
+                    DeviceControl.InitDGDMesure(System.Convert.ToDouble(txtBoxWavelength.Text));
+                    string jString = DeviceControl.GetJonesMatrix(System.Convert.ToDouble(txtBoxWavelength.Text), System.Convert.ToInt32(txtBoxDelay.Text));
+                    DeviceControl.LaserOff();
 
                     double[] jMatValues = Utility.JonesString2Double(jString);
                     //double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing
@@ -438,10 +366,10 @@ namespace GPIBController
                     this.Invoke(new MethodInvoker(delegate ()
                     {
                         //update labels
-                        lblJ11.Text = GetComplexString(refJonesMat.J11);
-                        lblJ12.Text = GetComplexString(refJonesMat.J12);
-                        lblJ21.Text = GetComplexString(refJonesMat.J21);
-                        lblJ22.Text = GetComplexString(refJonesMat.J22);
+                        lblJ11.Text = CMath.GetComplexString(refJonesMat.J11);
+                        lblJ12.Text = CMath.GetComplexString(refJonesMat.J12);
+                        lblJ21.Text = CMath.GetComplexString(refJonesMat.J21);
+                        lblJ22.Text = CMath.GetComplexString(refJonesMat.J22);
                     }));
                 }
                 catch (Exception ex)
@@ -456,18 +384,18 @@ namespace GPIBController
         {
             refJonesMat = CMath.UnitMatrix();
 
-            lblJ11.Text = GetComplexString(refJonesMat.J11);
-            lblJ12.Text = GetComplexString(refJonesMat.J12);
-            lblJ21.Text = GetComplexString(refJonesMat.J21);
-            lblJ22.Text = GetComplexString(refJonesMat.J22);
+            lblJ11.Text = CMath.GetComplexString(refJonesMat.J11);
+            lblJ12.Text = CMath.GetComplexString(refJonesMat.J12);
+            lblJ21.Text = CMath.GetComplexString(refJonesMat.J21);
+            lblJ22.Text = CMath.GetComplexString(refJonesMat.J22);
         }
 
         private void BtnShowRefJonesMat_Click(object sender, EventArgs e)
         {
-            lblJ11.Text = GetComplexString(refJonesMat.J11);
-            lblJ12.Text = GetComplexString(refJonesMat.J12);
-            lblJ21.Text = GetComplexString(refJonesMat.J21);
-            lblJ22.Text = GetComplexString(refJonesMat.J22);
+            lblJ11.Text = CMath.GetComplexString(refJonesMat.J11);
+            lblJ12.Text = CMath.GetComplexString(refJonesMat.J12);
+            lblJ21.Text = CMath.GetComplexString(refJonesMat.J21);
+            lblJ22.Text = CMath.GetComplexString(refJonesMat.J22);
         }
 
         private void btnShowHist_Click(object sender, EventArgs e)

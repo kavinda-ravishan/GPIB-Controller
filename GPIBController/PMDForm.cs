@@ -17,74 +17,6 @@ namespace GPIBController
 
         public Form RefToMainForm { get; set; }
 
-        static void Creat(string path)
-        {
-            Excel excel = new Excel();
-            excel.CreatNewFile();
-            excel.SaveAs(path);
-            excel.Close();
-        }
-
-        static string MsgWaveLenghtSrc(double waveLenght = 1551.120)
-        {
-            return ":WAVElength " + waveLenght.ToString() + "nm";
-        }
-
-        static string MsgPowerSrc(double power = 1000)
-        {
-            return ":POWer " + power.ToString() + "uW";
-        }
-
-        static string MsgWaveLenghtPol(double waveLenght = 1551.12)
-        {
-            return "L " + waveLenght.ToString() + ";X;";
-        }
-
-        static void InitDGDMesure(double start, double power)
-        {
-            Console.WriteLine("Set Source Power - " + power.ToString());
-            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgPowerSrc(power))); // set power to 1000uW
-            Console.WriteLine("Laser is ON !");
-            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 1")); // turn on the laser
-            Console.WriteLine("Set Source  WL - " + start.ToString());
-            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtSrc(start)));//change wavelength source
-            Console.WriteLine("Set PAT9000 WL - " + start.ToString());
-            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtPol(start)));//change wavelength pol
-            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("PO;X;"));//Optimizing the polarizer position in the module
-        }
-
-        static void Done()
-        {
-            Console.WriteLine("Laser is Off !");
-            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(":OUTPut 0")); // turn off the laser
-        }
-
-        static string GetJonesMatrix(double wavelenght, int delay)
-        {
-            string jString;
-
-            Console.WriteLine("Set Source  WL - " + wavelenght.ToString());
-            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtSrc(wavelenght)));//change wavelength source
-
-            Console.WriteLine("Set PAT9000 WL - " + wavelenght.ToString());
-            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtPol(wavelenght)));//change wavelength pol
-            System.Threading.Thread.Sleep(delay);
-            
-            Console.WriteLine("Read JM        - " + wavelenght.ToString());
-            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("K 0;JM;X"));
-            jString = Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString());//put JM data here
-            Console.WriteLine();
-            return jString;
-        }
-
-        static string GetComplexString(CMath.ComplexCar complex)
-        {
-            if (complex.imag >= 0)
-                return complex.real.ToString() + " +" + complex.imag.ToString() + " i";
-            else
-                return complex.real.ToString() + " " + complex.imag.ToString() + " i";
-        }
-
         public struct PMDData
         {
             public double waveLenght;
@@ -197,7 +129,8 @@ namespace GPIBController
                     }));
 
                     //laser on
-                    InitDGDMesure(settings.start, settings.laserPower);
+                    DeviceControl.LaserOn(settings.laserPower);
+                    DeviceControl.InitDGDMesure(settings.start);
 
                     threadRun = true;
 
@@ -207,12 +140,12 @@ namespace GPIBController
                         {
                             if (i < 2)
                             {
-                                jStrings[i] = GetJonesMatrix(wavelenght[i], settings.delay);
+                                jStrings[i] = DeviceControl.GetJonesMatrix(wavelenght[i], settings.delay);
                                 //jStrings[i] = Utility.text_J1;//for testing
                             }
                             else
                             {
-                                jStrings[i] = GetJonesMatrix(wavelenght[i], settings.delay);
+                                jStrings[i] = DeviceControl.GetJonesMatrix(wavelenght[i], settings.delay);
                                 //jStrings[i] = Utility.text_J1;//for testing
 
                                 DGDval = Utility.DGD(jStrings[i - 2], jStrings[i], refJonesMat, wavelenght[i - 2], wavelenght[i]);//Meaure DGD for arg1 and arg2 jones matrices
@@ -250,7 +183,7 @@ namespace GPIBController
                         else break;
                     }
                     //laser off
-                    Done();
+                    DeviceControl.LaserOff();
                 }
                 catch(Exception ex)
                 {
@@ -280,7 +213,7 @@ namespace GPIBController
                     {
                         try
                         {
-                            Creat(path);
+                            Excel.Creat(path);
                             Excel excel = new Excel(path, 1);
                             excel.SelectWorkSheet(1);
 
@@ -472,20 +405,20 @@ namespace GPIBController
 
         private void BtnShowRefJonesMat_Click(object sender, EventArgs e)
         {
-            lblJ11.Text = GetComplexString(refJonesMat.J11);
-            lblJ12.Text = GetComplexString(refJonesMat.J12);
-            lblJ21.Text = GetComplexString(refJonesMat.J21);
-            lblJ22.Text = GetComplexString(refJonesMat.J22);
+            lblJ11.Text = CMath.GetComplexString(refJonesMat.J11);
+            lblJ12.Text = CMath.GetComplexString(refJonesMat.J12);
+            lblJ21.Text = CMath.GetComplexString(refJonesMat.J21);
+            lblJ22.Text = CMath.GetComplexString(refJonesMat.J22);
         }
 
         private void BtnResetRefJonesMat_Click(object sender, EventArgs e)
         {
             refJonesMat = CMath.UnitMatrix();
 
-            lblJ11.Text = GetComplexString(refJonesMat.J11);
-            lblJ12.Text = GetComplexString(refJonesMat.J12);
-            lblJ21.Text = GetComplexString(refJonesMat.J21);
-            lblJ22.Text = GetComplexString(refJonesMat.J22);
+            lblJ11.Text = CMath.GetComplexString(refJonesMat.J11);
+            lblJ12.Text = CMath.GetComplexString(refJonesMat.J12);
+            lblJ21.Text = CMath.GetComplexString(refJonesMat.J21);
+            lblJ22.Text = CMath.GetComplexString(refJonesMat.J22);
         }
 
         private void BtnMeasureRefJonesMat_Click(object sender, EventArgs e)
@@ -494,9 +427,10 @@ namespace GPIBController
             {
                 try
                 {
-                    InitDGDMesure(System.Convert.ToDouble(txtBoxStart.Text), System.Convert.ToInt32(txtBoxLaserPower.Text));
-                    string jString = GetJonesMatrix(System.Convert.ToDouble(txtBoxStart.Text), System.Convert.ToInt32(txtBoxDelay.Text));
-                    Done();
+                    DeviceControl.LaserOn(System.Convert.ToInt32(txtBoxLaserPower.Text));
+                    DeviceControl.InitDGDMesure(System.Convert.ToDouble(txtBoxStart.Text));
+                    string jString = DeviceControl.GetJonesMatrix(System.Convert.ToDouble(txtBoxStart.Text), System.Convert.ToInt32(txtBoxDelay.Text));
+                    DeviceControl.LaserOff();
 
                     double[] jMatValues = Utility.JonesString2Double(jString);
                     //double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing
@@ -507,10 +441,10 @@ namespace GPIBController
                     this.Invoke(new MethodInvoker(delegate ()
                     {
                         //update labels
-                        lblJ11.Text = GetComplexString(refJonesMat.J11);
-                        lblJ12.Text = GetComplexString(refJonesMat.J12);
-                        lblJ21.Text = GetComplexString(refJonesMat.J21);
-                        lblJ22.Text = GetComplexString(refJonesMat.J22);
+                        lblJ11.Text = CMath.GetComplexString(refJonesMat.J11);
+                        lblJ12.Text = CMath.GetComplexString(refJonesMat.J12);
+                        lblJ21.Text = CMath.GetComplexString(refJonesMat.J21);
+                        lblJ22.Text = CMath.GetComplexString(refJonesMat.J22);
                     }));
                 }
                 catch(Exception ex)

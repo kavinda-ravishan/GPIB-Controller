@@ -50,6 +50,7 @@ namespace GPIBController
         bool threadRun;
         List<double> wavelengths;
         CMath.JonesMatCar refJonesMat;
+
         int progress;
         int progressTotal;
         float progressPercentage;
@@ -86,10 +87,10 @@ namespace GPIBController
 
             PMDData pMD = new PMDData();
 
-            //string jStringw1 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            string jStringw1 = Utility.text_J1_1;//for testing
-            //string jStringw2 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            string jStringw2 = Utility.text_J1_2;//for testing
+            string jStringw1 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            //string jStringw1 = Utility.text_J1_1;//for testing
+            string jStringw2 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+            //string jStringw2 = Utility.text_J1_2;//for testing
 
             double[] DGD = Utility.DGD(
                 jStringw1,
@@ -129,7 +130,7 @@ namespace GPIBController
                 stringReadTextBox.ScrollToCaret();
 
                 lblProgress.Text = progress.ToString() + "/" + progressTotal.ToString() +
-                "  [ " + progressPercentage + "% ]" +
+                "  [ " + (int)progressPercentage + "% ]" +
                 "  " + etaTime;
 
                 progressBar.Value = (int)progressPercentage;
@@ -269,8 +270,8 @@ namespace GPIBController
                 {
                     threadRun = true;
 
-                    //DeviceControl.LaserOn(pMDCharacteristics.laserPower);
-                    //DeviceControl.InitDGDMesure(pMDCharacteristics.wavelength);
+                    DeviceControl.LaserOn(pMDCharacteristics.laserPower);
+                    DeviceControl.InitDGDMesure(pMDCharacteristics.wavelength);
 
                     for (int i = 0; i < wavelengths.Count; i++)// loop go through all wavelenghts need to measure
                     {
@@ -303,7 +304,7 @@ namespace GPIBController
                                 break;
                         }
                     }
-                    //DeviceControl.LaserOff();
+                    DeviceControl.LaserOff();
                 });
                 thread.Start();
             }

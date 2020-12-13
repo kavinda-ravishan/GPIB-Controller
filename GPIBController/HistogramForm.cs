@@ -104,44 +104,54 @@ namespace GPIBController
                     }
                     excel.Close();
 
-                    double stepSize = System.Convert.ToDouble(txtBoxChartStepSize.Text);
-                    double steps = (max - min) / stepSize;
-
-                    double temp = min;
-
-                    for (i = 0; i < steps; i++)
+                    if(max != min)
                     {
-                        histY.Add(0);
-                        histX.Add(temp - (stepSize / 2));
-                        temp = temp + stepSize;
+                        double stepSize = System.Convert.ToDouble(txtBoxChartStepSize.Text);
+                        double steps = (max - min) / stepSize;
 
-                        this.Invoke(new MethodInvoker(delegate ()
+                        double temp = min;
+
+                        for (i = 0; i < steps; i++)
                         {
-                            lblStatus.Text = i.ToString();
-                        }));
-                    }
+                            histY.Add(0);
+                            histX.Add(temp - (stepSize / 2));
+                            temp = temp + stepSize;
 
-                    for (i = 0; i < PMD.Count; i++)
-                    {
-                        histY[(int)((PMD[i] - min) / stepSize)]++;
-
-                        this.Invoke(new MethodInvoker(delegate ()
-                        {
-                            lblStatus.Text = i.ToString();
-                        }));
-                    }
-
-                    this.Invoke(new MethodInvoker(delegate ()
-                    {
-                        chart.Series["Data"].Points.Clear();
-                        for (i = 0; i < histY.Count; i++)
-                        {
-                            chart.Series["Data"].Points.AddXY(histX[i], histY[i]);
-
-                            lblStatus.Text = data.ToString();
+                            this.Invoke(new MethodInvoker(delegate ()
+                            {
+                                lblStatus.Text = i.ToString();
+                            }));
                         }
-                        lblStatus.Text = "---";
-                    }));
+
+                        for (i = 0; i < PMD.Count; i++)
+                        {
+                            histY[(int)((PMD[i] - min) / stepSize)]++;
+
+                            this.Invoke(new MethodInvoker(delegate ()
+                            {
+                                lblStatus.Text = i.ToString();
+                            }));
+                        }
+
+                        this.Invoke(new MethodInvoker(delegate ()
+                        {
+                            chart.Series["Data"].Points.Clear();
+                            for (i = 0; i < histY.Count; i++)
+                            {
+                                chart.Series["Data"].Points.AddXY(histX[i], histY[i]);
+
+                                lblStatus.Text = data.ToString();
+                            }
+                            lblStatus.Text = "---";
+                        }));
+                    }
+                    else
+                    {
+                        this.Invoke(new MethodInvoker(delegate ()
+                        {
+                            lblStatus.Text = "---";
+                        }));
+                    }
                 });
                 thread.Start();
             }

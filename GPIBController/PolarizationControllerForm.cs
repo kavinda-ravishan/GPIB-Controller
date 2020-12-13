@@ -303,6 +303,8 @@ namespace GPIBController
                             if (threadRun == false)
                                 break;
                         }
+                        if (threadRun == false)
+                            break;
                     }
                     DeviceControl.LaserOff();
                 });

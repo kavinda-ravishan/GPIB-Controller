@@ -26,7 +26,6 @@ namespace GPIBController
             public double PMD;
             public int i;
         }
-
         private struct PMDSettings
         {
             public double start;
@@ -41,16 +40,32 @@ namespace GPIBController
             public int laserPower;
             public int delay;
         }
-
         private PMDData[] data;
         private PMDSettings settings;
-
         private CMath.JonesMatCar refJonesMat;
-
         private static bool threadRun;
 
         // declaring an event using built-in EventHandler
         public event EventHandler<PMDData> DGDMeasured;
+
+        private void SetupControlState(bool isPMDMeasurementStarted)
+        {
+            btnStop.Enabled = isPMDMeasurementStarted;
+
+            btnStart.Enabled = !isPMDMeasurementStarted;
+            btnResetRefJonesMat.Enabled = !isPMDMeasurementStarted;
+            btnMeasureRefJonesMat.Enabled = !isPMDMeasurementStarted;
+            btnShowRefJonesMat.Enabled = !isPMDMeasurementStarted;
+            btnSave.Enabled = !isPMDMeasurementStarted;
+            btnLoad.Enabled = !isPMDMeasurementStarted;
+
+            txtBoxDelay.Enabled = !isPMDMeasurementStarted;
+            txtBoxLength.Enabled = !isPMDMeasurementStarted;
+            txtBoxLaserPower.Enabled = !isPMDMeasurementStarted;
+            txtBoxFileName.Enabled = !isPMDMeasurementStarted;
+            txtBoxStart.Enabled = !isPMDMeasurementStarted;
+            txtBoxStop.Enabled = !isPMDMeasurementStarted;
+        }
 
         protected virtual void OnDGDMeasured(PMDData data)
         {
@@ -92,6 +107,11 @@ namespace GPIBController
             {
                 try
                 {
+                    this.Invoke(new MethodInvoker(delegate ()
+                    {
+                        SetupControlState(true);
+                    }));
+
                     //take user inputs
                     settings.start = System.Convert.ToDouble(txtBoxStart.Text);
                     settings.stop = System.Convert.ToDouble(txtBoxStop.Text); ;
@@ -186,6 +206,9 @@ namespace GPIBController
                                 }
                                 //call event for show update chart and labels
                                 OnDGDMeasured(data[i - 2]);
+#if (TESTMODE)
+                                Thread.Sleep(1000);
+#endif
                             }
                         }
                         else break;
@@ -198,6 +221,13 @@ namespace GPIBController
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    this.Invoke(new MethodInvoker(delegate ()
+                    {
+                        SetupControlState(false);
+                    }));
                 }
             });
             thread.Start();

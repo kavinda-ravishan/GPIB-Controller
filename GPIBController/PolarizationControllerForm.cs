@@ -1,4 +1,4 @@
-﻿#define TESTMODE
+﻿//#define TESTMODE
 
 using System;
 using System.Collections.Generic;
@@ -120,7 +120,7 @@ namespace GPIBController
             hours = eta / 3600;
             minutes = (eta / 60) - (hours * 60);
 
-            etaTime = hours + ":" + minutes + ":" + seconds;
+            etaTime = hours + " Hrs : " + minutes + " Min : " + seconds + " Sec";
 
             this.Invoke(new MethodInvoker(delegate ()
             {
@@ -135,7 +135,7 @@ namespace GPIBController
 
                 lblProgress.Text = progress.ToString() + "/" + progressTotal.ToString() +
                 "  [ " + (int)progressPercentage + "% ]" +
-                "  " + etaTime;
+                "    " + etaTime;
 
                 progressBar.Value = (int)progressPercentage;
             }));
@@ -151,7 +151,7 @@ namespace GPIBController
             btnFindPorts.Enabled = !isPMDMeasurementStarted;
             btnDisconnect.Enabled = !isPMDMeasurementStarted;
             btnWrite.Enabled = !isPMDMeasurementStarted;
-            btnAdd.Enabled= !isPMDMeasurementStarted;
+            btnAdd.Enabled = !isPMDMeasurementStarted;
             btnClear.Enabled = !isPMDMeasurementStarted;
             btnResetRefJonesMat.Enabled = !isPMDMeasurementStarted;
             btnMeasureRefJonesMat.Enabled = !isPMDMeasurementStarted;
@@ -274,38 +274,42 @@ namespace GPIBController
         {
             if (serialPort != null && wavelengths.Count != 0)
             {
-                SetupControlState(true);
-
-                pMDCharacteristics = new PMDCharacteristics
-                {
-                    PMDDatas = new List<PMDData>(),
-
-                    //Read user inputs
-                    stepSize = System.Convert.ToInt32(txtBoxStepSize.Text),
-                    wavelength = 0,
-                    waveLengthStepSize = System.Convert.ToDouble(txtBoxWaveStep.Text),
-                    laserPower = System.Convert.ToDouble(txtBoxLaserPower.Text),
-                    delay = System.Convert.ToInt32(txtBoxDelay.Text),
-                    fiberLength = System.Convert.ToDouble(txtBoxFiberLength.Text),
-                    start = System.Convert.ToInt32(txtBoxStart.Text),
-                    stop = System.Convert.ToInt32(txtBoxStop.Text)
-                };
-
-                sqrtFiberLength = Math.Sqrt(pMDCharacteristics.fiberLength);
-
-                progress = 0;
-                progressPercentage = 0;
-                progressTotal = ((pMDCharacteristics.stop - pMDCharacteristics.start) / pMDCharacteristics.stepSize) + 1;
-                progressTotal = progressTotal * progressTotal * progressTotal * wavelengths.Count;
-                progressBar.Value = 0;
-                dateTimeStart = DateTime.Now;
-                eta = 0;
-
                 //all long running oparations done in separate threads for avoid ui freezing issue.
                 Thread thread = new Thread(() =>
                 {
                     try
                     {
+                        this.Invoke(new MethodInvoker(delegate ()
+                        {
+                            SetupControlState(true);
+                            progressBar.Value = 0;
+                        }));
+
+                        pMDCharacteristics = new PMDCharacteristics
+                        {
+                            PMDDatas = new List<PMDData>(),
+
+                            //Read user inputs
+                            stepSize = System.Convert.ToInt32(txtBoxStepSize.Text),
+                            wavelength = 0,
+                            waveLengthStepSize = System.Convert.ToDouble(txtBoxWaveStep.Text),
+                            laserPower = System.Convert.ToDouble(txtBoxLaserPower.Text),
+                            delay = System.Convert.ToInt32(txtBoxDelay.Text),
+                            fiberLength = System.Convert.ToDouble(txtBoxFiberLength.Text),
+                            start = System.Convert.ToInt32(txtBoxStart.Text),
+                            stop = System.Convert.ToInt32(txtBoxStop.Text)
+                        };
+
+                        sqrtFiberLength = Math.Sqrt(pMDCharacteristics.fiberLength);
+
+                        progress = 0;
+                        progressPercentage = 0;
+                        progressTotal = ((pMDCharacteristics.stop - pMDCharacteristics.start) / pMDCharacteristics.stepSize) + 1;
+                        progressTotal = progressTotal * progressTotal * progressTotal * wavelengths.Count;
+                        dateTimeStart = DateTime.Now;
+                        eta = 0;
+
+
                         threadRun = true;
 #if (!TESTMODE)
                         DeviceControl.LaserOn(pMDCharacteristics.laserPower);

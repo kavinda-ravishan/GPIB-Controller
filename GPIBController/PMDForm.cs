@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define TESTMODE
+
+using System;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -25,7 +27,7 @@ namespace GPIBController
             public int i;
         }
 
-        public struct PMDSettings
+        private struct PMDSettings
         {
             public double start;
             public double stop;
@@ -40,10 +42,10 @@ namespace GPIBController
             public int delay;
         }
 
-        PMDData[] data;
-        PMDSettings settings;
+        private PMDData[] data;
+        private PMDSettings settings;
 
-        CMath.JonesMatCar refJonesMat;
+        private CMath.JonesMatCar refJonesMat;
 
         private static bool threadRun;
 
@@ -57,10 +59,10 @@ namespace GPIBController
 
         private void PMDForm_DGDMeasured(object sender, PMDData e)
         {
-            Console.WriteLine(e.waveLenght);
-            Console.WriteLine(e.DGD);
-            Console.WriteLine(e.PMD);
-            Console.WriteLine();
+            //Console.WriteLine(e.waveLenght);
+            //Console.WriteLine(e.DGD);
+            //Console.WriteLine(e.PMD);
+            //Console.WriteLine();
 
             this.Invoke(new MethodInvoker(delegate ()
             {
@@ -117,7 +119,7 @@ namespace GPIBController
                     double[] DGDval = new double[2];
                     data = new PMDData[steps - 2];
                     double sumPMD = 0;
-                    
+
                     //Invoke methods for allow cross thread oparations
                     this.Invoke(new MethodInvoker(delegate ()
                     {
@@ -127,11 +129,11 @@ namespace GPIBController
                     {
                         chart.Series["PMD"].Points.Clear();
                     }));
-
+#if(!TESTMODE)
                     //laser on
                     DeviceControl.LaserOn(settings.laserPower);
                     DeviceControl.InitDGDMesure(settings.start);
-
+#endif
                     threadRun = true;
 
                     for (int i = 0; i < steps; i++)
@@ -140,13 +142,19 @@ namespace GPIBController
                         {
                             if (i < 2)
                             {
+#if (!TESTMODE)
                                 jStrings[i] = DeviceControl.GetJonesMatrix(wavelenght[i], settings.delay);
-                                //jStrings[i] = Utility.text_J1;//for testing
+#else
+                                jStrings[i] = Utility.text_J1;//for testing
+#endif
                             }
                             else
                             {
+#if (!TESTMODE)
                                 jStrings[i] = DeviceControl.GetJonesMatrix(wavelenght[i], settings.delay);
-                                //jStrings[i] = Utility.text_J1;//for testing
+#else
+                                jStrings[i] = Utility.text_J1;//for testing
+#endif
 
                                 DGDval = Utility.DGD(jStrings[i - 2], jStrings[i], refJonesMat, wavelenght[i - 2], wavelenght[i]);//Meaure DGD for arg1 and arg2 jones matrices
                                 data[i - 2].DGD = DGDval[0];
@@ -182,10 +190,12 @@ namespace GPIBController
                         }
                         else break;
                     }
+#if (!TESTMODE)
                     //laser off
                     DeviceControl.LaserOff();
+#endif
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
@@ -269,7 +279,7 @@ namespace GPIBController
                                 stringReadTextBox.ScrollToCaret();
                             }));
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             MessageBox.Show(ex.Message);
                         }
@@ -281,7 +291,7 @@ namespace GPIBController
             {
                 MessageBox.Show("No data available.");
             }
-            
+
         }
 
         private void BtnStop_Click(object sender, EventArgs e)
@@ -427,14 +437,16 @@ namespace GPIBController
             {
                 try
                 {
+#if (!TESTMODE)
                     DeviceControl.LaserOn(System.Convert.ToInt32(txtBoxLaserPower.Text));
                     DeviceControl.InitDGDMesure(System.Convert.ToDouble(txtBoxStart.Text));
                     string jString = DeviceControl.GetJonesMatrix(System.Convert.ToDouble(txtBoxStart.Text), System.Convert.ToInt32(txtBoxDelay.Text));
                     DeviceControl.LaserOff();
 
                     double[] jMatValues = Utility.JonesString2Double(jString);
-                    //double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing
-
+#else
+                    double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing
+#endif
                     CMath.JonesMatPol matPol = Utility.JonesDoubleArray2JonesMat(jMatValues);
                     refJonesMat = CMath.Inverse(CMath.Pol2Car(matPol));
 
@@ -447,7 +459,7 @@ namespace GPIBController
                         lblJ22.Text = CMath.GetComplexString(refJonesMat.J22);
                     }));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }

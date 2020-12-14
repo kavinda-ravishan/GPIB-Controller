@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define TESTMODE
+
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -23,7 +25,9 @@ namespace GPIBController
         {
             try
             {
+#if (!TESTMODE)
                 Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
+#endif
                 points = System.Convert.ToInt32(txtBoxNumPoints.Text);
                 
                 chart1.Series["S1"].Points.Clear();
@@ -57,8 +61,11 @@ namespace GPIBController
         {
             try
             {
+#if (!TESTMODE)
                 string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
+#else
+                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
+#endif
 
                 stringReadTextBox.Clear();
                 for (int i = 0; i < 6; i++)
@@ -92,9 +99,9 @@ namespace GPIBController
                     chart2.Series["S2"].Points.Add(S2[i]);
                     chart3.Series["S3"].Points.Add(S3[i]);
                 }
-                //chart1.Update();
-                //chart2.Update();
-                //chart3.Update();
+                chart1.Update();
+                chart2.Update();
+                chart3.Update();
 
             }
             catch (Exception ex)

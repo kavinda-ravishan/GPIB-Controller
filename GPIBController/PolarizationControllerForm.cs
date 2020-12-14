@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define TESTMODE
+
+using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Threading;
@@ -16,20 +18,20 @@ namespace GPIBController
             wavelengths = new List<double>();
         }
 
-        double sqrtFiberLength;
-        public struct ServoAngle
+        private double sqrtFiberLength;
+        private struct ServoAngle
         {
             public string servoA;
             public string servoB;
             public string servoC;
         }
-        public struct PMDData
+        private struct PMDData
         {
             public ServoAngle ServoAngle;
             public double DGD;
             public double PMD;
         }
-        public struct PMDCharacteristics
+        private struct PMDCharacteristics
         {
             public int stepSize;
             public double wavelength;
@@ -43,24 +45,24 @@ namespace GPIBController
         }
         private string[] portNames;
         private SerialPort serialPort;
-        ServoAngle servoAngle;
-        PMDCharacteristics pMDCharacteristics;
-        string ack;
-        bool nextMeasurement;
-        bool threadRun;
-        List<double> wavelengths;
-        CMath.JonesMatCar refJonesMat;
+        private ServoAngle servoAngle;
+        private PMDCharacteristics pMDCharacteristics;
+        private string ack;
+        private static bool nextMeasurement;
+        private static bool threadRun;
+        private List<double> wavelengths;
+        private CMath.JonesMatCar refJonesMat;
 
-        int progress;
-        int progressTotal;
-        float progressPercentage;
-        DateTime dateTimeStart;
-        int timePastSeonds;
-        int eta;
-        int seconds;
-        int minutes;
-        int hours;
-        string etaTime;
+        private int progress;
+        private int progressTotal;
+        private float progressPercentage;
+        private DateTime dateTimeStart;
+        private int timePastSeonds;
+        private int eta;
+        private int seconds;
+        private int minutes;
+        private int hours;
+        private string etaTime;
 
         protected override void WndProc(ref Message m)
         {
@@ -86,11 +88,13 @@ namespace GPIBController
             }));
 
             PMDData pMD = new PMDData();
-
+#if (!TESTMODE)            
             string jStringw1 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            //string jStringw1 = Utility.text_J1_1;//for testing
             string jStringw2 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            //string jStringw2 = Utility.text_J1_2;//for testing
+#else
+            string jStringw1 = Utility.text_J1_1;//for testing
+            string jStringw2 = Utility.text_J1_2;//for testing
+#endif
 
             double[] DGD = Utility.DGD(
                 jStringw1,
@@ -268,32 +272,37 @@ namespace GPIBController
                 //all long running oparations done in separate threads for avoid ui freezing issue.
                 Thread thread = new Thread(() =>
                 {
-                    threadRun = true;
-
-                    DeviceControl.LaserOn(pMDCharacteristics.laserPower);
-                    DeviceControl.InitDGDMesure(pMDCharacteristics.wavelength);
-
-                    for (int i = 0; i < wavelengths.Count; i++)// loop go through all wavelenghts need to measure
+                    try
                     {
-                        pMDCharacteristics.wavelength = wavelengths[i];
-
-                        for (int A = pMDCharacteristics.start; A <= pMDCharacteristics.stop; A += pMDCharacteristics.stepSize)
+                        threadRun = true;
+#if (!TESTMODE)
+                        DeviceControl.LaserOn(pMDCharacteristics.laserPower);
+                        DeviceControl.InitDGDMesure(pMDCharacteristics.wavelength);
+#endif
+                        for (int i = 0; i < wavelengths.Count; i++)// loop go through all wavelenghts need to measure
                         {
-                            for (int B = pMDCharacteristics.start; B <= pMDCharacteristics.stop; B += pMDCharacteristics.stepSize)
+                            pMDCharacteristics.wavelength = wavelengths[i];
+
+                            for (int A = pMDCharacteristics.start; A <= pMDCharacteristics.stop; A += pMDCharacteristics.stepSize)
                             {
-                                for (int C = pMDCharacteristics.start; C <= pMDCharacteristics.stop; C += pMDCharacteristics.stepSize)
+                                for (int B = pMDCharacteristics.start; B <= pMDCharacteristics.stop; B += pMDCharacteristics.stepSize)
                                 {
-                                    servoAngle.servoA = A.ToString();
-                                    servoAngle.servoB = B.ToString();
-                                    servoAngle.servoC = C.ToString();
+                                    for (int C = pMDCharacteristics.start; C <= pMDCharacteristics.stop; C += pMDCharacteristics.stepSize)
+                                    {
+                                        servoAngle.servoA = A.ToString();
+                                        servoAngle.servoB = B.ToString();
+                                        servoAngle.servoC = C.ToString();
 
-                                    serialPort.WriteLine("PMD" + servoAngle.servoA + ":" + servoAngle.servoB + ":" + servoAngle.servoC);//Prepare data string and send to arduino
+                                        serialPort.WriteLine("PMD" + servoAngle.servoA + ":" + servoAngle.servoB + ":" + servoAngle.servoC);//Prepare data string and send to arduino
 
-                                    nextMeasurement = false;
-                                    while (!nextMeasurement) { }//wait until arduino send rotate complete message
+                                        nextMeasurement = false;
+                                        while (!nextMeasurement) { }//wait until arduino send rotate complete message
 
-                                    OnServoRotated(ack);
+                                        OnServoRotated(ack);
 
+                                        if (threadRun == false)
+                                            break;
+                                    }
                                     if (threadRun == false)
                                         break;
                                 }
@@ -303,10 +312,14 @@ namespace GPIBController
                             if (threadRun == false)
                                 break;
                         }
-                        if (threadRun == false)
-                            break;
+#if (!TESTMODE)
+                        DeviceControl.LaserOff();
+#endif
                     }
-                    DeviceControl.LaserOff();
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 });
                 thread.Start();
             }
@@ -389,14 +402,16 @@ namespace GPIBController
             {
                 try
                 {
+#if (!TESTMODE)
                     DeviceControl.LaserOn(System.Convert.ToInt32(txtBoxLaserPower.Text));
                     DeviceControl.InitDGDMesure(System.Convert.ToDouble(txtBoxWavelength.Text));
                     string jString = DeviceControl.GetJonesMatrix(System.Convert.ToDouble(txtBoxWavelength.Text), System.Convert.ToInt32(txtBoxDelay.Text));
                     DeviceControl.LaserOff();
 
                     double[] jMatValues = Utility.JonesString2Double(jString);
-                    //double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing
-
+#else
+                    double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing
+#endif
                     CMath.JonesMatPol matPol = Utility.JonesDoubleArray2JonesMat(jMatValues);
                     refJonesMat = CMath.Inverse(CMath.Pol2Car(matPol));
 

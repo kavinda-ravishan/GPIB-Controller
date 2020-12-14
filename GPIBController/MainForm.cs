@@ -1,6 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
+﻿//#define TESTMODE
+
 using NationalInstruments.NI4882;
+using System;
+using System.Windows.Forms;
 
 namespace GPIBController
 {
@@ -95,7 +97,7 @@ namespace GPIBController
         private void CloseButton_Click(object sender, EventArgs e)
         {
             try
-            {    
+            {
                 Devices.devicePolarizationAnalyzer.Dispose();
                 Devices.devicePolarizationAnalyzer = null;
                 SetupControlState1(false);
@@ -136,17 +138,18 @@ namespace GPIBController
         }
 
         private void BtnS0_Click(object sender, EventArgs e)
-        {       
+        {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
-
+#if (!TESTMODE)
                 Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("S0;"));
                 string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                //string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.text_S0)); //for testing
-
+#else
+                string[] data = Utility.S0_filter(Utility.DataSeparator(Utility.text_S0)); //for testing
+#endif
                 for (int i = 0; i < data.Length; i++)
                 {
                     stringReadTextBox1.Text += (Utility.Labels_S0[i] + " -> " + data[i] + Environment.NewLine);
@@ -171,11 +174,12 @@ namespace GPIBController
                 Cursor.Current = Cursors.WaitCursor;
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
-
+#if (!TESTMODE)
                 Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("SB;"));
                 string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                //string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
-
+#else
+                string[] data = Utility.SB_filter(Utility.DataSeparator(Utility.text_SB));//for testing
+#endif
                 for (int i = 0; i < data.Length; i++)
                 {
                     stringReadTextBox1.Text += (Utility.Labels_SB[i] + " -> " + data[i] + Environment.NewLine);
@@ -199,11 +203,12 @@ namespace GPIBController
                 Cursor.Current = Cursors.WaitCursor;
                 stringReadTextBox1.Enabled = true;
                 stringReadTextBox1.Clear();
-
+#if (!TESTMODE)
                 Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("JM;"));
                 string[] data = Utility.JM_filter(Utility.DataSeparator(Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString())));
-                //string[] data = Utility.JM_filter(Utility.DataSeparator(Utility.text_J1));//for testing
-
+#else
+                string[] data = Utility.JM_filter(Utility.DataSeparator(Utility.text_J1));//for testing
+#endif
                 for (int i = 0; i < data.Length; i++)
                 {
                     stringReadTextBox1.Text += (Utility.Labels_JM[i] + " -> " + data[i] + Environment.NewLine);
@@ -220,9 +225,9 @@ namespace GPIBController
             }
         }
 
-        #endregion
+#endregion
 
-        #region Laser Source
+#region Laser Source
 
         private void SetupControlState2(bool isSessionOpen)
         {
@@ -336,9 +341,9 @@ namespace GPIBController
             }
         }
 
-        #endregion
+#endregion
 
-        #region Common
+#region Common
         private void BtnFindDevices_Click(object sender, EventArgs e)
         {
             try
@@ -357,7 +362,7 @@ namespace GPIBController
                 }
                 board.Dispose();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -396,7 +401,7 @@ namespace GPIBController
                 MessageBox.Show("Device not initialized");
             }
         }
-        #endregion
+#endregion
 
         private void BtnPolController_Click(object sender, EventArgs e)
         {

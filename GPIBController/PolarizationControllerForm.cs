@@ -1,4 +1,4 @@
-﻿//#define TESTMODE
+﻿#define TESTMODE
 
 using System;
 using System.Collections.Generic;
@@ -143,6 +143,36 @@ namespace GPIBController
 
         public Form RefToMainForm { get; set; }
 
+        private void SetupControlState(bool isPMDMeasurementStarted)
+        {
+            btnStop.Enabled = isPMDMeasurementStarted;
+
+            btnStart.Enabled = !isPMDMeasurementStarted;
+            btnFindPorts.Enabled = !isPMDMeasurementStarted;
+            btnDisconnect.Enabled = !isPMDMeasurementStarted;
+            btnWrite.Enabled = !isPMDMeasurementStarted;
+            btnAdd.Enabled= !isPMDMeasurementStarted;
+            btnClear.Enabled = !isPMDMeasurementStarted;
+            btnResetRefJonesMat.Enabled = !isPMDMeasurementStarted;
+            btnMeasureRefJonesMat.Enabled = !isPMDMeasurementStarted;
+            btnShowRefJonesMat.Enabled = !isPMDMeasurementStarted;
+            btnSave.Enabled = !isPMDMeasurementStarted;
+            btnShowHIst.Enabled = !isPMDMeasurementStarted;
+
+            txtBoxDelay.Enabled = !isPMDMeasurementStarted;
+            txtBoxFiberLength.Enabled = !isPMDMeasurementStarted;
+            txtBoxLaserPower.Enabled = !isPMDMeasurementStarted;
+            txtBoxPath.Enabled = !isPMDMeasurementStarted;
+            txtBoxServoA.Enabled = !isPMDMeasurementStarted;
+            txtBoxServoB.Enabled = !isPMDMeasurementStarted;
+            txtBoxServoC.Enabled = !isPMDMeasurementStarted;
+            txtBoxStart.Enabled = !isPMDMeasurementStarted;
+            txtBoxStepSize.Enabled = !isPMDMeasurementStarted;
+            txtBoxStop.Enabled = !isPMDMeasurementStarted;
+            txtBoxWavelength.Enabled = !isPMDMeasurementStarted;
+            txtBoxWaveStep.Enabled = !isPMDMeasurementStarted;
+        }
+
         private void BtnFindPorts_Click(object sender, EventArgs e)
         {
             cmbCOMPorts.Items.Clear();
@@ -244,6 +274,8 @@ namespace GPIBController
         {
             if (serialPort != null && wavelengths.Count != 0)
             {
+                SetupControlState(true);
+
                 pMDCharacteristics = new PMDCharacteristics
                 {
                     PMDDatas = new List<PMDData>(),
@@ -314,11 +346,18 @@ namespace GPIBController
                         }
 #if (!TESTMODE)
                         DeviceControl.LaserOff();
-#endif
+#endif  
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        this.Invoke(new MethodInvoker(delegate ()
+                        {
+                            SetupControlState(false);
+                        }));
                     }
                 });
                 thread.Start();
@@ -328,6 +367,7 @@ namespace GPIBController
         private void BtnStop_Click(object sender, EventArgs e)
         {
             threadRun = false;
+            SetupControlState(false);
         }
 
         private void BtnSave_Click(object sender, EventArgs e)

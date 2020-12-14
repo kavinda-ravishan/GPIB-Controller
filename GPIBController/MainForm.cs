@@ -11,8 +11,8 @@ namespace GPIBController
         public MainForm()
         {
             InitializeComponent();
-            SetupControlState1(false);
-            SetupControlState2(false);
+            SetupControlStatePolarimeter(false);
+            SetupControlStateSource(false);
             InitsecondaryAddressComboBox1();
             InitsecondaryAddressComboBox2();
 
@@ -41,9 +41,9 @@ namespace GPIBController
             base.WndProc(ref m);
         }
 
-        #region Polarization Analyzer
+#region Polarization Analyzer
 
-        private void SetupControlState1(bool isSessionOpen)
+        private void SetupControlStatePolarimeter(bool isSessionOpen)
         {
             boardIdNumericUpDown1.Enabled = !isSessionOpen;
             primaryAddressNumericUpDown1.Enabled = !isSessionOpen;
@@ -53,7 +53,6 @@ namespace GPIBController
             stringToWriteTextBox1.Enabled = isSessionOpen;
             writeButton1.Enabled = isSessionOpen;
             readButton1.Enabled = isSessionOpen;
-            //stringReadTextBox1.Enabled = isSessionOpen;
             btnJM.Enabled = isSessionOpen;
             btnS0.Enabled = isSessionOpen;
             btnSB.Enabled = isSessionOpen;
@@ -82,7 +81,7 @@ namespace GPIBController
                 }
                 // Intialize the device
                 Devices.devicePolarizationAnalyzer = new Device((int)boardIdNumericUpDown1.Value, (byte)primaryAddressNumericUpDown1.Value, (byte)currentSecondaryAddress);
-                SetupControlState1(true);
+                SetupControlStatePolarimeter(true);
             }
             catch (Exception ex)
             {
@@ -100,7 +99,7 @@ namespace GPIBController
             {
                 Devices.devicePolarizationAnalyzer.Dispose();
                 Devices.devicePolarizationAnalyzer = null;
-                SetupControlState1(false);
+                SetupControlStatePolarimeter(false);
             }
             catch (Exception ex)
             {
@@ -229,7 +228,7 @@ namespace GPIBController
 
 #region Laser Source
 
-        private void SetupControlState2(bool isSessionOpen)
+        private void SetupControlStateSource(bool isSessionOpen)
         {
             boardIdNumericUpDown2.Enabled = !isSessionOpen;
             primaryAddressNumericUpDown2.Enabled = !isSessionOpen;
@@ -239,7 +238,6 @@ namespace GPIBController
             stringToWriteTextBox2.Enabled = isSessionOpen;
             writeButton2.Enabled = isSessionOpen;
             readButton2.Enabled = isSessionOpen;
-            //stringReadTextBox2.Enabled = isSessionOpen;
         }
 
         private void InitsecondaryAddressComboBox2()
@@ -286,7 +284,7 @@ namespace GPIBController
                 }
                 // Intialize the device
                 Devices.deviceLaserSource = new Device((int)boardIdNumericUpDown2.Value, (byte)primaryAddressNumericUpDown2.Value, (byte)currentSecondaryAddress);
-                SetupControlState2(true);
+                SetupControlStateSource(true);
             }
             catch (Exception ex)
             {
@@ -304,7 +302,7 @@ namespace GPIBController
             {
                 Devices.deviceLaserSource.Dispose();
                 Devices.deviceLaserSource = null;
-                SetupControlState2(false);
+                SetupControlStateSource(false);
             }
             catch (Exception ex)
             {
@@ -401,7 +399,6 @@ namespace GPIBController
                 MessageBox.Show("Device not initialized");
             }
         }
-#endregion
 
         private void BtnPolController_Click(object sender, EventArgs e)
         {
@@ -419,6 +416,7 @@ namespace GPIBController
                 MessageBox.Show("Device not initialized");
             }
         }
+        #endregion
     }
 }
 

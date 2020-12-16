@@ -190,6 +190,9 @@ namespace GPIBController
                                 {
                                     settings.min = data[i - 2].PMD;
                                     settings.max = data[i - 2].PMD;
+
+                                    settings.minWaveLength = data[i - 2].waveLenght;
+                                    settings.maxWaveLength = data[i - 2].waveLenght;
                                 }
                                 else
                                 {

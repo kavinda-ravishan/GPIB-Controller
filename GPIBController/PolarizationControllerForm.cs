@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 namespace GPIBController
+
 {
     public partial class PolarizationControllerForm : Form
     {
@@ -88,57 +89,70 @@ namespace GPIBController
             }));
 
             PMDData pMD = new PMDData();
-#if (!TESTMODE)            
-            string jStringw1 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-            string jStringw2 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+#if (!TESTMODE)     
+            try
+            {
+                string jStringw1 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+                string jStringw2 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+
+                double[] DGD = Utility.DGD(
+                                     jStringw1,
+                                     jStringw2,
+                                     refJonesMat,
+                                     pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize,
+                                     pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize
+                                     );
+
+
+                pMD.DGD = DGD[0];
+                pMD.PMD = DGD[0] / sqrtFiberLength;
+                pMD.ServoAngle = servoAngle;
+
+                pMDCharacteristics.PMDDatas.Add(pMD);
+            }
+            catch (Exception)// Due to Jones matrix filtr issue.
+            {
+                pMD.DGD = 0;
+                pMD.PMD = 0;
+                pMD.ServoAngle = servoAngle;
+
+                pMDCharacteristics.PMDDatas.Add(pMD);
+            }
+            finally
+            {
+                progress++;
+                progressPercentage = (progress * 100f) / progressTotal;
+                timePastSeonds = (int)(DateTime.Now - dateTimeStart).TotalSeconds;
+                eta = (int)((timePastSeonds * 100f) / progressPercentage) - timePastSeonds;
+
+                seconds = eta % 60;
+                hours = eta / 3600;
+                minutes = (eta / 60) - (hours * 60);
+
+                etaTime = hours + " Hrs : " + minutes + " Min : " + seconds + " Sec";
+
+                this.Invoke(new MethodInvoker(delegate ()
+                {
+                    //update labels and chart
+                    stringReadTextBox.Text += (pMDCharacteristics.wavelength.ToString() + " nm" + Environment.NewLine);
+                    stringReadTextBox.Text += ("DGD : " + pMD.DGD.ToString() + " ps" + Environment.NewLine);
+                    stringReadTextBox.Text += ("PMD : " + pMD.PMD.ToString() + Environment.NewLine);
+                    stringReadTextBox.Text += (Environment.NewLine);
+
+                    stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
+                    stringReadTextBox.ScrollToCaret();
+
+                    lblProgress.Text = progress.ToString() + "/" + progressTotal.ToString() +
+                    "  [ " + (int)progressPercentage + "% ]" +
+                    "    " + etaTime;
+
+                    progressBar.Value = (int)progressPercentage;
+                }));
+            }
 #else
             string jStringw1 = Utility.text_J1_1;//for testing
             string jStringw2 = Utility.text_J1_2;//for testing
 #endif
-
-            double[] DGD = Utility.DGD(
-                jStringw1,
-                jStringw2,
-                refJonesMat,
-                pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize,
-                pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize
-                );
-
-
-            pMD.DGD = DGD[0];
-            pMD.PMD = DGD[0] / sqrtFiberLength;
-            pMD.ServoAngle = servoAngle;
-
-            pMDCharacteristics.PMDDatas.Add(pMD);
-
-            progress++;
-            progressPercentage = (progress * 100f) / progressTotal;
-            timePastSeonds = (int)(DateTime.Now - dateTimeStart).TotalSeconds;
-            eta = (int)((timePastSeonds * 100f) / progressPercentage) - timePastSeonds;
-
-            seconds = eta % 60;
-            hours = eta / 3600;
-            minutes = (eta / 60) - (hours * 60);
-
-            etaTime = hours + " Hrs : " + minutes + " Min : " + seconds + " Sec";
-
-            this.Invoke(new MethodInvoker(delegate ()
-            {
-                //update labels and chart
-                stringReadTextBox.Text += (pMDCharacteristics.wavelength.ToString() + " nm" + Environment.NewLine);
-                stringReadTextBox.Text += ("DGD : " + pMD.DGD.ToString() + " ps" + Environment.NewLine);
-                stringReadTextBox.Text += ("PMD : " + pMD.PMD.ToString() + Environment.NewLine);
-                stringReadTextBox.Text += (Environment.NewLine);
-
-                stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;
-                stringReadTextBox.ScrollToCaret();
-
-                lblProgress.Text = progress.ToString() + "/" + progressTotal.ToString() +
-                "  [ " + (int)progressPercentage + "% ]" +
-                "    " + etaTime;
-
-                progressBar.Value = (int)progressPercentage;
-            }));
         }
 
         public Form RefToMainForm { get; set; }
@@ -363,6 +377,8 @@ namespace GPIBController
                             SetupControlState(false);
                         }));
                     }
+                    
+                    
                 });
                 thread.Start();
             }

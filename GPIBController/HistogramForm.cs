@@ -88,12 +88,13 @@ namespace GPIBController
                     while (true)
                     {
                         data = excel.ReadExcel(i + 2, 0);
+
                         if (data != -1)
                         {
                             PMD.Add(data);
-                            if (max < excel.ReadExcel(i + 2, 0)) max = excel.ReadExcel(i + 2, 0);
-                            if (min > excel.ReadExcel(i + 2, 0)) min = excel.ReadExcel(i + 2, 0);
-                            
+                            if (max < excel.ReadExcel(i + 2, 0)) max = data;
+                            if (min > excel.ReadExcel(i + 2, 0)) min = data;
+
                             this.Invoke(new MethodInvoker(delegate ()
                             {
                                 lblStatus.Text = i.ToString() + " : " + data.ToString();
@@ -142,7 +143,7 @@ namespace GPIBController
 
                                 lblStatus.Text = data.ToString();
                             }
-                            lblStatus.Text = "---";
+                            lblStatus.Text = "Number of data points : " + PMD.Count.ToString();
                         }));
                     }
                     else
@@ -198,9 +199,17 @@ namespace GPIBController
                         chart.Series["Data"].Points.Clear();
                         for (i = 0; i < histY.Count; i++)
                         {
+                            /*
+                            Console.Write(histX[i] - (stepSize / 2));
+                            Console.Write(" - ");
+                            Console.Write(histX[i] + (stepSize / 2));
+                            Console.Write(" : ");
+                            Console.WriteLine(histY[i]);
+                            */
                             chart.Series["Data"].Points.AddXY(histX[i], histY[i]);
                         }
-                        lblStatus.Text = "---";
+                        //Console.WriteLine("-------------------------------------");
+                        lblStatus.Text = "Number of data points : " + PMD.Count.ToString();
                     }));
                 });
                 thread.Start();

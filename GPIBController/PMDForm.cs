@@ -1,6 +1,7 @@
 ﻿//#define TESTMODE
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -371,16 +372,28 @@ namespace GPIBController
                     settings.max = System.Convert.ToDouble(excel.ReadExcel(5, 1));
                     settings.maxWaveLength = System.Convert.ToDouble(excel.ReadExcel(5, 3));
 
-                    int steps = (int)((settings.stop - settings.start) / settings.stepSize) + 3;
-                    data = new PMDData[steps - 2];
+                    List<double> waveLenghts = new List<double>();
+                    List<double> DGDs = new List<double>();
+                    List<double> PMDs = new List<double>();
 
-                    for (int i = 0; i < steps - 2; i++)
+                    int i = 0;
+                    while (true)
                     {
-                        data[i].i = System.Convert.ToInt32(excel.ReadExcel(i + 8, 0));
-                        data[i].waveLenght = System.Convert.ToDouble(excel.ReadExcel(i + 8, 1));
-                        data[i].DGD = System.Convert.ToDouble(excel.ReadExcel(i + 8, 2));
-                        data[i].PMD = System.Convert.ToDouble(excel.ReadExcel(i + 8, 3));
+                        if (excel.ReadExcel(i + 8, 0) != -1)
+                        {
+                            waveLenghts.Add(excel.ReadExcel(i + 8, 1));
+                            DGDs.Add(excel.ReadExcel(i + 8, 2));
+                            PMDs.Add(excel.ReadExcel(i + 8, 3));
+
+                            //this.Invoke(new MethodInvoker(delegate ()
+                            //{
+                                //lblStatus.Text = i.ToString() + " : " + data.ToString();
+                            //}));
+                        }
+                        else break;
+                        i++;
                     }
+
                     excel.Close();
 
                     this.Invoke(new MethodInvoker(delegate ()
@@ -400,14 +413,14 @@ namespace GPIBController
 
                         chart.Series["PMD"].Points.Clear();
 
-                        for (int i = 0; i < data.Length; i++)
+                        for (i = 0; i < waveLenghts.Count; i++)
                         {
 
-                            chart.Series["PMD"].Points.AddXY(data[i].waveLenght, data[i].PMD);
+                            chart.Series["PMD"].Points.AddXY(waveLenghts[i], PMDs[i]);
 
-                            stringReadTextBox.Text += (data[i].waveLenght.ToString() + " nm" + Environment.NewLine);
-                            stringReadTextBox.Text += ("DGD : " + data[i].DGD.ToString() + " ps" + Environment.NewLine);
-                            stringReadTextBox.Text += ("PMD : " + data[i].PMD.ToString() + Environment.NewLine);
+                            stringReadTextBox.Text += (waveLenghts[i].ToString() + " nm" + Environment.NewLine);
+                            stringReadTextBox.Text += ("DGD : " + DGDs[i].ToString() + " ps" + Environment.NewLine);
+                            stringReadTextBox.Text += ("PMD : " + PMDs[i].ToString() + Environment.NewLine);
                             stringReadTextBox.Text += (Environment.NewLine);
 
                             stringReadTextBox.SelectionStart = stringReadTextBox.Text.Length;

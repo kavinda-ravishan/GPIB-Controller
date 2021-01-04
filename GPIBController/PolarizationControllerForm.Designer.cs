@@ -95,9 +95,14 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.lblProgress = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.radioButtonJM = new System.Windows.Forms.RadioButton();
+            this.radioButtonS = new System.Windows.Forms.RadioButton();
+            this.radioButtonED = new System.Windows.Forms.RadioButton();
+            this.groupBox = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).BeginInit();
             this.panel2.SuspendLayout();
+            this.groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDisconnect
@@ -106,7 +111,7 @@
             this.btnDisconnect.Enabled = false;
             this.btnDisconnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDisconnect.ForeColor = System.Drawing.Color.White;
-            this.btnDisconnect.Location = new System.Drawing.Point(169, 109);
+            this.btnDisconnect.Location = new System.Drawing.Point(169, 93);
             this.btnDisconnect.Name = "btnDisconnect";
             this.btnDisconnect.Size = new System.Drawing.Size(78, 40);
             this.btnDisconnect.TabIndex = 7;
@@ -119,7 +124,7 @@
             this.btnConnect.BackColor = System.Drawing.Color.Blue;
             this.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConnect.ForeColor = System.Drawing.Color.White;
-            this.btnConnect.Location = new System.Drawing.Point(45, 109);
+            this.btnConnect.Location = new System.Drawing.Point(45, 93);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(78, 40);
             this.btnConnect.TabIndex = 6;
@@ -131,7 +136,7 @@
             // 
             this.cmbCOMPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCOMPorts.FormattingEnabled = true;
-            this.cmbCOMPorts.Location = new System.Drawing.Point(45, 61);
+            this.cmbCOMPorts.Location = new System.Drawing.Point(45, 45);
             this.cmbCOMPorts.Name = "cmbCOMPorts";
             this.cmbCOMPorts.Size = new System.Drawing.Size(114, 21);
             this.cmbCOMPorts.TabIndex = 5;
@@ -141,7 +146,7 @@
             this.btnFindPorts.BackColor = System.Drawing.Color.Blue;
             this.btnFindPorts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFindPorts.ForeColor = System.Drawing.Color.White;
-            this.btnFindPorts.Location = new System.Drawing.Point(169, 59);
+            this.btnFindPorts.Location = new System.Drawing.Point(169, 43);
             this.btnFindPorts.Name = "btnFindPorts";
             this.btnFindPorts.Size = new System.Drawing.Size(78, 23);
             this.btnFindPorts.TabIndex = 4;
@@ -151,7 +156,7 @@
             // 
             // txtBoxServoA
             // 
-            this.txtBoxServoA.Location = new System.Drawing.Point(45, 207);
+            this.txtBoxServoA.Location = new System.Drawing.Point(45, 191);
             this.txtBoxServoA.Name = "txtBoxServoA";
             this.txtBoxServoA.Size = new System.Drawing.Size(33, 20);
             this.txtBoxServoA.TabIndex = 8;
@@ -163,7 +168,7 @@
             this.btnWrite.BackColor = System.Drawing.Color.Blue;
             this.btnWrite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWrite.ForeColor = System.Drawing.Color.White;
-            this.btnWrite.Location = new System.Drawing.Point(45, 243);
+            this.btnWrite.Location = new System.Drawing.Point(45, 227);
             this.btnWrite.Name = "btnWrite";
             this.btnWrite.Size = new System.Drawing.Size(195, 34);
             this.btnWrite.TabIndex = 11;
@@ -175,7 +180,7 @@
             // 
             this.lblRData.AutoSize = true;
             this.lblRData.ForeColor = System.Drawing.Color.White;
-            this.lblRData.Location = new System.Drawing.Point(123, 321);
+            this.lblRData.Location = new System.Drawing.Point(123, 304);
             this.lblRData.Name = "lblRData";
             this.lblRData.Size = new System.Drawing.Size(16, 13);
             this.lblRData.TabIndex = 11;
@@ -183,7 +188,7 @@
             // 
             // txtBoxServoB
             // 
-            this.txtBoxServoB.Location = new System.Drawing.Point(126, 207);
+            this.txtBoxServoB.Location = new System.Drawing.Point(126, 191);
             this.txtBoxServoB.Name = "txtBoxServoB";
             this.txtBoxServoB.Size = new System.Drawing.Size(33, 20);
             this.txtBoxServoB.TabIndex = 9;
@@ -192,7 +197,7 @@
             // 
             // txtBoxServoC
             // 
-            this.txtBoxServoC.Location = new System.Drawing.Point(207, 207);
+            this.txtBoxServoC.Location = new System.Drawing.Point(207, 191);
             this.txtBoxServoC.Name = "txtBoxServoC";
             this.txtBoxServoC.Size = new System.Drawing.Size(33, 20);
             this.txtBoxServoC.TabIndex = 10;
@@ -201,7 +206,7 @@
             // 
             // txtBoxStepSize
             // 
-            this.txtBoxStepSize.Location = new System.Drawing.Point(653, 203);
+            this.txtBoxStepSize.Location = new System.Drawing.Point(653, 187);
             this.txtBoxStepSize.Name = "txtBoxStepSize";
             this.txtBoxStepSize.Size = new System.Drawing.Size(100, 20);
             this.txtBoxStepSize.TabIndex = 13;
@@ -213,7 +218,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Black;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(544, 206);
+            this.label1.Location = new System.Drawing.Point(544, 190);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 14;
@@ -223,7 +228,7 @@
             // 
             this.lblServoA.AutoSize = true;
             this.lblServoA.ForeColor = System.Drawing.Color.White;
-            this.lblServoA.Location = new System.Drawing.Point(583, 321);
+            this.lblServoA.Location = new System.Drawing.Point(608, 333);
             this.lblServoA.Name = "lblServoA";
             this.lblServoA.Size = new System.Drawing.Size(16, 13);
             this.lblServoA.TabIndex = 16;
@@ -233,7 +238,7 @@
             // 
             this.lblServoB.AutoSize = true;
             this.lblServoB.ForeColor = System.Drawing.Color.White;
-            this.lblServoB.Location = new System.Drawing.Point(643, 321);
+            this.lblServoB.Location = new System.Drawing.Point(668, 333);
             this.lblServoB.Name = "lblServoB";
             this.lblServoB.Size = new System.Drawing.Size(16, 13);
             this.lblServoB.TabIndex = 17;
@@ -243,7 +248,7 @@
             // 
             this.lblServoC.AutoSize = true;
             this.lblServoC.ForeColor = System.Drawing.Color.White;
-            this.lblServoC.Location = new System.Drawing.Point(704, 321);
+            this.lblServoC.Location = new System.Drawing.Point(729, 333);
             this.lblServoC.Name = "lblServoC";
             this.lblServoC.Size = new System.Drawing.Size(16, 13);
             this.lblServoC.TabIndex = 18;
@@ -254,9 +259,9 @@
             this.btnStop.BackColor = System.Drawing.Color.Blue;
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(670, 243);
+            this.btnStop.Location = new System.Drawing.Point(695, 266);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(83, 35);
+            this.btnStop.Size = new System.Drawing.Size(111, 35);
             this.btnStop.TabIndex = 19;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = false;
@@ -267,7 +272,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Black;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(308, 65);
+            this.label2.Location = new System.Drawing.Point(308, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 21;
@@ -275,7 +280,7 @@
             // 
             // txtBoxWavelength
             // 
-            this.txtBoxWavelength.Location = new System.Drawing.Point(379, 62);
+            this.txtBoxWavelength.Location = new System.Drawing.Point(379, 46);
             this.txtBoxWavelength.Name = "txtBoxWavelength";
             this.txtBoxWavelength.Size = new System.Drawing.Size(100, 20);
             this.txtBoxWavelength.TabIndex = 20;
@@ -352,7 +357,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Black;
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(544, 65);
+            this.label4.Location = new System.Drawing.Point(544, 49);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(103, 13);
             this.label4.TabIndex = 90;
@@ -360,7 +365,7 @@
             // 
             // txtBoxWaveStep
             // 
-            this.txtBoxWaveStep.Location = new System.Drawing.Point(653, 62);
+            this.txtBoxWaveStep.Location = new System.Drawing.Point(653, 46);
             this.txtBoxWaveStep.Name = "txtBoxWaveStep";
             this.txtBoxWaveStep.Size = new System.Drawing.Size(100, 20);
             this.txtBoxWaveStep.TabIndex = 89;
@@ -372,7 +377,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Black;
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(544, 117);
+            this.label5.Location = new System.Drawing.Point(544, 101);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 13);
             this.label5.TabIndex = 92;
@@ -380,7 +385,7 @@
             // 
             // txtBoxLaserPower
             // 
-            this.txtBoxLaserPower.Location = new System.Drawing.Point(653, 114);
+            this.txtBoxLaserPower.Location = new System.Drawing.Point(653, 98);
             this.txtBoxLaserPower.Name = "txtBoxLaserPower";
             this.txtBoxLaserPower.Size = new System.Drawing.Size(100, 20);
             this.txtBoxLaserPower.TabIndex = 91;
@@ -392,7 +397,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Black;
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(544, 143);
+            this.label6.Location = new System.Drawing.Point(544, 127);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(34, 13);
             this.label6.TabIndex = 94;
@@ -400,7 +405,7 @@
             // 
             // txtBoxDelay
             // 
-            this.txtBoxDelay.Location = new System.Drawing.Point(653, 140);
+            this.txtBoxDelay.Location = new System.Drawing.Point(653, 124);
             this.txtBoxDelay.Name = "txtBoxDelay";
             this.txtBoxDelay.Size = new System.Drawing.Size(100, 20);
             this.txtBoxDelay.TabIndex = 93;
@@ -412,7 +417,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Black;
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(544, 91);
+            this.label7.Location = new System.Drawing.Point(544, 75);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(62, 13);
             this.label7.TabIndex = 96;
@@ -420,7 +425,7 @@
             // 
             // txtBoxFiberLength
             // 
-            this.txtBoxFiberLength.Location = new System.Drawing.Point(653, 88);
+            this.txtBoxFiberLength.Location = new System.Drawing.Point(653, 72);
             this.txtBoxFiberLength.Name = "txtBoxFiberLength";
             this.txtBoxFiberLength.Size = new System.Drawing.Size(100, 20);
             this.txtBoxFiberLength.TabIndex = 95;
@@ -570,7 +575,7 @@
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Black;
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(759, 93);
+            this.label8.Location = new System.Drawing.Point(759, 77);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(22, 13);
             this.label8.TabIndex = 112;
@@ -581,7 +586,7 @@
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Black;
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(759, 145);
+            this.label9.Location = new System.Drawing.Point(759, 129);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(20, 13);
             this.label9.TabIndex = 111;
@@ -592,7 +597,7 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Black;
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(759, 119);
+            this.label10.Location = new System.Drawing.Point(759, 103);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(24, 13);
             this.label10.TabIndex = 110;
@@ -603,7 +608,7 @@
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.Black;
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(759, 67);
+            this.label11.Location = new System.Drawing.Point(759, 51);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(21, 13);
             this.label11.TabIndex = 109;
@@ -614,7 +619,7 @@
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.Black;
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(485, 65);
+            this.label12.Location = new System.Drawing.Point(485, 49);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(21, 13);
             this.label12.TabIndex = 108;
@@ -624,7 +629,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(213, 169);
+            this.label14.Location = new System.Drawing.Point(213, 153);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(14, 13);
             this.label14.TabIndex = 115;
@@ -634,7 +639,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(134, 169);
+            this.label16.Location = new System.Drawing.Point(134, 153);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(14, 13);
             this.label16.TabIndex = 114;
@@ -644,7 +649,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(53, 169);
+            this.label17.Location = new System.Drawing.Point(53, 153);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(14, 13);
             this.label17.TabIndex = 113;
@@ -654,7 +659,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(704, 293);
+            this.label18.Location = new System.Drawing.Point(729, 312);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(14, 13);
             this.label18.TabIndex = 118;
@@ -664,7 +669,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.ForeColor = System.Drawing.Color.White;
-            this.label19.Location = new System.Drawing.Point(643, 293);
+            this.label19.Location = new System.Drawing.Point(668, 312);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(14, 13);
             this.label19.TabIndex = 117;
@@ -674,7 +679,7 @@
             // 
             this.label20.AutoSize = true;
             this.label20.ForeColor = System.Drawing.Color.White;
-            this.label20.Location = new System.Drawing.Point(583, 293);
+            this.label20.Location = new System.Drawing.Point(608, 312);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(14, 13);
             this.label20.TabIndex = 116;
@@ -682,7 +687,7 @@
             // 
             // txtBoxStart
             // 
-            this.txtBoxStart.Location = new System.Drawing.Point(579, 177);
+            this.txtBoxStart.Location = new System.Drawing.Point(579, 161);
             this.txtBoxStart.Name = "txtBoxStart";
             this.txtBoxStart.Size = new System.Drawing.Size(62, 20);
             this.txtBoxStart.TabIndex = 119;
@@ -691,7 +696,7 @@
             // 
             // txtBoxStop
             // 
-            this.txtBoxStop.Location = new System.Drawing.Point(691, 177);
+            this.txtBoxStop.Location = new System.Drawing.Point(691, 161);
             this.txtBoxStop.Name = "txtBoxStop";
             this.txtBoxStop.Size = new System.Drawing.Size(62, 20);
             this.txtBoxStop.TabIndex = 120;
@@ -702,7 +707,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Location = new System.Drawing.Point(544, 180);
+            this.label21.Location = new System.Drawing.Point(544, 164);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(30, 13);
             this.label21.TabIndex = 121;
@@ -712,7 +717,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.ForeColor = System.Drawing.Color.White;
-            this.label22.Location = new System.Drawing.Point(656, 180);
+            this.label22.Location = new System.Drawing.Point(656, 164);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(20, 13);
             this.label22.TabIndex = 122;
@@ -723,7 +728,7 @@
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.Black;
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(759, 206);
+            this.label13.Location = new System.Drawing.Point(759, 190);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(47, 13);
             this.label13.TabIndex = 123;
@@ -734,7 +739,7 @@
             this.label23.AutoSize = true;
             this.label23.BackColor = System.Drawing.Color.Black;
             this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(759, 180);
+            this.label23.Location = new System.Drawing.Point(759, 164);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(47, 13);
             this.label23.TabIndex = 124;
@@ -745,7 +750,7 @@
             this.listView.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.listView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listView.HideSelection = false;
-            this.listView.Location = new System.Drawing.Point(379, 91);
+            this.listView.Location = new System.Drawing.Point(379, 75);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(100, 136);
             this.listView.TabIndex = 125;
@@ -757,9 +762,9 @@
             this.btnStart.BackColor = System.Drawing.Color.Blue;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(547, 242);
+            this.btnStart.Location = new System.Drawing.Point(547, 266);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(83, 35);
+            this.btnStart.Size = new System.Drawing.Size(111, 35);
             this.btnStart.TabIndex = 126;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = false;
@@ -770,7 +775,7 @@
             this.btnAdd.BackColor = System.Drawing.Color.Blue;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(311, 91);
+            this.btnAdd.Location = new System.Drawing.Point(311, 75);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(62, 136);
             this.btnAdd.TabIndex = 127;
@@ -783,7 +788,7 @@
             this.btnClear.BackColor = System.Drawing.Color.Blue;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(311, 242);
+            this.btnClear.Location = new System.Drawing.Point(311, 226);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(168, 35);
             this.btnClear.TabIndex = 128;
@@ -795,7 +800,7 @@
             // 
             this.lblProgress.AutoSize = true;
             this.lblProgress.ForeColor = System.Drawing.Color.White;
-            this.lblProgress.Location = new System.Drawing.Point(308, 321);
+            this.lblProgress.Location = new System.Drawing.Point(308, 304);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(16, 13);
             this.lblProgress.TabIndex = 129;
@@ -803,10 +808,57 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(8, 348);
+            this.progressBar.Location = new System.Drawing.Point(8, 356);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(847, 14);
             this.progressBar.TabIndex = 130;
+            // 
+            // radioButtonJM
+            // 
+            this.radioButtonJM.AutoSize = true;
+            this.radioButtonJM.ForeColor = System.Drawing.Color.White;
+            this.radioButtonJM.Location = new System.Drawing.Point(6, 13);
+            this.radioButtonJM.Name = "radioButtonJM";
+            this.radioButtonJM.Size = new System.Drawing.Size(74, 17);
+            this.radioButtonJM.TabIndex = 131;
+            this.radioButtonJM.TabStop = true;
+            this.radioButtonJM.Text = "Jones Mat";
+            this.radioButtonJM.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonS
+            // 
+            this.radioButtonS.AutoSize = true;
+            this.radioButtonS.ForeColor = System.Drawing.Color.White;
+            this.radioButtonS.Location = new System.Drawing.Point(99, 13);
+            this.radioButtonS.Name = "radioButtonS";
+            this.radioButtonS.Size = new System.Drawing.Size(58, 17);
+            this.radioButtonS.TabIndex = 132;
+            this.radioButtonS.TabStop = true;
+            this.radioButtonS.Text = "Stokes";
+            this.radioButtonS.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonED
+            // 
+            this.radioButtonED.AutoSize = true;
+            this.radioButtonED.ForeColor = System.Drawing.Color.White;
+            this.radioButtonED.Location = new System.Drawing.Point(179, 13);
+            this.radioButtonED.Name = "radioButtonED";
+            this.radioButtonED.Size = new System.Drawing.Size(74, 17);
+            this.radioButtonED.TabIndex = 133;
+            this.radioButtonED.TabStop = true;
+            this.radioButtonED.Text = "ExEyDelta";
+            this.radioButtonED.UseVisualStyleBackColor = true;
+            // 
+            // groupBox
+            // 
+            this.groupBox.Controls.Add(this.radioButtonJM);
+            this.groupBox.Controls.Add(this.radioButtonED);
+            this.groupBox.Controls.Add(this.radioButtonS);
+            this.groupBox.Location = new System.Drawing.Point(547, 219);
+            this.groupBox.Name = "groupBox";
+            this.groupBox.Size = new System.Drawing.Size(259, 35);
+            this.groupBox.TabIndex = 134;
+            this.groupBox.TabStop = false;
             // 
             // PolarizationControllerForm
             // 
@@ -814,6 +866,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1150, 570);
+            this.Controls.Add(this.groupBox);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.btnClear);
@@ -884,6 +937,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.groupBox.ResumeLayout(false);
+            this.groupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -957,5 +1012,9 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label lblProgress;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.RadioButton radioButtonJM;
+        private System.Windows.Forms.RadioButton radioButtonS;
+        private System.Windows.Forms.RadioButton radioButtonED;
+        private System.Windows.Forms.GroupBox groupBox;
     }
 }

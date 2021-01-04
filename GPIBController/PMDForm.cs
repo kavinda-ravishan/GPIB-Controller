@@ -177,7 +177,13 @@ namespace GPIBController
                                 jStrings[i] = Utility.text_J1;//for testing
 #endif
 
-                                DGDval = Utility.DGD(jStrings[i - 2], jStrings[i], refJonesMat, wavelenght[i - 2], wavelenght[i]);//Meaure DGD for arg1 and arg2 jones matrices
+                                DGDval = Utility.DGD(
+                                    Utility.JonesMatString2Car(jStrings[i - 2]),
+                                    Utility.JonesMatString2Car(jStrings[i]), 
+                                    refJonesMat, 
+                                    wavelenght[i - 2], 
+                                    wavelenght[i]);//Meaure DGD for arg1 and arg2 jones matrices
+
                                 data[i - 2].DGD = DGDval[0];
                                 data[i - 2].waveLenght = DGDval[1];
                                 data[i - 2].PMD = DGDval[0] / lengthSqrt;

@@ -208,6 +208,34 @@ namespace GPIBController
             return JMat;
         }
 
+        public static string[] SC_filter(List<string> text)
+        {
+            string[] SC = new string[6];
+
+            for (int i = 0; i < 4; i++)
+            {
+                SC[i] = text[i].Substring(3);
+            }
+
+            SC[4] = text[4];
+            SC[5] = text[5].Substring(0, 3);
+
+            return SC;
+        }
+
+        public static double[] SC_String2Double(string[] values)
+        {
+            double[] SC = new double[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+
+                SC[i] = System.Convert.ToDouble(values[i]);
+            }
+
+            return SC;
+        }
+
         public static double[] JonesString2Double(string text)
         {
             List<string> values = DataSeparator(text);
@@ -222,6 +250,68 @@ namespace GPIBController
             }
 
             return jonesMat;
+        }
+
+        public static double[] SB_String2Double(string[] values)
+        {
+            double[] stokes = new double[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                stokes[i] = System.Convert.ToDouble(values[i]);
+            }
+
+            return stokes;
+        }
+
+        public static double[] SB2Stokes(string text)
+        {
+            return SB_String2Double(SB_filter(DataSeparator(text)));
+        }// S1, S2, S3, PDB
+
+        public static double[] SC2EybyExDelta(string text)
+        {
+            return SC_String2Double(SC_filter(DataSeparator(text)));
+        }
+
+        public static CMath.ComplexCar TanPiDelta2K(double delta, double tanPi)//Delta in deg
+        {
+            CMath.ComplexCar complexCar = new CMath.ComplexCar();
+
+            double r = 1 / tanPi;
+            double theta = -1 * CMath.Deg2Red(delta);
+
+            complexCar.real = r * Math.Cos(theta);
+            complexCar.imag = r * Math.Sin(theta);
+
+            return complexCar;
+        }
+
+        public static CMath.ComplexCar Stokes2K(double s1, double s2, double s3, double s0 = 1)
+        {
+            CMath.ComplexCar complexCar = new CMath.ComplexCar();
+
+            double r = Math.Sqrt((s0 + s1) / (s0 - s1));
+            double theta = -1 * Math.Atan(s3 / s2);
+
+            complexCar.real = r * Math.Cos(theta);
+            complexCar.imag = r * Math.Sin(theta);
+
+            return complexCar;
+        }
+
+        public static CMath.JonesMatCar K2JonesMat(CMath.ComplexCar k0, CMath.ComplexCar k90, CMath.ComplexCar k45)
+        {
+            CMath.JonesMatCar jonesMatCar = new CMath.JonesMatCar();
+
+            CMath.ComplexCar k4 = (k90 - k45) / (k45 - k0);
+
+            jonesMatCar.J11 = k0 * k4;
+            jonesMatCar.J12 = k90;
+            jonesMatCar.J21 = k4;
+            jonesMatCar.J22 = new CMath.ComplexCar(1, 0);
+
+            return jonesMatCar;
         }
 
         //Jones double array comes with angle degries function convert it to red
@@ -249,16 +339,84 @@ namespace GPIBController
             return C / (wavelength * 1000);
         }
 
-        public static double[] DGD(string j1, string j2, CMath.JonesMatCar refJonesMat,double w1, double w2)
+        public static CMath.JonesMatCar JonesMatString2Car(string jonesMat)
         {
-            double[] jValues1 = JonesString2Double(j1);
-            double[] jValues2 = JonesString2Double(j2);
+            return CMath.Pol2Car(JonesDoubleArray2JonesMat(JonesString2Double(jonesMat)));
+        }
 
-            CMath.JonesMatPol mat1 = JonesDoubleArray2JonesMat(jValues1);
-            CMath.JonesMatPol mat2 = JonesDoubleArray2JonesMat(jValues2);
+        static CMath.ComplexCar Stokes2KMesure(double polPos, int polDelay = 3000)
+        {
+            //Console.WriteLine("Set Polarizer to - " + polPos.ToString());
+            Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences(DeviceControl.MsgPolPosition(polPos)));//change pol position
 
-            CMath.JonesMatCar J1 = refJonesMat * CMath.Pol2Car(mat1);
-            CMath.JonesMatCar J2 = refJonesMat * CMath.Pol2Car(mat2);
+            System.Threading.Thread.Sleep(polDelay);
+
+            //Console.WriteLine("Read SB at - " + polPos.ToString());
+            Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences("SB;"));
+
+            string stokesString = InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString());//read Stokes
+            double[] stokes = SB2Stokes(stokesString);
+
+            return Stokes2K(stokes[0], stokes[1], stokes[2]);
+        }
+
+        static CMath.ComplexCar TanPiDelta2KMesure(double polPos, int polDelay = 3000)
+        {
+            Console.WriteLine("Set Polarizer to - " + polPos.ToString());
+            Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences(DeviceControl.MsgPolPosition(polPos)));//change pol position
+
+            System.Threading.Thread.Sleep(polDelay);
+
+            Console.WriteLine("Read SC at - " + polPos.ToString());
+            Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences("SC;"));
+
+            string TanPiDeltaString = InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString());//read Stokes
+            double[] TanPiDelta = Utility.SC2EybyExDelta(TanPiDeltaString);
+
+            return Utility.TanPiDelta2K(TanPiDelta[1], TanPiDelta[2]);
+        }
+
+        public static CMath.JonesMatCar MesureStokes2JonesMat(double wavelenght, int delay)
+        {
+            //Console.WriteLine("Set Source  WL - " + wavelenght.ToString());
+            Devices.deviceLaserSource.Write(ReplaceCommonEscapeSequences(DeviceControl.MsgWaveLenghtSrc(wavelenght)));//change wavelength source
+
+            //Console.WriteLine("Set PAT9000 WL - " + wavelenght.ToString());
+            Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences(DeviceControl.MsgWaveLenghtPol(wavelenght)));//change wavelength pol
+            System.Threading.Thread.Sleep(delay);
+
+            CMath.ComplexCar k0 = Stokes2KMesure(0);
+            CMath.ComplexCar k45 = Stokes2KMesure(45);
+            CMath.ComplexCar k90 = Stokes2KMesure(90);
+
+            Console.WriteLine();
+
+            return K2JonesMat(k0, k90, k45);
+        }
+
+        public static CMath.JonesMatCar MesureTanPiDelta2JonesMat(double wavelenght, int delay)
+        {
+            //Console.WriteLine("Set Source  WL - " + wavelenght.ToString());
+            Devices.deviceLaserSource.Write(ReplaceCommonEscapeSequences(DeviceControl.MsgWaveLenghtSrc(wavelenght)));//change wavelength source
+
+            //Console.WriteLine("Set PAT9000 WL - " + wavelenght.ToString());
+            Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences(DeviceControl.MsgWaveLenghtPol(wavelenght)));//change wavelength pol
+            System.Threading.Thread.Sleep(delay);
+
+            CMath.ComplexCar k0 = TanPiDelta2KMesure(0);
+            CMath.ComplexCar k45 = TanPiDelta2KMesure(45);
+            CMath.ComplexCar k90 = TanPiDelta2KMesure(90);
+
+            Console.WriteLine();
+
+            return K2JonesMat(k0, k90, k45);
+        }
+
+
+        public static double[] DGD(CMath.JonesMatCar j1, CMath.JonesMatCar j2, CMath.JonesMatCar refJonesMat,double w1, double w2)
+        {
+            CMath.JonesMatCar J1 = refJonesMat * j1;
+            CMath.JonesMatCar J2 = refJonesMat * j2;
 
             CMath.JonesMatCar J1Inv = CMath.Inverse(J1);
 

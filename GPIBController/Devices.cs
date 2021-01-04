@@ -66,5 +66,11 @@ namespace GPIBController
             //Console.WriteLine();
             return jString;
         }
+
+        public static string MsgPolPosition(double theta = 179.82)
+        {
+            //POS 0;X;
+            return "POS " + theta.ToString() + ";X;";
+        }
     }
 }

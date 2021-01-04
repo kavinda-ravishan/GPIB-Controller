@@ -17,6 +17,8 @@ namespace GPIBController
             ServoRotated += PolController_ServoRotated;
             refJonesMat = CMath.UnitMatrix();
             wavelengths = new List<double>();
+
+            radioButtonJM.Checked = true;
         }
 
         private double sqrtFiberLength;
@@ -89,20 +91,53 @@ namespace GPIBController
             }));
 
             PMDData pMD = new PMDData();
-#if (!TESTMODE)     
+            CMath.JonesMatCar j1;
+            CMath.JonesMatCar j2;
+
             try
             {
-                string jStringw1 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-                string jStringw2 = DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+                if (radioButtonJM.Checked)
+                {
+#if (!TESTMODE)
+                    j1 = Utility.JonesMatString2Car(
+                        DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay)
+                        );
+                    j2 = Utility.JonesMatString2Car(
+                        DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay)
+                        );
+#else
+                    j1 = Utility.JonesMatString2Car(Utility.text_J1_1);//for testing
+                    j2 = Utility.JonesMatString2Car(Utility.text_J1_2);//for testing
+#endif
+                }
+                else if(radioButtonS.Checked)
+                {
+#if (!TESTMODE)
+                    j1 = Utility.MesureStokes2JonesMat(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+                    j2 = Utility.MesureStokes2JonesMat(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+#else
+                    j1 = Utility.JonesMatString2Car(Utility.text_J1);//for testing
+                    j2 = Utility.JonesMatString2Car(Utility.text_J2);//for testing
+#endif
+                }
+                else
+                {
+#if (!TESTMODE)
+                    j1 = Utility.MesureTanPiDelta2JonesMat(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+                    j2 = Utility.MesureTanPiDelta2JonesMat(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
+#else
+                    j1 = Utility.JonesMatString2Car(Utility.text_J1);//for testing
+                    j2 = Utility.JonesMatString2Car(Utility.text_J2);//for testing
+#endif
+                }
 
                 double[] DGD = Utility.DGD(
-                                     jStringw1,
-                                     jStringw2,
-                                     refJonesMat,
-                                     pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize,
-                                     pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize
-                                     );
-
+                                             j1,
+                                             j2,
+                                             refJonesMat,
+                                             pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize,
+                                             pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize
+                                             );
 
                 pMD.DGD = DGD[0];
                 pMD.PMD = DGD[0] / sqrtFiberLength;
@@ -149,10 +184,6 @@ namespace GPIBController
                     progressBar.Value = (int)progressPercentage;
                 }));
             }
-#else
-            string jStringw1 = Utility.text_J1_1;//for testing
-            string jStringw2 = Utility.text_J1_2;//for testing
-#endif
         }
 
         public Form RefToMainForm { get; set; }
@@ -185,6 +216,8 @@ namespace GPIBController
             txtBoxStop.Enabled = !isPMDMeasurementStarted;
             txtBoxWavelength.Enabled = !isPMDMeasurementStarted;
             txtBoxWaveStep.Enabled = !isPMDMeasurementStarted;
+
+            groupBox.Enabled = !isPMDMeasurementStarted;
         }
 
         private void BtnFindPorts_Click(object sender, EventArgs e)

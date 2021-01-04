@@ -16,6 +16,8 @@ namespace GPIBController
             threadRun = true;
 
             refJonesMat = CMath.UnitMatrix();
+
+            radioButtonJM.Checked = true;
         }
 
         public Form RefToMainForm { get; set; }
@@ -66,6 +68,8 @@ namespace GPIBController
             txtBoxFileName.Enabled = !isPMDMeasurementStarted;
             txtBoxStart.Enabled = !isPMDMeasurementStarted;
             txtBoxStop.Enabled = !isPMDMeasurementStarted;
+
+            groupBox.Enabled = !isPMDMeasurementStarted;
         }
 
         protected virtual void OnDGDMeasured(PMDData data)
@@ -136,7 +140,7 @@ namespace GPIBController
                     }
 
                     //for save PAT9300 JM information
-                    string[] jStrings = new string[steps];
+                    CMath.JonesMatCar[] jMat = new CMath.JonesMatCar[steps];
                     double[] DGDval = new double[2];
                     data = new PMDData[steps - 2];
                     double sumPMD = 0;
@@ -164,7 +168,18 @@ namespace GPIBController
                             if (i < 2)
                             {
 #if (!TESTMODE)
-                                jStrings[i] = DeviceControl.GetJonesMatrix(wavelenght[i], settings.delay);
+                                if (radioButtonJM.Checked)
+                                {
+                                    jMat[i] = Utility.JonesMatString2Car(DeviceControl.GetJonesMatrix(wavelenght[i], settings.delay));
+                                }
+                                if (radioButtonS.Checked)
+                                {
+                                    jMat[i] = Utility.MesureStokes2JonesMat(wavelenght[i], settings.delay);
+                                }
+                                else
+                                {
+                                    jMat[i] = Utility.MesureTanPiDelta2JonesMat(wavelenght[i], settings.delay);
+                                }
 #else
                                 jStrings[i] = Utility.text_J1;//for testing
 #endif
@@ -172,14 +187,25 @@ namespace GPIBController
                             else
                             {
 #if (!TESTMODE)
-                                jStrings[i] = DeviceControl.GetJonesMatrix(wavelenght[i], settings.delay);
+                                if (radioButtonJM.Checked)
+                                {
+                                    jMat[i] = Utility.JonesMatString2Car(DeviceControl.GetJonesMatrix(wavelenght[i], settings.delay));
+                                }
+                                if (radioButtonS.Checked)
+                                {
+                                    jMat[i] = Utility.MesureStokes2JonesMat(wavelenght[i], settings.delay);
+                                }
+                                else
+                                {
+                                    jMat[i] = Utility.MesureTanPiDelta2JonesMat(wavelenght[i], settings.delay);
+                                }
 #else
                                 jStrings[i] = Utility.text_J1;//for testing
 #endif
 
                                 DGDval = Utility.DGD(
-                                    Utility.JonesMatString2Car(jStrings[i - 2]),
-                                    Utility.JonesMatString2Car(jStrings[i]), 
+                                    jMat[i - 2],
+                                    jMat[i], 
                                     refJonesMat, 
                                     wavelenght[i - 2], 
                                     wavelenght[i]);//Meaure DGD for arg1 and arg2 jones matrices

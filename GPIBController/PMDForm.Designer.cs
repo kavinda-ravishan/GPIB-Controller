@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PMDForm));
             this.stringReadTextBox = new System.Windows.Forms.RichTextBox();
             this.btnStart = new System.Windows.Forms.Button();
@@ -79,10 +79,15 @@
             this.txtBoxDelay = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.groupBox = new System.Windows.Forms.GroupBox();
+            this.radioButtonJM = new System.Windows.Forms.RadioButton();
+            this.radioButtonED = new System.Windows.Forms.RadioButton();
+            this.radioButtonS = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCloseButton)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // stringReadTextBox
@@ -137,24 +142,24 @@
             // 
             // chart
             // 
-            chartArea2.AxisX.Title = "Wavelength (nm)";
-            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.AxisY.Title = "PMD";
-            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart.Legends.Add(legend2);
+            chartArea1.AxisX.Title = "Wavelength (nm)";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = "PMD";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart.Legends.Add(legend1);
             this.chart.Location = new System.Drawing.Point(12, 47);
             this.chart.Name = "chart";
             this.chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series2.BorderWidth = 3;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "PMD";
-            series2.ShadowColor = System.Drawing.Color.Black;
-            this.chart.Series.Add(series2);
+            series1.BorderWidth = 3;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "PMD";
+            series1.ShadowColor = System.Drawing.Color.Black;
+            this.chart.Series.Add(series1);
             this.chart.Size = new System.Drawing.Size(636, 366);
             this.chart.TabIndex = 43;
             this.chart.Text = "chart1";
@@ -611,12 +616,60 @@
             this.pictureBox1.TabIndex = 86;
             this.pictureBox1.TabStop = false;
             // 
+            // groupBox
+            // 
+            this.groupBox.Controls.Add(this.radioButtonJM);
+            this.groupBox.Controls.Add(this.radioButtonED);
+            this.groupBox.Controls.Add(this.radioButtonS);
+            this.groupBox.Location = new System.Drawing.Point(657, 224);
+            this.groupBox.Name = "groupBox";
+            this.groupBox.Size = new System.Drawing.Size(259, 35);
+            this.groupBox.TabIndex = 135;
+            this.groupBox.TabStop = false;
+            // 
+            // radioButtonJM
+            // 
+            this.radioButtonJM.AutoSize = true;
+            this.radioButtonJM.ForeColor = System.Drawing.Color.White;
+            this.radioButtonJM.Location = new System.Drawing.Point(6, 13);
+            this.radioButtonJM.Name = "radioButtonJM";
+            this.radioButtonJM.Size = new System.Drawing.Size(74, 17);
+            this.radioButtonJM.TabIndex = 131;
+            this.radioButtonJM.TabStop = true;
+            this.radioButtonJM.Text = "Jones Mat";
+            this.radioButtonJM.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonED
+            // 
+            this.radioButtonED.AutoSize = true;
+            this.radioButtonED.ForeColor = System.Drawing.Color.White;
+            this.radioButtonED.Location = new System.Drawing.Point(179, 13);
+            this.radioButtonED.Name = "radioButtonED";
+            this.radioButtonED.Size = new System.Drawing.Size(74, 17);
+            this.radioButtonED.TabIndex = 133;
+            this.radioButtonED.TabStop = true;
+            this.radioButtonED.Text = "ExEyDelta";
+            this.radioButtonED.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonS
+            // 
+            this.radioButtonS.AutoSize = true;
+            this.radioButtonS.ForeColor = System.Drawing.Color.White;
+            this.radioButtonS.Location = new System.Drawing.Point(99, 13);
+            this.radioButtonS.Name = "radioButtonS";
+            this.radioButtonS.Size = new System.Drawing.Size(58, 17);
+            this.radioButtonS.TabIndex = 132;
+            this.radioButtonS.TabStop = true;
+            this.radioButtonS.Text = "Stokes";
+            this.radioButtonS.UseVisualStyleBackColor = true;
+            // 
             // PMDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1192, 635);
+            this.Controls.Add(this.groupBox);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.txtBoxDelay);
@@ -669,6 +722,8 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox.ResumeLayout(false);
+            this.groupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -722,5 +777,9 @@
         private System.Windows.Forms.TextBox txtBoxDelay;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.GroupBox groupBox;
+        private System.Windows.Forms.RadioButton radioButtonJM;
+        private System.Windows.Forms.RadioButton radioButtonED;
+        private System.Windows.Forms.RadioButton radioButtonS;
     }
 }

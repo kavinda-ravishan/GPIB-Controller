@@ -25,6 +25,8 @@ namespace GPIBController
 
         public const double C = 299792458;
 
+        public enum Methods { JonesMat = 0, Stokes = 1, ExEyDelta = 2 };
+
         public static string ReplaceCommonEscapeSequences(string s)
         {
             return s.Replace("\\n", "\n").Replace("\\r", "\r");
@@ -371,9 +373,9 @@ namespace GPIBController
             Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences("SC;"));
 
             string TanPiDeltaString = InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString());//read Stokes
-            double[] TanPiDelta = Utility.SC2EybyExDelta(TanPiDeltaString);
+            double[] TanPiDelta = SC2EybyExDelta(TanPiDeltaString);
 
-            return Utility.TanPiDelta2K(TanPiDelta[1], TanPiDelta[2]);
+            return TanPiDelta2K(TanPiDelta[1], TanPiDelta[2]);
         }
 
         public static CMath.JonesMatCar MesureStokes2JonesMat(double wavelenght, int delay)

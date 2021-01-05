@@ -66,6 +66,7 @@ namespace GPIBController
         private int minutes;
         private int hours;
         private string etaTime;
+        private Utility.Methods method;
 
         protected override void WndProc(ref Message m)
         {
@@ -96,7 +97,7 @@ namespace GPIBController
 
             try
             {
-                if (radioButtonJM.Checked)
+                if (Utility.Methods.JonesMat == method)
                 {
 #if (!TESTMODE)
                     j1 = Utility.JonesMatString2Car(
@@ -110,7 +111,7 @@ namespace GPIBController
                     j2 = Utility.JonesMatString2Car(Utility.text_J1_2);//for testing
 #endif
                 }
-                else if(radioButtonS.Checked)
+                else if(Utility.Methods.Stokes == method)
                 {
 #if (!TESTMODE)
                     j1 = Utility.MesureStokes2JonesMat(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
@@ -331,6 +332,19 @@ namespace GPIBController
                             SetupControlState(true);
                             progressBar.Value = 0;
                         }));
+
+                        if (radioButtonJM.Checked)
+                        {
+                            method = Utility.Methods.JonesMat;
+                        }
+                        else if (radioButtonS.Checked)
+                        {
+                            method = Utility.Methods.Stokes;
+                        }
+                        else
+                        {
+                            method = Utility.Methods.ExEyDelta;
+                        }
 
                         pMDCharacteristics = new PMDCharacteristics
                         {

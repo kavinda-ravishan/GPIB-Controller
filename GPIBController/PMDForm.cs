@@ -48,6 +48,8 @@ namespace GPIBController
         private CMath.JonesMatCar refJonesMat;
         private static bool threadRun;
 
+        private Utility.Methods method;
+
         // declaring an event using built-in EventHandler
         public event EventHandler<PMDData> DGDMeasured;
 
@@ -117,6 +119,19 @@ namespace GPIBController
                         SetupControlState(true);
                     }));
 
+                    if (radioButtonJM.Checked)
+                    {
+                        method = Utility.Methods.JonesMat;
+                    }
+                    else if (radioButtonS.Checked)
+                    {
+                        method = Utility.Methods.Stokes;
+                    }
+                    else
+                    {
+                        method = Utility.Methods.ExEyDelta;
+                    }
+
                     //take user inputs
                     settings.start = System.Convert.ToDouble(txtBoxStart.Text);
                     settings.stop = System.Convert.ToDouble(txtBoxStop.Text); ;
@@ -168,11 +183,11 @@ namespace GPIBController
                             if (i < 2)
                             {
 #if (!TESTMODE)
-                                if (radioButtonJM.Checked)
+                                if (Utility.Methods.JonesMat == method)
                                 {
                                     jMat[i] = Utility.JonesMatString2Car(DeviceControl.GetJonesMatrix(wavelenght[i], settings.delay));
                                 }
-                                if (radioButtonS.Checked)
+                                if (Utility.Methods.Stokes == method)
                                 {
                                     jMat[i] = Utility.MesureStokes2JonesMat(wavelenght[i], settings.delay);
                                 }
@@ -181,7 +196,7 @@ namespace GPIBController
                                     jMat[i] = Utility.MesureTanPiDelta2JonesMat(wavelenght[i], settings.delay);
                                 }
 #else
-                                jStrings[i] = Utility.text_J1;//for testing
+                                jMat[i] = Utility.JonesMatString2Car(Utility.text_J1);//for testing
 #endif
                             }
                             else
@@ -200,7 +215,7 @@ namespace GPIBController
                                     jMat[i] = Utility.MesureTanPiDelta2JonesMat(wavelenght[i], settings.delay);
                                 }
 #else
-                                jStrings[i] = Utility.text_J1;//for testing
+                                jMat[i] = Utility.JonesMatString2Car(Utility.text_J1);//for testing
 #endif
 
                                 DGDval = Utility.DGD(

@@ -1,4 +1,4 @@
-﻿#define TESTMODE
+﻿//#define TESTMODE
 
 using NationalInstruments.NI4882;
 using System;

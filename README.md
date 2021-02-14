@@ -1,3 +1,6 @@
 # GPIB-Controller
-![](imgs/Polarization%20controller.PNG)
-![](imgs/Histogram.PNG)
+![](imgs/1.PNG)
+![](imgs/2.PNG)
+![](imgs/3.PNG)
+![](imgs/4.PNG)
+![](imgs/5.PNG)

@@ -415,7 +415,7 @@
             this.btnStokes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStokes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStokes.ForeColor = System.Drawing.Color.White;
-            this.btnStokes.Location = new System.Drawing.Point(558, 383);
+            this.btnStokes.Location = new System.Drawing.Point(558, 340);
             this.btnStokes.Name = "btnStokes";
             this.btnStokes.Size = new System.Drawing.Size(177, 37);
             this.btnStokes.TabIndex = 40;
@@ -527,7 +527,7 @@
             this.btnPMD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPMD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPMD.ForeColor = System.Drawing.Color.White;
-            this.btnPMD.Location = new System.Drawing.Point(560, 333);
+            this.btnPMD.Location = new System.Drawing.Point(558, 386);
             this.btnPMD.Name = "btnPMD";
             this.btnPMD.Size = new System.Drawing.Size(177, 37);
             this.btnPMD.TabIndex = 48;

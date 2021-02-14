@@ -1,4 +1,4 @@
-﻿//#define TESTMODE
+﻿#define TESTMODE
 
 using System;
 using System.Collections.Generic;

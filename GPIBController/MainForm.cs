@@ -1,4 +1,4 @@
-﻿//#define TESTMODE
+﻿#define TESTMODE
 
 using NationalInstruments.NI4882;
 using System;
@@ -344,6 +344,7 @@ namespace GPIBController
 #region Common
         private void BtnFindDevices_Click(object sender, EventArgs e)
         {
+#if(!TESTMODE)
             try
             {
                 Board board = new Board(0);
@@ -364,6 +365,17 @@ namespace GPIBController
             {
                 MessageBox.Show(ex.Message);
             }
+#else
+            richTextBoxDevices.Clear();
+            richTextBoxDevices.Text += (
+                        "Primary Address : " + "9" + " , " +
+                        "Secondary Address : " + "0" +
+                        Environment.NewLine);
+            richTextBoxDevices.Text += (
+                        "Primary Address : " + "25" + " , " +
+                        "Secondary Address : " + "0" +
+                        Environment.NewLine);
+#endif
         }
 
         private void BtnPMD_Click(object sender, EventArgs e)

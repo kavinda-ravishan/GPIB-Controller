@@ -17,5 +17,4 @@ C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBCont
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Release\GPIBController.csproj.CopyComplete
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Release\GPIB Controller.exe
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Release\GPIB Controller.pdb
-C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Release\GPIBController.csprojAssemblyReference.cache
 C:\Users\Kavinda Ravishan\source\repos\kavinda-ravishan\GPIB-Controller\GPIBController\obj\Release\GPIBController.HistogramForm.resources

@@ -364,12 +364,12 @@ namespace GPIBController
 
         static CMath.ComplexCar TanPiDelta2KMesure(double polPos, int polDelay = 3000)
         {
-            Console.WriteLine("Set Polarizer to - " + polPos.ToString());
+            //Console.WriteLine("Set Polarizer to - " + polPos.ToString());
             Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences(DeviceControl.MsgPolPosition(polPos)));//change pol position
 
             System.Threading.Thread.Sleep(polDelay);
 
-            Console.WriteLine("Read SC at - " + polPos.ToString());
+            //Console.WriteLine("Read SC at - " + polPos.ToString());
             Devices.devicePolarizationAnalyzer.Write(ReplaceCommonEscapeSequences("SC;"));
 
             string TanPiDeltaString = InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString());//read Stokes

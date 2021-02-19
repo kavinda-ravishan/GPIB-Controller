@@ -691,7 +691,7 @@
             this.txtBoxStart.Name = "txtBoxStart";
             this.txtBoxStart.Size = new System.Drawing.Size(62, 20);
             this.txtBoxStart.TabIndex = 119;
-            this.txtBoxStart.Text = "0";
+            this.txtBoxStart.Text = "60";
             this.txtBoxStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtBoxStop
@@ -700,7 +700,7 @@
             this.txtBoxStop.Name = "txtBoxStop";
             this.txtBoxStop.Size = new System.Drawing.Size(62, 20);
             this.txtBoxStop.TabIndex = 120;
-            this.txtBoxStop.Text = "40";
+            this.txtBoxStop.Text = "120";
             this.txtBoxStop.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label21

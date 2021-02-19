@@ -11,7 +11,7 @@ int colons[2];
 
 void rotate(int ang, Servo servo){
   int cPos = servo.read();// read current position of servo
-  int dt = 100; // delay for slowdown servo rotation speed
+  int dt = 10; // delay for slowdown servo rotation speed
   
   if(cPos == ang){}
   else if(cPos < ang){//check the rotation direction for rotate

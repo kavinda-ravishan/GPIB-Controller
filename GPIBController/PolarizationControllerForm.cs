@@ -92,8 +92,8 @@ namespace GPIBController
             }));
 
             PMDData pMD = new PMDData();
-            CMath.JonesMatCar j1 = new CMath.JonesMatCar();
-            CMath.JonesMatCar j2 = new CMath.JonesMatCar();
+            CMath.JonesMatCar j1;
+            CMath.JonesMatCar j2;
 
             try
             {
@@ -101,12 +101,11 @@ namespace GPIBController
                 {
 #if (!TESTMODE)
                     j1 = Utility.JonesMatString2Car(
-                        DeviceControl.GetJonesMatrixDummy(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay,Utility.text_J1_1)
+                        DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay)
                         );
                     j2 = Utility.JonesMatString2Car(
-                        DeviceControl.GetJonesMatrixDummy(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay,Utility.text_J1_2)
+                        DeviceControl.GetJonesMatrix(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay)
                         );
-                    Console.WriteLine("Jones Mat");
 #else
                     j1 = Utility.JonesMatString2Car(Utility.text_J1_1);//for testing
                     j2 = Utility.JonesMatString2Car(Utility.text_J1_2);//for testing
@@ -117,18 +116,16 @@ namespace GPIBController
 #if (!TESTMODE)
                     j1 = Utility.MesureStokes2JonesMat(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
                     j2 = Utility.MesureStokes2JonesMat(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-                    Console.WriteLine("Stokes");
 #else
                     j1 = Utility.JonesMatString2Car(Utility.text_J1);//for testing
                     j2 = Utility.JonesMatString2Car(Utility.text_J2);//for testing
 #endif
                 }
-                else if(Utility.Methods.ExEyDelta == method)
+                else
                 {
 #if (!TESTMODE)
                     j1 = Utility.MesureTanPiDelta2JonesMat(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
                     j2 = Utility.MesureTanPiDelta2JonesMat(pMDCharacteristics.wavelength + pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);
-                    Console.WriteLine("ExEyDelta");
 #else
                     j1 = Utility.JonesMatString2Car(Utility.text_J1);//for testing
                     j2 = Utility.JonesMatString2Car(Utility.text_J2);//for testing
@@ -344,7 +341,7 @@ namespace GPIBController
                         {
                             method = Utility.Methods.Stokes;
                         }
-                        else if (radioButtonED.Checked)
+                        else
                         {
                             method = Utility.Methods.ExEyDelta;
                         }
@@ -518,8 +515,7 @@ namespace GPIBController
                     string jString = DeviceControl.GetJonesMatrix(System.Convert.ToDouble(txtBoxWavelength.Text), System.Convert.ToInt32(txtBoxDelay.Text));
                     DeviceControl.LaserOff();
 
-                    //double[] jMatValues = Utility.JonesString2Double(jString);
-                    double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing
+                    double[] jMatValues = Utility.JonesString2Double(jString);
 #else
                     double[] jMatValues = Utility.JonesString2Double(Utility.text_J1);//for testing
 #endif

@@ -127,14 +127,14 @@ namespace GPIBController
                     {
                         method = Utility.Methods.Stokes;
                     }
-                    else if(radioButtonED.Checked)
+                    else
                     {
                         method = Utility.Methods.ExEyDelta;
                     }
 
                     //take user inputs
                     settings.start = System.Convert.ToDouble(txtBoxStart.Text);
-                    settings.stop = System.Convert.ToDouble(txtBoxStop.Text);
+                    settings.stop = System.Convert.ToDouble(txtBoxStop.Text); ;
                     settings.stepSize = System.Convert.ToDouble(txtBoxStep.Text);
                     settings.length = System.Convert.ToDouble(txtBoxLength.Text); // in Km
                     settings.laserPower = System.Convert.ToInt32(txtBoxLaserPower.Text);
@@ -187,11 +187,11 @@ namespace GPIBController
                                 {
                                     jMat[i] = Utility.JonesMatString2Car(DeviceControl.GetJonesMatrix(wavelenght[i], settings.delay));
                                 }
-                                else if (Utility.Methods.Stokes == method)
+                                if (Utility.Methods.Stokes == method)
                                 {
                                     jMat[i] = Utility.MesureStokes2JonesMat(wavelenght[i], settings.delay);
                                 }
-                                else if(Utility.Methods.ExEyDelta == method)
+                                else
                                 {
                                     jMat[i] = Utility.MesureTanPiDelta2JonesMat(wavelenght[i], settings.delay);
                                 }
@@ -202,15 +202,15 @@ namespace GPIBController
                             else
                             {
 #if (!TESTMODE)
-                                if (Utility.Methods.JonesMat == method)
+                                if (radioButtonJM.Checked)
                                 {
                                     jMat[i] = Utility.JonesMatString2Car(DeviceControl.GetJonesMatrix(wavelenght[i], settings.delay));
                                 }
-                                else if (Utility.Methods.Stokes == method)
+                                if (radioButtonS.Checked)
                                 {
                                     jMat[i] = Utility.MesureStokes2JonesMat(wavelenght[i], settings.delay);
                                 }
-                                else if(Utility.Methods.ExEyDelta == method)
+                                else
                                 {
                                     jMat[i] = Utility.MesureTanPiDelta2JonesMat(wavelenght[i], settings.delay);
                                 }

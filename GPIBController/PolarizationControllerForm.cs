@@ -92,8 +92,8 @@ namespace GPIBController
             }));
 
             PMDData pMD = new PMDData();
-            CMath.JonesMatCar j1;
-            CMath.JonesMatCar j2;
+            CMath.JonesMatCar j1 = new CMath.JonesMatCar();
+            CMath.JonesMatCar j2 = new CMath.JonesMatCar();
 
             try
             {
@@ -121,7 +121,7 @@ namespace GPIBController
                     j2 = Utility.JonesMatString2Car(Utility.text_J2);//for testing
 #endif
                 }
-                else
+                else if (Utility.Methods.ExEyDelta == method)
                 {
 #if (!TESTMODE)
                     j1 = Utility.MesureTanPiDelta2JonesMat(pMDCharacteristics.wavelength - pMDCharacteristics.waveLengthStepSize, pMDCharacteristics.delay);

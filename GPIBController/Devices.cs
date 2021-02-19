@@ -67,6 +67,24 @@ namespace GPIBController
             return jString;
         }
 
+        public static string GetJonesMatrixDummy(double wavelenght, int delay, string dummy)
+        {
+            string jString;
+
+            //Console.WriteLine("Set Source  WL - " + wavelenght.ToString());
+            Devices.deviceLaserSource.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtSrc(wavelenght)));//change wavelength source
+
+            //Console.WriteLine("Set PAT9000 WL - " + wavelenght.ToString());
+            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences(MsgWaveLenghtPol(wavelenght)));//change wavelength pol
+            System.Threading.Thread.Sleep(delay);
+
+            //Console.WriteLine("Read JM        - " + wavelenght.ToString());
+            Devices.devicePolarizationAnalyzer.Write(Utility.ReplaceCommonEscapeSequences("K 0;JM;X"));
+            //jString = Utility.InsertCommonEscapeSequences(Devices.devicePolarizationAnalyzer.ReadString());//put JM data here
+            //Console.WriteLine();
+            return dummy;
+        }
+
         public static string MsgPolPosition(double theta = 179.82)
         {
             //POS 0;X;
